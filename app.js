@@ -47,7 +47,7 @@ app.get('/test', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    const defaultRender = function() {res.render("index", { title: "Login", facebookAppID: process.env.FACEBOOK_APP_ID, userPermissions: process.env.FACEBOOK_USER_PERMISSIONS })}
+    const defaultRender = function() {res.render("index", { title: "Login", instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST })}
 
     const qrID = req.query.qr
     if (qrID) {

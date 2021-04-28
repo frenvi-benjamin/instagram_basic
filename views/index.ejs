@@ -9,12 +9,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <%- include('./partials/facebook_sdk') %>
-                            <script src="/js/facebook.js"></script>
-                            <a class="btn btn-block btn-social btn-facebook gy-3"
-                                onclick="FB.login(afterLogin, {scope: '<%= userPermissions %>'});" role="button">
-                                <i class="fab fa-facebook-f mt-1"></i>
-                                Sign in with facebook
+                            <a class="btn btn-block btn-social btn-instagram gy-3"  role="button" href="https://api.instagram.com/oauth/authorize?client_id=<%= instagramAppID %>&redirect_uri='<%= oauthRedirectURI %> '&scope=user_profile,user_media&response_type=code">
+                                <i class="fab fa-instagram mt-1"></i>
+                                Sign in with Instagram
                             </a>
                             <form id="form" action="/scanner" method="POST">
                                 <input hidden id="instaInput" name="instagramUserID" type="text">

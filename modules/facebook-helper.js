@@ -10,7 +10,7 @@ function getLongLivedAccessToken(shortLivedAccessToken, callback) {
         'GET',
         {
             "grant_type": "fb_exchange_token",
-            "client_id": process.env.FACEBOOK_APP_ID,
+            "client_id": process.env.INSTAGRAM_APP_ID,
             "client_secret": process.env.FACEBOOK_APP_SECRET,
             "fb_exchange_token": shortLivedAccessToken
         },
