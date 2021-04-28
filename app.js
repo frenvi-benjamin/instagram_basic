@@ -47,7 +47,7 @@ app.get('/test', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    const defaultRender = function() {res.render("index", { title: "Login", instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST })}
+    const defaultRender = function() {res.render("index", { title: "Login", instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + "/scanner" })}
 
     const qrID = req.query.qr
     if (qrID) {
@@ -81,38 +81,46 @@ app.get('/collab', (req, res) => {
     // }
 })
 
+app.get('/scanner', (req, res) => {
+    const authCode = req.query.code
+
+    fetch(`https://api.instagram.com/oauth/access_token?client_id=${process.env.INSTAGRAM_APP_ID}&client_secret=${process.env.INSTAGRAM_APP_SECRECT}&grant_type=authorization_code&redirect_uri=${process.env.HOST + "/scanner"}&code=${authCode}`)
+
+})
+
 app.post('/scanner', (req, res) => {
-    const instagramUserID = req.body.instagramUserID
-    const facebookPageID = req.body.facebookPageID
-    const shortLivedAccessToken = req.body.accessToken
+    console.log(req.body)
+    // const instagramUserID = req.body.instagramUserID
+    // const facebookPageID = req.body.facebookPageID
+    // const shortLivedAccessToken = req.body.accessToken
 
 
-    fbHelper.getLongLivedAccessToken(shortLivedAccessToken, function(longLivedAccessToken) {
-        // callback after getting longLivedAccessToken
+    // fbHelper.getLongLivedAccessToken(shortLivedAccessToken, function(longLivedAccessToken) {
+    //     // callback after getting longLivedAccessToken
 
-        // check for existig user
-        userHelper.getUserByFacebookPageID(facebookPageID)
-        .then((user) => {
-            // add new user if non-existant
-            if (!user) {
+    //     // check for existig user
+    //     userHelper.getUserByFacebookPageID(facebookPageID)
+    //     .then((user) => {
+    //         // add new user if non-existant
+    //         if (!user) {
 
-                const user = new User({
-                    instagramUserID: instagramUserID,
-                    facebookPageID: facebookPageID,
-                    accessToken: longLivedAccessToken
-                })
-                user.save()
-                    .then((newlyCreatedUser) => res.render("scanner", { title: "QR-Scanner", user: newlyCreatedUser }))
-            }
-            // if user already exists update token and render scanner
-            else {
+    //             const user = new User({
+    //                 instagramUserID: instagramUserID,
+    //                 facebookPageID: facebookPageID,
+    //                 accessToken: longLivedAccessToken
+    //             })
+    //             user.save()
+    //                 .then((newlyCreatedUser) => res.render("scanner", { title: "QR-Scanner", user: newlyCreatedUser }))
+    //         }
+    //         // if user already exists update token and render scanner
+    //         else {
 
-                user.accessToken = longLivedAccessToken
-                user.save()
-                res.render("scanner", { title: "QR-Scanner", user: user })
-            }
-        })
-    })
+    //             user.accessToken = longLivedAccessToken
+    //             user.save()
+    //             res.render("scanner", { title: "QR-Scanner", user: user })
+    //         }
+    //     })
+    // })
 })
 
 app.post('/connect-qrcode', (req, res) => {
