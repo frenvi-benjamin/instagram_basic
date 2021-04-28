@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<%- include("./partials/head") %>
+
+<body>
+	<script>
+		const host = "<%= process.env.HOST %>"
+		const port = <%= process.env.PORT %>
+		const user = {
+			instagramUserID: "<%= user.instagramUserID %>",
+			facebookPageID: "<%= user.facebookPageID %>"
+		}
+	</script>
+	<script src="/js/qr-scanner.js" type="module"></script>
+    <%- include("./partials/header") %>
+
+	<video hidden id="qr-video" class="centered video" autoplay="true" playsinline="true"></video>
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col">
+				<div class="card my-2">
+					<div class="card-body">
+						<p class="h3">QR-Codes Scannen</p>
+						<p>Bitte scannen Sie alle gelieferten QR-Codes. Alle von Ihnen gescannten Codes werden nach dem Scan auf eine von uns
+							generierte Webseite mit Werbung für Ihren Instagram- und/oder Google-Account führen!
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<p class="h3 text-center py-2 mb-2 card" id="qr-status"></p>
+			</div>
+		</div>
+		<div class="row">
+			<div id="scanner" class="col">
+			</div>
+		</div>
+	</div>
+
+	<b>Detected QR code: </b>
+	<span id="cam-qr-result">None</span>
+	<span id="cam-qr-result-timestamp"></span>
+</body>
+
+</html>

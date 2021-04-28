@@ -1,0 +1,17 @@
+img {
+    width: 100px;
+    height: 100px;
+}
+
+.tag {
+    color: #A2D208;
+    background: none;
+    border: none;
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+    margin-bottom: 0;
+}
+
+.tag:hover {
+    opacity: .6;
+}

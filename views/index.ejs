@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<%- include("./partials/head") %>
+
+    <body>
+        <%- include("./partials/header") %>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <%- include('./partials/facebook_sdk') %>
+                            <script src="/js/facebook.js"></script>
+                            <a class="btn btn-block btn-social btn-facebook gy-3"
+                                onclick="FB.login(afterLogin, {scope: '<%= userPermissions %>'});" role="button">
+                                <i class="fab fa-facebook-f mt-1"></i>
+                                Sign in with facebook
+                            </a>
+                            <form id="form" action="/scanner" method="POST">
+                                <input hidden id="instaInput" name="instagramUserID" type="text">
+                                <input hidden id="facebookInput" name="facebookPageID" type="text">
+                                <input hidden id="accessToken" name="accessToken" type="text">
+                            </form>
+                    </div>
+                </div>
+            </div>
+    </body>
+</html>
