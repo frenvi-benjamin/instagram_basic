@@ -47,7 +47,7 @@ app.get('/test', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    const defaultRender = function() {res.render("index", { title: "Login", instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + "/scanner" })}
+    const defaultRender = function() {res.render("index", { title: "Login", instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + "/auth" })}
 
     const qrID = req.query.qr
     if (qrID) {
@@ -84,7 +84,7 @@ app.get('/collab', (req, res) => {
 app.get('/scanner', (req, res) => {
     const authCode = req.query.code
 
-    fetch(`https://api.instagram.com/oauth/access_token?client_id=${process.env.INSTAGRAM_APP_ID}&client_secret=${process.env.INSTAGRAM_APP_SECRECT}&grant_type=authorization_code&redirect_uri=${process.env.HOST + "/auth"}&code=${authCode}`)
+    fetch(`https://api.instagram.com/oauth/access_token?client_id=${process.env.INSTAGRAM_APP_ID}&client_secret=${process.env.INSTAGRAM_APP_SECRECT}&grant_type=authorization_code&redirect_uri=${process.env.HOST + "/scanner"}&code=${authCode}`)
 
 })
 
