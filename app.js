@@ -94,13 +94,13 @@ app.get('/auth', (req, res) => {
 
     console.log("authCode", authCode)
     console.log("client_id", process.env.INSTAGRAM_APP_ID)
-    console.log("client_secret", process.env.INSTAGRAM_APP_SECRECT)
+    console.log("client_secret", process.env.INSTAGRAM_APP_SECRET)
     console.log("redirect_uri", process.env.HOST + "/auth")
 
     var formdata = new FormData()
     formdata.append("code", authCode)
     formdata.append("client_id", process.env.INSTAGRAM_APP_ID)
-    formdata.append("client_secret", process.env.INSTAGRAM_APP_SECRECT)
+    formdata.append("client_secret", process.env.INSTAGRAM_APP_SECRET)
     formdata.append("grant_type", "authorization_code")
     formdata.append("redirect_uri", process.env.HOST + "/auth")
 
