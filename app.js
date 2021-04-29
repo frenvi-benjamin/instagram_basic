@@ -92,7 +92,10 @@ app.get('/collab', (req, res) => {
 app.get('/auth', (req, res) => {
     const authCode = req.query.code
 
-    console.log(authCode)
+    console.log("authCode", authCode)
+    console.log("client_id", process.env.INSTAGRAM_APP_ID)
+    console.log("client_secret", process.env.INSTAGRAM_APP_SECRECT)
+    console.log("redirect_uri", process.env.HOST + "/auth")
 
     var formdata = new FormData()
     formdata.append("code", authCode)
