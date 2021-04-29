@@ -102,13 +102,7 @@ app.get('/auth', (req, res) => {
     body.append("redirect_uri", process.env.HOST + "/auth")
     body.append("code", authCode)
 
-    fetch("https://api.instagram.com/oauth/access_token", {
-        body,
-        headers: {
-            "Content-Type": "multipart/form-data"
-        },
-        method: "POST"
-    })
+    body.submit("https://api.instagram.com/oauth/access_token")
     .then((SLATResponse) => {
         console.log(SLATResponse)
         const shortLivedAccessToken = SLATResponse.body.access_token
