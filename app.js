@@ -2,6 +2,9 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 
+// node-fetch
+const fetch = require('node-fetch')
+
 // add body parser to read post body
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
