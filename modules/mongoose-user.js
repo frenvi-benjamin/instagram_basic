@@ -25,7 +25,7 @@ function setInstagramAccessToken(accessToken) {
     .then(body => {
         console.log(body)
         const instagramUserID = body.id
-        return userHelper.getUserByInstagramUserID(instagramUserID)
+        return getUserByInstagramUserID(instagramUserID)
     })
     .then(user => {
         if (user) {
