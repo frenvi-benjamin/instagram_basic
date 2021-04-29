@@ -99,7 +99,7 @@ app.get('/auth', (req, res) => {
             client_id: process.env.INSTAGRAM_APP_ID,
             client_secret: process.env.INSTAGRAM_APP_SECRECT,
             grant_type: "authorization_code",
-            redirect_uri: process.env.HOST + "/scanner",
+            redirect_uri: process.env.HOST + "/auth",
             code: authCode
         }
     })
