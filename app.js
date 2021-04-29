@@ -93,21 +93,6 @@ app.get('/auth', (req, res) => {
 
     console.log(authCode)
 
-    const body = new FormData
-    body.append("client_id", process.env.INSTAGRAM_APP_ID)
-    body.append("client_secret", process.env.INSTAGRAM_APP_SECRECT)
-    body.append("grant_type", "authorization_code")
-    body.append("redirect_uri", "https://socialsizzle.herokuapp.com/auth/")
-    body.append("code", "AQDp3TtBQQ...")
-
-    fetch("https://api.instagram.com/oauth/access_token", {
-        body,
-        headers: {
-            "Content-Type": "multipart/form-data"
-        },
-        method: "POST"
-    })
-
     fetch("https://api.instagram.com/oauth/access_token", {
         method: "POST",
         body: {
