@@ -127,7 +127,7 @@ app.get('/auth', (req, res) => {
 
             userHelper.setInstagramAccessToken(longLivedAccessToken)
             .then((user) => {
-                res.render("auth", {accessToken: user.accessToken, instagramUserID: user.instagramUserID})
+                res.render("auth", {title: "Authentication", accessToken: user.accessToken, instagramUserID: user.instagramUserID})
             })
         })
     })
