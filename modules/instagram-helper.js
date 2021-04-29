@@ -3,10 +3,11 @@ const fetch = require('node-fetch')
 
 function getUserByInstagramAccessToken(accessToken) {
     return fetch(`https://graph.instagram.com/me?fields=id,username&access_token=${accessToken}`)
-    .then((response) => {
-        const instagramUserID = response.body.id
+    .then(response => response.json())
+    .then(body => {
+        const instagramUserID = body.id
         return userHelper.getUserByInstagramUserID(instagramUserID)
-        .then((user) => {return user})
+        .then(user => {return user})
     })
 }
 
