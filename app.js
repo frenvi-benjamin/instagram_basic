@@ -19,6 +19,10 @@ const userHelper = require('./modules/mongoose-user')
 // facebook
 const fbHelper = require('./modules/facebook-helper')
 
+//instagram
+const instaHelper = require('./modules/instagram-helper')
+const { render } = require('ejs')
+
 // set view engine to ejs
 app.set('view engine', 'ejs')
 
@@ -87,7 +91,38 @@ app.get('/collab', (req, res) => {
 app.get('/auth', (req, res) => {
     const authCode = req.query.code
 
-    fetch(`https://api.instagram.com/oauth/access_token?client_id=${process.env.INSTAGRAM_APP_ID}&client_secret=${process.env.INSTAGRAM_APP_SECRECT}&grant_type=authorization_code&redirect_uri=${process.env.HOST + "/scanner"}&code=${authCode}`)
+    fetch("https://api.instagram.com/oauth/access_token", {
+        method: "POST",
+        body: {
+            client_id: process.env.INSTAGRAM_APP_ID,
+            client_secret: process.env.INSTAGRAM_APP_SECRECT,
+            grant_type: "authorization_code",
+            redirect_uri: process.env.HOST + "/scanner",
+            code: authCode
+        }
+    })
+    .then((SLATResponse) => {
+        const shortLivedAccessToken = SLATResponse.body.access_token
+        console.log("SLAT: ", shortLivedAccessToken)
+
+        fetch(`https://graph.instagram.com/access_token?` +
+                `grant_type=ig_exchange_token&` +
+                `client_secret=${process.env.INSTAGRAM_APP_SECRECT}&` +
+                `access_token=${shortLivedAccessToken}`)
+        .then((LLATResponse) => {
+            const longLivedAccessToken = LLATResponse.body.access_token
+            console.log("LLAT: ", longLivedAccessToken)
+
+            instaHelper.getUserByInstagramAccessToken()
+            .then((user) => {
+                user.accessToken = longLivedAccessToken
+                user.save()
+
+                res.render("auth", )
+            })
+
+        })
+    })
 
 })
 
