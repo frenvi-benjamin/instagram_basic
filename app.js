@@ -107,7 +107,7 @@ app.get('/auth', (req, res) => {
     }
 
     fetch("https://api.instagram.com/oauth/access_token", requestOptions)
-    .then(response => res.send(response))
+    .then(response => res.send(response.json()))
     
 
 })
