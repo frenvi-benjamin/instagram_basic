@@ -4,7 +4,7 @@
 <%- include('./partials/head') %> 
 
 <body>
-    <form id="form" action="/scanner" method="POST" enctype="application/x-www-form-urlencoded">
+    <form id="form" action="/scanner-insta" method="POST" enctype="application/x-www-form-urlencoded">
         <input hidden type="text" name="accessToken" value="<%= accessToken %>">
         <input hidden type="text" name="instagramUserID" value="<%= instagramUserID %>">
     </form>

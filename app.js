@@ -133,8 +133,15 @@ app.get('/auth', (req, res) => {
     })
 })
 
+app.post('scanner-insta', (req, res) => {
+    res.render("scanner", { title: "QR-Scanner", instagramUserID: req.body.instagramUserID, accessToken: req.body.accessToken })
+})
+
 app.post('/scanner', (req, res) => {
     res.send(req.body)
+    
+    
+
     // const instagramUserID = req.body.instagramUserID
     // const facebookPageID = req.body.facebookPageID
     // const shortLivedAccessToken = req.body.accessToken
@@ -179,6 +186,28 @@ app.post('/connect-qrcode', (req, res) => {
             .where("facebookPageID").equals(req.body.facebookPageID)
             .exec()
         .then((userResponse) => {
+            var user = userResponse[0]
+            // add only if not already present
+            user.qrcodes.addToSet(qrcode._id)
+            qrcode.connectedUser = user._id
+
+            user.save()
+            qrcode.save()
+
+            return {"qrcode": qrcode, "user": user}
+        })
+        .then((changedModels) => res.send(JSON.stringify(changedModels)))
+    })
+})
+
+app.post('/connect-qrcode-insta', (req, res) => {
+    // get qrcode by qrID
+    QrCode.where("_id").equals(req.body.qrID)
+    .then(qrcodeResponse => {
+        var qrcode = qrcodeResponse[0]
+    // get current user
+        User.where("instagramUserID").equals(req.body.instagramUserID)
+        .then(userResponse => {
             var user = userResponse[0]
             // add only if not already present
             user.qrcodes.addToSet(qrcode._id)
