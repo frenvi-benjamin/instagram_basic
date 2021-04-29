@@ -133,12 +133,8 @@ app.get('/auth', (req, res) => {
     })
 })
 
-app.get('/auth/slat', (req, res) => {
-    
-})
-
 app.post('/scanner', (req, res) => {
-    console.log(req.body)
+    res.send(req.body)
     // const instagramUserID = req.body.instagramUserID
     // const facebookPageID = req.body.facebookPageID
     // const shortLivedAccessToken = req.body.accessToken
