@@ -104,6 +104,7 @@ app.get('/auth', (req, res) => {
         }
     })
     .then((SLATResponse) => {
+        console.log(SLATResponse)
         const shortLivedAccessToken = SLATResponse.body.access_token
         console.log("SLAT: ", shortLivedAccessToken)
 
@@ -115,7 +116,7 @@ app.get('/auth', (req, res) => {
             const longLivedAccessToken = LLATResponse.body.access_token
             console.log("LLAT: ", longLivedAccessToken)
 
-            instaHelper.getUserByInstagramAccessToken()
+            instaHelper.getUserByInstagramAccessToken(longLivedAccessToken)
             .then((user) => {
                 user.accessToken = longLivedAccessToken
                 user.save()
