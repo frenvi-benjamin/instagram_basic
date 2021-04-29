@@ -107,35 +107,34 @@ app.get('/auth', (req, res) => {
     }
 
     fetch("https://api.instagram.com/oauth/access_token", requestOptions)
-    .then(response => res.send(response.json()))
-    
+    .then(SLATResponse => SLATResponse.json())
+    .then(body => {
+        const shortLivedAccessToken = body.access_token
+        console.log("SLAT: ", shortLivedAccessToken)
 
+        const url = `https://graph.instagram.com/access_token?` +
+        `grant_type=ig_exchange_token&` +
+        `client_secret=${process.env.INSTAGRAM_APP_SECRET}&` +
+        `access_token=${shortLivedAccessToken}`
+
+        console.log("URL to exchange SLAT for LLAT: ", url)
+
+        fetch(url)
+        .then(LLATResponse => LLATResponse.json())
+        .then(body => {
+            const longLivedAccessToken = body.access_token
+            console.log("LLAT: ", longLivedAccessToken)
+
+            userHelper.setInstagramAccessToken(longLivedAccessToken)
+            .then((user) => {
+                res.render("auth", {accessToken: user.accessToken, instagramUserID: user.instagramUserID})
+            })
+        })
+    })
 })
 
 app.get('/auth/slat', (req, res) => {
-    const body = req.body
-    const shortLivedAccessToken = body.access_token
-    console.log("SLAT: ", shortLivedAccessToken)
-
-    const url = `https://graph.instagram.com/access_token?` +
-    `grant_type=ig_exchange_token&` +
-    `client_secret=${process.env.INSTAGRAM_APP_SECRET}&` +
-    `access_token=${shortLivedAccessToken}`
-
-    console.log("URL to exchange SLAT for LLAT: ", url)
-
-    fetch(url)
-    .then(LLATResponse => LLATResponse.json())
-    .then(body => {
-        const longLivedAccessToken = body.access_token
-        console.log("LLAT: ", longLivedAccessToken)
-
-        userHelper.setInstagramAccessToken(longLivedAccessToken)
-        .then((user) => {
-            res.render("auth", {accessToken: user.accessToken, instagramUserID: user.instagramUserID})
-        })
-
-    })
+    
 })
 
 app.post('/scanner', (req, res) => {
