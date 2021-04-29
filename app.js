@@ -94,7 +94,7 @@ app.get('/auth', (req, res) => {
 
     console.log(authCode)
 
-    const body = new FormData
+    const body = new FormData()
 
     body.append("client_id", process.env.INSTAGRAM_APP_ID)
     body.append("client_secret", process.env.INSTAGRAM_APP_SECRECT)
