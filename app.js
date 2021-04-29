@@ -112,7 +112,7 @@ app.get('/auth', (req, res) => {
 
     fetch("https://api.instagram.com/oauth/access_token", requestOptions)
     .then((SLATResponse) => {
-        console.log(SLATResponse)
+        console.log(SLATResponse.body)
         const shortLivedAccessToken = SLATResponse.body.access_token
         console.log("SLAT: ", shortLivedAccessToken)
 
