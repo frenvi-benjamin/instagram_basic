@@ -20,6 +20,9 @@ const userHelper = require('./modules/mongoose-user')
 // facebook
 const fbHelper = require('./modules/facebook-helper')
 
+// instagram
+const instaHelper = require('./modules/instagram-helper')
+
 // set view engine to ejs
 app.set('view engine', 'ejs')
 
@@ -74,7 +77,7 @@ app.get('/collab', (req, res) => {
     if (req.query._id) {
         const userID = req.query._id
 
-        fbHelper.getCollabPartnerData(userID, function (collabPartnerData) {
+        instaHelper.getCollabPartnerData(userID, (collabPartnerData) => {
             res.render("collab", { title: "Collab", collabPartner: collabPartnerData})
         })
     }
