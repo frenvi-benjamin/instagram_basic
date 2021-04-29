@@ -8,7 +8,7 @@ const FormData = require('form-data')
 
 // add body parser to read post body
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }))
 
 // mongoose imports
 const mongoose = require('mongoose')
@@ -94,15 +94,20 @@ app.get('/auth', (req, res) => {
 
     console.log(authCode)
 
-    const body = new FormData()
+    var formdata = new FormData()
+    formdata.append("code", authCode)
+    formdata.append("client_id", process.env.INSTAGRAM_APP_ID)
+    formdata.append("client_secret", process.env.INSTAGRAM_APP_SECRECT)
+    formdata.append("grant_type", "authorization_code")
+    formdata.append("redirect_uri", process.env.HOST + "/auth")
 
-    body.append("client_id", process.env.INSTAGRAM_APP_ID)
-    body.append("client_secret", process.env.INSTAGRAM_APP_SECRECT)
-    body.append("grant_type", "authorization_code")
-    body.append("redirect_uri", process.env.HOST + "/auth")
-    body.append("code", authCode)
+    var requestOptions = {
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow'
+    }
 
-    body.submit("https://api.instagram.com/oauth/access_token")
+    fetch("https://api.instagram.com/oauth/access_token", requestOptions)
     .then((SLATResponse) => {
         console.log(SLATResponse)
         const shortLivedAccessToken = SLATResponse.body.access_token
