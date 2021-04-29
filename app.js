@@ -93,15 +93,19 @@ app.get('/auth', (req, res) => {
 
     console.log(authCode)
 
+    const body = new FormData
+    body.append("client_id", process.env.INSTAGRAM_APP_ID)
+    body.append("client_secret", process.env.INSTAGRAM_APP_SECRECT)
+    body.append("grant_type", "authorization_code")
+    body.append("redirect_uri", process.env.HOST + "/auth")
+    body.append("code", authCode)
+
     fetch("https://api.instagram.com/oauth/access_token", {
-        method: "POST",
-        body: {
-            client_id: process.env.INSTAGRAM_APP_ID,
-            client_secret: process.env.INSTAGRAM_APP_SECRECT,
-            grant_type: "authorization_code",
-            redirect_uri: process.env.HOST + "/auth",
-            code: authCode
-        }
+        body,
+        headers: {
+            "Content-Type": "multipart/form-data"
+        },
+        method: "POST"
     })
     .then((SLATResponse) => {
         const shortLivedAccessToken = SLATResponse.body.access_token
