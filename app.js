@@ -98,7 +98,7 @@ app.get('/auth', (req, res) => {
     formdata.append("client_id", process.env.INSTAGRAM_APP_ID)
     formdata.append("client_secret", process.env.INSTAGRAM_APP_SECRET)
     formdata.append("grant_type", "authorization_code")
-    formdata.append("redirect_uri", process.env.HOST + "/auth/slat")
+    formdata.append("redirect_uri", process.env.HOST + "/auth")
 
     var requestOptions = {
         method: 'POST',
