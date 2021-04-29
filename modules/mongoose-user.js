@@ -23,23 +23,24 @@ function setInstagramAccessToken(accessToken) {
     return fetch(`https://graph.instagram.com/me?fields=id,username&access_token=${accessToken}`)
     .then(response => response.json())
     .then(body => {
-        console.log(body)
+        console.log("body", body)
         const instagramUserID = body.id
         return getUserByInstagramUserID(instagramUserID)
+        .then(user => {
+            if (user) {
+                user.accessToken = accessToken
+            }
+            else {
+                user = new User({
+                    instagramUserID: body.id,
+                    accessToken: accessToken
+                })
+            }
+            user.save()
+            return user
+        })
     })
-    .then(user => {
-        if (user) {
-            user.accessToken = accessToken
-        }
-        else {
-            user = new User({
-                instagramUserID: body.id,
-                accessToken: accessToken
-            })
-        }
-        user.save()
-        return user
-    })
+    
 }
 
 module.exports = { allUsers, getUserByID, getUserByFacebookPageID, getUserByInstagramUserID, setInstagramAccessToken }
