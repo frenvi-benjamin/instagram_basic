@@ -20,10 +20,6 @@ const userHelper = require('./modules/mongoose-user')
 // facebook
 const fbHelper = require('./modules/facebook-helper')
 
-//instagram
-const instaHelper = require('./modules/instagram-helper')
-const { render } = require('ejs')
-
 // set view engine to ejs
 app.set('view engine', 'ejs')
 
@@ -129,12 +125,9 @@ app.get('/auth', (req, res) => {
             const longLivedAccessToken = body.access_token
             console.log("LLAT: ", longLivedAccessToken)
 
-            instaHelper.getUserByInstagramAccessToken(longLivedAccessToken)
+            userHelper.setInstagramAccessToken(longLivedAccessToken)
             .then((user) => {
-                user.accessToken = longLivedAccessToken
-                user.save()
-
-                res.render("auth", )
+                res.render("auth", {accessToken: user.accessToken, instagramUserID: user.instagramUserID})
             })
 
         })
