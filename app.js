@@ -227,5 +227,8 @@ app.post('/connect-qrcode-insta', (req, res) => {
 
 app.get('/admin/clear', (req, res) => {
     userHelper.deleteAllUsers()
-    qrcodeHelper.clearConnectedUsers()
+    .then(response => console.log("deleted ", response.n, "users"))
+    .then(() => {return qrcodeHelper.clearConnectedUsers()})
+    .then(response => console.log("cleared ", response.nModified, " qrcodes"))
+    .then(() => res.redirect('/'))
 })
