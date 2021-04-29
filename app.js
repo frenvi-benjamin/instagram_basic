@@ -91,6 +91,8 @@ app.get('/collab', (req, res) => {
 app.get('/auth', (req, res) => {
     const authCode = req.query.code
 
+    console.log(authCode)
+
     fetch("https://api.instagram.com/oauth/access_token", {
         method: "POST",
         body: {
