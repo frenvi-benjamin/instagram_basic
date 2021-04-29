@@ -133,7 +133,7 @@ app.get('/auth', (req, res) => {
     })
 })
 
-app.post('scanner-insta', (req, res) => {
+app.post('/scanner-insta', (req, res) => {
     res.render("scanner", { title: "QR-Scanner", instagramUserID: req.body.instagramUserID, accessToken: req.body.accessToken })
 })
 
