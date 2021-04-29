@@ -43,4 +43,8 @@ function setInstagramAccessToken(accessToken) {
     
 }
 
-module.exports = { allUsers, getUserByID, getUserByFacebookPageID, getUserByInstagramUserID, setInstagramAccessToken }
+function deleteAllUsers() {
+    User.deleteMany({})
+}
+
+module.exports = { allUsers, getUserByID, getUserByFacebookPageID, getUserByInstagramUserID, setInstagramAccessToken, deleteAllUsers }

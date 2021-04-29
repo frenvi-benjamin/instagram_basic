@@ -224,3 +224,8 @@ app.post('/connect-qrcode-insta', (req, res) => {
         .then((changedModels) => res.send(JSON.stringify(changedModels)))
     })
 })
+
+app.get('/admin/clear', (req, res) => {
+    userHelper.deleteAllUsers()
+    qrcodeHelper.clearConnectedUsers()
+})

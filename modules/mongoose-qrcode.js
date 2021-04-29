@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { find } = require('../models/qrcode')
 const QrCode = require('../models/qrcode')
 const userHelper = require('./mongoose-user')
 
@@ -25,4 +26,8 @@ function getConnectedUser(qrID) {
     })
 }
 
-module.exports = { allQrCodes, getQrcodeByID, getConnectedUser }
+function clearConnectedUsers() {
+    QrCode.updateMany({}, { connectedUser: undefined})
+}
+
+module.exports = { allQrCodes, getQrcodeByID, getConnectedUser, clearConnectedUsers }
