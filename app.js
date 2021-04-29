@@ -119,7 +119,7 @@ app.get('/auth', (req, res) => {
 
         const url = `https://graph.instagram.com/access_token?` +
         `grant_type=ig_exchange_token&` +
-        `client_secret=${process.env.INSTAGRAM_APP_SECRECT}&` +
+        `client_secret=${process.env.INSTAGRAM_APP_SECRET}&` +
         `access_token=${shortLivedAccessToken}`
 
         console.log("URL to exchange SLAT for LLAT: ", url)
