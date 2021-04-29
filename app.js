@@ -117,10 +117,14 @@ app.get('/auth', (req, res) => {
         const shortLivedAccessToken = jsonSLAT.access_token
         console.log("SLAT: ", shortLivedAccessToken)
 
-        fetch(`https://graph.instagram.com/access_token?` +
-                `grant_type=ig_exchange_token&` +
-                `client_secret=${process.env.INSTAGRAM_APP_SECRECT}&` +
-                `access_token=${shortLivedAccessToken}`)
+        const url = `https://graph.instagram.com/access_token?` +
+        `grant_type=ig_exchange_token&` +
+        `client_secret=${process.env.INSTAGRAM_APP_SECRECT}&` +
+        `access_token=${shortLivedAccessToken}`
+
+        console.log("URL to exchange SLAT for LLAT: ", url)
+
+        fetch(url)
         .then(LLATResponse => LLATResponse.json())
         .then(jsonLLAT => {
             console.log("LLAT json", jsonLLAT)
