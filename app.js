@@ -111,17 +111,20 @@ app.get('/auth', (req, res) => {
     }
 
     fetch("https://api.instagram.com/oauth/access_token", requestOptions)
-    .then((SLATResponse) => {
-        console.log(SLATResponse.body)
-        const shortLivedAccessToken = SLATResponse.body.access_token
+    .then(SLATResponse => SLATResponse.json().body)
+    .then(body => {
+        console.log("SLAT body", body)
+        const shortLivedAccessToken = body.access_token
         console.log("SLAT: ", shortLivedAccessToken)
 
         fetch(`https://graph.instagram.com/access_token?` +
                 `grant_type=ig_exchange_token&` +
                 `client_secret=${process.env.INSTAGRAM_APP_SECRECT}&` +
                 `access_token=${shortLivedAccessToken}`)
-        .then((LLATResponse) => {
-            const longLivedAccessToken = LLATResponse.body.access_token
+        .then(LLATResponse => LLATResponse.json().body)
+        .then(body => {
+            console.log("LLAT body", body)
+            const longLivedAccessToken = body.access_token
             console.log("LLAT: ", longLivedAccessToken)
 
             instaHelper.getUserByInstagramAccessToken(longLivedAccessToken)
