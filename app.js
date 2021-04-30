@@ -130,34 +130,29 @@ app.get('/auth', (req, res) => {
             }
         })
     })
-    .then(
-        // exchange short lived for long lived access token if media access was granted
-        function (SLAT) {
-            const url = `https://graph.instagram.com/access_token?` +
-                `grant_type=ig_exchange_token&` +
-                `client_secret=${process.env.INSTAGRAM_APP_SECRET}&` +
-                `access_token=${SLAT}`
+    .then( SLAT => {
+        const url = `https://graph.instagram.com/access_token?` +
+            `grant_type=ig_exchange_token&` +
+            `client_secret=${process.env.INSTAGRAM_APP_SECRET}&` +
+            `access_token=${SLAT}`
 
-            console.log("URL to exchange SLAT for LLAT: ", url)
+        console.log("URL to exchange SLAT for LLAT: ", url)
 
-            fetch(url)
-            .then(LLATResponse => LLATResponse.json())
-            .then(body => {
-                const longLivedAccessToken = body.access_token
-                console.log("LLAT: ", longLivedAccessToken)
+        fetch(url)
+        .then(LLATResponse => LLATResponse.json())
+        .then(body => {
+            const longLivedAccessToken = body.access_token
+            console.log("LLAT: ", longLivedAccessToken)
 
-                userHelper.setInstagramAccessToken(longLivedAccessToken)
-                    .then((user) => {
-                        res.render("auth", { title: "Authentication", accessToken: user.accessToken, instagramUserID: user.instagramUserID })
-                    })
-            })
-        },
-        // request media access from user if not granted
-        function () {
-            res.render("request-media")
-        }
-    
-    )
+            userHelper.setInstagramAccessToken(longLivedAccessToken)
+                .then((user) => {
+                    res.render("auth", { title: "Authentication", accessToken: user.accessToken, instagramUserID: user.instagramUserID })
+                })
+        })
+    })
+    .catch(() => {
+        res.render("request-media")
+    })
 
 
     
