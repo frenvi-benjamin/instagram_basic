@@ -1,6 +1,6 @@
 const QrCode = require('../models/qrcode')
 const User = require('../models/user')
-const fetch = require('node-fetch')
+const instagramHelper = require('./instagram-helper')
 
 
 function clearConnections(username = undefined) {
@@ -31,17 +31,17 @@ function getConnectedUser(qrID) {
 }
 
 function createUserFromAccessToken(accessToken) {
-    return fetch(`https://graph.instagram.com/me?fields=id,username&access_token=${accessToken}`)
-    .then(response => response.json())
-    .then(body => {
-        console.log("body", body)
-        // create or update existing user with new data
-        return User.findOneAndUpdate({ instagramUserID: body.id }, { username: body.username, accessToken: accessToken }, { upsert: true })
+    Promise.all([
+        instagramHelper.getUsername(accessToken),
+        instagramHelper.getID(accessToken),
+        instagramHelper.getShortcode(accessToken),
+    ])
+    .then(([username, id, shortcode]) => {
+        return User.findOneAndUpdate({ instagramUserID: id }, { username: username, accessToken: accessToken, shortcode: shortcode }, { upsert: true })
     })
 }
 
 function getUserByID(userID) {
-    console.log(userID)
     return Promise.all([User.findOne({"_id": userID})])
 }
 
