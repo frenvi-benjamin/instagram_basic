@@ -35,7 +35,7 @@ function getConnectedUser(qrID) {
 }
 
 function createUserFromAccessToken(accessToken) {
-    Promise.all([
+    return Promise.all([
         instagramHelper.getUsername(accessToken),
         instagramHelper.getID(accessToken),
         instagramHelper.getShortcode(accessToken),
