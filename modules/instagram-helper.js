@@ -1,5 +1,5 @@
 require('dotenv').config()
-const userHelper = require('./mongoose-user')
+const dbHelper = require('./db-helper')
 const fetch = require('node-fetch')
 
 const mediaURL = "https://graph.instagram.com/me/media"
@@ -8,7 +8,7 @@ const userURL = "https://graph.instagram.com/me"
 function getCollabPartnerData(userID, callback) {
     var data = {}
 
-    userHelper.getUserByID(userID)
+    dbHelper.getUserByID(userID)
     .then(user => {
         // get username
         return fetch(userURL + `?fields=username&access_token=${user.accessToken}`)

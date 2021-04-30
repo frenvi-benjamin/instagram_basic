@@ -18,8 +18,7 @@ mongoose.set('returnOriginal', false)
 
 const User = require('./models/user')
 const QrCode = require('./models/qrcode')
-const qrcodeHelper = require('./modules/mongoose-qrcode')
-const userHelper = require('./modules/mongoose-user')
+const dbHelper = require('./modules/db-helper')
 
 // facebook
 const fbHelper = require('./modules/facebook-helper')
@@ -57,7 +56,7 @@ app.get('/', (req, res) => {
 
     const qrID = req.query.qr
     if (qrID) {
-        qrcodeHelper.getConnectedUser(qrID)
+        dbHelper.getConnectedUser(qrID)
         .then((user) => {
             if (user) {
                 res.redirect('/collab?_id=' + user._id)
@@ -146,7 +145,7 @@ app.get('/auth', (req, res) => {
                 const longLivedAccessToken = body.access_token
                 console.log("LLAT: ", longLivedAccessToken)
 
-                userHelper.createUserFromAccessToken(longLivedAccessToken)
+                dbHelper.createUserFromAccessToken(longLivedAccessToken)
                 .then((user) => defaultRender(user))
             })
     },
