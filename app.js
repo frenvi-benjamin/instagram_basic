@@ -73,17 +73,6 @@ app.get('/', (req, res) => {
     }
 })
 
-// app.get('/collab', (req, res) => {
-//     if (req.query._id) {
-//         const userID = req.query._id
-//         console.log("userID @ /collab", userID)
-
-//         instaHelper.getCollabPartnerData(userID, (collabPartnerData) => {
-//             res.render("collab", { title: "Collab", collabPartner: collabPartnerData})
-//         })
-//     }
-// })
-
 app.get('/auth', (req, res) => {
     const authCode = req.query.code
 
