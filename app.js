@@ -153,7 +153,7 @@ app.get('/auth', (req, res) => {
             })
     },
         () => {
-            res.render("request-media")
+            res.render("request-media", { title: "Medienanfrage" })
         }
     )
 })
