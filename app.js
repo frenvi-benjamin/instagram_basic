@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 
+
 // node-fetch
 const fetch = require('node-fetch')
 const FormData = require('form-data')
@@ -129,7 +130,7 @@ app.get('/auth', (req, res) => {
             }
         })
     })
-    .spread((mediaAccessDenied, SLAT) => {
+    .then(([mediaAccessDenied, SLAT]) => {
         if (mediaAccessDenied) {
             res.render("request-media")
         }
