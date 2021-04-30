@@ -23,6 +23,7 @@ const fbHelper = require('./modules/facebook-helper')
 
 // instagram
 const instaHelper = require('./modules/instagram-helper')
+const { resolveInclude } = require('ejs')
 
 // set view engine to ejs
 app.set('view engine', 'ejs')
@@ -119,7 +120,7 @@ app.get('/auth', (req, res) => {
     })
     // test if user gave access to media
     .then(SLAT => {
-        fetch(`https://graph.instagram.com/me/media?fields=permalink&access_token=${SLAT}`)
+        return fetch(`https://graph.instagram.com/me/media?fields=permalink&access_token=${SLAT}`)
         .then(response => response.json())
         .then(body => {
             if (body.error) {
