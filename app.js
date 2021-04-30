@@ -123,18 +123,16 @@ app.get('/auth', (req, res) => {
         .then(response => response.json())
         .then(body => {
             if (body.error) {
-                return [true, SLAT]
+                throw Error(body.error)
             }
             else {
-                return [false, SLAT]
+                return SLAT
             }
         })
     })
-    .then(([mediaAccessDenied, SLAT]) => {
-        if (mediaAccessDenied) {
-            res.render("request-media")
-        }
-        else {
+    .then(
+        // exchange short lived for long lived access token if media access was granted
+        function (SLAT) {
             const url = `https://graph.instagram.com/access_token?` +
                 `grant_type=ig_exchange_token&` +
                 `client_secret=${process.env.INSTAGRAM_APP_SECRET}&` +
@@ -153,8 +151,13 @@ app.get('/auth', (req, res) => {
                         res.render("auth", { title: "Authentication", accessToken: user.accessToken, instagramUserID: user.instagramUserID })
                     })
             })
+        },
+        // request media access from user if not granted
+        function () {
+            res.render("request-media")
         }
-    })
+    
+    )
 
 
     
