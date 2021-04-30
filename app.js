@@ -14,6 +14,8 @@ app.use(express.urlencoded({ extended: true }))
 // mongoose imports
 const mongoose = require('mongoose')
 mongoose.set('useFindAndModify', false)
+mongoose.set('returnOriginal', false)
+
 const User = require('./models/user')
 const QrCode = require('./models/qrcode')
 const qrcodeHelper = require('./modules/mongoose-qrcode')
