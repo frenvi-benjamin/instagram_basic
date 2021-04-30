@@ -117,25 +117,43 @@ app.get('/auth', (req, res) => {
         console.log("SLAT: ", shortLivedAccessToken)
         return shortLivedAccessToken
     })
+    // test if user gave access to media
     .then(SLAT => {
-        const url = `https://graph.instagram.com/access_token?` +
-            `grant_type=ig_exchange_token&` +
-            `client_secret=${process.env.INSTAGRAM_APP_SECRET}&` +
-            `access_token=${SLAT}`
-
-        console.log("URL to exchange SLAT for LLAT: ", url)
-
-        fetch(url)
-        .then(LLATResponse => LLATResponse.json())
+        fetch(`https://graph.instagram.com/me/media?fields=permalink&access_token=${SLAT}`)
+        .then(response => response.json())
         .then(body => {
-            const longLivedAccessToken = body.access_token
-            console.log("LLAT: ", longLivedAccessToken)
-
-            userHelper.setInstagramAccessToken(longLivedAccessToken)
-                .then((user) => {
-                    res.render("auth", { title: "Authentication", accessToken: user.accessToken, instagramUserID: user.instagramUserID })
-                })
+            if (body.error) {
+                return [true, SLAT]
+            }
+            else {
+                return [false, SLAT]
+            }
         })
+    })
+    .then(([mediaAccessDenied, SLAT]) => {
+        if (mediaAccessDenied) {
+            res.render("request-media")
+        }
+        else {
+            const url = `https://graph.instagram.com/access_token?` +
+                `grant_type=ig_exchange_token&` +
+                `client_secret=${process.env.INSTAGRAM_APP_SECRET}&` +
+                `access_token=${SLAT}`
+
+            console.log("URL to exchange SLAT for LLAT: ", url)
+
+            fetch(url)
+            .then(LLATResponse => LLATResponse.json())
+            .then(body => {
+                const longLivedAccessToken = body.access_token
+                console.log("LLAT: ", longLivedAccessToken)
+
+                userHelper.setInstagramAccessToken(longLivedAccessToken)
+                    .then((user) => {
+                        res.render("auth", { title: "Authentication", accessToken: user.accessToken, instagramUserID: user.instagramUserID })
+                    })
+            })
+        }
     })
 
 
