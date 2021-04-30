@@ -26,21 +26,6 @@ function createUserFromAccessToken(accessToken) {
         console.log("body", body)
         // create or update existing user with new data
         return User.findOneAndUpdate({ instagramUserID: body.id }, { username: body.username, accessToken: accessToken }, { upsert: true, returnOriginal: false })
-        // const instagramUserID = body.id
-        // return getUserByInstagramUserID(instagramUserID)
-        // .then(user => {
-        //     if (user) {
-        //         user.accessToken = accessToken
-        //     }
-        //     else {
-        //         user = new User({
-        //             instagramUserID: body.id,
-        //             accessToken: accessToken
-        //         })
-        //     }
-        //     user.save()
-        //     return user
-        // })
     })
     
 }
