@@ -108,32 +108,56 @@ app.get('/auth', (req, res) => {
         body: formdata,
         redirect: 'follow'
     }
-
+    // get short lived access token with given authentication code
     fetch("https://api.instagram.com/oauth/access_token", requestOptions)
     .then(SLATResponse => SLATResponse.json())
     .then(body => {
         const shortLivedAccessToken = body.access_token
         console.log("SLAT: ", shortLivedAccessToken)
-
-        const url = `https://graph.instagram.com/access_token?` +
-        `grant_type=ig_exchange_token&` +
-        `client_secret=${process.env.INSTAGRAM_APP_SECRET}&` +
-        `access_token=${shortLivedAccessToken}`
-
-        console.log("URL to exchange SLAT for LLAT: ", url)
-
-        fetch(url)
-        .then(LLATResponse => LLATResponse.json())
+        return shortLivedAccessToken
+    })
+    // test if user gave access to media
+    .then(SLAT => {
+        fetch(`https://graph.instagram.com/me/media?fields=permalink&access_token=${SLAT}`)
+        .then(response => response.json())
         .then(body => {
-            const longLivedAccessToken = body.access_token
-            console.log("LLAT: ", longLivedAccessToken)
-
-            userHelper.setInstagramAccessToken(longLivedAccessToken)
-            .then((user) => {
-                res.render("auth", {title: "Authentication", accessToken: user.accessToken, instagramUserID: user.instagramUserID})
-            })
+            if (body.error) {
+                return [true, SLAT]
+            }
+            else {
+                return [false, SLAT]
+            }
         })
     })
+    .spread((mediaAccessDenied, SLAT) => {
+        if (mediaAccessDenied) {
+            res.render("request-media")
+        }
+        else {
+            const url = `https://graph.instagram.com/access_token?` +
+                `grant_type=ig_exchange_token&` +
+                `client_secret=${process.env.INSTAGRAM_APP_SECRET}&` +
+                `access_token=${SLAT}`
+
+            console.log("URL to exchange SLAT for LLAT: ", url)
+
+            fetch(url)
+            .then(LLATResponse => LLATResponse.json())
+            .then(body => {
+                const longLivedAccessToken = body.access_token
+                console.log("LLAT: ", longLivedAccessToken)
+
+                userHelper.setInstagramAccessToken(longLivedAccessToken)
+                    .then((user) => {
+                        res.render("auth", { title: "Authentication", accessToken: user.accessToken, instagramUserID: user.instagramUserID })
+                    })
+            })
+        }
+    })
+
+
+    
+    
 })
 
 app.post('/scanner-insta', (req, res) => {
