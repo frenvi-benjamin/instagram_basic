@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="de">
+<%- include('./partials/head') %> 
+<body>
+    <%- include('./partials/header') %>
+
+    <form action="/admin/clear" method="POST">
+        <label for="clear">Alle Verbindungen zwischen QR-Codes und Usern löschen:</label>
+        <button id="clear" type="submit">Löschen</button>
+    </form>
+
+    <form action="/admin/clear-one" method="POST">
+        Verbindungen eines Users mit allen seinen QR-Codes löschen:
+        <input type="text" name="username" placeholder="username">
+        <button type="submit">Löschen</button>
+    </form>
+</body>
+</html>
