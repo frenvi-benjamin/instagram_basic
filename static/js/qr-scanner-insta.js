@@ -8,9 +8,6 @@ const camQrResultTimestamp = document.getElementById("cam-qr-result-timestamp")
 
 const qrStatus = document.getElementById("qr-status")
 
-
-const linkToNewlyCreatedWebsite = "https://www.google.de"
-
 const alreadyScannedQrcodes = []
 function alreadyScanned(qrID) {
 	return alreadyScannedQrcodes.indexOf(qrID) != -1
