@@ -32,7 +32,7 @@ function createUserFromAccessToken(accessToken) {
 }
 
 function getUserByID(instagramUserID) {
-    return User.findOne({"_id": userID})
+    return User.findOne({"_id": instagramUserID})
 }
 
 module.exports = { clearConnections, getConnectedUser, createUserFromAccessToken, getUserByID }
