@@ -93,6 +93,13 @@ app.get('/collab', (req, res) => {
 app.get('/auth', (req, res) => {
     const authCode = req.query.code
 
+    const defaultRender = function (user) {res.render("auth", { title: "Authentication", accessToken: user.accessToken, instagramUserID: user.instagramUserID })}
+    const permissionsNotGrantedRender = function() {res.render("request-permissions", { instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + "/auth"  })}
+
+    if (!authCode) {
+        permissionsNotGrantedRender()
+    }
+
     console.log("authCode", authCode)
     console.log("client_id", process.env.INSTAGRAM_APP_ID)
     console.log("client_secret", process.env.INSTAGRAM_APP_SECRET)
@@ -147,13 +154,11 @@ app.get('/auth', (req, res) => {
                 console.log("LLAT: ", longLivedAccessToken)
 
                 userHelper.setInstagramAccessToken(longLivedAccessToken)
-                    .then((user) => {
-                        res.render("auth", { title: "Authentication", accessToken: user.accessToken, instagramUserID: user.instagramUserID })
-                    })
+                .then((user) => defaultRender(user))
             })
     },
         () => {
-            res.render("request-media", { title: "Medienanfrage", instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + "/auth"  })
+            permissionsNotGrantedRender()
         }
     )
 })
