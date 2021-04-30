@@ -43,8 +43,8 @@ function setInstagramAccessToken(accessToken) {
     
 }
 
-function deleteAllUsers() {
-    return User.deleteMany({})
+function clearConnections() {
+    return User.updateMany({}, { qrcodes: undefined })
 }
 
-module.exports = { allUsers, getUserByID, getUserByFacebookPageID, getUserByInstagramUserID, setInstagramAccessToken, deleteAllUsers }
+module.exports = { allUsers, getUserByID, getUserByFacebookPageID, getUserByInstagramUserID, setInstagramAccessToken, clearConnections }

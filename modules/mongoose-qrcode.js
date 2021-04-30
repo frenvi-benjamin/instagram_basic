@@ -26,8 +26,8 @@ function getConnectedUser(qrID) {
     })
 }
 
-function clearConnectedUsers() {
-    return QrCode.updateMany({}, { connectedUser: undefined})
+function clearConnections() {
+    return QrCode.updateMany({}, { connectedUser: undefined })
 }
 
-module.exports = { allQrCodes, getQrcodeByID, getConnectedUser, clearConnectedUsers }
+module.exports = { allQrCodes, getQrcodeByID, getConnectedUser, clearConnections }
