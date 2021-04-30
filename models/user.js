@@ -12,11 +12,13 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
+    accessToken: String,
+    username: String,
+    shortcode: String,
     qrcodes: [{
         type: Schema.Types.ObjectId,
         ref: "QrCode"
     }],
-    accessToken: String,
 }, { timestamps: true })
 
 const User = mongoose.model('User', userSchema)
