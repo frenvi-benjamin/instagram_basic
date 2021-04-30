@@ -154,7 +154,7 @@ app.get('/auth', (req, res) => {
                 const longLivedAccessToken = body.access_token
                 console.log("LLAT: ", longLivedAccessToken)
 
-                userHelper.setInstagramAccessToken(longLivedAccessToken)
+                userHelper.createUserFromAccessToken(longLivedAccessToken)
                 .then((user) => defaultRender(user))
             })
     },
