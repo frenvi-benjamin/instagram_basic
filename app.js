@@ -153,7 +153,7 @@ app.get('/auth', (req, res) => {
             })
     },
         () => {
-            res.render("request-media", { title: "Medienanfrage" })
+            res.render("request-media", { title: "Medienanfrage", instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + "/auth"  })
         }
     )
 })
