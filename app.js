@@ -123,40 +123,38 @@ app.get('/auth', (req, res) => {
         .then(response => response.json())
         .then(body => {
             if (body.error) {
-                throw Error(body.error)
+                reject()
             }
             else {
                 return SLAT
             }
         })
     })
-    .then( SLAT => {
-        const url = `https://graph.instagram.com/access_token?` +
-            `grant_type=ig_exchange_token&` +
-            `client_secret=${process.env.INSTAGRAM_APP_SECRET}&` +
-            `access_token=${SLAT}`
+    .then(
+        SLAT => {
+            const url = `https://graph.instagram.com/access_token?` +
+                `grant_type=ig_exchange_token&` +
+                `client_secret=${process.env.INSTAGRAM_APP_SECRET}&` +
+                `access_token=${SLAT}`
 
-        console.log("URL to exchange SLAT for LLAT: ", url)
+            console.log("URL to exchange SLAT for LLAT: ", url)
 
-        fetch(url)
-        .then(LLATResponse => LLATResponse.json())
-        .then(body => {
-            const longLivedAccessToken = body.access_token
-            console.log("LLAT: ", longLivedAccessToken)
+            fetch(url)
+            .then(LLATResponse => LLATResponse.json())
+            .then(body => {
+                const longLivedAccessToken = body.access_token
+                console.log("LLAT: ", longLivedAccessToken)
 
-            userHelper.setInstagramAccessToken(longLivedAccessToken)
-                .then((user) => {
-                    res.render("auth", { title: "Authentication", accessToken: user.accessToken, instagramUserID: user.instagramUserID })
-                })
-        })
-    })
-    .catch(() => {
-        res.render("request-media")
-    })
-
-
-    
-    
+                userHelper.setInstagramAccessToken(longLivedAccessToken)
+                    .then((user) => {
+                        res.render("auth", { title: "Authentication", accessToken: user.accessToken, instagramUserID: user.instagramUserID })
+                    })
+            })
+    },
+        () => {
+            res.render("request-media")
+        }
+    )
 })
 
 app.post('/scanner-insta', (req, res) => {
