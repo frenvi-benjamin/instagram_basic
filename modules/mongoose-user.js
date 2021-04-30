@@ -25,7 +25,7 @@ function createUserFromAccessToken(accessToken) {
     .then(body => {
         console.log("body", body)
         // create or update existing user with new data
-        return User.findOneAndUpdate({ instagramUserID: body.id }, { username: body.username, accessToken: accessToken }, { upsert: true })
+        return User.findOneAndUpdate({ instagramUserID: body.id }, { username: body.username, accessToken: accessToken }, { upsert: true, returnOriginal: false })
         // const instagramUserID = body.id
         // return getUserByInstagramUserID(instagramUserID)
         // .then(user => {
