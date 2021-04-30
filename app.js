@@ -98,6 +98,7 @@ app.get('/auth', (req, res) => {
 
     if (!authCode) {
         permissionsNotGrantedRender()
+        return
     }
 
     console.log("authCode", authCode)
