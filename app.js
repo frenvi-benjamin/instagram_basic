@@ -78,11 +78,6 @@ app.get('/collab', (req, res) => {
             res.render("collab", { title: "Collab", collabPartner: collabPartnerData})
         })
     }
-    // collabPartnerData = {
-    //     username: "eismanufakturzeitgeist",
-    //     profilePicURL: "https://scontent-frx5-1.cdninstagram.com/v/t51.2885-19/s320x320/45817360_313316495944356_1062492746306027520_n.jpg?tp=1&_nc_ht=scontent-frx5-1.cdninstagram.com&_nc_ohc=BuCF9k_I_TwAX8mhQYq&edm=ABfd0MgAAAAA&ccb=7-4&oh=08b9c32b75d84ad95c951ee288d752fc&oe=60A4523C&_nc_sid=7bff83",
-    //     shortcode: "CLjWK7vn_T4"
-    // }
 })
 
 app.get('/auth', (req, res) => {
