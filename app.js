@@ -50,12 +50,6 @@ mongoose.connect(process.env.MONGODB_CONNECTION_URL, { useNewUrlParser: true, us
     .then((result) => startServer)
     .catch((err) => console.log(err))
 
-app.get('/test', (req, res) => {
-    qrcodeHelper.getConnectedUser("608835a56fd6e4eface893c7")
-    .then((user) => res.send(user))
-    
-})
-
 app.get('/', (req, res) => {
     const defaultRender = function() {res.render("index", { title: "Login", instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + "/auth" })}
 
