@@ -178,8 +178,16 @@ app.post('/connect-qrcode-insta', (req, res) => {
     })
 })
 
-app.get('/admin/clear', (req, res) => {
-    userHelper.clearConnections()
-    .then(() => {return qrcodeHelper.clearConnections()})
-    .then(() => res.redirect('/'))
+app.get('/admin', (req, res) => {
+    res.render("admin", { title: "Admin" })
+})
+
+app.post('/admin/clear', (req, res) => {
+    dbHelper.clearConnections()
+    res.redirect('/admin')
+})
+
+app.post('admin/clear-one', (req, res) => {
+    dbHelper.clearConnections(req.body.username)
+    res.redirect('/admin')
 })
