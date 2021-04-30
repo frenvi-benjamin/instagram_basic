@@ -20,12 +20,8 @@ const User = require('./models/user')
 const QrCode = require('./models/qrcode')
 const dbHelper = require('./modules/db-helper')
 
-// facebook
-const fbHelper = require('./modules/facebook-helper')
-
 // instagram
 const instaHelper = require('./modules/instagram-helper')
-const { resolveInclude } = require('ejs')
 
 // set view engine to ejs
 app.set('view engine', 'ejs')
