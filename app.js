@@ -45,7 +45,7 @@ const startServer = app.listen(process.env.PORT, () => {
 // connect to database
 mongoose.connect(process.env.MONGODB_CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     // start server when db is connected
-    .then((result) => startServer)
+    .then(() => startServer)
     .catch((err) => console.log(err))
 
 app.get('/', (req, res) => {
@@ -54,9 +54,14 @@ app.get('/', (req, res) => {
     const qrID = req.query.qr
     if (qrID) {
         dbHelper.getConnectedUser(qrID)
-        .then((user) => {
+        .then(user => {
             if (user) {
-                res.redirect('/collab?_id=' + user._id)
+                const collabPartnerData = {
+                    username: user.username,
+                    shortcode: user.shortcode,
+                    profile_picture_url: user.profile_picture_url
+                }
+                res.render("collab", { title: "Collab", collabPartner: collabPartnerData})
             }
             else {
                 defaultRender()
@@ -68,15 +73,16 @@ app.get('/', (req, res) => {
     }
 })
 
-app.get('/collab', (req, res) => {
-    if (req.query._id) {
-        const userID = req.query._id
+// app.get('/collab', (req, res) => {
+//     if (req.query._id) {
+//         const userID = req.query._id
+//         console.log("userID @ /collab", userID)
 
-        instaHelper.getCollabPartnerData(userID, (collabPartnerData) => {
-            res.render("collab", { title: "Collab", collabPartner: collabPartnerData})
-        })
-    }
-})
+//         instaHelper.getCollabPartnerData(userID, (collabPartnerData) => {
+//             res.render("collab", { title: "Collab", collabPartner: collabPartnerData})
+//         })
+//     }
+// })
 
 app.get('/auth', (req, res) => {
     const authCode = req.query.code
