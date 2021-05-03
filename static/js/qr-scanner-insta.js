@@ -63,16 +63,21 @@ const scanner = new QrScanner(
 
 scanner.start()
 
-
 const scannerDiv = document.getElementById("scanner")
-scannerDiv.appendChild(scanner.$canvas);
-scanner.$canvas.style.display = "block";
-var facingmode = scanner.facingmode
-if (scanner.facingmode == "user") {
-	scanner.$canvas.style.transform = "scaleX(-1)";
-}
-
 const canvas = scanner.$canvas
+scannerDiv.appendChild(canvas)
 
+
+var observer = new MutationObserver((mutationsList) => {
+	mutationsList.forEach(mutation => {
+		canvas.style.transform = video.style.transform
+	});
+})
+
+observer.observe(video, { attributes : true, attributeFilter : ['style'] })
+
+canvas.style.display = "block"
+canvas.style.maxWidth = "500px"
+canvas.classList.add("mx-auto")
 canvas.style.width = "100%"
 canvas.style.borderRadius = "0.25rem"
