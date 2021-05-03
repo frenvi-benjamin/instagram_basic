@@ -84,11 +84,6 @@ app.get('/auth', (req, res) => {
         return
     }
 
-    console.log("authCode", authCode)
-    console.log("client_id", process.env.INSTAGRAM_APP_ID)
-    console.log("client_secret", process.env.INSTAGRAM_APP_SECRET)
-    console.log("redirect_uri", process.env.HOST + "/auth")
-
     var formdata = new FormData()
     formdata.append("code", authCode)
     formdata.append("client_id", process.env.INSTAGRAM_APP_ID)
@@ -106,7 +101,6 @@ app.get('/auth', (req, res) => {
     .then(SLATResponse => SLATResponse.json())
     .then(body => {
         const shortLivedAccessToken = body.access_token
-        console.log("SLAT: ", shortLivedAccessToken)
         return shortLivedAccessToken
     })
     // test if user gave access to media
@@ -129,13 +123,10 @@ app.get('/auth', (req, res) => {
                 `client_secret=${process.env.INSTAGRAM_APP_SECRET}&` +
                 `access_token=${SLAT}`
 
-            console.log("URL to exchange SLAT for LLAT: ", url)
-
             fetch(url)
             .then(LLATResponse => LLATResponse.json())
             .then(body => {
                 const longLivedAccessToken = body.access_token
-                console.log("LLAT: ", longLivedAccessToken)
 
                 dbHelper.createUserFromAccessToken(longLivedAccessToken)
                 .then((user) => defaultRender(user))
