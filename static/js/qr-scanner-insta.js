@@ -39,6 +39,10 @@ function onQrScan(result) {
 				"qrID": qrID
 			}),
 		})
+		const readyButton = document.getElementById("ready-button")
+		readyButton.removeAttribute("hidden")
+		readyButton.setAttribute("href", result)
+
 		alreadyScannedQrcodes.push(qrID)
 	}
 
