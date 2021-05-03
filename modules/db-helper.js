@@ -46,8 +46,5 @@ function createUserFromAccessToken(accessToken) {
     })
 }
 
-function getUserByID(userID) {
-    return Promise.all([User.findOne({"_id": userID})])
-}
 
-module.exports = { clearConnections, getConnectedUser, createUserFromAccessToken, getUserByID }
+module.exports = { clearConnections, getConnectedUser, createUserFromAccessToken }
