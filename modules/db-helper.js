@@ -8,7 +8,7 @@ function clearConnections(username = undefined) {
         const qrcodes = User.find({username: username}, "qrcodes")
         var promises = []
         qrcodes.forEach(qrID => {
-            promises.push(QrCode.findOneAndUpdate({ _id: qrID }, { connectedUser: undefined }))
+            promises.push(QrCode.findByIdAndUpdate(qrID, { connectedUser: undefined }))
         })
         promises.push(User.findOneAndUpdate({ username: username }, { qrcodes: [] }))
         Promise.all(promises)
@@ -22,7 +22,7 @@ function clearConnections(username = undefined) {
 }
 
 function getConnectedUser(qrID) {
-    return QrCode.findOne({ _id: qrID}, "connectedUser")
+    return QrCode.findById(qrID, "connectedUser")
     .then(qrcode => {
         if (qrcode.connectedUser) {
             return User.findById(qrcode.connectedUser)
