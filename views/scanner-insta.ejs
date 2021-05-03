@@ -2,52 +2,66 @@
 <html lang="de">
 
 <%- include("./partials/head") %>
-<link rel="stylesheet" href="/css/scanner-insta.css">
+	<link rel="stylesheet" href="/css/scanner-insta.css">
 
-<body>
-	<script>
-		const host = "<%= process.env.HOST %>"
-		const port = <%= process.env.PORT %>
+	<body>
+		<script>
+			const host = "<%= process.env.HOST %>"
+			const port = <%= process.env.PORT %>
         const instagramUserID = "<%= instagramUserID %>"
-	</script>
-	<script src="/js/qr-scanner-insta.js" type="module"></script>
-    <%- include("./partials/header") %>
+		</script>
+		<script src="/js/qr-scanner-insta.js" type="module"></script>
 
-	<video hidden id="qr-video" class="centered video" autoplay="true" playsinline="true"></video>
-	
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col">
-				<div class="card my-2">
-					<div class="card-body">
-						<p class="h3">QR-Codes Scannen</p>
-						<p>Bitte scannen Sie alle gelieferten QR-Codes. Alle von Ihnen gescannten Codes werden nach dem Scan auf eine von uns
-							generierte Webseite mit Werbung für Ihren Instagram- und/oder Google-Account führen!
+		<video hidden id="qr-video" class="centered video" autoplay="true" playsinline="true"></video>
+
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="col">
+					<p class="h3 text-center py-2 my-2 card" id="qr-status"></p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div id="scanner" class="col mb-2">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					<a hidden id="ready-button" href="">
+						<p id="ready-card" class="h3 text-center py-2 mb-2 card">
+							Alle QR-Codes gescannt? Hier geht's zu Ihrer Webseite
 						</p>
+					</a>
+				</div>
+			</div>
+
+		</div>
+
+
+		<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">QR-Codes Scannen</h4>
+					</div>
+					<div class="modal-body">
+						<p>Bitte scannen Sie alle gelieferten QR-Codes. Alle von Ihnen gescannten Codes werden nach dem
+							Scan auf eine von uns
+							generierte Webseite mit Werbung für Ihren Instagram- und/oder Google-Account führen!</p>
+					</div>
+					<div class="modal-footer">
+						<button id="ok-button" type="button" class="btn btn-simple" data-dismiss="modal">Okay</button>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col">
-				<a hidden id="ready-button" href="">
-					<p id="ready-card" class="h3 text-center py-2 mb-2 card">
-						Alle QR-Codes gescannt? Hier geht's zu Ihrer Webseite
-					</p>
-				</a>
-			</div>
-		</div>
-		<div class="row">
-			<div id="scanner" class="col mb-2">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col">
-				<p class="h3 text-center py-2 mb-2 card" id="qr-status"></p>
-			</div>
-		</div>
-		
-	</div>
-</body>
+
+		<script>
+			new bootstrap.Modal(document.getElementById("modal")).show()
+		</script>
+
+	</body>
 
 </html>
