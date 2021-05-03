@@ -7,10 +7,7 @@
 	<script>
 		const host = "<%= process.env.HOST %>"
 		const port = <%= process.env.PORT %>
-        const instagramUser = {
-            ID: "<%= instagramUserID %>",
-            accessToken: "<%= accessToken %>"
-        }
+        const instagramUserID = "<%= instagramUserID %>"
 	</script>
 	<script src="/js/qr-scanner-insta.js" type="module"></script>
     <%- include("./partials/header") %>

@@ -46,5 +46,12 @@ function createUserFromAccessToken(accessToken) {
     })
 }
 
+function connectQrcodeToUser(qrID, instagramUserID) {
+    
+    QrCode.findByIdAndUpdate(qrID, { connectedUser: instagramUserID })
 
-module.exports = { clearConnections, getConnectedUser, createUserFromAccessToken }
+    User.findOneAndUpdate({ instagramUserID: instagramUserID }, { $addToSet: { qrcodes: qrID }})
+}
+
+
+module.exports = { clearConnections, getConnectedUser, createUserFromAccessToken, connectQrcodeToUser }

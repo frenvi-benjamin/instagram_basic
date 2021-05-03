@@ -142,27 +142,16 @@ app.post('/scanner-insta', (req, res) => {
     res.render("scanner-insta", { title: "QR-Scanner", instagramUserID: req.body.instagramUserID, accessToken: req.body.accessToken })
 })
 
+app.get('/scanner-insta', (req, res) => {
+    res.render("scanner-insta", { title: "QR-Scanner", instagramUserID: test, accessToken: test })
+})
+
 
 app.post('/connect-qrcode-insta', (req, res) => {
-    // get qrcode by qrID
-    QrCode.where("_id").equals(req.body.qrID)
-    .then(qrcodeResponse => {
-        var qrcode = qrcodeResponse[0]
-    // get current user
-        User.where("instagramUserID").equals(req.body.instagramUserID)
-        .then(userResponse => {
-            var user = userResponse[0]
-            // add only if not already present
-            user.qrcodes.addToSet(qrcode._id)
-            qrcode.connectedUser = user._id
 
-            user.save()
-            qrcode.save()
+    dbHelper.connectQrcodeToUser(req.body.qrID, req.body.instagramUserID)
 
-            return {"qrcode": qrcode, "user": user}
-        })
-        .then((changedModels) => res.send(JSON.stringify(changedModels)))
-    })
+    
 })
 
 app.get('/admin', (req, res) => {
