@@ -17,12 +17,7 @@ mongoose.set('useFindAndModify', false)
 mongoose.set('returnOriginal', false)
 mongoose.set('debug', true)
 
-const User = require('./models/user')
-const QrCode = require('./models/qrcode')
 const dbHelper = require('./modules/db-helper')
-
-// instagram
-const instaHelper = require('./modules/instagram-helper')
 
 // set view engine to ejs
 app.set('view engine', 'ejs')
