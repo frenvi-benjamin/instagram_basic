@@ -3,8 +3,6 @@ QrScanner.WORKER_PATH = "/qr-scanner/qr-scanner-worker.min.js"
 
 
 const video = document.getElementById("qr-video")
-const camQrResult = document.getElementById("cam-qr-result")
-const camQrResultTimestamp = document.getElementById("cam-qr-result-timestamp")
 
 const qrStatus = document.getElementById("qr-status")
 
@@ -14,9 +12,6 @@ function alreadyScanned(qrID) {
 }
 
 function onQrScan(result) {
-	// show result on label
-	camQrResult.textContent = result
-
 	// find qr code ID
 	const pos = result.search("qr=") + 3
 	const qrID = result.slice(pos)
