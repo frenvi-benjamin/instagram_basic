@@ -7,7 +7,7 @@ const userURL = "https://graph.instagram.com/me"
 
 function getUsername(accessToken) {
     return fetch(userURL + `?fields=username&access_token=${accessToken}`)
-    .then(response => {console.log("USERNAME RESPONSE", response.json()); return response})
+    .then(response => {console.log("USERNAME RESPONSE", response); return response})
     .then(response => {return response.json().username})
 }
 
@@ -24,7 +24,7 @@ function getShortcode(accessToken) {
 
 function getID(accessToken) {
     return fetch(userURL + `?access_token=${accessToken}`)
-    .then(response => {console.log("ID RESPONSE", response.json()); return response})
+    .then(response => {console.log("ID RESPONSE", response); return response})
     .then(res => {return res.json().id})
 }
 
