@@ -25,7 +25,7 @@ function getConnectedUser(qrID) {
     return QrCode.findById(qrID, "connectedUser")
     .then(qrcode => {
         if (qrcode.connectedUser) {
-            return User.findById(qrcode.connectedUser)
+            return User.findOne({ instagramUserID: qrcode.connectedUser })
             .then(res => {return res})
         }
         else {
@@ -42,15 +42,16 @@ function createUserFromAccessToken(accessToken) {
     ])
     .then(res => {console.log(res); return res})
     .then(([username, id, shortcode]) => {
-        return User.findOneAndUpdate({ instagramUserID: id }, { username: username, accessToken: accessToken, shortcode: shortcode }, { upsert: true })
+        return User.findOneAndUpdate({ instagramUserID: id }, { username: username, accessToken: accessToken, shortcode: shortcode, qrcodes: [] }, { upsert: true })
     })
 }
 
 function connectQrcodeToUser(qrID, instagramUserID) {
     
-    QrCode.findByIdAndUpdate(qrID, { connectedUser: instagramUserID })
-
-    User.findOneAndUpdate({ instagramUserID: instagramUserID }, { $addToSet: { qrcodes: qrID }})
+    return Promise.all([
+        QrCode.findByIdAndUpdate(qrID, { connectedUser: instagramUserID }, { upsert: true }),
+        User.findOneAndUpdate({ instagramUserID: instagramUserID }, { $addToSet: { qrcodes: qrID }})
+    ])
 }
 
 

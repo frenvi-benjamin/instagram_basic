@@ -3,8 +3,7 @@ const Schema = mongoose.Schema
 
 const qrcodeSchema = new Schema({
     connectedUser: {
-        type: Schema.Types.ObjectId,
-        ref: "User"
+        type: String
     }
 }, { timestamps: true })
 
