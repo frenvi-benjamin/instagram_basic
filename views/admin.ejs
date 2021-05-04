@@ -1,18 +1,72 @@
 <!DOCTYPE html>
 <html lang="de">
-<%- include('./partials/head') %> 
-<body>
-    <%- include('./partials/header') %>
+<%- include('./partials/head') %>
 
-    <form action="/admin/clear" method="POST">
-        <label for="clear">Alle Verbindungen zwischen QR-Codes und Usern löschen:</label>
-        <button id="clear" type="submit">Löschen</button>
-    </form>
+    <body>
+        <%- include('./partials/header') %>
 
-    <form action="/admin/clear-one" method="POST">
-        Verbindungen eines Users mit allen seinen QR-Codes löschen:
-        <input type="text" name="username" placeholder="username">
-        <button type="submit">Löschen</button>
-    </form>
-</body>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="/admin/clear" method="POST">
+                                <label for="clear">Alle Verbindungen zwischen QR-Codes und Usern löschen:</label>
+                                <button id="clear" type="submit">Löschen</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="/admin/clear-one" method="POST">
+                                Verbindungen eines Users mit allen seinen QR-Codes löschen:
+                                <input type="text" name="username" placeholder="@username">
+                                <button type="submit">Löschen</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="/admin/create-qrcodes" method="POST">
+                                <label for="nQrcodes">QR-Codes generieren:</label>
+                                <input type="text" placeholder="Anzahl" name="nQrcodes">
+                                <button type="submit">Generieren</button>
+                            </form>
+                            <% try { %> 
+                            <form action="/admin/download">
+                                <% qrcodes.forEach(qrcode => { %>
+                                <input hidden type="text" value="<%= qrcode._id %> "></input>
+                                <% }) %>
+                                <button type="submit">Download</button>
+                            </form>
+                            <% } catch {} %> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script>
+        let cols = document.getElementsByClassName("col")
+        for (let col of cols) {
+            col.classList.add("my-1")
+        }
+
+        let buttons = document.getElementsByTagName("button")
+        for (let button of buttons) {
+            button.classList.add("btn")
+            button.classList.add("btn-dark")
+        }
+    </script>
+
 </html>

@@ -2,6 +2,15 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 
+//fs
+const fs = require('fs')
+
+// qrcode-generator
+const QRCode = require("qrcode-svg")
+
+//zip
+const zip = require('express-easy-zip')
+app.use(zip())
 
 // node-fetch
 const fetch = require('node-fetch')
@@ -156,7 +165,33 @@ app.post('/admin/clear', (req, res) => {
     res.redirect('/admin')
 })
 
-app.post('admin/clear-one', (req, res) => {
+app.post('/admin/clear-one', (req, res) => {
     dbHelper.clearConnections(req.body.username)
     res.redirect('/admin')
+})
+
+app.post('/admin/create-qrcodes', (req, res) => {
+    const n = req.body.nQrcodes
+    dbHelper.createQrcodes(n)
+    .then(newQrcodes => {
+        var files = []
+
+        newQrcodes.forEach(qrcode => {
+            const qrID = qrcode._id
+            let qrcodeImage = new QRCode({
+                content: `https://eatlery.herokuapp.com?qr=${qrID}`,
+                color: "#A2D208",
+            })
+            files.push({
+                content: qrcodeImage.svg(),
+                name: qrID + ".svg",
+                date: new Date(),
+                type: "file",
+            })
+        })
+        res.zip({
+            files: files,
+            filename: "qrcodes.zip"
+        })
+    })
 })
