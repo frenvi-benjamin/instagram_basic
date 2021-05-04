@@ -195,3 +195,8 @@ app.post('/admin/create-qrcodes', (req, res) => {
         })
     })
 })
+
+app.post("/admin/delete-qrcodes", (req, res) => {
+    dbHelper.deleteAllQrcodes()
+    res.redirect("/admin")
+})

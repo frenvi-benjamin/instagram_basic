@@ -41,14 +41,18 @@
                                 <input type="text" placeholder="Anzahl" name="nQrcodes">
                                 <button type="submit">Generieren</button>
                             </form>
-                            <% try { %> 
-                            <form action="/admin/download">
-                                <% qrcodes.forEach(qrcode => { %>
-                                <input hidden type="text" value="<%= qrcode._id %> "></input>
-                                <% }) %>
-                                <button type="submit">Download</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="/admin/delete-qrcodes" method="POST">
+                                <label for="delete">Alle QR-Codes löschen:</label>
+                                <button id="delete" type="submit">Löschen</button>
                             </form>
-                            <% } catch {} %> 
                         </div>
                     </div>
                 </div>

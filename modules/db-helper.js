@@ -62,9 +62,12 @@ function createQrcodes(n) {
     for (let i = 0; i < n; i++) {
         array.push({ connectedUser: undefined})
     }
-    console.log(n)
     return QrCode.insertMany(array)
 }
 
+function deleteAllQrcodes() {
+    QrCode.deleteMany({}).exec()
+}
 
-module.exports = { clearConnections, getConnectedUser, createUserFromAccessToken, connectQrcodeToUser, createQrcodes }
+
+module.exports = { clearConnections, getConnectedUser, createUserFromAccessToken, connectQrcodeToUser, createQrcodes, deleteAllQrcodes }
