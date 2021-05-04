@@ -180,7 +180,9 @@ app.post('/admin/create-qrcodes', (req, res) => {
             const qrID = qrcode._id
             let qrcodeImage = new QRCode({
                 content: `https://eatlery.herokuapp.com?qr=${qrID}`,
-                color: "#A2D208",
+                color: req.body.color,
+                background: req.body.background,
+                join: true // joins all vector graphics paths
             })
             files.push({
                 content: qrcodeImage.svg(),

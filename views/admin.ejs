@@ -7,12 +7,42 @@
 
         <div class="container">
             <div class="row">
-                <div class="col">
+                <div class="col-lg my-1">
                     <div class="card">
+                        <div class="card-header">
+                            Alle Verbindungen zwischen QR-Codes und Usern löschen
+                        </div>
                         <div class="card-body">
                             <form action="/admin/clear" method="POST">
-                                <label for="clear">Alle Verbindungen zwischen QR-Codes und Usern löschen:</label>
                                 <button id="clear" type="submit">Löschen</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg my-1">
+                    <div class="card">
+                        <div class="card-header">
+                            Verbindungen eines Users mit allen seinen QR-Codes löschen
+                        </div>
+                        <div class="card-body">
+                            <form action="/admin/clear-one" method="POST">
+                                <div class="input-group">
+                                    <span class="input-group-text">@</span>
+                                    <input required type="text" name="username" placeholder="username">
+                                    <button type="submit" class="btn">Löschen</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg my-1">
+                    <div class="card">
+                        <div class="card-header">
+                            Alle QR-Codes löschen
+                        </div>
+                        <div class="card-body">
+                            <form action="/admin/delete-qrcodes" method="POST">
+                                <button type="submit">Löschen</button>
                             </form>
                         </div>
                     </div>
@@ -20,38 +50,23 @@
             </div>
 
             <div class="row">
-                <div class="col">
+                <div class="col my-1">
                     <div class="card">
-                        <div class="card-body">
-                            <form action="/admin/clear-one" method="POST">
-                                Verbindungen eines Users mit allen seinen QR-Codes löschen:
-                                <input type="text" name="username" placeholder="@username">
-                                <button type="submit">Löschen</button>
-                            </form>
+                        <div class="card-header">
+                            QR-Codes generieren
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="card">
                         <div class="card-body">
                             <form action="/admin/create-qrcodes" method="POST">
-                                <label for="nQrcodes">QR-Codes generieren:</label>
-                                <input type="text" placeholder="Anzahl" name="nQrcodes">
+                                <input required class="mb-1" type="text" placeholder="Anzahl" name="nQrcodes">
+                                <div class="input-group mb-1">
+                                    <label for="color" class="input-group-text ">Farbe</label>
+                                    <input type="color" name="color" id="color" value="#000000">
+                                </div>
+                                <div class="input-group mb-1">
+                                    <label for="background" class="input-group-text">Hintergrund</label>
+                                    <input type="color" name="background" id="background" value="#ffffff">
+                                </div>
                                 <button type="submit">Generieren</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <form action="/admin/delete-qrcodes" method="POST">
-                                <label for="delete">Alle QR-Codes löschen:</label>
-                                <button id="delete" type="submit">Löschen</button>
                             </form>
                         </div>
                     </div>
@@ -70,6 +85,23 @@
         for (let button of buttons) {
             button.classList.add("btn")
             button.classList.add("btn-dark")
+        }
+
+        let labels = document.getElementsByTagName("label")
+        for (let label of labels) {
+            label.classList.add("form-label")
+        }
+
+        let inputs = document.getElementsByTagName("input")
+        for (let input of inputs) {
+            switch (input.type) {
+                case "text":
+                    input.classList.add("form-control")
+                break;
+                case "color":
+                    input.classList.add("form-control")
+                    input.classList.add("form-control-color")
+            }
         }
     </script>
 
