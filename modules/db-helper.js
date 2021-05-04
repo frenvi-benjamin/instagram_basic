@@ -5,13 +5,16 @@ const instagramHelper = require('./instagram-helper')
 
 function clearConnections(username = undefined) {
     if (username) {
-        const qrcodes = User.find({username: username}, "qrcodes")
         var promises = []
-        qrcodes.forEach(qrID => {
-            promises.push(QrCode.findByIdAndUpdate(qrID, { connectedUser: undefined }))
+        User.find({username: username}, "qrcodes").exec()
+        .then(qrcodes => {
+            qrcodes.forEach(qrID => {
+                promises.push(QrCode.findByIdAndUpdate(qrID, { connectedUser: undefined }))
+            })
+            promises.push(User.findOneAndUpdate({ username: username }, { qrcodes: [] }))
+            Promise.all(promises)
         })
-        promises.push(User.findOneAndUpdate({ username: username }, { qrcodes: [] }))
-        Promise.all(promises)
+        
     }
     else {
         Promise.all([
