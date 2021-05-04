@@ -1,0 +1,11 @@
+.btn:not(.btn-social) {
+    color: white;
+    background-color: #A2D208;
+    border-color: #A2D208;
+}
+
+.btn:hover:not(.btn-social) {
+    color: #A2D208;
+    background-color: white;
+    border-color: #A2D208;
+}
