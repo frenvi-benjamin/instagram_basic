@@ -2,11 +2,6 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
-    // facebookPageID: {
-    //     type: String,
-    //     required: true,
-    //     unique: true
-    // },
     instagramUserID: {
         type: String,
         required: true,
