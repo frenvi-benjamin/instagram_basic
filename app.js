@@ -65,6 +65,7 @@ app.get('/', (req, res) => {
                     shortcode: user.shortcode,
                     profile_picture_url: user.profile_picture_url
                 }
+                dbHelper.incrementNrOfScans(user.username)
                 res.render("collab", { title: "Collab", collabPartner: collabPartnerData})
             }
             else {

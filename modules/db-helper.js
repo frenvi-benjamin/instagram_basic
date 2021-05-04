@@ -69,5 +69,8 @@ function deleteAllQrcodes() {
     QrCode.deleteMany({}).exec()
 }
 
+function incrementNrOfScans(username) {
+    User.findOneAndUpdate({ username: username }, { $inc: { nrOfScans: 1 }}, { upsert: true }).exec()
+}
 
-module.exports = { clearConnections, getConnectedUser, createUserFromAccessToken, connectQrcodeToUser, createQrcodes, deleteAllQrcodes }
+module.exports = { clearConnections, getConnectedUser, createUserFromAccessToken, connectQrcodeToUser, createQrcodes, deleteAllQrcodes, incrementNrOfScans }
