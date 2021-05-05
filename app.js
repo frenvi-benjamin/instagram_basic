@@ -24,7 +24,6 @@ mongoose.set("returnOriginal", false)
 mongoose.set("debug", true)
 
 const dbHelper = require("./modules/db-helper")
-<<<<<<< HEAD
 
 // session
 const session = require("express-session")
@@ -45,8 +44,6 @@ app.use(
 )
 
 // max age of session (1h) {ttl: 1000 * 60 * 60}
-=======
->>>>>>> 389af6724f35c2d676d101ef31391705c1ca616d
 
 // set view engine to ejs
 app.set("view engine", "ejs")
