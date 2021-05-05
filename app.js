@@ -70,22 +70,6 @@ mongoose.connect(process.env.MONGODB_CONNECTION_URL, { useNewUrlParser: true, us
     .catch((err) => console.log(err))
 
 
-// always check if user session is initiated
-app.all("*", (req, res, next) => {
-
-    // only allow /auth without session because session is created there
-    if (req.path == "/auth" || req.path.match(/\/admin.*/)) {return next()}
-
-    if (!req.session.username) {
-        // if no session was initiated, render login screen
-        res.render("index", { title: "Login", instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + "/auth" })
-    }
-    else {
-        // else carry on as usual
-        next()
-    }
-})
-
 app.get("/", (req, res) => {
 
     const defaultRender = function() {
@@ -101,7 +85,7 @@ app.get("/", (req, res) => {
                 shortcode: user.shortcode,
                 profile_picture_url: user.profile_picture_url
             }
-            dbHelper.incrementNrOfScans(user.username)
+                dbHelper.incrementNrOfScans(user.username)
             res.render("collab", { title: "Collab", collabPartner: collabPartnerData})
             },
             () => {
@@ -184,15 +168,6 @@ app.get("/auth", (req, res) => {
     )
 })
 
-app.get("/scanner", (req, res) => {
-    res.render("scanner", { title: "QR-Scanner", instagramUserID: req.session.instagramUserID, accessToken: req.session.accessToken })
-})
-
-app.post("/connect-qrcode", (req, res) => {
-    dbHelper.connectQrcodeToUser(req.body.qrID, req.session.instagramUserID)
-    .then(changedModels => res.send(changedModels))
-})
-
 app.get("/admin", (req, res) => {
     res.render("admin", { title: "Admin" })
 })
@@ -238,4 +213,32 @@ app.post("/admin/create-qrcodes", (req, res) => {
 app.post("/admin/delete-qrcodes", (req, res) => {
     dbHelper.deleteAllQrcodes()
     res.redirect("/admin")
+})
+
+/*########################################################################################################*/
+//                                                                                                     /*#*/
+// check if user session is initiated this is required for all following routes                        /*#*/
+app.all("*", (req, res, next) => {                                                                     /*#*/
+//                                                                                                     /*#*/
+    if (                                                                                               /*#*/
+        req.session.username                                                                           /*#*/
+    // ||  req.path == "/auth"                                                                         /*#*/
+    // ||  req.path == "/login"                                                                        /*#*/
+    // ||  req.path.match(/\/admin.*/)                                                                 /*#*/
+    // ||  req.path.match(/\/collab.*/)                                                                /*#*/
+    ) { return next() }                                                                                /*#*/
+    else {                                                                                             /*#*/
+        res.redirect("/")                                                                              /*#*/
+    }                                                                                                  /*#*/
+})                                                                                                     /*#*/
+//                                                                                                     /*#*/
+/*#################### ALL ROUTES BELOW HAVE TO HAVE USER LOGGED IN, IF NOT HE WILL BE REDIRECTED TO ROOT */
+
+app.get("/scanner", (req, res) => {
+    res.render("scanner", { title: "QR-Scanner", instagramUserID: req.session.instagramUserID, accessToken: req.session.accessToken })
+})
+
+app.post("/connect-qrcode", (req, res) => {
+    dbHelper.connectQrcodeToUser(req.body.qrID, req.session.instagramUserID)
+    .then(changedModels => res.send(changedModels))
 })
