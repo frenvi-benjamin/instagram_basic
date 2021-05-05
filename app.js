@@ -24,7 +24,6 @@ mongoose.set("returnOriginal", false)
 mongoose.set("debug", true)
 
 const dbHelper = require("./modules/db-helper")
-const dbHelper = require('./modules/db-helper')
 
 // set view engine to ejs
 app.set("view engine", "ejs")
