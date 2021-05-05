@@ -32,7 +32,7 @@ function getConnectedUser(qrID) {
             .then(res => {return res})
         }
         else {
-            return undefined
+            reject()
         }
     })
 }

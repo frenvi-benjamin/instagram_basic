@@ -24,7 +24,26 @@ mongoose.set("returnOriginal", false)
 mongoose.set("debug", true)
 
 const dbHelper = require("./modules/db-helper")
-const dbHelper = require('./modules/db-helper')
+
+// session
+const session = require("express-session")
+
+// use mongodb as session store
+const MongoStore = require("connect-mongo")
+
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        store: MongoStore.create({
+            mongoUrl: process.env.MONGODB_CONNECTION_URL,
+            ttl: 1000 * 60 * 60,
+        })
+    })
+)
+
+// max age of session (1h) {ttl: 1000 * 60 * 60}
 
 // set view engine to ejs
 app.set("view engine", "ejs")
@@ -51,27 +70,43 @@ mongoose.connect(process.env.MONGODB_CONNECTION_URL, { useNewUrlParser: true, us
     .catch((err) => console.log(err))
 
 
+// always check if user session is initiated
+app.all("*", (req, res, next) => {
+    // only allow /auth without session because session is created there
+    if (req.path == "/auth") {return next()}
+
+    if (!req.session.username) {
+        // if no session was initiated, render login screen
+        res.render("index", { title: "Login", instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + "/auth" })
+    }
+    else {
+        // else carry on as usual
+        next()
+    }
+})
+
 app.get("/", (req, res) => {
 
-    const defaultRender = function() {res.render("index", { title: "Login", instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + "/auth" })}
+    const defaultRender = function() {
+        res.render("index", { title: "Login", instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + "/auth" })
+    }
 
     const qrID = req.query.qr
     if (qrID) {
         dbHelper.getConnectedUser(qrID)
         .then(user => {
-            if (user) {
-                const collabPartnerData = {
-                    username: user.username,
-                    shortcode: user.shortcode,
-                    profile_picture_url: user.profile_picture_url
-                }
-                dbHelper.incrementNrOfScans(user.username)
-                res.render("collab", { title: "Collab", collabPartner: collabPartnerData})
+            const collabPartnerData = {
+                username: user.username,
+                shortcode: user.shortcode,
+                profile_picture_url: user.profile_picture_url
             }
-            else {
+            dbHelper.incrementNrOfScans(user.username)
+            res.render("collab", { title: "Collab", collabPartner: collabPartnerData})
+            },
+            () => {
                 defaultRender()
             }
-        })
+        )
     }
     else {
         defaultRender()
@@ -134,7 +169,13 @@ app.get("/auth", (req, res) => {
                 const longLivedAccessToken = body.access_token
 
                 dbHelper.createUserFromAccessToken(longLivedAccessToken)
-                .then((user) => defaultRender(user))
+                .then((user) => {
+                    req.session.accessToken = user.accessToken
+                    req.session.username = user.username
+                    req.session.instagramUserID = user.instagramUserID
+
+                    defaultRender(user)
+                })
             })
     },
         () => {
@@ -143,16 +184,12 @@ app.get("/auth", (req, res) => {
     )
 })
 
-app.post("/scanner", (req, res) => {
-    res.render("scanner", { title: "QR-Scanner", instagramUserID: req.body.instagramUserID, accessToken: req.body.accessToken })
-})
-
 app.get("/scanner", (req, res) => {
-    res.render("scanner", { title: "QR-Scanner", instagramUserID: "17841404030696548", accessToken: "IGQVJXMEdmUGJ6SF8td0lfX3d0NndncW1KMnFJb1BWVERVY3FSRWluTk11VWRnOTdQRWFmMHlsVkU0NkpwZA0RUdjhURUQyeDlfM2ZAtZAUpKSHByUkdnRGdMNWwyWnYxaXpYYjdfaENn" })
+    res.render("scanner", { title: "QR-Scanner", instagramUserID: req.session.instagramUserID, accessToken: req.session.accessToken })
 })
 
 app.post("/connect-qrcode", (req, res) => {
-    dbHelper.connectQrcodeToUser(req.body.qrID, req.body.instagramUserID)
+    dbHelper.connectQrcodeToUser(req.body.qrID, req.session.instagramUserID)
     .then(changedModels => res.send(changedModels))
 })
 
