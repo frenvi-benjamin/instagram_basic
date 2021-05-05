@@ -1,6 +1,6 @@
-require('dotenv').config()
-const dbHelper = require('./db-helper')
-const fetch = require('node-fetch')
+require("dotenv").config()
+const dbHelper = require("./db-helper")
+const fetch = require("node-fetch")
 
 const mediaURL = "https://graph.instagram.com/me/media"
 const userURL = "https://graph.instagram.com/me"

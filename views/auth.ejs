@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="de">
 
-<%- include('./partials/head') %> 
+<%- include("./partials/head") %> 
 
 <body>
-    <form id="form" action="/scanner-insta" method="POST" enctype="application/x-www-form-urlencoded">
+    <form id="form" action="/scanner" method="POST" enctype="application/x-www-form-urlencoded">
         <input hidden type="text" name="accessToken" value="<%= accessToken %>">
         <input hidden type="text" name="instagramUserID" value="<%= instagramUserID %>">
     </form>
     <script>
-        document.getElementById('form').submit()
+        document.getElementById("form").submit()
     </script>
 </body>
 </html>

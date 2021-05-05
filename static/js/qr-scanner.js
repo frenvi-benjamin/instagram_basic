@@ -73,7 +73,7 @@ var observer = new MutationObserver((mutationsList) => {
 	});
 })
 
-observer.observe(video, { attributes : true, attributeFilter : ['style'] })
+observer.observe(video, { attributes : true, attributeFilter : ["style"] })
 
 canvas.style.display = "block"
 canvas.style.maxWidth = "500px"

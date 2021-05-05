@@ -1,46 +1,44 @@
-require('dotenv').config()
-const express = require('express')
+require("dotenv").config()
+const express = require("express")
 const app = express()
-
-//fs
-const fs = require('fs')
 
 // qrcode-generator
 const QRCode = require("qrcode-svg")
 
 //zip
-const zip = require('express-easy-zip')
+const zip = require("express-easy-zip")
 app.use(zip())
 
 // node-fetch
-const fetch = require('node-fetch')
-const FormData = require('form-data')
+const fetch = require("node-fetch")
+const FormData = require("form-data")
 
 // add body parser to read post body
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // mongoose imports
-const mongoose = require('mongoose')
-mongoose.set('useFindAndModify', false)
-mongoose.set('returnOriginal', false)
-mongoose.set('debug', true)
+const mongoose = require("mongoose")
+mongoose.set("useFindAndModify", false)
+mongoose.set("returnOriginal", false)
+mongoose.set("debug", true)
 
+const dbHelper = require("./modules/db-helper")
 const dbHelper = require('./modules/db-helper')
 
 // set view engine to ejs
-app.set('view engine', 'ejs')
+app.set("view engine", "ejs")
 
 // set all paths
-app.use('/img', express.static(__dirname + '/static/img'))
-app.use('/js', express.static(__dirname + '/static/js'))
-app.use('/css', express.static(__dirname + '/static/css'))
+app.use("/img", express.static(__dirname + "/static/img"))
+app.use("/js", express.static(__dirname + "/static/js"))
+app.use("/css", express.static(__dirname + "/static/css"))
 
-app.use('/qr-scanner', express.static(__dirname + '/node_modules/qr-scanner'))
-app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'))
-app.use('/bootstrap-social', express.static(__dirname + '/node_modules/bootstrap-social'))
-app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'))
-app.use('/fontawesome', express.static(__dirname + '/node_modules/@fortawesome/fontawesome-free'))
+app.use("/qr-scanner", express.static(__dirname + "/node_modules/qr-scanner"))
+app.use("/bootstrap", express.static(__dirname + "/node_modules/bootstrap/dist"))
+app.use("/bootstrap-social", express.static(__dirname + "/node_modules/bootstrap-social"))
+app.use("/jquery", express.static(__dirname + "/node_modules/jquery/dist"))
+app.use("/fontawesome", express.static(__dirname + "/node_modules/@fortawesome/fontawesome-free"))
 
 const startServer = app.listen(process.env.PORT, () => {
     console.log(`App listening at ${process.env.HOST}:${process.env.PORT}`)
@@ -52,7 +50,9 @@ mongoose.connect(process.env.MONGODB_CONNECTION_URL, { useNewUrlParser: true, us
     .then(() => startServer)
     .catch((err) => console.log(err))
 
-app.get('/', (req, res) => {
+
+app.get("/", (req, res) => {
+
     const defaultRender = function() {res.render("index", { title: "Login", instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + "/auth" })}
 
     const qrID = req.query.qr
@@ -78,7 +78,7 @@ app.get('/', (req, res) => {
     }
 })
 
-app.get('/auth', (req, res) => {
+app.get("/auth", (req, res) => {
     const authCode = req.query.code
 
     const defaultRender = function (user) {res.render("auth", { title: "Authentication", accessToken: user.accessToken, instagramUserID: user.instagramUserID })}
@@ -97,9 +97,9 @@ app.get('/auth', (req, res) => {
     formdata.append("redirect_uri", process.env.HOST + "/auth")
 
     var requestOptions = {
-        method: 'POST',
+        method: "POST",
         body: formdata,
-        redirect: 'follow'
+        redirect: "follow"
     }
     // get short lived access token with given authentication code
     fetch("https://api.instagram.com/oauth/access_token", requestOptions)
@@ -143,35 +143,35 @@ app.get('/auth', (req, res) => {
     )
 })
 
-app.post('/scanner-insta', (req, res) => {
-    res.render("scanner-insta", { title: "QR-Scanner", instagramUserID: req.body.instagramUserID, accessToken: req.body.accessToken })
+app.post("/scanner", (req, res) => {
+    res.render("scanner", { title: "QR-Scanner", instagramUserID: req.body.instagramUserID, accessToken: req.body.accessToken })
 })
 
-app.get('/scanner-insta', (req, res) => {
-    res.render("scanner-insta", { title: "QR-Scanner", instagramUserID: "17841404030696548", accessToken: "IGQVJXMEdmUGJ6SF8td0lfX3d0NndncW1KMnFJb1BWVERVY3FSRWluTk11VWRnOTdQRWFmMHlsVkU0NkpwZA0RUdjhURUQyeDlfM2ZAtZAUpKSHByUkdnRGdMNWwyWnYxaXpYYjdfaENn" })
+app.get("/scanner", (req, res) => {
+    res.render("scanner", { title: "QR-Scanner", instagramUserID: "17841404030696548", accessToken: "IGQVJXMEdmUGJ6SF8td0lfX3d0NndncW1KMnFJb1BWVERVY3FSRWluTk11VWRnOTdQRWFmMHlsVkU0NkpwZA0RUdjhURUQyeDlfM2ZAtZAUpKSHByUkdnRGdMNWwyWnYxaXpYYjdfaENn" })
 })
 
 
-app.post('/connect-qrcode-insta', (req, res) => {
+app.post("/connect-qrcode-insta", (req, res) => {
     dbHelper.connectQrcodeToUser(req.body.qrID, req.body.instagramUserID)
     .then(changedModels => res.send(changedModels))
 })
 
-app.get('/admin', (req, res) => {
+app.get("/admin", (req, res) => {
     res.render("admin", { title: "Admin" })
 })
 
-app.post('/admin/clear', (req, res) => {
+app.post("/admin/clear", (req, res) => {
     dbHelper.clearConnections()
-    res.redirect('/admin')
+    res.redirect("/admin")
 })
 
-app.post('/admin/clear-one', (req, res) => {
+app.post("/admin/clear-one", (req, res) => {
     dbHelper.clearConnections(req.body.username)
-    res.redirect('/admin')
+    res.redirect("/admin")
 })
 
-app.post('/admin/create-qrcodes', (req, res) => {
+app.post("/admin/create-qrcodes", (req, res) => {
     const n = req.body.nQrcodes
     dbHelper.createQrcodes(n)
     .then(newQrcodes => {

@@ -1,6 +1,6 @@
-const QrCode = require('../models/qrcode')
-const User = require('../models/user')
-const instagramHelper = require('./instagram-helper')
+const QrCode = require("../models/qrcode")
+const User = require("../models/user")
+const instagramHelper = require("./instagram-helper")
 
 
 function clearConnections(username = undefined) {
