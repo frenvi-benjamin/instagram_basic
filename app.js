@@ -72,8 +72,9 @@ mongoose.connect(process.env.MONGODB_CONNECTION_URL, { useNewUrlParser: true, us
 
 // always check if user session is initiated
 app.all("*", (req, res, next) => {
+
     // only allow /auth without session because session is created there
-    if (req.path == "/auth") {return next()}
+    if (req.path == "/auth" || req.path.match(/\/admin.*/)) {return next()}
 
     if (!req.session.username) {
         // if no session was initiated, render login screen
