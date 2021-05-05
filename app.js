@@ -116,7 +116,6 @@ app.get("/", (req, res) => {
 app.get("/auth", (req, res) => {
     const authCode = req.query.code
 
-    const defaultRender = function (user) {res.render("auth", { title: "Authentication", accessToken: user.accessToken, instagramUserID: user.instagramUserID })}
     const permissionsNotGrantedRender = function() {res.render("request-permissions", { instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + "/auth"  })}
 
     if (!authCode) {
@@ -169,12 +168,12 @@ app.get("/auth", (req, res) => {
                 const longLivedAccessToken = body.access_token
 
                 dbHelper.createUserFromAccessToken(longLivedAccessToken)
-                .then((user) => {
+                .then(user => {
                     req.session.accessToken = user.accessToken
                     req.session.username = user.username
                     req.session.instagramUserID = user.instagramUserID
 
-                    defaultRender(user)
+                    res.redirect("/scanner")
                 })
             })
     },
