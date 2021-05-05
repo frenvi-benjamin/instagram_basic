@@ -241,7 +241,7 @@ app.all("*", (req, res, next) => {                                              
 /*#################### ALL ROUTES BELOW HAVE TO HAVE USER LOGGED IN, IF NOT HE WILL BE REDIRECTED TO ROOT */
 
 app.get("/scanner", (req, res) => {
-    res.render("scanner", { title: "QR-Scanner", instagramUserID: req.session.instagramUserID, accessToken: req.session.accessToken })
+    res.render("scanner", { title: "QR-Scanner", instagramUserID: req.session.instagramUserID, accessToken: req.session.accessToken, username: req.session.username })
 })
 
 app.post("/connect-qrcode", (req, res) => {
