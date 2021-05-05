@@ -151,8 +151,7 @@ app.get("/scanner", (req, res) => {
     res.render("scanner", { title: "QR-Scanner", instagramUserID: "17841404030696548", accessToken: "IGQVJXMEdmUGJ6SF8td0lfX3d0NndncW1KMnFJb1BWVERVY3FSRWluTk11VWRnOTdQRWFmMHlsVkU0NkpwZA0RUdjhURUQyeDlfM2ZAtZAUpKSHByUkdnRGdMNWwyWnYxaXpYYjdfaENn" })
 })
 
-
-app.post("/connect-qrcode-insta", (req, res) => {
+app.post("/connect-qrcode", (req, res) => {
     dbHelper.connectQrcodeToUser(req.body.qrID, req.body.instagramUserID)
     .then(changedModels => res.send(changedModels))
 })
