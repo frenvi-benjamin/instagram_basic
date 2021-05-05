@@ -79,14 +79,11 @@ app.get("/", (req, res) => {
     const qrID = req.query.qr
     if (qrID) {
         dbHelper.getConnectedUser(qrID)
-        .then(user => {
-            const collabPartnerData = {
-                username: user.username,
-                shortcode: user.shortcode,
-                profile_picture_url: user.profile_picture_url
-            }
+        .then(
+            user => {
                 dbHelper.incrementNrOfScans(user.username)
-            res.render("collab", { title: "Collab", collabPartner: collabPartnerData})
+                // res.render("collab", { title: "Collab", collabPartner: { username: user.username, shortcode: user.shortcode }})
+                res.redirect(`/collab/${user.username}`)
             },
             () => {
                 defaultRender()
@@ -96,6 +93,15 @@ app.get("/", (req, res) => {
     else {
         defaultRender()
     }
+})
+
+app.get("/collab/:username", (req, res) => {
+    const username = req.params.username
+    dbHelper.getUserByUsername(username)
+    .then(user => dbHelper.updateShortcode(user.accessToken))
+    .then(user => {
+        res.render("collab", { title: "Collab", collabPartner: { username: user.username, shortcode: user.shortcode }})
+    })
 })
 
 app.get("/auth", (req, res) => {

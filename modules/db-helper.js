@@ -73,4 +73,15 @@ function incrementNrOfScans(username) {
     User.findOneAndUpdate({ username: username }, { $inc: { nrOfScans: 1 }}, { upsert: true }).exec()
 }
 
-module.exports = { clearConnections, getConnectedUser, createUserFromAccessToken, connectQrcodeToUser, createQrcodes, deleteAllQrcodes, incrementNrOfScans }
+function getUserByUsername(username) {
+    return User.findOne({ username: username }).exec()
+}
+
+function updateShortcode(accessToken) {
+    return instagramHelper.getShortcode(accessToken)
+    .then(shortcode => {
+        return User.findOneAndUpdate({ accessToken: accessToken }, { shortcode: shortcode }, { upsert: true }).exec()
+    })
+}
+
+module.exports = { clearConnections, getConnectedUser, createUserFromAccessToken, connectQrcodeToUser, createQrcodes, deleteAllQrcodes, incrementNrOfScans, getUserByUsername, updateShortcode }
