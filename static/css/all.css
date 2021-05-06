@@ -1,11 +1,23 @@
-.btn:not(.btn-social) {
+.btn-custom {
     color: white;
     background-color: #A2D208;
     border-color: #A2D208;
 }
 
-.btn:hover:not(.btn-social) {
+.btn-custom:hover {
     color: #A2D208;
     background-color: white;
     border-color: #A2D208;
+}
+
+.btn-custom-danger {
+    color: white;
+    background-color: #DC3545;
+    border-color: #DC3545;
+}
+
+.btn-custom-danger:hover {
+    color: #DC3545;
+    background-color: white;
+    border-color: #DC3545;
 }
