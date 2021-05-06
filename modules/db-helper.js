@@ -84,4 +84,19 @@ function updateShortcode(accessToken) {
     })
 }
 
-module.exports = { clearConnections, getConnectedUser, createUserFromAccessToken, connectQrcodeToUser, createQrcodes, deleteAllQrcodes, incrementNrOfScans, getUserByUsername, updateShortcode }
+function deleteUser(username) {
+    User.findOneAndDelete({ username: username }).exec()
+}
+
+module.exports = {
+    clearConnections,
+    getConnectedUser,
+    createUserFromAccessToken,
+    connectQrcodeToUser,
+    createQrcodes,
+    deleteAllQrcodes,
+    incrementNrOfScans,
+    getUserByUsername,
+    updateShortcode,
+    deleteUser,
+}

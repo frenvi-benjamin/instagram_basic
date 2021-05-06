@@ -183,6 +183,11 @@ app.post("/admin/get-user", (req, res) => {
     .then(user => res.render("admin", { user: user }))
 })
 
+app.post("/admin/delete-user", (req, res) => {
+    dbHelper.deleteUser(req.body.username)
+    res.redirect("/admin")
+})
+
 app.post("/admin/clear", (req, res) => {
     dbHelper.clearConnections()
     res.redirect("/admin")

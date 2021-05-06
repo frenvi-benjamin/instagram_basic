@@ -8,16 +8,15 @@
                 </div>
                 <input type="text" class="form-control" placeholder="username" name="username">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">Finden</button>
+                    <button class="btn btn-custom btn-outline-secondary" type="submit">Finden</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
-<div class="row">
-    <div class="col">
-        <% try { if (user) {} %>
-
+<% try { if (user) {} %>
+    <div class="row">
+        <div class="col">
             <div class="input-group mb-1">
                 <div class="input-group-prepend fixed-width">
                     <div class="input-group-text fixed-width">username</div>
@@ -26,7 +25,7 @@
                     <%= user.username %>
                 </div>
                 <div class="input-group-append">
-                    <a class="btn" target="_blank" href="<%= " https://www.instagram.com/" +user.username %>">
+                    <a class="btn btn-custom" target="_blank" href="<%= " https://www.instagram.com/" +user.username %>">
                         <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>
@@ -40,7 +39,7 @@
                     <%= "https://instagram.com/p/" + user.shortcode %>
                 </div>
                 <div class="input-group-append">
-                    <a class="btn" target="_blank" href="<%= " https://www.instagram.com/p/" +user.shortcode %>">
+                    <a class="btn btn-custom" target="_blank" href="<%= " https://www.instagram.com/p/" +user.shortcode %>">
                         <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>
@@ -54,7 +53,7 @@
                     <%= process.env.HOST + "/collab/" + user.username %>
                 </div>
                 <div class="input-group-append">
-                    <a class="btn" target="_blank" href="<%= process.env.HOST + "/collab/" + user.username %>">
+                    <a class="btn btn-custom" target="_blank" href="<%= process.env.HOST + " /collab/" + user.username %>">
                         <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>
@@ -104,6 +103,9 @@
                     <%= user.updatedAt %>
                 </div>
             </div>
-            <% } catch {} %>
+            <form action="/admin/delete-user" method="POST">
+                <button class="btn btn btn-custom-danger float-right mt-2">Löschen</button>
+            </form>
+        </div>
     </div>
-</div>
+<% } catch {} %>
