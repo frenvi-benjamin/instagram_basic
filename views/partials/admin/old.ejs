@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-lg my-1">
+        <div class="card">
+            <div class="card-header">
+                Alle Verbindungen zwischen QR-Codes und Usern löschen
+            </div>
+            <div class="card-body">
+                <form action="/admin/clear" method="POST">
+                    <button class="btn" id="clear" type="submit">Löschen</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg my-1">
+        <div class="card">
+            <div class="card-header">
+                Verbindungen eines Users mit allen seinen QR-Codes löschen
+            </div>
+            <div class="card-body">
+                <form action="/admin/clear-one" method="POST">
+                    <div class="input-group">
+                        <span class="input-group-text">@</span>
+                        <input required type="text" name="username" placeholder="username">
+                        <button type="submit" class="btn">Löschen</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg my-1">
+        <div class="card">
+            <div class="card-header">
+                Alle QR-Codes löschen
+            </div>
+            <div class="card-body">
+                <form action="/admin/delete-qrcodes" method="POST">
+                    <button class="btn" type="submit">Löschen</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col my-1">
+        <div class="card">
+            <div class="card-header">
+                QR-Codes generieren
+            </div>
+            <div class="card-body">
+                <form action="/admin/create-qrcodes" method="POST">
+                    <input required class="mb-1" type="text" placeholder="Anzahl" name="nQrcodes">
+                    <div class="input-group mb-1">
+                        <label for="color" class="input-group-text ">Farbe</label>
+                        <input type="color" name="color" id="color" value="#000000">
+                    </div>
+                    <div class="input-group mb-1">
+                        <label for="background" class="input-group-text">Hintergrund</label>
+                        <input type="color" name="background" id="background" value="#ffffff">
+                    </div>
+                    <button class="btn" type="submit">Generieren</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

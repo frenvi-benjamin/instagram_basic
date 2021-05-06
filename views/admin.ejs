@@ -1,137 +1,57 @@
 <!DOCTYPE html>
 <html lang="de">
 <%- include("./partials/head") %>
+    <link rel="stylesheet" href="/css/admin.css">
 
     <body>
         <%- include("./partials/header") %>
             <div class="container-fluid">
                 <div class="card">
-                    <div class="card-header border-bottom-0">
+                    <div class="card-header border-bottom-0 pb-0">
                         <nav>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="user-tab" data-toggle="tab" href="#user"
-                                        role="tab" aria-controls="user" aria-selected="true">User</button>
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item dropdown">
+                                    <button class="nav-link dropdown-toggle active" data-toggle="dropdown">User</button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item active" data-toggle="tab"
+                                            href="#edit-user">Verändern</a>
+                                        <a class="dropdown-item" data-toggle="tab" href="#delete-user">Löschen</a>
+                                    </div>
                                 </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="qrcode-tab" data-toggle="tab" href="#qrcode" role="tab"
-                                        aria-controls="qrcode" aria-selected="false">QR-Code</button>
+                                <li class="nav-item dropdown">
+                                    <button class="nav-link dropdown-toggle" data-toggle="dropdown">QR-Code</button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" data-toggle="tab" href="#create-qrcode">Erstellen</a>
+                                        <a class="dropdown-item" data-toggle="tab" href="#edit-qrcode">Verändern</a>
+                                        <a class="dropdown-item" data-toggle="tab" href="#delete-qrcode">Löschen</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link" href="#old" data-toggle="tab">Old</button>
                                 </li>
                             </ul>
                         </nav>
                     </div>
                     <div class="card-body">
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="user" role="tabpanel"
-                                aria-labelledby="user-tab">
-                                <div class="row">
-                                    <div class="col-lg my-1">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                Alle Verbindungen zwischen QR-Codes und Usern löschen
-                                            </div>
-                                            <div class="card-body">
-                                                <form action="/admin/clear" method="POST">
-                                                    <button class="btn" id="clear" type="submit">Löschen</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg my-1">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                Verbindungen eines Users mit allen seinen QR-Codes löschen
-                                            </div>
-                                            <div class="card-body">
-                                                <form action="/admin/clear-one" method="POST">
-                                                    <div class="input-group">
-                                                        <span class="input-group-text">@</span>
-                                                        <input class="form-control" required type="text"
-                                                            name="username" placeholder="username">
-                                                        <button class="btn" type="submit">Löschen</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg my-1">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                Alle QR-Codes löschen
-                                            </div>
-                                            <div class="card-body">
-                                                <form action="/admin/delete-qrcodes" method="POST">
-                                                    <button class="btn" type="submit">Löschen</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col my-1">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                QR-Codes generieren
-                                            </div>
-                                            <div class="card-body">
-                                                <form action="/admin/create-qrcodes" method="POST">
-                                                    <input required class="mb-1 form-control" type="text"
-                                                        placeholder="Anzahl" name="nQrcodes">
-                                                    <div class="input-group mb-1">
-                                                        <label for="color" class="input-group-text">Farbe</label>
-                                                        <input class="form-control form-control-color" type="color"
-                                                            name="color" id="color" value="#000000">
-                                                    </div>
-                                                    <div class="input-group mb-1">
-                                                        <label for="background"
-                                                            class="input-group-text">Hintergrund</label>
-                                                        <input class="form-control form-control-color" type="color"
-                                                            name="background" id="background" value="#ffffff">
-                                                    </div>
-                                                    <button class="btn" type="submit">Generieren</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="tab-content">
+                            <div class="tab-pane fade active show" id="edit-user" role="tabpanel" aria-labelledby="edit-user-tab">
+                                <%- include("./partials/admin/edit-user-tab") %>
                             </div>
-                            <div class="tab-pane fade" id="qrcode" role="tabpanel" aria-labelledby="qrcode-tab">
-
+                            <div class="tab-pane fade" id="delete-user" role="tabpanel"
+                                aria-labelledby="delete-user-tab">Delete User</div>
+                            <div class="tab-pane fade" id="create-qrcode" role="tabpanel"
+                                aria-labelledby="create-qrcode-tab">Create QR-Code</div>
+                            <div class="tab-pane fade" id="edit-qrcode" role="tabpanel"
+                                aria-labelledby="edit-qrcode-tab">Edit QR-Code</div>
+                            <div class="tab-pane fade" id="delete-qrcode" role="tabpanel"
+                                aria-labelledby="delete-qrcode-tab">Delete QR-Code</div>
+                            <div class="tab-pane fade" id="old">
+                                <%- include("./partials/admin/old") %>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
     </body>
-
-    <script>
-        // let cols = document.getElementsByClassName("col")
-        // for (let col of cols) {
-        //     col.classList.add("my-1")
-        // }
-
-        // let buttons = document.getElementsByTagName("button")
-        // for (let button of buttons) {
-        //     button.classList.add("btn")
-        // }
-
-        // let labels = document.getElementsByTagName("label")
-        // for (let label of labels) {
-        //     label.classList.add("form-label")
-        // }
-
-        // let inputs = document.getElementsByTagName("input")
-        // for (let input of inputs) {
-        //     switch (input.type) {
-        //         case "text":
-        //             input.classList.add("form-control")
-        //         break;
-        //         case "color":
-        //             input.classList.add("form-control")
-        //             input.classList.add("form-control-color")
-        //     }
-        // }
-    </script>
 
 </html>

@@ -178,6 +178,11 @@ app.get("/admin", (req, res) => {
     res.render("admin", { title: "Admin" })
 })
 
+app.post("/admin/get-user", (req, res) => {
+    dbHelper.getUserByUsername(req.body.username)
+    .then(user => res.render("admin", { user: user }))
+})
+
 app.post("/admin/clear", (req, res) => {
     dbHelper.clearConnections()
     res.redirect("/admin")
@@ -224,19 +229,19 @@ app.post("/admin/delete-qrcodes", (req, res) => {
 /*########################################################################################################*/
 //                                                                                                     /*#*/
 // check if user session is initiated this is required for all following routes                        /*#*/
-app.all("*", (req, res, next) => {                                                                     /*#*/
-//                                                                                                     /*#*/
-    if (                                                                                               /*#*/
-        req.session.username                                                                           /*#*/
-    // ||  req.path == "/auth"                                                                         /*#*/
-    // ||  req.path == "/login"                                                                        /*#*/
-    // ||  req.path.match(/\/admin.*/)                                                                 /*#*/
-    // ||  req.path.match(/\/collab.*/)                                                                /*#*/
-    ) { return next() }                                                                                /*#*/
-    else {                                                                                             /*#*/
-        res.redirect("/")                                                                              /*#*/
-    }                                                                                                  /*#*/
-})                                                                                                     /*#*/
+// app.use((req, res, next) => {                                                                          /*#*/
+// //                                                                                                     /*#*/
+//     if (                                                                                               /*#*/
+//         req.session.username                                                                           /*#*/
+//     // ||  req.path == "/auth"                                                                         /*#*/
+//     // ||  req.path == "/login"                                                                        /*#*/
+//     // ||  req.path.match(/\/admin.*/)                                                                 /*#*/
+//     // ||  req.path.match(/\/collab.*/)                                                                /*#*/
+//     ) { return next() }                                                                                /*#*/
+//     else {                                                                                             /*#*/
+//         res.redirect("/")                                                                              /*#*/
+//     }                                                                                                  /*#*/
+// })                                                                                                     /*#*/
 //                                                                                                     /*#*/
 /*#################### ALL ROUTES BELOW HAVE TO HAVE USER LOGGED IN, IF NOT HE WILL BE REDIRECTED TO ROOT */
 

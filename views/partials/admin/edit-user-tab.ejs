@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="col-lg">
+        <form class="mb-2" action="/admin/get-user" method="POST">
+            <label for="create-user-form">User finden</label>
+            <div class="input-group" id="create-user-form">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@</span>
+                </div>
+                <input type="text" class="form-control" placeholder="username" name="username">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">Finden</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-lg">
+        <% try { if (user) {} %>
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col mr-1" id="username">
+                            <span class="form-control">
+                                <%= user.username %>
+                            </span>
+                        </div>
+                        <a class="mr-2" href="<%= "https://www.instagram.com/" +user.username %>">
+                            <div class="border rounded link-icon">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                        </a>
+                        <a class="mx-2" href="<%= process.env.HOST + "/collab/" +user.username %>">
+                            <div class="border rounded link-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend fixed-width">
+                            <span class="input-group-text fixed-width">instagramUserID</span>
+                        </div>
+                        <span class="form-control text-right">
+                            <%= user.instagramUserID %>
+                        </span>
+                    </div>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend fixed-width">
+                            <span class="input-group-text fixed-width">accessToken</span>
+                        </div>
+                        <span class="form-control text-right">
+                            <%= user.accessToken %>
+                        </span>
+                    </div>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend fixed-width">
+                            <span class="input-group-text fixed-width">Shortcode</span>
+                        </div>
+                        <span class="form-control text-right">
+                            <%= user.shortcode %>
+                        </span>
+                    </div>
+
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend fixed-width">
+                            <span class="input-group-text fixed-width">createdAt</span>
+                        </div>
+                        <span class="form-control text-right">
+                            <%= user.createdAt %>
+                        </span>
+                    </div>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend fixed-width">
+                            <span class="input-group-text fixed-width">updatedAt</span>
+                        </div>
+                        <span class="form-control text-right">
+                            <%= user.updatedAt %>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <% } catch {} %>
+    </div>
+</div>
