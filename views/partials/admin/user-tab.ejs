@@ -14,7 +14,7 @@
         </form>
     </div>
 </div>
-<% try { if (user) {} %>
+<% try { if (user) { %>
     <div class="row">
         <div class="col">
             <div class="input-group mb-1">
@@ -104,8 +104,9 @@
                 </div>
             </div>
             <form action="/admin/delete-user" method="POST">
+                <input hidden type="text" name="username" value="<%= user.username %>">
                 <button class="btn btn btn-custom-danger float-right mt-2">Löschen</button>
             </form>
         </div>
     </div>
-<% } catch {} %>
+<% }} catch {} %>
