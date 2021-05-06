@@ -1,0 +1,109 @@
+<div class="row">
+    <div class="col">
+        <form class="mb-2" action="/admin/get-user" method="POST">
+            <label for="create-user-form">User finden</label>
+            <div class="input-group" id="create-user-form">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">@</div>
+                </div>
+                <input type="text" class="form-control" placeholder="username" name="username">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">Finden</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <% try { if (user) {} %>
+
+            <div class="input-group mb-1">
+                <div class="input-group-prepend fixed-width">
+                    <div class="input-group-text fixed-width">username</div>
+                </div>
+                <div class="form-control text-right">
+                    <%= user.username %>
+                </div>
+                <div class="input-group-append">
+                    <a class="btn" target="_blank" href="<%= " https://www.instagram.com/" +user.username %>">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="input-group mb-1">
+                <div class="input-group-prepend fixed-width">
+                    <div class="input-group-text fixed-width">promoted post</div>
+                </div>
+                <div class="form-control text-right">
+                    <%= "https://instagram.com/p/" + user.shortcode %>
+                </div>
+                <div class="input-group-append">
+                    <a class="btn" target="_blank" href="<%= " https://www.instagram.com/p/" +user.shortcode %>">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="input-group mb-1">
+                <div class="input-group-prepend fixed-width">
+                    <div class="input-group-text fixed-width">collab website</div>
+                </div>
+                <div class="form-control text-right">
+                    <%= process.env.HOST + "/collab/" +user.username %>
+                </div>
+                <div class="input-group-append">
+                    <a class="btn" target="_blank" href="<%= process.env.HOST + "/collab/" + user.username %>">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="input-group mb-1">
+                <div class="input-group-prepend fixed-width">
+                    <div class="input-group-text fixed-width">Total Scans</div>
+                </div>
+                <div class="form-control text-right">
+                    <%= user.nrOfScans %>
+                </div>
+            </div>
+
+            <div class="input-group mb-1">
+                <div class="input-group-prepend fixed-width">
+                    <div class="input-group-text fixed-width">instagramUserID</div>
+                </div>
+                <div class="form-control text-right">
+                    <%= user.instagramUserID %>
+                </div>
+            </div>
+
+            <div class="input-group mb-1">
+                <div class="input-group-prepend fixed-width">
+                    <div class="input-group-text fixed-width">accessToken</div>
+                </div>
+                <div class="form-control text-right">
+                    <%= user.accessToken %>
+                </div>
+            </div>
+
+            <div class="input-group mb-1">
+                <div class="input-group-prepend fixed-width">
+                    <div class="input-group-text fixed-width">createdAt</div>
+                </div>
+                <div class="form-control text-right">
+                    <%= user.createdAt %>
+                </div>
+            </div>
+
+            <div class="input-group mb-1">
+                <div class="input-group-prepend fixed-width">
+                    <div class="input-group-text fixed-width">updatedAt</div>
+                </div>
+                <div class="form-control text-right">
+                    <%= user.updatedAt %>
+                </div>
+            </div>
+            <% } catch {} %>
+    </div>
+</div>

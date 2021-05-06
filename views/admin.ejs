@@ -14,7 +14,7 @@
                                     <button class="nav-link dropdown-toggle active" data-toggle="dropdown">User</button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item active" data-toggle="tab"
-                                            href="#edit-user">Verändern</a>
+                                            href="#search-user">Suchen</a>
                                         <a class="dropdown-item" data-toggle="tab" href="#delete-user">Löschen</a>
                                     </div>
                                 </li>
@@ -34,17 +34,13 @@
                     </div>
                     <div class="card-body">
                         <div class="tab-content">
-                            <div class="tab-pane fade active show" id="edit-user" role="tabpanel" aria-labelledby="edit-user-tab">
-                                <%- include("./partials/admin/edit-user-tab") %>
+                            <div class="tab-pane fade active show" id="search-user" role="tabpanel">
+                                <%- include("./partials/admin/search-user-tab") %>
                             </div>
-                            <div class="tab-pane fade" id="delete-user" role="tabpanel"
-                                aria-labelledby="delete-user-tab">Delete User</div>
-                            <div class="tab-pane fade" id="create-qrcode" role="tabpanel"
-                                aria-labelledby="create-qrcode-tab">Create QR-Code</div>
-                            <div class="tab-pane fade" id="edit-qrcode" role="tabpanel"
-                                aria-labelledby="edit-qrcode-tab">Edit QR-Code</div>
-                            <div class="tab-pane fade" id="delete-qrcode" role="tabpanel"
-                                aria-labelledby="delete-qrcode-tab">Delete QR-Code</div>
+                            <div class="tab-pane fade" id="delete-user">Delete User</div>
+                            <div class="tab-pane fade" id="create-qrcode">Create QR-Code</div>
+                            <div class="tab-pane fade" id="edit-qrcode">Edit QR-Code</div>
+                            <div class="tab-pane fade" id="delete-qrcode">Delete QR-Code</div>
                             <div class="tab-pane fade" id="old">
                                 <%- include("./partials/admin/old") %>
                             </div>

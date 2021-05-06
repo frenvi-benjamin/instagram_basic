@@ -7,35 +7,17 @@
 }
 
 .input-group-prepend.fixed-width {
-    flex: 0 0 40%;
+    flex: 0 0 30%;
 }
 
 .input-group-text.fixed-width {
     width: 100%;
 }
 
-#username {
-    max-width: 40%;
-}
-
-#username>span {
-    background-color: #A2D208;
-    color: white;
-}
-
 .form-control {
     height: fit-content;
 }
 
-.svg-inline--fa {
-    vertical-align: middle;
-}
-
-svg {
-    margin: 10px;
-}
-
-.link-icon {
-    color: white;
-    background-color: #A2D208;
+#create-user-form {
+    width: 30%;
 }
