@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<% const title = collabPartner.username %> 
-
-<%- include("./partials/head") %>
+<%- include("./partials/head", { title: collabPartner.username}) %>
 <link rel="stylesheet" href="/css/collab.css">
 
 <body>
