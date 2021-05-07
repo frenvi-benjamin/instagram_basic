@@ -15,7 +15,7 @@
 </div>
 <div hidden class="row my-2" id="download-row">
     <form class="col" action="/admin/download-qrcodes" method="POST">
-        <input id="fileStore" type="text" name="files"></input>
+        <input hidden id="fileStore" type="text" name="files"></input>
         <a class="input-group" id="download-button" onclick="document.getElementById('arrow-download-button').click()">
             <div class="input-group-prepend">
                 <div class="input-group-text">Download</div>
