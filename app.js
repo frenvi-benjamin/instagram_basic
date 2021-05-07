@@ -76,7 +76,7 @@ mongoose.connect(process.env.MONGODB_CONNECTION_URL, { useNewUrlParser: true, us
 app.get("/", (req, res) => {
 
     const defaultRender = function() {
-        res.render("index", { title: "Login", instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + "/auth" })
+        res.render("index", { instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + "/auth" })
     }
 
     const qrID = req.query.qr
@@ -85,7 +85,6 @@ app.get("/", (req, res) => {
         .then(
             user => {
                 dbHelper.incrementNrOfScans(user.username)
-                // res.render("collab", { title: "Collab", collabPartner: { username: user.username, shortcode: user.shortcode }})
                 res.redirect(`/collab/${user.username}`)
             },
             () => {
@@ -103,7 +102,7 @@ app.get("/collab/:username", (req, res) => {
     dbHelper.getUserByUsername(username)
     .then(user => dbHelper.updateShortcode(user.accessToken))
     .then(user => {
-        res.render("collab", { title: "Collab", collabPartner: { username: user.username, shortcode: user.shortcode }})
+        res.render("collab", { collabPartner: { username: user.username, shortcode: user.shortcode }})
     })
 })
 
@@ -178,7 +177,7 @@ app.get("/auth", (req, res) => {
 })
 
 app.get("/admin", (req, res) => {
-    res.render("admin", { title: "Admin" })
+    res.render("admin")
 })
 
 app.post("/admin/get-user", (req, res) => {
@@ -254,7 +253,7 @@ app.post("/admin/delete-qrcodes", (req, res) => {
 /*#################### ALL ROUTES BELOW HAVE TO HAVE USER LOGGED IN, IF NOT HE WILL BE REDIRECTED TO ROOT */
 
 app.get("/scanner", (req, res) => {
-    res.render("scanner", { title: "QR-Scanner", instagramUserID: req.session.instagramUserID, accessToken: req.session.accessToken, username: req.session.username })
+    res.render("scanner", { instagramUserID: req.session.instagramUserID, accessToken: req.session.accessToken, username: req.session.username })
 })
 
 app.post("/connect-qrcode", (req, res) => {
