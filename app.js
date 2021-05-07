@@ -190,7 +190,7 @@ app.post("/admin/get-user", (req, res) => {
 })
 
 app.post("/admin/delete-user", (req, res) => {
-    dbHelper.deleteUser(req.body.username)
+    dbHelper.deleteUser(req.body.username, true)
     res.redirect("/admin")
 })
 

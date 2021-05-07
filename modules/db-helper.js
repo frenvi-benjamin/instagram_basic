@@ -84,8 +84,18 @@ function updateShortcode(accessToken) {
     })
 }
 
-function deleteUser(username) {
+function deleteUser(username, deleteQrcodes = false) {
+    if (deleteQrcodes) {
+        User.findOne({ username: username})
+        .then(user => {
+            user.qrcodes.forEach(qrcode => {
+                QrCode.findByIdAndDelete(qrcode).exec()
+            });
+        })
+    }
+
     User.findOneAndDelete({ username: username }).exec()
+    
 }
 
 module.exports = {
