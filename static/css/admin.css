@@ -18,6 +18,7 @@
     height: fit-content;
 }
 
-#create-user-form {
-    width: 300px;
+#download-button:hover {
+    text-decoration: none;
+    cursor: pointer;
 }

@@ -214,8 +214,8 @@ app.post("/admin/create-qrcodes", (req, res) => {
             const qrID = qrcode._id
             let qrcodeImage = new QRCode({
                 content: `${process.env.HOST}?qr=${qrID}`,
-                color: req.body.color,
-                background: req.body.background,
+                color: "black",
+                background: "white",
                 join: true // joins all vector graphics paths
             })
             files.push({
@@ -225,10 +225,15 @@ app.post("/admin/create-qrcodes", (req, res) => {
                 type: "file",
             })
         })
-        res.zip({
-            files: files,
-            filename: "qrcodes.zip"
-        })
+        res.send(files)
+    })
+})
+
+app.post("/admin/download-qrcodes", (req, res) => {
+    console.log(JSON.parse(req.body.files))
+    res.zip({
+        files: JSON.parse(req.body.files),
+        filename: "qrcodes.zip"
     })
 })
 

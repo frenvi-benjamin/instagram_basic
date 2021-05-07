@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col">
+        <label for="create-qrcode-form">QR-Code erstellen</label>
+        <div class="input-group" id="create-qrcode-form">
+            <div class="input-group-prepend">
+                <div class="input-group-text">Anzahl</div>
+            </div>
+            <input type="text" class="form-control" id="nQrcodes" value="1" name="nQrcodes" onfocus="this.value = ''">
+            <div class="input-group-append">
+                <button class="btn btn-custom btn-outline-secondary"
+                    onclick="createQrcodes(document.getElementById('nQrcodes').value)">Erstellen</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div hidden class="row my-2" id="download-row">
+    <form class="col" action="/admin/download-qrcodes" method="POST">
+        <input id="fileStore" type="text" name="files"></input>
+        <a class="input-group" id="download-button" onclick="document.getElementById('arrow-download-button').click()">
+            <div class="input-group-prepend">
+                <div class="input-group-text">Download</div>
+            </div>
+            <div class="input-group-append">
+                <button class="btn btn-custom" id="arrow-download-button" type="submit">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </a>
+    </form>
+</div>
+
+<script>
+    function createQrcodes(nQrcodes) {
+        fetch("/admin/create-qrcodes", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "nQrcodes": nQrcodes
+            }),
+        })
+        .then(response => response.json())
+        .then(files => {
+            const tabContainer = document.getElementById("create-qrcode")
+            const row = document.createElement("div")
+            row.classList.add("row")
+            tabContainer.append(row)
+
+            fileStore = document.getElementById("fileStore")
+
+            fileStore.value = `[`
+
+            files.forEach(file => {
+                fileStore.value += JSON.stringify(file)
+                if (files.indexOf(file) < files.length - 1) {
+                    fileStore.value += ", "
+                }
+
+
+                const col = document.createElement("div")
+                col.classList.add("col")
+                col.innerHTML = file.content
+                row.append(col)
+            })
+
+            fileStore.value += "]"
+
+            document.getElementById("download-row").removeAttribute("hidden")
+
+        })
+    }
+</script>
