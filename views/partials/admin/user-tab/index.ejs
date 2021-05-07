@@ -1,0 +1,37 @@
+<div class="row mb-2" id="search-row">
+    <div class="col">
+        <label for="create-user-form">User finden</label>
+        <div class="input-group" id="create-user-form">
+            <div class="input-group-prepend">
+                <div class="input-group-text">@</div>
+            </div>
+            <input type="text" class="form-control" id="form-username" placeholder="username" name="username">
+            <div class="input-group-append">
+                <button class="btn btn-custom btn-outline-secondary"
+                    onclick="getUser(document.getElementById('form-username').value)">Finden</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function getUser(username) {
+        fetch("/admin/get-user", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "username": username
+            }),
+        })
+        .then(response => response.text())
+        .then(text => {
+            const userRow = document.createElement("div")
+            userRow.classList.add("row")
+            userRow.innerHTML = text
+            document.getElementById("search-row").after(userRow)
+        })
+    }
+</script>

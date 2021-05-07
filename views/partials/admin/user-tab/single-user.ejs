@@ -1,0 +1,92 @@
+<div class="col">
+    <div class="input-group mb-1">
+        <div class="input-group-prepend fixed-width">
+            <div class="input-group-text fixed-width">username</div>
+        </div>
+        <div class="form-control text-right username">
+            <%= user.username %>
+        </div>
+        <div class="input-group-append">
+            <a class="btn btn-custom" target="_blank" href="<%= " https://www.instagram.com/" +user.username %>">
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="input-group mb-1">
+        <div class="input-group-prepend fixed-width">
+            <div class="input-group-text fixed-width">promoted post</div>
+        </div>
+        <div class="form-control text-right">
+            <%= "https://instagram.com/p/" + user.shortcode %>
+        </div>
+        <div class="input-group-append">
+            <a class="btn btn-custom" target="_blank" href="<%= " https://www.instagram.com/p/" +user.shortcode %>">
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="input-group mb-1">
+        <div class="input-group-prepend fixed-width">
+            <div class="input-group-text fixed-width">collab website</div>
+        </div>
+        <div class="form-control text-right">
+            <%= process.env.HOST + "/collab/" + user.username %>
+        </div>
+        <div class="input-group-append">
+            <a class="btn btn-custom" target="_blank" href="<%= process.env.HOST + " /collab/" + user.username %>">
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="input-group mb-1">
+        <div class="input-group-prepend fixed-width">
+            <div class="input-group-text fixed-width">Total Scans</div>
+        </div>
+        <div class="form-control text-right">
+            <%= user.nrOfScans %>
+        </div>
+    </div>
+
+    <div class="input-group mb-1">
+        <div class="input-group-prepend fixed-width">
+            <div class="input-group-text fixed-width">instagramUserID</div>
+        </div>
+        <div class="form-control text-right">
+            <%= user.instagramUserID %>
+        </div>
+    </div>
+
+    <div class="input-group mb-1">
+        <div class="input-group-prepend fixed-width">
+            <div class="input-group-text fixed-width">accessToken</div>
+        </div>
+        <div class="form-control text-right">
+            <%= user.accessToken %>
+        </div>
+    </div>
+
+    <div class="input-group mb-1">
+        <div class="input-group-prepend fixed-width">
+            <div class="input-group-text fixed-width">createdAt</div>
+        </div>
+        <div class="form-control text-right">
+            <%= user.createdAt %>
+        </div>
+    </div>
+
+    <div class="input-group mb-1">
+        <div class="input-group-prepend fixed-width">
+            <div class="input-group-text fixed-width">updatedAt</div>
+        </div>
+        <div class="form-control text-right">
+            <%= user.updatedAt %>
+        </div>
+    </div>
+    <form action="/admin/delete-user" method="POST">
+        <input hidden type="text" name="username" value="<%= user.username %>">
+        <button class="btn btn btn-custom-danger float-right mt-2">Löschen</button>
+    </form>
+</div>

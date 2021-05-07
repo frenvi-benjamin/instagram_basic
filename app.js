@@ -50,6 +50,7 @@ app.use(
 
 // set view engine to ejs
 app.set("view engine", "ejs")
+const ejs = require("ejs")
 
 // set all paths
 app.use("/img", express.static(path.join(__dirname, "/static/img")))
@@ -182,7 +183,10 @@ app.get("/admin", (req, res) => {
 
 app.post("/admin/get-user", (req, res) => {
     dbHelper.getUserByUsername(req.body.username)
-    .then(user => res.render("admin", { user: user }))
+    .then(user => {
+        ejs.renderFile("./views/partials/admin/user-tab/single-user.ejs", { user: user })
+        .then(rendered => res.send(rendered))
+    })
 })
 
 app.post("/admin/delete-user", (req, res) => {
