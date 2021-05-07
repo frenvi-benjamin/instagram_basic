@@ -28,8 +28,16 @@
         })
         .then(response => response.text())
         .then(text => {
-            const userRow = document.createElement("div")
-            userRow.classList.add("row")
+            var userRow
+            if (!document.getElementById("userRow")) {
+                userRow = document.createElement("div")
+                userRow.id = "userRow"
+                userRow.classList.add("row")
+            }
+            else {
+                userRow = document.getElementById("userRow")
+            }
+
             userRow.innerHTML = text
             document.getElementById("search-row").after(userRow)
         })
