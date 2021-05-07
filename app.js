@@ -2,6 +2,8 @@ require("dotenv").config()
 const express = require("express")
 const app = express()
 
+const path = require("path")
+
 // qrcode-generator
 const QRCode = require("qrcode-svg")
 
@@ -30,6 +32,7 @@ const session = require("express-session")
 
 // use mongodb as session store
 const MongoStore = require("connect-mongo")
+const { request } = require("express")
 
 app.use(
     session({
@@ -49,15 +52,15 @@ app.use(
 app.set("view engine", "ejs")
 
 // set all paths
-app.use("/img", express.static(__dirname + "/static/img"))
-app.use("/js", express.static(__dirname + "/static/js"))
-app.use("/css", express.static(__dirname + "/static/css"))
+app.use("/img", express.static(path.join(__dirname, "/static/img")))
+app.use("/js", express.static(path.join(__dirname, "/static/js")))
+app.use("/css", express.static(path.join(__dirname, "/static/css")))
 
-app.use("/qr-scanner", express.static(__dirname + "/node_modules/qr-scanner"))
-app.use("/bootstrap", express.static(__dirname + "/node_modules/bootstrap/dist"))
-app.use("/bootstrap-social", express.static(__dirname + "/node_modules/bootstrap-social"))
-app.use("/jquery", express.static(__dirname + "/node_modules/jquery/dist"))
-app.use("/fontawesome", express.static(__dirname + "/node_modules/@fortawesome/fontawesome-free"))
+app.use("/qr-scanner", express.static(path.join(__dirname, "/node_modules/qr-scanner")))
+app.use("/bootstrap", express.static(path.join(__dirname, "/node_modules/bootstrap/dist")))
+app.use("/bootstrap-social", express.static(path.join(__dirname, "/node_modules/bootstrap-social")))
+app.use("/jquery", express.static(path.join(__dirname, "/node_modules/jquery/dist")))
+app.use("/fontawesome", express.static(path.join(__dirname, "/node_modules/@fortawesome/fontawesome-free")))
 
 const startServer = app.listen(process.env.PORT, () => {
     console.log(`App listening at ${process.env.HOST}:${process.env.PORT}`)
