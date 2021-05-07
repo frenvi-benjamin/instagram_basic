@@ -14,7 +14,7 @@
                                 <li class="nav-item">
                                     <button class="nav-link active" href="#user" data-toggle="tab">User</button>
                                 </li>
-                                <li class="nav-item dropdown">
+                                <li class="nav-item mx-1 dropdown">
                                     <button class="nav-link dropdown-toggle" data-toggle="dropdown">QR-Code</button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" data-toggle="tab" href="#create-qrcode">Erstellen</a>
@@ -33,7 +33,9 @@
                             <div class="tab-pane fade active show" id="user" role="tabpanel">
                                 <%- include("./partials/admin/user-tab/index") %>
                             </div>
-                            <div class="tab-pane fade" id="create-qrcode">Create QR-Code</div>
+                            <div class="tab-pane fade" id="create-qrcode">
+                                <%- include("./partials/admin/qrcode-tab/index") %>
+                            </div>
                             <div class="tab-pane fade" id="edit-qrcode">Edit QR-Code</div>
                             <div class="tab-pane fade" id="delete-qrcode">Delete QR-Code</div>
                             <div class="tab-pane fade" id="old">
