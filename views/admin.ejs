@@ -6,20 +6,37 @@
 
     <body>
         <%- include("./partials/header") %>
+
+        <script>
+            addEventListener("DOMContentLoaded", () => {
+                const hash = location.hash
+                if (hash && (
+                    hash == "#user" ||
+                    hash == "#create-qrcode" ||
+                    hash == "#edit-qrcode" ||
+                    hash == "#delete-qrcode"
+                )) {
+                    const id = hash.slice(1) + "-tab"
+                    const button = document.getElementById(id)
+                    button.click()
+                }
+            })
+            
+        </script>
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-header border-bottom-0 pb-0">
                         <nav>
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                    <button class="nav-link active" href="#user" data-toggle="tab">User</button>
+                                    <button class="nav-link active" id="user-tab" href="#user" data-toggle="tab"onclick="location.href = '#user'">User</button>
                                 </li>
                                 <li class="nav-item mx-1 dropdown">
                                     <button class="nav-link dropdown-toggle" data-toggle="dropdown">QR-Code</button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" data-toggle="tab" href="#create-qrcode">Erstellen</a>
-                                        <a class="dropdown-item" data-toggle="tab" href="#edit-qrcode">Verändern</a>
-                                        <a class="dropdown-item" data-toggle="tab" href="#delete-qrcode">Löschen</a>
+                                        <a class="dropdown-item" id="create-qrcode-tab" data-toggle="tab" href="#create-qrcode" onclick="location.href = '#create-qrcode'">Erstellen</a>
+                                        <a class="dropdown-item" id="edit-qrcode-tab" data-toggle="tab" href="#edit-qrcode" onclick="location.href = '#edit-qrcode'">Verändern</a>
+                                        <a class="dropdown-item" id="delete-qrcode-tab" data-toggle="tab" href="#delete-qrcode" onclick="location.href = '#delete-qrcode'">Löschen</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
@@ -30,15 +47,15 @@
                     </div>
                     <div class="card-body">
                         <div class="tab-content">
-                            <div class="tab-pane fade active show" id="user" role="tabpanel">
+                            <div class="tab-pane active show" id="user" role="tabpanel">
                                 <%- include("./partials/admin/user-tab/index") %>
                             </div>
-                            <div class="tab-pane fade" id="create-qrcode">
+                            <div class="tab-pane" id="create-qrcode">
                                 <%- include("./partials/admin/qrcode-tab/index") %>
                             </div>
-                            <div class="tab-pane fade" id="edit-qrcode">Edit QR-Code</div>
-                            <div class="tab-pane fade" id="delete-qrcode">Delete QR-Code</div>
-                            <div class="tab-pane fade" id="old">
+                            <div class="tab-pane" id="edit-qrcode">Edit QR-Code</div>
+                            <div class="tab-pane" id="delete-qrcode">Delete QR-Code</div>
+                            <div class="tab-pane" id="old">
                                 <%- include("./partials/admin/old") %>
                             </div>
                         </div>
