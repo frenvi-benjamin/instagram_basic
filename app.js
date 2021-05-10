@@ -267,22 +267,18 @@ app.post("/admin/delete-qrcodes", (req, res) => {
 })
 
 /*########################################################################################################*/
-//                                                                                                     /*#*/
+                                                                                                    /*#*/
 // check if user session is initiated this is required for all following routes                        /*#*/
-// app.use((req, res, next) => {                                                                          /*#*/
-// //                                                                                                     /*#*/
-//     if (                                                                                               /*#*/
-//         req.session.username                                                                           /*#*/
-//     // ||  req.path == "/auth"                                                                         /*#*/
-//     // ||  req.path == "/login"                                                                        /*#*/
-//     // ||  req.path.match(/\/admin.*/)                                                                 /*#*/
-//     // ||  req.path.match(/\/collab.*/)                                                                /*#*/
-//     ) { return next() }                                                                                /*#*/
-//     else {                                                                                             /*#*/
-//         res.redirect("/")                                                                              /*#*/
-//     }                                                                                                  /*#*/
-// })                                                                                                     /*#*/
+app.use((req, res, next) => {                                                                          /*#*/
 //                                                                                                     /*#*/
+    if (                                                                                               /*#*/
+        req.session.username                                                                           /*#*/
+    ) { return next() }                                                                                /*#*/
+    else {                                                                                             /*#*/
+        res.redirect("/")                                                                              /*#*/
+    }                                                                                                  /*#*/
+})                                                                                                     /*#*/
+                                                                                                    /*#*/
 /*#################### ALL ROUTES BELOW HAVE TO HAVE USER LOGGED IN, IF NOT HE WILL BE REDIRECTED TO ROOT */
 
 app.get("/scanner", (req, res) => {
