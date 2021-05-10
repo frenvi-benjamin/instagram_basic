@@ -24,6 +24,10 @@ const mongoose = require("mongoose")
 mongoose.set("useFindAndModify", false)
 mongoose.set("returnOriginal", false)
 mongoose.set("debug", true)
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true);
 
 const dbHelper = require("./modules/db-helper")
 
