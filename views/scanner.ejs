@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="de">
 
-<%- include("./partials/head", {title: "QR-Scanner"}) %>
+<head>
+	<%- include("./partials/head", {title: "QR-Scanner" }) %>
+</head>
 
-	<body>
-		<link rel="stylesheet" href="/css/scanner.css">
-		<script>
-			const host = "<%= process.env.HOST %>"
-			const port = <%= process.env.PORT %>
+<body>
+	<link rel="stylesheet" href="/css/scanner.css">
+	<script>
+		const host = "<%= process.env.HOST %>"
+		const port = <%= process.env.PORT %>
         const instagramUserID = "<%= instagramUserID %>"
-		</script>
-		<script src="/js/qr-scanner.js" type="module"></script>
+	</script>
+	<script src="/js/qr-scanner.js" type="module"></script>
 
-		<video hidden id="qr-video" class="centered video" autoplay="true" playsinline="true"></video>
+	<video hidden id="qr-video" class="centered video" autoplay="true" playsinline="true"></video>
 
-		<%- include("./partials/header") %> 
+	<%- include("./partials/header") %>
 
 		<div class="container-fluid">
 
@@ -64,6 +66,6 @@
 			new bootstrap.Modal(document.getElementById("modal")).show()
 		</script>
 
-	</body>
+</body>
 
 </html>

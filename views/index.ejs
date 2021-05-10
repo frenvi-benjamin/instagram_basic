@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="de">
 
-<%- include("./partials/head", {title: "Login"}) %>
+<head>
+    <%- include("./partials/head", {title: "Login"}) %>
+</head>
 
-    <body>
-        <%- include("./partials/header") %>
+<body>
+    <%- include("./partials/header") %>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <%- include("./partials/instagram-button") %> 
-                        <%- include("./partials/forwarding-form.ejs") %>
-                    </div>
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <%- include("./partials/instagram-button") %> 
+                <%- include("./partials/forwarding-form.ejs") %>
             </div>
-    </body>
+        </div>
+    </div>
+</body>
 </html>

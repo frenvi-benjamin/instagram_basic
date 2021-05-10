@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="de">
 
-<%- include("./partials/head") %>
+<head>
+    <%- include("./partials/head") %>
+</head>
 
-    <body>
-        <%- include("./partials/header") %>
+<body>
+    <%- include("./partials/header") %>
 
-            <div class="container">
-                <div class="row mt-3">
-                    <div class="col">
-                        <div class="card mb-2">
-                            <div class="card-body">
-                                Bitte lassen Sie alle angefragten Berechtigungen zu. Wir brauchen diese um Ihre Instagram-Seite auf unserer Webseite zu bewerben.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <%- include("./partials/instagram-button") %> 
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col">
+                <div class="card mb-2">
+                    <div class="card-body">
+                        Bitte lassen Sie alle angefragten Berechtigungen zu. Wir brauchen diese um Ihre
+                        Instagram-Seite auf unserer Webseite zu bewerben.
                     </div>
                 </div>
             </div>
-    </body>
+        </div>
+        <div class="row">
+            <div class="col">
+                <%- include("./partials/instagram-button") %>
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>
