@@ -21,7 +21,6 @@ app.use(express.urlencoded({ extended: true }))
 
 // mongoose imports
 const mongoose = require("mongoose")
-mongoose.set("useFindAndModify", false)
 mongoose.set("returnOriginal", false)
 mongoose.set("debug", true)
 mongoose.set('useNewUrlParser', true);
@@ -29,7 +28,9 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
+// helper modules
 const dbHelper = require("./modules/db-helper")
+const instagramHelper = require("./modules/instagram-helper")
 
 // session
 const session = require("express-session")
@@ -103,11 +104,24 @@ app.get("/", (req, res) => {
 })
 
 app.get("/collab/:username", (req, res) => {
+    
     const username = req.params.username
-    dbHelper.getUserByUsername(username)
-    .then(user => dbHelper.updateShortcode(user.accessToken))
-    .then(user => {
-        res.render("collab", { collabPartner: { username: user.username, shortcode: user.shortcode }})
+
+    Promise.all([
+        dbHelper.getUserByUsername(username)
+        .then(user => instagramHelper.getShortcodeForLatestPost(user.accessToken))
+        .then(shortcode => fetch(`https://graph.facebook.com/v10.0/instagram_oembed?url=https://www.instagram.com/p/${shortcode}&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`))
+        .then(response => response.json())
+        .then(body => body.html),
+
+        dbHelper.getUserByUsername("eatleryforfuture")
+        .then(user => instagramHelper.getShortcodeForLatestPost(user.accessToken))
+        .then(shortcode => fetch(`https://graph.facebook.com/v10.0/instagram_oembed?url=https://www.instagram.com/p/${shortcode}&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`))
+        .then(response => response.json())
+        .then(body => body.html)
+    ])
+    .then(([partnerInstagram, eatleryInstagram]) => {
+        res.render("collab", { partnerInstagram: partnerInstagram, eatleryInstagram, eatleryInstagram, username: req.params.username })
     })
 })
 
