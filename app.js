@@ -184,8 +184,14 @@ app.get("/admin", (req, res) => {
 app.post("/admin/get-user", (req, res) => {
     dbHelper.getUserByUsername(req.body.username)
     .then(user => {
-        ejs.renderFile("./views/partials/admin/user-tab/single-user.ejs", { user: user })
-        .then(rendered => res.send(rendered))
+        if(user) {
+            ejs.renderFile("./views/partials/admin/user-tab/single-user.ejs", { user: user })
+            .then(rendered => res.send(rendered))
+        }
+        else {
+            res.sendFile(path.join(__dirname, "/views/partials/admin/user-tab/no-user-found.ejs"))
+        }
+        
     })
 })
 
