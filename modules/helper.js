@@ -89,7 +89,7 @@ function createUserFromAccessToken(accessToken) {
     ])
     .then(res => {console.log(res); return res})
     .then(([username, id, shortcode]) => {
-        return User.findOneAndUpdate({ instagramUserID: id }, { username: username.toLowerCase(), accessToken: accessToken, shortcode: shortcode, qrcodes: [], nrOfScans: 0 }, { upsert: true })
+        return User.findOneAndUpdate({ instagramUserID: id }, { username: username, accessToken: accessToken, shortcode: shortcode, qrcodes: [], nrOfScans: 0 }, { upsert: true })
     })
 }
 
@@ -118,7 +118,7 @@ function incrementNrOfScans(username) {
 }
 
 function getUserByUsername(username) {
-    return User.findOne({ username: username.toLowerCase() }).exec()
+    return User.findOne({ username: {$regex: new RegExp(username.toLowerCase(), "i")} }).exec()
 }
 
 function updateShortcode(accessToken) {
