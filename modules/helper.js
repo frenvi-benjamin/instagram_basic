@@ -15,12 +15,18 @@ const oembedURL = "https://graph.facebook.com/v10.0/instagram_oembed"
 // INSTAGRAM
 
 function getUsername(accessToken) {
+
+    if (!accessToken) throw Error("No Access Token given")
+
     return fetch(userURL + `?fields=username&access_token=${accessToken}`)
     .then(response => {return response.json()})
     .then(response => {return response.username})
 }
 
 function getShortcodeForLatestPost(accessToken) {
+
+    if (!accessToken) throw Error("No Access Token given")
+
     return fetch(mediaURL + `?fields=permalink&access_token=${accessToken}`)
     .then(res => res.json())
     .then(body => {
@@ -32,12 +38,18 @@ function getShortcodeForLatestPost(accessToken) {
 }
 
 function getID(accessToken) {
+
+    if (!accessToken) throw Error("No Access Token given")
+
     return fetch(userURL + `?access_token=${accessToken}`)
     .then(response => {return response.json()})
     .then(response => {return response.id})
 }
 
 function getOembed(username) {
+
+    if (!username) throw Error("No username given")
+
     return getUserByUsername(username)
     .then(user => getShortcodeForLatestPost(user.accessToken))
     .then(shortcode => fetch(oembedURL + `?url=https://www.instagram.com/p/${shortcode}&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`))
@@ -49,7 +61,10 @@ function getOembed(username) {
 
 function deleteQrcodes(username = undefined) {
     if (username) {
-        User.find({username: username}, "qrcodes").exec()
+        User.findOne({username: username}).exec()
+        .then(user => {
+            if (!user) throw Error(`User (${username}) not found`)
+        })
         .then(qrcodes => QrCode.deleteMany({ _id: { $in: qrcodes }}).exec())
         .then(User.findOneAndUpdate({ username: username }, { qrcodes: [] }).exec())
     }
@@ -61,7 +76,10 @@ function deleteQrcodes(username = undefined) {
 
 function clearConnections(username = undefined) {
     if (username) {
-        User.find({username: username}, "qrcodes").exec()
+        User.findOne({username: username}).exec()
+        .then(user => {
+            if (!user) throw Error(`User (${username}) not found`)
+        })
         .then(qrcodes => {
             QrCode.updateMany({ _id: { $in: qrcodes }}, { connectedUser: undefined }).exec()
             User.findOneAndUpdate({ username: username }, { qrcodes: [] }).exec()
@@ -74,11 +92,15 @@ function clearConnections(username = undefined) {
 }
 
 function getConnectedUser(qrID) {
-    return QrCode.findById(qrID, "connectedUser")
+    return QrCode.findById(qrID)
     .then(qrcode => {
-        if (qrcode.connectedUser) {
-            return User.findOne({ instagramUserID: qrcode.connectedUser })
-            .then(res => {return res})
+        if (!qrcode) throw Error(`No QR-Code found with _id=${qrID}`)
+        return qrcode.connectedUser
+    })
+    .then(instagramUserID => {
+        if (instagramUserID) {
+            return User.findOne({ instagramUserID: instagramUserID })
+            .then(user => {return user})
         }
         else {
             reject()
@@ -87,26 +109,32 @@ function getConnectedUser(qrID) {
 }
 
 function createUserFromAccessToken(accessToken) {
+
+    if (!accessToken) throw Error("No Access Token given")
+
     return Promise.all([
         getUsername(accessToken),
         getID(accessToken),
         getShortcodeForLatestPost(accessToken),
     ])
-    .then(res => {console.log(res); return res})
     .then(([username, id, shortcode]) => {
         return User.findOneAndUpdate({ instagramUserID: id }, { username: username, accessToken: accessToken, shortcode: shortcode, qrcodes: [], nrOfScans: 0 }, { upsert: true })
     })
 }
 
 function connectQrcodeToUser(qrID, instagramUserID) {
+
+    if (!qrID) throw Error("No qrID given")
+    if (!instagramUserID) throw Error("No instagramUserID given")
     
-    return Promise.all([
-        QrCode.findByIdAndUpdate(qrID, { connectedUser: instagramUserID }, { upsert: true }),
-        User.findOneAndUpdate({ instagramUserID: instagramUserID }, { $addToSet: { qrcodes: qrID }})
-    ])
+    QrCode.findByIdAndUpdate(qrID, { connectedUser: instagramUserID }, { upsert: true }).exec()
+    User.findOneAndUpdate({ instagramUserID: instagramUserID }, { $addToSet: { qrcodes: qrID }}).exec()
 }
 
 function createQrcodes(n) {
+
+    if (!n) throw Error("No number given")
+
     let array = []
     for (let i = 0; i < n; i++) {
         array.push({ connectedUser: undefined})
@@ -115,14 +143,23 @@ function createQrcodes(n) {
 }
 
 function incrementNrOfScans(username) {
+
+    if (!username) throw Error("No username given")
+
     User.findOneAndUpdate({ username: username }, { $inc: { nrOfScans: 1 }}, { upsert: true }).exec()
 }
 
 function getUserByUsername(username) {
+
+    if (!username) throw Error("No username given")
+
     return User.findOne({ username: {$regex: new RegExp(username.toLowerCase(), "i")} }).exec()
 }
 
 function updateShortcode(accessToken) {
+
+    if (!accessToken) throw Error("No Access Token given")
+
     return getShortcodeForLatestPost(accessToken)
     .then(shortcode => {
         return User.findOneAndUpdate({ accessToken: accessToken }, { shortcode: shortcode }, { upsert: true }).exec()
@@ -130,6 +167,9 @@ function updateShortcode(accessToken) {
 }
 
 function deleteUser(username, deleteQrcodes = false) {
+
+    if(!username) throw Error("No username given")
+
     if (deleteQrcodes) {
         User.findOne({ username: username})
         .then(user => {
