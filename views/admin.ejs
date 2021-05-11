@@ -30,7 +30,7 @@
             <div class="card-header border-bottom-0 pb-0">
                 <nav>
                     <ul class="nav nav-tabs">
-                        <li class="nav-item">
+                        <li class="nav-item mx-1">
                             <button class="nav-link active" id="user-tab" href="#user" data-toggle="tab"
                                 onclick="location.href = '#user'">User</button>
                         </li>
@@ -39,13 +39,11 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" id="create-qrcode-tab" data-toggle="tab"
                                     href="#create-qrcode" onclick="location.href = '#create-qrcode'">Erstellen</a>
-                                <a class="dropdown-item" id="edit-qrcode-tab" data-toggle="tab" href="#edit-qrcode"
-                                    onclick="location.href = '#edit-qrcode'">Verändern</a>
                                 <a class="dropdown-item" id="delete-qrcode-tab" data-toggle="tab"
                                     href="#delete-qrcode" onclick="location.href = '#delete-qrcode'">Löschen</a>
                             </div>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item mx-1">
                             <button class="nav-link" href="#old" data-toggle="tab">Old</button>
                         </li>
                     </ul>
@@ -57,10 +55,11 @@
                         <%- include("./partials/admin/user-tab/index") %>
                     </div>
                     <div class="tab-pane" id="create-qrcode">
-                        <%- include("./partials/admin/qrcode-tab/index") %>
+                        <%- include("./partials/admin/qrcode-tab/create") %>
                     </div>
-                    <div class="tab-pane" id="edit-qrcode">Edit QR-Code</div>
-                    <div class="tab-pane" id="delete-qrcode">Delete QR-Code</div>
+                    <div class="tab-pane" id="delete-qrcode">
+                        <%- include("./partials/admin/qrcode-tab/delete") %>
+                    </div>
                     <div class="tab-pane" id="old">
                         <%- include("./partials/admin/old") %>
                     </div>

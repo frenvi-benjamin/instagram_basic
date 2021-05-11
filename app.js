@@ -215,14 +215,26 @@ app.post("/admin/delete-user", (req, res) => {
     res.redirect("/admin")
 })
 
-app.post("/admin/clear", (req, res) => {
-    helper.clearConnections()
-    res.redirect("/admin")
+app.post("/admin/delete-qrcodes", (req, res) => {
+    if (req.body.username) {
+        helper.deleteQrcodes(username)
+        res.sendStatus(200)
+    }
+    else {
+        helper.deleteQrcodes()
+        res.sendStatus(200)
+    }
 })
 
-app.post("/admin/clear-one", (req, res) => {
-    helper.clearConnections(req.body.username)
-    res.redirect("/admin")
+app.post("/admin/clear-connections", (req, res) => {
+    if (req.body.username) {
+        helper.clearConnections(username)
+        res.sendStatus(200)
+    }
+    else {
+        helper.clearConnections()
+        res.sendStatus(200)
+    }
 })
 
 app.post("/admin/create-qrcodes", (req, res) => {
@@ -259,7 +271,7 @@ app.post("/admin/download-qrcodes", (req, res) => {
 })
 
 app.post("/admin/delete-qrcodes", (req, res) => {
-    helper.deleteAllQrcodes()
+    helper.deleteQrcodes()
     res.redirect("/admin")
 })
 

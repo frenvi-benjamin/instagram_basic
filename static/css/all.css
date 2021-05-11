@@ -21,3 +21,15 @@
     background-color: white;
     border-color: #DC3545;
 }
+
+.btn-custom-warning {
+    color:white;
+    background-color: #FFC107;
+    border-color: #FFC107;
+}
+
+.btn-custom-warning:hover {
+    color:#FFC107;
+    background-color: white;
+    border-color: #FFC107;
+}

@@ -47,24 +47,29 @@ function getOembed(username) {
 
 // DATABASE
 
-function clearConnections(username = undefined) {
+function deleteQrcodes(username = undefined) {
     if (username) {
-        var promises = []
         User.find({username: username}, "qrcodes").exec()
-        .then(qrcodes => {
-            qrcodes.forEach(qrID => {
-                promises.push(QrCode.findByIdAndUpdate(qrID, { connectedUser: undefined }))
-            })
-            promises.push(User.findOneAndUpdate({ username: username }, { qrcodes: [] }))
-            Promise.all(promises)
-        })
-        
+        .then(qrcodes => QrCode.deleteMany({ _id: { $in: qrcodes }}).exec())
+        .then(User.findOneAndUpdate({ username: username }, { qrcodes: [] }).exec())
     }
     else {
-        Promise.all([
-            QrCode.updateMany({}, { connectedUser: undefined }),
-            User.updateMany({}, { qrcodes: [] })
-        ])
+        QrCode.deleteMany({}).exec()
+        User.updateMany({}, { qrcodes: [] }).exec()
+    }
+}
+
+function clearConnections(username = undefined) {
+    if (username) {
+        User.find({username: username}, "qrcodes").exec()
+        .then(qrcodes => {
+            QrCode.updateMany({ _id: { $in: qrcodes }}, { connectedUser: undefined }).exec()
+            User.findOneAndUpdate({ username: username }, { qrcodes: [] }).exec()
+        })
+    }
+    else {
+        QrCode.updateMany({}, { connectedUser: undefined }).exec()
+        User.updateMany({}, { qrcodes: [] }).exec()
     }
 }
 
@@ -109,10 +114,6 @@ function createQrcodes(n) {
     return QrCode.insertMany(array)
 }
 
-function deleteAllQrcodes() {
-    QrCode.deleteMany({}).exec()
-}
-
 function incrementNrOfScans(username) {
     User.findOneAndUpdate({ username: username }, { $inc: { nrOfScans: 1 }}, { upsert: true }).exec()
 }
@@ -144,11 +145,11 @@ function deleteUser(username, deleteQrcodes = false) {
 
 module.exports = {
     clearConnections,
+    deleteQrcodes,
     getConnectedUser,
     createUserFromAccessToken,
     connectQrcodeToUser,
     createQrcodes,
-    deleteAllQrcodes,
     incrementNrOfScans,
     getUserByUsername,
     updateShortcode,
