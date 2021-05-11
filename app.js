@@ -104,23 +104,21 @@ app.get("/", (req, res) => {
 
 app.get("/collab/:username", (req, res) => {
     
-    const username = req.params.username
-
-    Promise.all([
-        helper.getUserByUsername(username)
-        .then(user => helper.getShortcodeForLatestPost(user.accessToken))
-        .then(shortcode => fetch(`https://graph.facebook.com/v10.0/instagram_oembed?url=https://www.instagram.com/p/${shortcode}&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`))
-        .then(response => response.json())
-        .then(body => body.html),
-
-        helper.getUserByUsername("eatleryforfuture")
-        .then(user => helper.getShortcodeForLatestPost(user.accessToken))
-        .then(shortcode => fetch(`https://graph.facebook.com/v10.0/instagram_oembed?url=https://www.instagram.com/p/${shortcode}&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`))
-        .then(response => response.json())
-        .then(body => body.html)
-    ])
-    .then(([partnerInstagram, eatleryInstagram]) => {
-        res.render("collab", { partnerInstagram: partnerInstagram, eatleryInstagram, eatleryInstagram, username: req.params.username })
+    helper.getUserByUsername(req.params.username)
+    .then(user => {
+        // if the user can be found
+        if (user) {
+            Promise.all([
+                        helper.getOembed(req.params.username),
+                        helper.getOembed("eatleryforfuture")
+            ])
+            .then(([partnerInstagram, eatleryInstagram]) => {
+                res.render("collab", { partnerInstagram: partnerInstagram, eatleryInstagram, eatleryInstagram, username: req.params.username })
+            })
+        }
+        else {
+            res.render("/")
+        }
     })
 })
 
