@@ -1,7 +1,51 @@
+require("dotenv").config()
+
+// database models
 const QrCode = require("../models/qrcode")
 const User = require("../models/user")
-const instagramHelper = require("./instagram-helper")
 
+// fetch
+const fetch = require("node-fetch")
+
+// api urls
+const mediaURL = "https://graph.instagram.com/me/media"
+const userURL = "https://graph.instagram.com/me"
+const oembedURL = "https://graph.facebook.com/v10.0/instagram_oembed"
+
+// INSTAGRAM
+
+function getUsername(accessToken) {
+    return fetch(userURL + `?fields=username&access_token=${accessToken}`)
+    .then(response => {return response.json()})
+    .then(response => {return response.username})
+}
+
+function getShortcodeForLatestPost(accessToken) {
+    return fetch(mediaURL + `?fields=permalink&access_token=${accessToken}`)
+    .then(res => res.json())
+    .then(body => {
+        const link = body.data[0].permalink
+        // find shortcode
+        const pos = link.search("/p/") + 3
+        return link.slice(pos, -1)
+    })
+}
+
+function getID(accessToken) {
+    return fetch(userURL + `?access_token=${accessToken}`)
+    .then(response => {return response.json()})
+    .then(response => {return response.id})
+}
+
+function getOembed(username) {
+    return getUserByUsername(username)
+    .then(user => getShortcodeForLatestPost(user.accessToken))
+    .then(shortcode => fetch(oembedURL + `?url=https://www.instagram.com/p/${shortcode}&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`))
+    .then(response => response.json())
+    .then(body => body.html)
+}
+
+// DATABASE
 
 function clearConnections(username = undefined) {
     if (username) {
@@ -39,9 +83,9 @@ function getConnectedUser(qrID) {
 
 function createUserFromAccessToken(accessToken) {
     return Promise.all([
-        instagramHelper.getUsername(accessToken),
-        instagramHelper.getID(accessToken),
-        instagramHelper.getShortcode(accessToken),
+        getUsername(accessToken),
+        getID(accessToken),
+        getShortcodeForLatestPost(accessToken),
     ])
     .then(res => {console.log(res); return res})
     .then(([username, id, shortcode]) => {
@@ -78,7 +122,7 @@ function getUserByUsername(username) {
 }
 
 function updateShortcode(accessToken) {
-    return instagramHelper.getShortcode(accessToken)
+    return getShortcodeForLatestPost(accessToken)
     .then(shortcode => {
         return User.findOneAndUpdate({ accessToken: accessToken }, { shortcode: shortcode }, { upsert: true }).exec()
     })
@@ -109,4 +153,8 @@ module.exports = {
     getUserByUsername,
     updateShortcode,
     deleteUser,
+    getShortcodeForLatestPost,
+    getUsername,
+    getID,
+    getOembed
 }

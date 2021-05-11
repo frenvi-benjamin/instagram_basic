@@ -29,8 +29,7 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
 // helper modules
-const dbHelper = require("./modules/db-helper")
-const instagramHelper = require("./modules/instagram-helper")
+const helper = require("./modules/helper")
 
 // session
 const session = require("express-session")
@@ -87,10 +86,10 @@ app.get("/", (req, res) => {
 
     const qrID = req.query.qr
     if (qrID) {
-        dbHelper.getConnectedUser(qrID)
+        helper.getConnectedUser(qrID)
         .then(
             user => {
-                dbHelper.incrementNrOfScans(user.username)
+                helper.incrementNrOfScans(user.username)
                 res.redirect(`/collab/${user.username}`)
             },
             () => {
@@ -108,14 +107,14 @@ app.get("/collab/:username", (req, res) => {
     const username = req.params.username
 
     Promise.all([
-        dbHelper.getUserByUsername(username)
-        .then(user => instagramHelper.getShortcodeForLatestPost(user.accessToken))
+        helper.getUserByUsername(username)
+        .then(user => helper.getShortcodeForLatestPost(user.accessToken))
         .then(shortcode => fetch(`https://graph.facebook.com/v10.0/instagram_oembed?url=https://www.instagram.com/p/${shortcode}&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`))
         .then(response => response.json())
         .then(body => body.html),
 
-        dbHelper.getUserByUsername("eatleryforfuture")
-        .then(user => instagramHelper.getShortcodeForLatestPost(user.accessToken))
+        helper.getUserByUsername("eatleryforfuture")
+        .then(user => helper.getShortcodeForLatestPost(user.accessToken))
         .then(shortcode => fetch(`https://graph.facebook.com/v10.0/instagram_oembed?url=https://www.instagram.com/p/${shortcode}&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`))
         .then(response => response.json())
         .then(body => body.html)
@@ -179,7 +178,7 @@ app.get("/auth", (req, res) => {
             .then(body => {
                 const longLivedAccessToken = body.access_token
 
-                dbHelper.createUserFromAccessToken(longLivedAccessToken)
+                helper.createUserFromAccessToken(longLivedAccessToken)
                 .then(user => {
                     req.session.accessToken = user.accessToken
                     req.session.username = user.username
@@ -200,7 +199,7 @@ app.get("/admin", (req, res) => {
 })
 
 app.post("/admin/get-user", (req, res) => {
-    dbHelper.getUserByUsername(req.body.username)
+    helper.getUserByUsername(req.body.username)
     .then(user => {
         if(user) {
             ejs.renderFile("./views/partials/admin/user-tab/single-user.ejs", { user: user })
@@ -214,23 +213,23 @@ app.post("/admin/get-user", (req, res) => {
 })
 
 app.post("/admin/delete-user", (req, res) => {
-    dbHelper.deleteUser(req.body.username, true)
+    helper.deleteUser(req.body.username, true)
     res.redirect("/admin")
 })
 
 app.post("/admin/clear", (req, res) => {
-    dbHelper.clearConnections()
+    helper.clearConnections()
     res.redirect("/admin")
 })
 
 app.post("/admin/clear-one", (req, res) => {
-    dbHelper.clearConnections(req.body.username)
+    helper.clearConnections(req.body.username)
     res.redirect("/admin")
 })
 
 app.post("/admin/create-qrcodes", (req, res) => {
     const n = req.body.nQrcodes
-    dbHelper.createQrcodes(n)
+    helper.createQrcodes(n)
     .then(newQrcodes => {
         var files = []
 
@@ -262,7 +261,7 @@ app.post("/admin/download-qrcodes", (req, res) => {
 })
 
 app.post("/admin/delete-qrcodes", (req, res) => {
-    dbHelper.deleteAllQrcodes()
+    helper.deleteAllQrcodes()
     res.redirect("/admin")
 })
 
@@ -286,6 +285,6 @@ app.get("/scanner", (req, res) => {
 })
 
 app.post("/connect-qrcode", (req, res) => {
-    dbHelper.connectQrcodeToUser(req.body.qrID, req.session.instagramUserID)
+    helper.connectQrcodeToUser(req.body.qrID, req.session.instagramUserID)
     .then(changedModels => res.send(changedModels))
 })
