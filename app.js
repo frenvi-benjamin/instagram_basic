@@ -217,7 +217,7 @@ app.post("/admin/delete-user", (req, res) => {
 
 app.post("/admin/delete-qrcodes", (req, res) => {
     if (req.body.username) {
-        helper.deleteQrcodes(username)
+        helper.deleteQrcodes(req.body.username)
         res.sendStatus(200)
     }
     else {
@@ -228,7 +228,7 @@ app.post("/admin/delete-qrcodes", (req, res) => {
 
 app.post("/admin/clear-connections", (req, res) => {
     if (req.body.username) {
-        helper.clearConnections(username)
+        helper.clearConnections(req.body.username)
         res.sendStatus(200)
     }
     else {
