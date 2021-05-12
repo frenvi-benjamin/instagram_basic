@@ -31,6 +31,11 @@ mongoose.set('useUnifiedTopology', true);
 // helper modules
 const helper = require("./modules/helper")
 
+helper.getUserByUsername("eatleryforfuture")
+.then(user => {
+    if (!user) throw Error("Application needs the eatleryforfuture account in DB to run properly")
+})
+
 // session
 const session = require("express-session")
 
