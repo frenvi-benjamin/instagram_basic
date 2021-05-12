@@ -85,9 +85,11 @@ app.use("/bootstrap-social", express.static(path.join(__dirname, "/node_modules/
 app.use("/jquery", express.static(path.join(__dirname, "/node_modules/jquery/dist")))
 app.use("/fontawesome", express.static(path.join(__dirname, "/node_modules/@fortawesome/fontawesome-free")))
 
-const startServer = app.listen(process.env.PORT, () => {
-    console.log(`App listening at ${process.env.HOST}:${process.env.PORT}`)
-})
+const startServer = function () {
+    app.listen(process.env.PORT, () => {
+        console.log(`App listening at ${process.env.HOST}:${process.env.PORT}`)
+    })
+}
 
 // connect to database
 mongoose.connect(process.env.MONGODB_CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
