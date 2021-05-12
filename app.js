@@ -204,7 +204,8 @@ app.post("/admin/get-user", (req, res) => {
             .then(rendered => res.send(rendered))
         }
         else {
-            res.sendFile(path.join(__dirname, "/views/partials/admin/user-tab/no-user-found.ejs"))
+            ejs.renderFile(path.join(__dirname, "/views/partials/admin/response.ejs"), { message: "Konnte den User nicht finden", good: false })
+            .then(rendered => res.send(rendered))
         }
         
     })
@@ -218,22 +219,59 @@ app.post("/admin/delete-user", (req, res) => {
 app.post("/admin/delete-qrcodes", (req, res) => {
     if (req.body.username) {
         helper.deleteQrcodes(req.body.username)
-        res.sendStatus(200)
+        .then(
+            () => {
+                ejs.renderFile(path.join(__dirname, "/views/partials/admin/response.ejs"), { message: "QR-Codes gelöscht", good: true })
+                .then(rendered => res.send(rendered))
+            },
+            () => {
+                ejs.renderFile(path.join(__dirname, "/views/partials/admin/response.ejs"), { message: "Konnte den User nicht finden", good: false })
+                .then(rendered => res.send(rendered))
+            }
+        )
     }
     else {
         helper.deleteQrcodes()
-        res.sendStatus(200)
+        .then(
+            () => {
+                ejs.renderFile(path.join(__dirname, "/views/partials/admin/response.ejs"), { message: "QR-Codes gelöscht", good: true })
+                .then(rendered => res.send(rendered))
+            },
+            () => {
+                ejs.renderFile(path.join(__dirname, "/views/partials/admin/response.ejs"), { message: "Fehler beim Suchen aufgetreten", good: false })
+                .then(rendered => res.send(rendered))
+            }
+        )
     }
 })
 
 app.post("/admin/clear-connections", (req, res) => {
+
     if (req.body.username) {
         helper.clearConnections(req.body.username)
-        res.sendStatus(200)
+        .then(
+            () => {
+                ejs.renderFile(path.join(__dirname, "/views/partials/admin/response.ejs"), { message: "Verbindungen getrennt", good: true })
+                .then(rendered => res.send(rendered))
+            },
+            () => {
+                ejs.renderFile(path.join(__dirname, "/views/partials/admin/response.ejs"), { message: "Konnte den User nicht finden", good: false })
+                .then(rendered => res.send(rendered))
+            }
+        )
     }
     else {
         helper.clearConnections()
-        res.sendStatus(200)
+        .then(
+            () => {
+                ejs.renderFile(path.join(__dirname, "/views/partials/admin/response.ejs"), { message: "Verbindungen getrennt", good: true })
+                .then(rendered => res.send(rendered))
+            },
+            () => {
+                ejs.renderFile(path.join(__dirname, "/views/partials/admin/response.ejs"), { message: "Fehler beim Suchen aufgetreten", good: false })
+                .then(rendered => res.send(rendered))
+            }
+        )
     }
 })
 

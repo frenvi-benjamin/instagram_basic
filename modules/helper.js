@@ -61,24 +61,27 @@ function getOembed(username) {
 
 function deleteQrcodes(username = undefined) {
     if (username) {
-        User.findOne({username: username}).exec()
+        return User.findOne({username: username}).exec()
         .then(user => {
-            if (!user) throw Error(`User (${username}) not found`)
+            if (!user) this.reject()
         })
         .then(qrcodes => QrCode.deleteMany({ _id: { $in: qrcodes }}).exec())
         .then(User.findOneAndUpdate({ username: username }, { qrcodes: [] }).exec())
     }
     else {
-        QrCode.deleteMany({}).exec()
-        User.updateMany({}, { qrcodes: [] }).exec()
+        return Promise.all([
+            QrCode.deleteMany({}).exec(),
+            User.updateMany({}, { qrcodes: [] }).exec()
+        ])
+        
     }
 }
 
 function clearConnections(username = undefined) {
     if (username) {
-        User.findOne({username: username}).exec()
+        return User.findOne({username: username}).exec()
         .then(user => {
-            if (!user) throw Error(`User (${username}) not found`)
+            if (!user) this.reject()
         })
         .then(qrcodes => {
             QrCode.updateMany({ _id: { $in: qrcodes }}, { connectedUser: undefined }).exec()
@@ -86,8 +89,11 @@ function clearConnections(username = undefined) {
         })
     }
     else {
-        QrCode.updateMany({}, { connectedUser: undefined }).exec()
-        User.updateMany({}, { qrcodes: [] }).exec()
+        return Promise.all([
+            QrCode.updateMany({}, { connectedUser: undefined }).exec(),
+            User.updateMany({}, { qrcodes: [] }).exec()
+        ])
+        
     }
 }
 
