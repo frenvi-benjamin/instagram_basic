@@ -305,7 +305,6 @@ app.post("/admin/create-qrcodes", (req, res) => {
 })
 
 app.post("/admin/download-qrcodes", (req, res) => {
-    console.log(JSON.parse(req.body.files))
     res.zip({
         files: JSON.parse(req.body.files),
         filename: "qrcodes.zip"
