@@ -36,7 +36,6 @@ const session = require("express-session")
 
 // use mongodb as session store
 const MongoStore = require("connect-mongo")
-const { request } = require("express")
 
 app.use(
     session({
