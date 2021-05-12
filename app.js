@@ -62,6 +62,7 @@ function initSession () {
 
     return function (req, res, next) {
         if (!initialzied) {
+            console.log("Initializing session")
             req.session.hasVisitedScanner = false
             initialzied = true
         }
@@ -345,6 +346,7 @@ app.use((req, res, next) => {                                                   
 /*#################### ALL ROUTES BELOW HAVE TO HAVE USER LOGGED IN, IF NOT HE WILL BE REDIRECTED TO ROOT */
 
 app.get("/scanner", (req, res) => {
+    console.log("@ /scanner", req.session.hasVisitedScanner)
     res.render("scanner", { instagramUserID: req.session.instagramUserID, accessToken: req.session.accessToken, username: req.session.username, hasVisitedScanner: req.session.hasVisitedScanner })
     req.session.hasVisitedScanner = true
 })
