@@ -18,6 +18,10 @@
     height: fit-content;
 }
 
+#download-button {
+    width: fit-content;
+}
+
 #download-button:hover {
     text-decoration: none;
     cursor: pointer;
