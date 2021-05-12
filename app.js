@@ -358,5 +358,4 @@ app.get("/scanner", (req, res) => {
 
 app.post("/connect-qrcode", (req, res) => {
     helper.connectQrcodeToUser(req.body.qrID, req.session.instagramUserID)
-    .then(changedModels => res.send(changedModels))
 })
