@@ -14,11 +14,10 @@ function checkForPermissions(req, res) {
             client_secret: process.env.INSTAGRAM_APP_SECRET,
             grant_type: "authorization_code",
             redirect_uri: process.env.HOST + "/auth"
-        },
-        redirect: "follow"
+        }
     })
-    .then(response => response.json())
-    .then(body => body.access_token)
+    .then(response => response.text())
+    .then(body => {console.log(body); return body.access_token})
     // test if user gave access to media
     .then(SLAT => {
         return fetch(`https://graph.instagram.com/me/media?fields=permalink&access_token=${SLAT}`)
