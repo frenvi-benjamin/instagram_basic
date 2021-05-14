@@ -1,17 +1,14 @@
 const helper = require("../modules/helper")
 
 function checkUserExistance(req, res, next) {
-    console.log(JSON.stringify(req.params))
     helper.getUserByUsername(req.params.username)
     .then(
         () => {return next()},
         () => {return res.redirect("../")}
     )
-
 }
 
-function renderCollabPage (req, res) {
-    console.log(JSON.stringify(req.params))
+function render (req, res) {
     helper.getUserByUsername(req.params.username)
     .then(() => {
         Promise.all([
@@ -22,6 +19,10 @@ function renderCollabPage (req, res) {
             res.render("collab", { partnerInstagram: partnerInstagram, eatleryInstagram, eatleryInstagram, username: req.params.username })
         })
     })
+}
+
+function renderCollabPage (req, res) {
+    checkUserExistance(req, res, render)
 }
 
 module.exports = { checkUserExistance, renderCollabPage }
