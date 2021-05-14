@@ -57,17 +57,9 @@ app.use(
 // max age of session (1h) {ttl: 1000 * 60 * 60}
 
 // initialize session
-function initSession () {
-    var initialzied = false
-
-    return function (req, res, next) {
-        if (!initialzied) {
-            req.session.hasVisitedScanner = false
-            initialzied = true
-        }
-    }
+function initSession (req, res, next) {
+    req.session.hasVisitedScanner = false
 }
-app.use(initSession())
 
 // set view engine to ejs
 app.set("view engine", "ejs")
