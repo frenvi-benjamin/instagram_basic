@@ -13,6 +13,8 @@ function checkForPermissions(req, res) {
         redirect_uri: process.env.HOST + "/auth"
     }
 
+    console.log(JSON.stringify(body))
+
     // get short lived access token with given authentication code
     return fetch("https://api.instagram.com/oauth/access_token", {
         method: "POST",
