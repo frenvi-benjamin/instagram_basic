@@ -66,9 +66,9 @@ function initSession () {
             req.session.hasVisitedScanner = false
             initialzied = true
         }
-        next()
     }
 }
+app.use(initSession())
 
 // set view engine to ejs
 app.set("view engine", "ejs")
@@ -92,10 +92,7 @@ const startServer = app.listen(process.env.PORT, () => {
 // connect to database
 mongoose.connect(process.env.MONGODB_CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     // start server when db is connected
-    .then(() => {
-        startServer()
-        initSession()
-    })
+    .then(() => startServer)
     .catch((err) => console.log(err))
 
 
