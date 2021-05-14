@@ -1,13 +1,12 @@
 const helper = require("../modules/helper")
 const fetch = require("node-fetch")
-const FormData = require("form-data")
 
 
 function checkForPermissions(req, res) {
     if (!req.query.code) return res.render("request-permissions")
 
     var formdata = new FormData()
-    formdata.append("code", authCode)
+    formdata.append("code", req.query.code)
     formdata.append("client_id", process.env.INSTAGRAM_APP_ID)
     formdata.append("client_secret", process.env.INSTAGRAM_APP_SECRET)
     formdata.append("grant_type", "authorization_code")
@@ -20,7 +19,7 @@ function checkForPermissions(req, res) {
     }
     // get short lived access token with given authentication code
     fetch("https://api.instagram.com/oauth/access_token", requestOptions)
-    .then(response => response.text())
+    .then(response => response.json())
     .then(body => {console.log(body); return body.access_token})
     // test if user gave access to media
     .then(SLAT => {
