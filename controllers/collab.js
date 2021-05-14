@@ -3,7 +3,7 @@ const helper = require("../modules/helper")
 function checkUserExistance(req, res, next) {
     helper.getUserByUsername(req.params.username)
     .then(
-        () => {return next()},
+        () => {return next(req, res)},
         () => {return res.redirect("../")}
     )
 }
