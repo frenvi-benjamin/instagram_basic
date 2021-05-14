@@ -332,6 +332,7 @@ app.use((req, res, next) => {                                                   
 
 app.get("/scanner", (req, res) => {
     const hasVisitedScanner = req.session.hasVisitedScanner | false
+    console.log("const", hasVisitedScanner, "sess", req.session.hasVisitedScanner)
     res.render("scanner", { instagramUserID: req.session.instagramUserID, accessToken: req.session.accessToken, username: req.session.username, hasVisitedScanner: hasVisitedScanner })
     req.session.hasVisitedScanner = true
 })
