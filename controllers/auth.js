@@ -5,16 +5,18 @@ const fetch = require("node-fetch")
 function checkForPermissions(req, res) {
     if (!req.query.code) return res.render("request-permissions")
 
+    const body = {
+        code: req.query.code,
+        client_id: process.env.INSTAGRAM_APP_ID,
+        client_secret: process.env.INSTAGRAM_APP_SECRET,
+        grant_type: "authorization_code",
+        redirect_uri: process.env.HOST + "/auth"
+    }
+
     // get short lived access token with given authentication code
     return fetch("https://api.instagram.com/oauth/access_token", {
         method: "POST",
-        body: {
-            code: req.query.code,
-            client_id: process.env.INSTAGRAM_APP_ID,
-            client_secret: process.env.INSTAGRAM_APP_SECRET,
-            grant_type: "authorization_code",
-            redirect_uri: process.env.HOST + "/auth"
-        }
+        body: body
     })
     .then(response => response.text())
     .then(body => {console.log(body); return body.access_token})
