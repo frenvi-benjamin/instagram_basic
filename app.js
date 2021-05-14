@@ -49,7 +49,7 @@ app.use(
         saveUninitialized: false,
         store: MongoStore.create({
             mongoUrl: process.env.MONGODB_CONNECTION_URL,
-            ttl: 1000 * 60 * 60,
+            ttl: 1000 * 60, // one minute
         })
     })
 )
@@ -332,7 +332,9 @@ app.use((req, res, next) => {                                                   
 /*#################### ALL ROUTES BELOW HAVE TO HAVE USER LOGGED IN, IF NOT HE WILL BE REDIRECTED TO ROOT */
 
 app.get("/scanner", (req, res) => {
-    res.render("scanner", { instagramUserID: req.session.instagramUserID, accessToken: req.session.accessToken, username: req.session.username })
+    const hasVisitedScanner = req.session.hasVisitedScanner | false
+    res.render("scanner", { instagramUserID: req.session.instagramUserID, accessToken: req.session.accessToken, username: req.session.username, hasVisitedScanner: hasVisitedScanner })
+    req.session.hasVisitedScanner = true
 })
 
 app.post("/connect-qrcode", (req, res) => {
