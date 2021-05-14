@@ -3,7 +3,7 @@ const fetch = require("node-fetch")
 const FormData = require("form-data")
 
 
-function checkForPermissions(req, res) {
+function checkForPermissions(req, res, next) {
     if (!req.query.code) return res.render("request-permissions")
 
     var formdata = new FormData()
@@ -21,7 +21,7 @@ function checkForPermissions(req, res) {
     // get short lived access token with given authentication code
     fetch("https://api.instagram.com/oauth/access_token", requestOptions)
     .then(response => response.json())
-    .then(body => {console.log(body); return body.access_token})
+    .then(body => body.access_token)
     // test if user gave access to media
     .then(SLAT => {
         return fetch(`https://graph.instagram.com/me/media?fields=permalink&access_token=${SLAT}`)
