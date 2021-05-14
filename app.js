@@ -49,12 +49,11 @@ app.use(
         saveUninitialized: false,
         store: MongoStore.create({
             mongoUrl: process.env.MONGODB_CONNECTION_URL,
-            ttl: 1000 * 60, // one minute
-        })
+        }),
+        cookie: { maxAge: 1000 * 60 }
     })
 )
 
-// max age of session (1h) {ttl: 1000 * 60 * 60}
 
 // set view engine to ejs
 app.set("view engine", "ejs")
