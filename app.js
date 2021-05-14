@@ -314,7 +314,11 @@ app.post("/admin/delete-qrcodes", (req, res) => {
     helper.deleteQrcodes()
     res.redirect("/admin")
 })
-
+app.get("/scanner", (req, res) => {
+    const hasVisitedScanner = req.session.hasVisitedScanner | false
+    req.session.hasVisitedScanner = true
+    res.render("scanner", { instagramUserID: req.session.instagramUserID, accessToken: req.session.accessToken, username: req.session.username, hasVisitedScanner: hasVisitedScanner })
+})
 /*########################################################################################################*/
                                                                                                     /*#*/
 // check if user session is initiated this is required for all following routes                        /*#*/
@@ -330,11 +334,7 @@ app.use((req, res, next) => {                                                   
                                                                                                     /*#*/
 /*#################### ALL ROUTES BELOW HAVE TO HAVE USER LOGGED IN, IF NOT HE WILL BE REDIRECTED TO ROOT */
 
-app.get("/scanner", (req, res) => {
-    const hasVisitedScanner = req.session.hasVisitedScanner | false
-    req.session.hasVisitedScanner = true
-    res.render("scanner", { instagramUserID: req.session.instagramUserID, accessToken: req.session.accessToken, username: req.session.username, hasVisitedScanner: hasVisitedScanner })
-})
+
 
 app.post("/connect-qrcode", (req, res) => {
     helper.connectQrcodeToUser(req.body.qrID, req.session.instagramUserID)

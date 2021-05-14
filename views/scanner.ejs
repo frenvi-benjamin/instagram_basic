@@ -25,7 +25,10 @@
 			</div>
 
 			<div class="row">
-				<div id="scanner" class="col mb-2">
+				<div class="col mb-2">
+					<div id="scanner" class="mx-auto" style="display: block; max-width: 500px; width: 100%; position: relative;">
+						<i id="info" class="far fa-question-circle rounded p-1 m-2" role="button" onclick="modal.show()"></i>
+					</div>
 				</div>
 			</div>
 
@@ -59,10 +62,13 @@
 				</div>
 			</div>
 		</div>
+		<script>
+			var modal = new bootstrap.Modal(document.getElementById("modal"))
+		</script>
 
 		<script>
 			if (!<%= hasVisitedScanner %>) {
-				new bootstrap.Modal(document.getElementById("modal")).show()
+				modal.show()
 			}
 		</script>
 
