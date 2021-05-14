@@ -62,7 +62,6 @@ function initSession () {
 
     return function (req, res, next) {
         if (!initialzied) {
-            console.log("Initializing session")
             req.session.hasVisitedScanner = false
             initialzied = true
         }
