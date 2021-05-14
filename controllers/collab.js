@@ -1,6 +1,7 @@
 const helper = require("../modules/helper")
 
 function checkUserExistance(req, res, next) {
+    console.log(JSON.stringify(req.params))
     helper.getUserByUsername(req.params.username)
     .then(
         () => {return next()},
@@ -10,6 +11,7 @@ function checkUserExistance(req, res, next) {
 }
 
 function renderCollabPage (req, res) {
+    console.log(JSON.stringify(req.params))
     helper.getUserByUsername(req.params.username)
     .then(() => {
         Promise.all([
