@@ -37,13 +37,4 @@ function create(req, res) {
     helper.connectQrcodeToUser(req.body.qrID, req.session.instagramUserID)
 }
 
-function checkForUserSession(req, res, next) {
-    if (
-        req.session.username
-    ) { return next() }
-    else {
-        res.redirect("/")
-    }
-}
-
-module.exports = { clear, create, checkForUserSession }
+module.exports = { clear, create }
