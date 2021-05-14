@@ -56,6 +56,20 @@ app.use(
 
 // max age of session (1h) {ttl: 1000 * 60 * 60}
 
+// initialize session
+function initSession () {
+    var initialzied = false
+
+    return function (req, res, next) {
+        if (!initialzied) {
+            console.log("Initializing session")
+            req.session.hasVisitedScanner = false
+            initialzied = true
+        }
+        next()
+    }
+}
+
 // set view engine to ejs
 app.set("view engine", "ejs")
 const ejs = require("ejs")
@@ -71,14 +85,19 @@ app.use("/bootstrap-social", express.static(path.join(__dirname, "/node_modules/
 app.use("/jquery", express.static(path.join(__dirname, "/node_modules/jquery/dist")))
 app.use("/fontawesome", express.static(path.join(__dirname, "/node_modules/@fortawesome/fontawesome-free")))
 
-const startServer = app.listen(process.env.PORT, () => {
-    console.log(`App listening at ${process.env.HOST}:${process.env.PORT}`)
-})
+const startServer = function () {
+    app.listen(process.env.PORT, () => {
+        console.log(`App listening at ${process.env.HOST}:${process.env.PORT}`)
+    })
+}
 
 // connect to database
 mongoose.connect(process.env.MONGODB_CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     // start server when db is connected
-    .then(() => startServer)
+    .then(() => {
+        startServer()
+        initSession()
+    })
     .catch((err) => console.log(err))
 
 
@@ -339,5 +358,4 @@ app.get("/scanner", (req, res) => {
 
 app.post("/connect-qrcode", (req, res) => {
     helper.connectQrcodeToUser(req.body.qrID, req.session.instagramUserID)
-    .then(changedModels => res.send(changedModels))
 })
