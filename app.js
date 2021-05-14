@@ -50,7 +50,7 @@ app.use(
         store: MongoStore.create({
             mongoUrl: process.env.MONGODB_CONNECTION_URL,
         }),
-        cookie: { maxAge: 1000 * 60 }
+        cookie: { maxAge: 1000 * 60 * 60 * 24 * 14 } // 14 days
     })
 )
 
