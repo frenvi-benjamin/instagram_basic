@@ -8,6 +8,6 @@ const sharedController = require("../controllers/shared")
 router.use(sharedController.checkForUserSession)
 // all routes below require an active session. if no session is active the user will be redirected to the login page
 
-router.get("/scanner", controller.renderScanner)
+router.get("/", controller.renderScanner)
 
 module.exports = router
