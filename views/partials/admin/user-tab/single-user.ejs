@@ -85,7 +85,7 @@
             <%= user.updatedAt %>
         </div>
     </div>
-    <form action="/admin/delete-user" method="POST">
+    <form action="/admin/user/delete" method="POST">
         <input hidden type="text" name="username" value="<%= user.username %>">
         <button class="btn btn btn-custom-danger float-right mt-2">Löschen</button>
     </form>

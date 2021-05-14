@@ -31,7 +31,7 @@
 <script>
     function clearConnections(username = undefined) {
         console.log("clearConnection", username)
-        fetch("/admin/clear-connections", {
+        fetch("/admin/connection/clear", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -48,7 +48,7 @@
 
     function deleteQrcodes(username = undefined) {
         console.log("deleteQrcodes", username)
-        fetch("/admin/delete-qrcodes", {
+        fetch("/admin/qrcode/delete", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

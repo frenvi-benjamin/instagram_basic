@@ -14,7 +14,7 @@
     </div>
 </div>
 <div hidden class="row my-2" id="download-row">
-    <form class="col" action="/admin/download-qrcodes" method="POST">
+    <form class="col" action="/admin/qrcode/download" method="POST">
         <input hidden id="fileStore" type="text" name="files"></input>
         <div class="input-group" id="download-button" onclick="document.getElementById('arrow-download-button').click()">
             <div class="input-group-prepend">
@@ -31,7 +31,7 @@
 
 <script>
     function createQrcodes(nQrcodes) {
-        fetch("/admin/create-qrcodes", {
+        fetch("/admin/qrcode/create", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

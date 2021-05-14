@@ -24,7 +24,7 @@ function onQrScan(result) {
 	}
 	// if not scanned, connect qrcode to user
 	else {
-		fetch("/connect-qrcode", {
+		fetch("/connection/create", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
