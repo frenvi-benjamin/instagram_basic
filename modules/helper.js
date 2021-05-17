@@ -1,8 +1,8 @@
 require("dotenv").config()
 
 // database models
-const QrCode = require("../models/qrcode")
-const User = require("../models/user")
+const QrCode = require("../models/qrcodeModel")
+const User = require("../models/userModel")
 
 // fetch
 const fetch = require("node-fetch")
