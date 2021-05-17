@@ -69,6 +69,9 @@ mongoose.connect(process.env.MONGODB_CONNECTION_URL, { useNewUrlParser: true, us
 .then(() => startServer)
 .catch((err) => console.log(err))
 
+// refresh tokens every 24.855 days (maximum)
+helper.refreshAccessTokens()
+setInterval(helper.refreshAccessTokens, 2147483647)
 
 // index
 app.use("/", require("./routes/index"))

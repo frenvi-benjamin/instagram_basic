@@ -197,6 +197,19 @@ function deleteUser(username, deleteQrcodes = false) {
     
 }
 
+function refreshAccessTokens() {
+    User.find({}, "accessToken")
+    .then(users => {
+        users.forEach(user => {
+            fetch(`https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${user.accessToken}`)
+            .then(response => response.json())
+            .then(body => {
+                User.findOneAndUpdate({accessToken: user.accessToken}, { accessToken: body.access_token }).exec()
+            })
+        })
+    })
+}
+
 module.exports = {
     clearConnections,
     deleteQrcodes,
@@ -211,5 +224,6 @@ module.exports = {
     getShortcodeForLatestPost,
     getUsername,
     getID,
-    getOembed
+    getOembed,
+    refreshAccessTokens,
 }
