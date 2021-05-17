@@ -33,7 +33,9 @@
     }
 
     #scanner {
-        max-width: 100vh;
+        max-width: 96vh;
+        margin-top: 2vh;
+        margin-bottom: 2vh;
     }
 
     canvas {
