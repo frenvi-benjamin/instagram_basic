@@ -23,6 +23,19 @@
     position: relative;
 }
 
+.max-width-500px {
+    max-width: 500px;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+}
+
+.horizontal {
+    display: none;
+}
+
 @media screen and (max-height: 450px) {
     #header {
         display: none;
@@ -38,7 +51,7 @@
         margin-bottom: 2vh;
     }
 
-    canvas {
-        max-width: fit-content;
+    .horizontal {
+        display: block;
     }
 }

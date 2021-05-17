@@ -4,7 +4,8 @@ QrScanner.WORKER_PATH = "/qr-scanner/qr-scanner-worker.min.js"
 
 const video = document.getElementById("qr-video")
 
-const qrStatus = document.getElementById("qr-status")
+const qrStatus = document.getElementsByClassName("qr-status")
+console.log(qrStatus)
 
 const alreadyScannedQrcodes = []
 function alreadyScanned(qrID) {
@@ -18,9 +19,12 @@ function onQrScan(result) {
 
 	// check if already scanned this session
 	if (alreadyScanned(qrID)) {
-		qrStatus.innerHTML = "QR-Code gescannt!"
-		qrStatus.style.backgroundColor = "#A2D208"
-		qrStatus.style.color = "white"
+		for (let i = 0; i < qrStatus.length; i++) {
+			const status = qrStatus[i];
+			status.innerHTML = "QR-Code gescannt!"
+			status.style.backgroundColor = "#A2D208"
+			status.style.color = "white"
+		}
 	}
 	// if not scanned, connect qrcode to user
 	else {
@@ -50,9 +54,12 @@ const scanner = new QrScanner(
 	video,
 	(result) => onQrScan(result),
 	(error) => {
-		qrStatus.innerHTML = "Kein QR-Code gefunden"
-		qrStatus.style.backgroundColor = "white"
-		qrStatus.style.color = "black"
+		for (let i = 0; i < qrStatus.length; i++) {
+			const status = qrStatus[i];
+			status.innerHTML = "Kein QR-Code gefunden"
+			status.style.backgroundColor = "white"
+			status.style.color = "black"
+		}
 	}
 )
 
@@ -60,6 +67,8 @@ scanner.start()
 
 const scannerDiv = document.getElementById("scanner")
 const canvas = scanner.$canvas
+canvas.classList.add("rounded")
+canvas.classList.add("mx-0")
 scannerDiv.appendChild(canvas)
 
 
@@ -70,9 +79,3 @@ var observer = new MutationObserver((mutationsList) => {
 })
 
 observer.observe(video, { attributes : true, attributeFilter : ["style"] })
-
-canvas.style.display = "block"
-canvas.style.maxWidth = "500px"
-canvas.classList.add("mx-auto")
-canvas.style.width = "100%"
-canvas.style.borderRadius = "0.25rem"
