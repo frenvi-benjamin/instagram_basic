@@ -82,6 +82,7 @@ function clearConnections(username = undefined) {
         return User.findOne({username: username}).exec()
         .then(user => {
             if (!user) this.reject()
+            else return user.qrcodes
         })
         .then(qrcodes => {
             QrCode.updateMany({ _id: { $in: qrcodes }}, { connectedUser: undefined }).exec()
