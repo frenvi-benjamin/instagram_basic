@@ -24,16 +24,16 @@
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="col mb-2">
-					<div id="scanner" class="mx-auto" style="display: block; max-width: 500px; width: 100%; position: relative;">
+			<div class="row" id="scanner-row">
+				<div class="col">
+					<div id="scanner" class="mx-auto">
 						<i id="info" class="far fa-question-circle rounded p-1 m-2" role="button" onclick="modal.show()"></i>
 					</div>
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col">
+				<div class="col mt-2">
 					<a id="ready-button" href="/collab/<%= username %>">
 						<p id="ready-card" class="h5 text-center p-2 mb-2 card">
 							Alle QR-Codes gescannt? Hier geht's zu Ihrer Webseite
@@ -64,9 +64,7 @@
 		</div>
 		<script>
 			var modal = new bootstrap.Modal(document.getElementById("modal"))
-		</script>
 
-		<script>
 			if (!<%= hasVisitedScanner %>) {
 				modal.show()
 			}

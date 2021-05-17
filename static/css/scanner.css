@@ -16,3 +16,27 @@
     background-color: white;
     box-sizing: unset;
 }
+
+#scanner {
+    display: block;
+    width: 100%;
+    position: relative;
+}
+
+@media screen and (max-height: 450px) {
+    #header {
+        display: none;
+    }
+
+    .row:not(#scanner-row) {
+        display: none;
+    }
+
+    #scanner {
+        max-width: 100vh;
+    }
+
+    canvas {
+        max-width: fit-content;
+    }
+}
