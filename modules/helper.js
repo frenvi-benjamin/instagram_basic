@@ -50,7 +50,7 @@ function getOembed(username) {
 
     if (!username) return Promise.reject()
 
-    return getUserByUsername(username)
+    return getUser(username)
     .then(user => getShortcodeForLatestPost(user.accessToken))
     .then(shortcode => fetch(oembedURL + `?url=https://www.instagram.com/p/${shortcode}&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`))
     .then(response => response.json())
@@ -155,11 +155,19 @@ function incrementNrOfScans(username) {
     User.findOneAndUpdate({ username: username }, { $inc: { nrOfScans: 1 }}, { upsert: true }).exec()
 }
 
-function getUserByUsername(username) {
+function getUser(username = undefined) {
 
-    if (!username) return Promise.reject()
+    if (username) {
+        return User.findOne({ username: {$regex: new RegExp(username.toLowerCase(), "i")} })
+        .then(user => {
+            if (user) return user
+            else return Promise.reject()
+        })
+    }
+    else {
+        return User.find({}).exec()
+    }
 
-    return User.findOne({ username: {$regex: new RegExp(username.toLowerCase(), "i")} }).exec()
 }
 
 function updateShortcode(accessToken) {
@@ -197,7 +205,7 @@ module.exports = {
     connectQrcodeToUser,
     createQrcodes,
     incrementNrOfScans,
-    getUserByUsername,
+    getUser,
     updateShortcode,
     deleteUser,
     getShortcodeForLatestPost,

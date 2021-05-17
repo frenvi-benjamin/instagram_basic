@@ -1,0 +1,17 @@
+<div class="col">
+    <% users.forEach(user => { %> 
+        <div class="input-group mb-1">
+            <div class="input-group-prepend fixed-width">
+                <div class="input-group-text fixed-width">username</div>
+            </div>
+            <div class="form-control text-right username">
+                <%= user.username %>
+            </div>
+            <div class="input-group-append">
+                <a class="btn btn-custom" target="_blank" onclick="getUser('<%= user.username %>')" + user.username %>">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+    <% }) %> 
+</div>

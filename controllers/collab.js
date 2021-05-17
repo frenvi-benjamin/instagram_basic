@@ -1,7 +1,7 @@
 const helper = require("../modules/helper")
 
 function checkUserExistance(req, res, next) {
-    helper.getUserByUsername(req.params.username)
+    helper.getUser(req.params.username)
     .then(
         () => {return next(req, res)},
         () => {return res.redirect("../")}
@@ -9,7 +9,7 @@ function checkUserExistance(req, res, next) {
 }
 
 function render (req, res) {
-    helper.getUserByUsername(req.params.username)
+    helper.getUser(req.params.username)
     .then(() => {
         Promise.all([
             helper.getOembed(req.params.username),

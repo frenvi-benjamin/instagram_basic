@@ -20,7 +20,7 @@ mongoose.set('useUnifiedTopology', true);
 // helper module
 const helper = require("./modules/helper")
 
-helper.getUserByUsername("eatleryforfuture")
+helper.getUser("eatleryforfuture")
 .then(user => {
     if (!user) throw Error("Application needs the eatleryforfuture account in DB to run properly")
 })

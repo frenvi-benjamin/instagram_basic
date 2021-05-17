@@ -6,6 +6,13 @@
                 <div class="input-group-text">@</div>
             </div>
             <input type="text" class="form-control" id="search-user-input" placeholder="username" name="username">
+            <script>
+                document.getElementById("search-user-input").onkeyup = (e) => { if (e.key === "Enter") { getUser(document.getElementById("search-user-input").value) } }
+            </script>
+            <div class="input-group-append">
+                <button class="btn btn-custom btn-outline-secondary"
+                    onclick="getUser()">Alle User</button>
+            </div>
             <div class="input-group-append">
                 <button class="btn btn-custom btn-outline-secondary"
                     onclick="getUser(document.getElementById('search-user-input').value)">Finden</button>
@@ -16,7 +23,7 @@
 
 
 <script>
-    function getUser(username) {
+    function getUser(username = undefined) {
         fetch("/admin/user/get", {
             method: "POST",
             headers: {
@@ -42,4 +49,6 @@
             document.getElementById("search-row").after(userRow)
         })
     }
+    // get all users when page is loaded the first time
+    getUser()
 </script>
