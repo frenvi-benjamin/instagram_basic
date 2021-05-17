@@ -4,6 +4,8 @@ const router = express.Router()
 const controller = require("../../controllers/admin/connection")
 const sharedController = require("../../controllers/shared")
 
+router.use((req, res) => console.log(req.url))
+
 router.post("/clear", controller.clear)
 
 // user session check middleware

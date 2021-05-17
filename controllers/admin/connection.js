@@ -34,6 +34,7 @@ function clear(req, res) {
 }
 
 function create(req, res) {
+    console.log("creating connection")
     helper.connectQrcodeToUser(req.body.qrID, req.session.instagramUserID)
 }
 
