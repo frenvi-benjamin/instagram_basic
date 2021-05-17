@@ -20,6 +20,9 @@ function authLogin(req, res) {
             req.session.admin = true
             return res.redirect("/admin")
         }
+        else {
+            return res.render("admin-login")
+        }
     })
 }
 
