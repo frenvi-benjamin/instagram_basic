@@ -3,7 +3,7 @@ const router = express.Router()
 const zip = require("express-easy-zip")
 router.use(zip())
 
-const controller = require("../../controllers/admin/qrcode")
+const controller = require("../../controllers/admin/qrcodeController")
 
 router.post("/create", controller.create)
 
