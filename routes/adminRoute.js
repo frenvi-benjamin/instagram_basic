@@ -15,12 +15,12 @@ router.get("/", (req, res) => {
 })
 
 // user
-router.use("/user", require("./admin/user"))
+router.use("/user", require("./admin/userRoute"))
 
 // connections
-router.use("/connection", require("./admin/connection"))
+router.use("/connection", require("./admin/connectionRoute"))
 
 // qrcodes
-router.use("/qrcode", require("./admin/qrcode"))
+router.use("/qrcode", require("./admin/qrcodeRoute"))
 
 module.exports = router

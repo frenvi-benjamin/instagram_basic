@@ -74,16 +74,16 @@ helper.refreshAccessTokens()
 setInterval(helper.refreshAccessTokens, 2147483647)
 
 // index
-app.use("/", require("./routes/index"))
+app.use("/", require("./routes/indexRoute"))
 
 // admin
-app.use("/admin", require("./routes/admin"))
+app.use("/admin", require("./routes/adminRoute"))
 
 // auth
-app.use("/auth", require("./routes/auth"))
+app.use("/auth", require("./routes/authRoute"))
 
 // collab
-app.use("/collab", require("./routes/collab"))
+app.use("/collab", require("./routes/collabRoute"))
 
 //scanner
-app.use("/scanner", require("./routes/scanner"))
+app.use("/scanner", require("./routes/scannerRoute"))
