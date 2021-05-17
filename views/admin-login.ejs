@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <%- include("./partials/head", {title: "Admin-Login"}) %>
+</head>
+
+<body>
+    <%- include("./partials/header") %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form action="/admin/auth" method="POST">
+                    <input class="form-control" type="text" name="username" id="username" placeholder="admin-username">
+                    <input class="form-control my-2" type="password" name="password" id="password" placeholder="admin-password">
+                    <button class="btn btn-custom" type="submit">Anmelden</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
