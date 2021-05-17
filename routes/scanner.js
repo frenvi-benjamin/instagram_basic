@@ -1,8 +1,8 @@
 const express = require("express")
 const router = express.Router()
 
-const controller = require("../controllers/scanner")
-const sharedController = require("../controllers/shared")
+const controller = require("../controllers/scannerController")
+const sharedController = require("../controllers/sharedController")
 
 // user session check middleware
 router.use(sharedController.checkForUserSession)
