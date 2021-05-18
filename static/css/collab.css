@@ -15,3 +15,8 @@ img {
 .tag:hover {
     opacity: .6;
 }
+
+iframe {
+    margin-left: auto!important;
+    margin-right: auto!important;
+}
