@@ -73,18 +73,16 @@
         <% user.qrcodes.forEach(qrcode => { %>
             <div class="input-group mb-1">
                 <div class="input-group-prepend fixed-width">
-                    <div class="input-group-text fixed-width"><%= i %> </div>
+                    <div class="input-group-text fixed-width">QR-Code #<%= i %> </div>
                 </div>
                 <div class="form-control text-right">
                     <%= qrcode %>
                 </div>
-                <form action="/admin/qrcode/download" method="POST">
+                <form class="input-group-append" action="/admin/qrcode/download" method="POST">
                     <input hidden type="text" name="qrcodes" value="[&quot;<%= qrcode %>&quot;]">
-                    <div class="input-group-append">
-                        <button class="btn btn-custom" type="submit">
-                            <i class="fas fa-file-download"></i>
-                        </button>
-                    </div>
+                    <button class="btn btn-custom" type="submit">
+                        <i class="fas fa-file-download"></i>
+                    </button>
                 </form>
             </div>
             <% i++ %> 
