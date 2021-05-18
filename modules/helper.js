@@ -130,7 +130,7 @@ function createUserFromAccessToken(accessToken) {
 }
 
 function connectQrcodeToUser(qrID, instagramUserID) {
-
+    console.log("qrID", qrID, "instagramUserID", instagramUserID)
     if (!qrID || !instagramUserID) return Promise.reject()
     
     QrCode.findByIdAndUpdate(qrID, { connectedUser: instagramUserID }, { upsert: true }).exec()
