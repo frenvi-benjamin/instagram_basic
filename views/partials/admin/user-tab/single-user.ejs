@@ -1,7 +1,7 @@
 <div class="col">
     <div class="input-group mb-1">
         <div class="input-group-prepend fixed-width">
-            <div class="input-group-text fixed-width">username</div>
+            <div class="input-group-text fixed-width">Username</div>
         </div>
         <div class="form-control text-right username">
             <%= user.username %>
@@ -15,7 +15,7 @@
 
     <div class="input-group mb-1">
         <div class="input-group-prepend fixed-width">
-            <div class="input-group-text fixed-width">promoted post</div>
+            <div class="input-group-text fixed-width">Promoted Post</div>
         </div>
         <div class="form-control text-right">
             <%= "https://instagram.com/p/" + user.shortcode %>
@@ -29,7 +29,7 @@
 
     <div class="input-group mb-1">
         <div class="input-group-prepend fixed-width">
-            <div class="input-group-text fixed-width">collab website</div>
+            <div class="input-group-text fixed-width">Collaboration Website</div>
         </div>
         <div class="form-control text-right">
             <%= process.env.HOST + "/collab/" + user.username %>
@@ -50,41 +50,47 @@
         </div>
     </div>
 
-    <div class="input-group mb-1">
+    <div class="input-group mb-1" id="qrcode-single">
         <div class="input-group-prepend fixed-width">
-            <div class="input-group-text fixed-width">instagramUserID</div>
+            <div class="input-group-text fixed-width">QR-Codes</div>
         </div>
         <div class="form-control text-right">
-            <%= user.instagramUserID %>
-        </div>
+            <% if (user.qrcodes.length > 0) { %>
+                <%= user.qrcodes.length %>
+                </div>
+                <div class="input-group-append">
+                    <button class="btn btn-custom" onclick="document.getElementById('qrcode-single').hidden = true; document.getElementById('qrcode-all').hidden = false">
+                        Alle anzeigen
+                    </button>
+                </div>
+            <% } else { %> 
+                Keine QR-Codes registriert </div>
+            <% } %> 
     </div>
 
-    <div class="input-group mb-1">
-        <div class="input-group-prepend fixed-width">
-            <div class="input-group-text fixed-width">accessToken</div>
-        </div>
-        <div class="form-control text-right">
-            <%= user.accessToken %>
-        </div>
+    <div hidden id="qrcode-all">
+        <% var i = 1 %> 
+        <% user.qrcodes.forEach(qrcode => { %>
+            <div class="input-group mb-1">
+                <div class="input-group-prepend fixed-width">
+                    <div class="input-group-text fixed-width"><%= i %> </div>
+                </div>
+                <div class="form-control text-right">
+                    <%= qrcode %>
+                </div>
+                <form action="/admin/qrcode/download" method="POST">
+                    <input hidden type="text" name="qrcodes" value="[&quot;<%= qrcode %>&quot;]">
+                    <div class="input-group-append">
+                        <button class="btn btn-custom" type="submit">
+                            <i class="fas fa-file-download"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <% i++ %> 
+        <% }) %>
     </div>
 
-    <div class="input-group mb-1">
-        <div class="input-group-prepend fixed-width">
-            <div class="input-group-text fixed-width">createdAt</div>
-        </div>
-        <div class="form-control text-right">
-            <%= user.createdAt %>
-        </div>
-    </div>
-
-    <div class="input-group mb-1">
-        <div class="input-group-prepend fixed-width">
-            <div class="input-group-text fixed-width">updatedAt</div>
-        </div>
-        <div class="form-control text-right">
-            <%= user.updatedAt %>
-        </div>
-    </div>
     <form action="/admin/user/delete" method="POST">
         <input hidden type="text" name="username" value="<%= user.username %>">
         <button class="btn btn btn-custom-danger float-right mt-2">Löschen</button>

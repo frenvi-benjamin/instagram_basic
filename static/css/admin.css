@@ -26,3 +26,12 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+.input-group-append>a.btn {
+    padding-left: 14px;
+    padding-right: 14px;
+}
+
+.form-control[readonly] {
+    background-color: white;
+}

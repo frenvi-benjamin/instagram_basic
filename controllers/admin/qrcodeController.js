@@ -7,31 +7,46 @@ const helper = require("../../modules/helper")
 function create(req, res) {
     const n = req.body.nQrcodes
     helper.createQrcodes(n)
-    .then(newQrcodes => {
-        var files = []
+    .then(newQrcodes => res.send(createQrcodeFiles(newQrcodes)))
+}
 
-        newQrcodes.forEach(qrcode => {
-            const qrID = qrcode._id
-            let qrcodeImage = new QRCode({
-                content: `${process.env.HOST}?qr=${qrID}`,
-                color: "black",
-                background: "white",
-                join: true // joins all vector graphics paths
-            })
-            files.push({
-                content: qrcodeImage.svg(),
-                name: qrID + ".svg",
-                date: new Date(),
-                type: "file",
-            })
+function createQrcodeFiles(qrcodes) {
+    var files = []
+
+    if (typeof qrcodes == "string") {
+        qrcodes = JSON.parse(qrcodes)
+    }
+
+    qrcodes.forEach(qrcode => {
+        // qrcode can either be the qrcode model from db or just the id
+        const qrID = qrcode._id || qrcode
+        console.log("qrID", qrID)
+        let qrcodeImage = new QRCode({
+            content: `${process.env.HOST}?qr=${qrID}`,
+            color: "black",
+            background: "white",
+            join: true // joins all vector graphics paths
         })
-        res.send(files)
+        files.push({
+            content: qrcodeImage.svg(),
+            name: qrID + ".svg",
+            date: new Date(),
+            type: "file",
+        })
     })
+
+    return files
 }
 
 function download(req, res) {
+    let files = req.body.files || createQrcodeFiles(req.body.qrcodes)
+
+    if (typeof files =="string") {
+        files = JSON.parse(files)
+    }
+
     res.zip({
-        files: JSON.parse(req.body.files),
+        files: files,
         filename: "qrcodes.zip"
     })
 }

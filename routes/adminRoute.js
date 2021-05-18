@@ -22,7 +22,6 @@ router.get("/", (req, res) => {
 // user
 router.use("/user", require("./admin/userRoute"))
 
-
 // qrcodes
 router.use("/qrcode", require("./admin/qrcodeRoute"))
 
