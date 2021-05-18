@@ -20,7 +20,6 @@ function createQrcodeFiles(qrcodes) {
     qrcodes.forEach(qrcode => {
         // qrcode can either be the qrcode model from db or just the id
         const qrID = qrcode._id || qrcode
-        console.log("qrID", qrID)
         let qrcodeImage = new QRCode({
             content: `${process.env.HOST}?qr=${qrID}`,
             color: "black",
