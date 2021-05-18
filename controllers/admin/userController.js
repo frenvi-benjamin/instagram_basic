@@ -28,6 +28,7 @@ function get(req, res) {
 
 function del(req, res) {
     helper.deleteUser(req.body.username, true)
+    res.redirect("/admin#user")
 }
 
 module.exports = { get, del }
