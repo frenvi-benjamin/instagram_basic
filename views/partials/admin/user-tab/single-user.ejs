@@ -70,16 +70,21 @@
 
     <div hidden id="qrcode-all">
         <% var i = 1 %> 
-        <% user.qrcodes.forEach(qrcode => { %>
+        <% user.qrcodes.forEach(qrID => { %>
             <div class="input-group mb-1">
                 <div class="input-group-prepend fixed-width">
                     <div class="input-group-text fixed-width">QR-Code #<%= i %> </div>
                 </div>
-                <div class="form-control text-right">
-                    <%= qrcode %>
+                <div id="<%= qrID %>" class="form-control text-right" data-state="id">
+                    <%= qrID %>
+                </div>
+                <div class="input-group-append">
+                    <button class="btn btn-custom" onclick="toggleQrcode('<%= qrID %>')">
+                        <i class="fas fa-qrcode"></i>
+                    </button>
                 </div>
                 <form class="input-group-append" action="/admin/qrcode/download" method="POST">
-                    <input hidden type="text" name="qrcodes" value="[&quot;<%= qrcode %>&quot;]">
+                    <input hidden type="text" name="qrcodes" value="[&quot;<%= qrID %>&quot;]">
                     <button class="btn btn-custom" type="submit">
                         <i class="fas fa-file-download"></i>
                     </button>

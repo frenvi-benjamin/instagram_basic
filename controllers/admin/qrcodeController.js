@@ -91,6 +91,10 @@ function getFiles(req, res) {
             QrCode.find({ connectedUser: undefined })
             .then(qrcodes => res.send(createQrcodeFiles(qrcodes)))
             break;
+        case "one":
+            QrCode.findById(req.body.one)
+            .then(qrcode => res.send(createQrcodeFiles([qrcode])[0]))
+            break;
     }
 } 
 

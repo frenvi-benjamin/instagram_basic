@@ -154,3 +154,32 @@ function getUser(username = undefined) {
         document.getElementById("search-row").after(userRow)
     })
 }
+
+function toggleQrcode(qrID) {
+    const elem = document.getElementById(qrID)
+
+    switch (elem.getAttribute("data-state")) {
+        case "id":
+            fetch("/admin/qrcode/getFiles", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "type": "one",
+                    "one": qrID
+                }),
+            })
+            .then(response => response.json())
+            .then(file => {
+                elem.innerHTML = file.content
+            })
+            elem.setAttribute("data-state", "qr")
+            break;
+    
+        case "qr":
+            elem.innerHTML = qrID
+            elem.setAttribute("data-state", "id")
+            break;
+    }
+}
