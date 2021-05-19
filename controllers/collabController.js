@@ -4,7 +4,7 @@ function checkUserExistance(req, res, next) {
     helper.getUser(req.params.username)
     .then(
         () => {return next(req, res)},
-        () => {return res.redirect("../")}
+        () => {return res.render("404")}
     )
 }
 
