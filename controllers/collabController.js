@@ -9,15 +9,15 @@ function checkUserExistance(req, res, next) {
 }
 
 function render (req, res) {
-    helper.getUser(req.params.username)
-    .then(() => {
-        Promise.all([
-            helper.getOembed(req.params.username),
-            helper.getOembed("eatleryforfuture")
-        ])
-        .then(([partnerInstagram, eatleryInstagram]) => {
-            res.render("collab", { partnerInstagram: partnerInstagram, eatleryInstagram, eatleryInstagram, username: req.params.username })
-        })
+    Promise.all([
+        helper.getOembed(req.params.username),
+        helper.getOembed("eatleryforfuture")
+    ])
+    .then(([partnerInstagram, eatleryInstagram]) => {
+        res.render("collab", { partnerInstagram: partnerInstagram, eatleryInstagram, eatleryInstagram, username: req.params.username })
+    })
+    .catch(() => {
+        res.render("no-permissions")
     })
 }
 
@@ -25,4 +25,4 @@ function renderCollabPage (req, res) {
     checkUserExistance(req, res, render)
 }
 
-module.exports = { checkUserExistance, renderCollabPage }
+module.exports = { renderCollabPage }
