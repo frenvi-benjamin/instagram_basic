@@ -5,7 +5,6 @@ QrScanner.WORKER_PATH = "/qr-scanner/qr-scanner-worker.min.js"
 const video = document.getElementById("qr-video")
 
 const qrStatus = document.getElementsByClassName("qr-status")
-console.log(qrStatus)
 
 const alreadyScannedQrcodes = []
 function alreadyScanned(qrID) {
@@ -42,7 +41,6 @@ function onQrScan(result) {
 
 	if (!alreadyScanned(qrID)) {
 		alreadyScannedQrcodes.push(qrID)
-		console.log(alreadyScannedQrcodes)
 	}
 
 }
