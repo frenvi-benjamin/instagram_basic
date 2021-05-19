@@ -11,6 +11,7 @@ router.post("/clear", adminController.checkAuth, controller.clear)
 // all routes below require an active session. if no session is active the user will be redirected to the login page
 router.use(sharedController.checkForUserSession)
 
-router.post("/create", controller.create)
+// make sure qrcode is not already connected to a user 
+router.post("/create", controller.assureUnusedQrcode, controller.create)
 
 module.exports = router
