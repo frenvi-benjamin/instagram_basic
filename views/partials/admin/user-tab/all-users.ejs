@@ -1,3 +1,11 @@
+<% 
+users.sort((first, second) => {
+    if (first.nrOfScans > second.nrOfScans) return -1
+    else if (first.nrOfScans < second.nrOfScans) return 1
+    else return 0
+})
+%> 
+
 <div class="col">
     <% users.forEach(user => { %> 
         <div class="input-group mb-1">
@@ -8,7 +16,12 @@
                 <%= user.username %>
             </div>
             <div class="input-group-append">
-                <a class="btn btn-custom" target="_blank" onclick="getUser('<%= user.username %>')" + user.username %>">
+                <div class="input-group-text">
+                    Scans: <%= user.nrOfScans %>
+                </div>
+            </div>
+            <div class="input-group-append">
+                <a class="btn btn-custom" target="_blank" onclick="getUser('<%= user.username %>')">
                     <i class="fas fa-chevron-right"></i>
                 </a>
             </div>
