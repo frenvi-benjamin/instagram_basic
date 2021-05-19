@@ -133,8 +133,10 @@ function connectQrcodeToUser(qrID, instagramUserID) {
 
     if (!qrID || !instagramUserID) return Promise.reject()
     
-    QrCode.findByIdAndUpdate(qrID, { connectedUser: instagramUserID }, { upsert: true }).exec()
-    User.findOneAndUpdate({ instagramUserID: instagramUserID }, { $addToSet: { qrcodes: qrID }}).exec()
+    return Promise.all([
+        QrCode.findByIdAndUpdate(qrID, { connectedUser: instagramUserID }, { upsert: true }),
+        User.findOneAndUpdate({ instagramUserID: instagramUserID }, { $addToSet: { qrcodes: qrID }})
+    ])
 }
 
 function createQrcodes(n) {
