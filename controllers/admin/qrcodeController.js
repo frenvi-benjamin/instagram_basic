@@ -81,7 +81,6 @@ function del(req, res) {
 }
 
 function getFiles(req, res) {
-    console.log(req.body)
     switch (req.body.type) {
         case "all":
             QrCode.find({})

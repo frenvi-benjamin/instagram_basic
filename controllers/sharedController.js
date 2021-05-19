@@ -3,7 +3,6 @@ function checkForUserSession(req, res, next) {
         req.session.username
     ) { return next() }
     else {
-        console.log("no active user session")
         res.redirect("/")
     }
 }

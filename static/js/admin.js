@@ -61,7 +61,6 @@ function createQrcodes(nQrcodes) {
 }
 
 function clearConnections(username = undefined) {
-    console.log("clearConnection", username)
     fetch("/admin/connection/clear", {
         method: "POST",
         headers: {
@@ -78,7 +77,6 @@ function clearConnections(username = undefined) {
 }
 
 function deleteQrcodes(username = undefined) {
-    console.log("deleteQrcodes", username)
     fetch("/admin/qrcode/delete", {
         method: "POST",
         headers: {

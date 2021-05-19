@@ -6,7 +6,6 @@ function checkAuth(req, res, next) {
         return next()
     }
     else {
-        console.log("not an admin user")
         return res.render("admin-login")
     }
 }

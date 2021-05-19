@@ -38,11 +38,9 @@ function assureUnusedQrcode(req, res, next) {
     QrCode.findById(req.body.qrID)
     .then(qrcode => {
         if (qrcode.connectedUser) {
-            console.log("qrcode already registered")
             return res.sendStatus(451)
         }
         else {
-            console.log("qrcode unregistered")
             return next()
         }
     })
