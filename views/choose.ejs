@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <%- include("./partials/head", { title: "Post wählen" }) %>
+    <link rel="stylesheet" href="/css/choose.css">
+    <script src="/js/choose.js"></script>
+</head>
+<body>
+    <%- include("./partials/header") %>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        Wählen Sie den Post, den wir promoten sollen aus.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <% media.forEach(post => { %>
+                <div class="col my-1 mx-auto">
+                    <img src="<%= post.media_url %>" id="<%= post.id %>" onclick="selectPost('<%= post.id %>')">
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</body>
+</html>

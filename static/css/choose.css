@@ -1,0 +1,24 @@
+.form-check>.row {
+    position: relative;
+}
+
+.form-check>.row>input {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+img {
+    width: 200px;
+    height: 200px;
+}
+
+img:hover {
+    cursor: pointer;
+}
+
+.selected {
+    border: 3px solid #A2D208!important
+}
