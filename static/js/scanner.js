@@ -34,7 +34,6 @@ function onQrScan(result) {
 				"Content-Type": "application/json"
 			},
 			body: JSON.stringify({
-				"instagramUserID": instagramUserID,
 				"qrID": qrID
 			}),
 		})
