@@ -4,28 +4,12 @@
 <head>
     <%- include("./partials/head", {title: "Admin" }) %>
     <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/admin.js"></script>
 </head>
 
 <body>
     <%- include("./partials/header") %>
 
-    <script>
-        addEventListener("DOMContentLoaded", () => {
-            const hash = location.hash
-            if (hash && (
-                hash == "#user" ||
-                hash == "#create-qrcode" ||
-                hash == "#edit-qrcode" ||
-                hash == "#view-qrcode" ||
-                hash == "#delete-qrcode"
-            )) {
-                const id = hash.slice(1) + "-tab"
-                const button = document.getElementById(id)
-                button.click()
-            }
-        })
-
-    </script>
     <div class="container-fluid">
         <div class="card">
             <div class="card-header border-bottom-0 pb-0">

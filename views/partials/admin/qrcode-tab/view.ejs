@@ -13,39 +13,3 @@
 <div class="row" id="view-row">
 
 </div>
-
-<script>
-    function getQrcodes(type) {
-        switch (type) {
-            case "all":
-                document.getElementById("refresh-get-all").hidden = false
-                document.getElementById("refresh-get-unused").hidden = true
-                break;
-        
-            case "unused":
-                document.getElementById("refresh-get-unused").hidden = false
-                document.getElementById("refresh-get-all").hidden = true
-                break;
-        }
-        fetch("/admin/qrcode/getFiles", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                "type": type
-            }),
-        })
-        .then(response => response.json())
-        .then(files => {
-            const row = document.getElementById("view-row")
-            row.innerHTML = ""
-            files.forEach(file => {
-                const col = document.createElement("div")
-                col.classList.add("col")
-                col.innerHTML = file.content
-                row.append(col)
-            })
-        })
-    }
-</script>

@@ -6,9 +6,6 @@
                 <div class="input-group-text">@</div>
             </div>
             <input type="text" class="form-control" id="search-user-input" placeholder="username" name="username">
-            <script>
-                document.getElementById("search-user-input").onkeyup = (e) => { if (e.key === "Enter") { getUser(document.getElementById("search-user-input").value) } }
-            </script>
             <div class="input-group-append">
                 <button class="btn btn-custom btn-outline-secondary"
                     onclick="getUser()">Alle User</button>
@@ -20,35 +17,3 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    function getUser(username = undefined) {
-        fetch("/admin/user/get", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                "username": username
-            }),
-        })
-        .then(response => response.text())
-        .then(text => {
-            var userRow
-            if (!document.getElementById("userRow")) {
-                userRow = document.createElement("div")
-                userRow.id = "userRow"
-                userRow.classList.add("row")
-            }
-            else {
-                userRow = document.getElementById("userRow")
-            }
-
-            userRow.innerHTML = text
-            document.getElementById("search-row").after(userRow)
-        })
-    }
-    // get all users when page is loaded the first time
-    getUser()
-</script>
