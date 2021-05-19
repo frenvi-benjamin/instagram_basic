@@ -3,9 +3,11 @@
         <label>Bereits erstellte QR-Codes anzeigen</label>
         <br>
         <div class="btn-group">
-            <button class="btn btn-custom" onclick="getQrcodes('all')">Alle</button>
-            <button class="btn btn-custom" onclick="getQrcodes('unused')">Unregistrierte</button>
+            <button id="btn-get-all" class="btn btn-custom" onclick="getQrcodes('all')">Alle</button>
+            <button id="btn-get-unused" class="btn btn-custom" onclick="getQrcodes('unused')">Unregistrierte</button>
         </div>
+        <button hidden id="refresh-get-all" class="btn btn-custom"><i class="fas fa-sync-alt fa-flip-horizontal" onclick="document.getElementById('btn-get-all').click()"></i></button>
+        <button hidden id="refresh-get-unused" class="btn btn-custom"><i class="fas fa-sync-alt fa-flip-horizontal" onclick="document.getElementById('btn-get-unused').click()"></i></button>
     </div>
 </div>
 <div class="row" id="view-row">
@@ -14,6 +16,17 @@
 
 <script>
     function getQrcodes(type) {
+        switch (type) {
+            case "all":
+                document.getElementById("refresh-get-all").hidden = false
+                document.getElementById("refresh-get-unused").hidden = true
+                break;
+        
+            case "unused":
+                document.getElementById("refresh-get-unused").hidden = false
+                document.getElementById("refresh-get-all").hidden = true
+                break;
+        }
         fetch("/admin/qrcode/getFiles", {
             method: "POST",
             headers: {
