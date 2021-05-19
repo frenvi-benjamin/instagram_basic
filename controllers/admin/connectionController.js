@@ -50,6 +50,7 @@ function assureUnusedQrcode(req, res, next) {
 
 function create(req, res) {
     helper.connectQrcodeToUser(req.body.qrID, req.session.instagramUserID)
+    .then(res.sendStatus(200))
 }
 
 module.exports = { clear, create, assureUnusedQrcode }
