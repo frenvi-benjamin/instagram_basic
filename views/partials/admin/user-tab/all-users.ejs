@@ -10,15 +10,10 @@ users.sort((first, second) => {
     <% users.forEach(user => { %> 
         <div class="input-group mb-1">
             <div class="input-group-prepend fixed-width">
-                <div class="input-group-text fixed-width">Username</div>
+                <div class="input-group-text fixed-width"><%= user.username %> </div>
             </div>
             <div class="form-control text-right username">
-                <%= user.username %>
-            </div>
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    Scans: <%= user.nrOfScans %>
-                </div>
+                <%= user.nrOfScans %>
             </div>
             <div class="input-group-append">
                 <a class="btn btn-custom" target="_blank" onclick="getUser('<%= user.username %>')">
