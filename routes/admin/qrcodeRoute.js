@@ -11,4 +11,6 @@ router.post("/download", controller.download)
 
 router.post("/delete", controller.del)
 
+router.post("/getFiles", controller.getFiles)
+
 module.exports = router

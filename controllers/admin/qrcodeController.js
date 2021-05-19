@@ -3,6 +3,7 @@ const ejs = require("ejs")
 const QRCode = require("qrcode-svg")
 
 const helper = require("../../modules/helper")
+const QrCode = require("../../models/qrcodeModel")
 
 function create(req, res) {
     const n = req.body.nQrcodes
@@ -40,7 +41,7 @@ function createQrcodeFiles(qrcodes) {
 function download(req, res) {
     let files = req.body.files || createQrcodeFiles(req.body.qrcodes)
 
-    if (typeof files =="string") {
+    if (typeof files == "string") {
         files = JSON.parse(files)
     }
 
@@ -79,4 +80,18 @@ function del(req, res) {
     }
 }
 
-module.exports = { create, download, del }
+function getFiles(req, res) {
+    console.log(req.body)
+    switch (req.body.type) {
+        case "all":
+            QrCode.find({})
+            .then(qrcodes => res.send(createQrcodeFiles(qrcodes)))
+            break;
+        case "unused":
+            QrCode.find({ connectedUser: undefined })
+            .then(qrcodes => res.send(createQrcodeFiles(qrcodes)))
+            break;
+    }
+} 
+
+module.exports = { create, download, del, getFiles }

@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col">
+        <label>Bereits erstellte QR-Codes anzeigen</label>
+        <br>
+        <div class="btn-group">
+            <button class="btn btn-custom" onclick="getQrcodes('all')">Alle</button>
+            <button class="btn btn-custom" onclick="getQrcodes('unused')">Unregistrierte</button>
+        </div>
+    </div>
+</div>
+<div class="row" id="view-row">
+
+</div>
+
+<script>
+    function getQrcodes(type) {
+        fetch("/admin/qrcode/getFiles", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "type": type
+            }),
+        })
+        .then(response => response.json())
+        .then(files => {
+            const row = document.getElementById("view-row")
+            row.innerHTML = ""
+            files.forEach(file => {
+                const col = document.createElement("div")
+                col.classList.add("col")
+                col.innerHTML = file.content
+                row.append(col)
+            })
+        })
+    }
+</script>
