@@ -15,6 +15,7 @@ const userSchema = new Schema({
         ref: "QrCode"
     }],
     nrOfScans: Number,
+    promotedPost: String,
 }, { timestamps: true })
 
 const User = mongoose.model("User", userSchema)

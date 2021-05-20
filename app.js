@@ -88,4 +88,7 @@ app.use("/collab", require("./routes/collabRoute"))
 //scanner
 app.use("/scanner", require("./routes/scannerRoute"))
 
+//choose
+app.use("/choose", require("./routes/chooseRoute"))
+
 app.use(require("./routes/404Route"))

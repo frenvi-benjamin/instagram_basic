@@ -16,7 +16,8 @@ function render (req, res) {
     .then(([partnerInstagram, eatleryInstagram]) => {
         res.render("collab", { partnerInstagram: partnerInstagram, eatleryInstagram, eatleryInstagram, username: req.params.username })
     })
-    .catch(() => {
+    .catch((err) => {
+        console.log(err)
         res.render("no-permissions")
     })
 }

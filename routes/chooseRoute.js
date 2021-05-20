@@ -4,7 +4,7 @@ const router = express.Router()
 const controller = require("../controllers/chooseController")
 const sharedController = require("../controllers/sharedController")
 
-// router.use(sharedController.checkForUserSession)
+router.use(sharedController.checkForUserSession)
 
 router.get("/", controller.render)
 

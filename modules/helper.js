@@ -14,6 +14,12 @@ const oembedURL = "https://graph.facebook.com/v10.0/instagram_oembed"
 
 // INSTAGRAM
 
+function getPostPermalink(mediaID, accessToken) {
+    return fetch(`https://graph.instagram.com/${mediaID}?fields=permalink&access_token=${accessToken}`)
+    .then(response => response.json())
+    .then(body => body.permalink)
+}
+
 function getUsername(accessToken) {
 
     if (!accessToken) return Promise.reject()
@@ -23,18 +29,13 @@ function getUsername(accessToken) {
     .then(response => {return response.username})
 }
 
-function getShortcodeForLatestPost(accessToken) {
+function getLatestPost(accessToken) {
 
     if (!accessToken) return Promise.reject()
 
     return fetch(mediaURL + `?fields=permalink&access_token=${accessToken}`)
     .then(res => res.json())
-    .then(body => {
-        const link = body.data[0].permalink
-        // find shortcode
-        const pos = link.search("/p/") + 3
-        return link.slice(pos, -1)
-    })
+    .then(body => body.data[0].permalink)
 }
 
 function getID(accessToken) {
@@ -50,11 +51,24 @@ function getOembed(username) {
 
     if (!username) return Promise.reject()
 
+    
     return getUser(username)
-    .then(user => getShortcodeForLatestPost(user.accessToken))
-    .then(shortcode => fetch(oembedURL + `?url=https://www.instagram.com/p/${shortcode}&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`))
-    .then(response => response.json())
-    .then(body => body.html)
+    .then(user => {
+        console.log(JSON.stringify(user.promotedPost))
+        if (user.promotedPost) {
+            return fetch(oembedURL + `?url=${user.promotedPost}&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`)
+            .then(response => response.json())
+            .then(body => body.html)
+        }
+        else {
+            return fetch(mediaURL + `?fields=permalink&access_token=${user.accessToken}`)
+            .then(response => response.json())
+            .then(body => fetch(oembedURL +`?url=${body.data[0].permalink}&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`))
+            .then(response => response.json())
+            .then(body => body.html)
+        }
+    })
+    
 }
 
 // DATABASE
@@ -122,10 +136,10 @@ function createUserFromAccessToken(accessToken) {
     return Promise.all([
         getUsername(accessToken),
         getID(accessToken),
-        getShortcodeForLatestPost(accessToken),
+        getLatestPost(accessToken),
     ])
-    .then(([username, id, shortcode]) => {
-        return User.findOneAndUpdate({ instagramUserID: id }, { username: username, accessToken: accessToken, shortcode: shortcode, qrcodes: [], nrOfScans: 0 }, { upsert: true })
+    .then(([username, id, promotedPost]) => {
+        return User.findOneAndUpdate({ instagramUserID: id }, { username: username, accessToken: accessToken, promotedPost: promotedPost, qrcodes: [], nrOfScans: 0 }, { upsert: true })
     })
 }
 
@@ -172,16 +186,6 @@ function getUser(username = undefined) {
 
 }
 
-function updateShortcode(accessToken) {
-
-    if (!accessToken) return Promise.reject()
-
-    return getShortcodeForLatestPost(accessToken)
-    .then(shortcode => {
-        return User.findOneAndUpdate({ accessToken: accessToken }, { shortcode: shortcode }, { upsert: true }).exec()
-    })
-}
-
 function deleteUser(username, deleteQrcodes = false) {
 
     if(!username) return Promise.reject()
@@ -221,11 +225,11 @@ module.exports = {
     createQrcodes,
     incrementNrOfScans,
     getUser,
-    updateShortcode,
     deleteUser,
-    getShortcodeForLatestPost,
+    getLatestPost,
     getUsername,
     getID,
     getOembed,
     refreshAccessTokens,
+    getPostPermalink,
 }

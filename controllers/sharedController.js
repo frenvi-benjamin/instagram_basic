@@ -7,4 +7,13 @@ function checkForUserSession(req, res, next) {
     }
 }
 
-module.exports = { checkForUserSession }
+function checkAdminAuth(req, res, next) {
+    if (req.session.admin === true) {
+        return next()
+    }
+    else {
+        return res.render("admin-login")
+    }
+}
+
+module.exports = { checkForUserSession, checkAdminAuth }

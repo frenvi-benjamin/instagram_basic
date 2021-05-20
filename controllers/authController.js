@@ -56,7 +56,7 @@ function auth(req, res) {
             req.session.username = user.username
             req.session.instagramUserID = user.instagramUserID
 
-            res.redirect("/scanner")
+            res.redirect("/choose")
         })
     })
 }

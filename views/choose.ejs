@@ -12,18 +12,74 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        Wählen Sie den Post, den wir promoten sollen aus.
+                        Sie können nun einen ihrer Instagram-Posts wählen, der den Kunden nach dem Scannen des QR-Codes angezeigt werden soll.
+                        Alternativ haben Sie die Wahl immen den aktuellsten Instagram-Post zu promoten.
+                        <br><br>
+                        <label for="static">
+                            <input type="radio" name="radio" id="static">
+                            Ich möchte den von mir ausgewählten Post promoten
+                        </label>
+                        <br>
+                        <label for="dynamic">
+                            <input type="radio" name="radio" id="dynamic" checked onclick="removeAllSelections()">
+                            Ich möchte immer den aktuellsten Post promoten
+                        </label>
+                        <br><br>
+                        <button class="btn btn-custom" onclick="confirmChoice()">
+                            Auswahl bestätigen
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <% media.forEach(post => { %>
-                <div class="col my-1 mx-auto">
-                    <img src="<%= post.media_url %>" id="<%= post.id %>" onclick="selectPost('<%= post.id %>')">
+                <div class="col my-1 img-container">
+                    <img class="preview-img" src="<%= post.media_url %>" id="<%= post.id %>" onclick="selectPost('<%= post.id %>')">
                 </div>
             <% }) %>
         </div>
     </div>
+
+    <button id="fixed" class="btn btn-custom" onclick="confirmChoice()">
+        Auswahl bestätigen
+    </button>
+
+    <div class="modal fade" id="noPostSelectedModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="noPostSelectedModal-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="noPostSelectedModal-title">Kein Post gewählt</h4>
+            </div>
+            <div class="modal-body">
+                <p>Sie haben keinen Post ausgewählt. Ist das ein Fehler oder wollen Sie immer den neusten Post Ihrer Instagram-Seite anzeigen lassen?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-custom full-width" data-dismiss="modal">Ich möchte einen Post wählen</button>
+              <button type="button" class="btn btn-custom full-width" data-dismiss="modal" onclick="document.getElementById('dynamic').click(); confirmChoice()">Ich möchte immer den neusten Post</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Wahl bestätigen</h4>
+                </div>
+                <div class="modal-body img-container">
+                    Sie haben diesen Post für die Promotion gewählt. Stimmt das so?
+                    <br><br>
+                    <img id="final-img" class="full-width" src="<%= media[0].media_url %>">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-custom-warning full-width" data-dismiss="modal">Meine Wahl ändern</button>
+                    <button type="submit" class="btn btn-custom full-width" data-dismiss="modal" onclick="sendConfirmation()">Meine Wahl bestätigen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
