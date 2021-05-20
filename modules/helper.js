@@ -177,15 +177,12 @@ function getUser(username = undefined) {
 }
 
 function deleteUser(username, deleteQrcodes = false) {
-
     if(!username) return Promise.reject()
 
     if (deleteQrcodes) {
         User.findOne({ username: username})
         .then(user => {
-            user.qrcodes.forEach(qrcode => {
-                QrCode.findByIdAndDelete(qrcode).exec()
-            });
+            QrCode.deleteMany({ connectedUser: user.instagramUserID }).exec()
         })
     }
 
