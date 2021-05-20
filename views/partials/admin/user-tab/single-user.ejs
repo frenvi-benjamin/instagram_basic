@@ -18,10 +18,14 @@
             <div class="input-group-text fixed-width">Promoted Post</div>
         </div>
         <div class="form-control text-right">
-            <%= "https://instagram.com/p/" + user.shortcode %>
-        </div>
+            <% if (user.promotedPost) { %>
+                <%= user.promotedPost %>
+            <% } else { %>
+                Dynamisch der neuste Post auf Instagram
+            <% } %>
+            </div>
         <div class="input-group-append">
-            <a class="btn btn-custom" target="_blank" href="<%= " https://www.instagram.com/p/" +user.shortcode %>">
+            <a class="btn btn-custom" target="_blank" href="<% if (user.promotedPost) { %><%= user.promotedPost %><% } else { %>https://www.instagram.com/<%= user.username %><% } %>">
                 <i class="fas fa-chevron-right"></i>
             </a>
         </div>
