@@ -29,15 +29,6 @@ function getUsername(accessToken) {
     .then(response => {return response.username})
 }
 
-function getLatestPost(accessToken) {
-
-    if (!accessToken) return Promise.reject()
-
-    return fetch(mediaURL + `?fields=permalink&access_token=${accessToken}`)
-    .then(res => res.json())
-    .then(body => body.data[0].permalink)
-}
-
 function getID(accessToken) {
 
     if (!accessToken) return Promise.reject()
@@ -136,10 +127,9 @@ function createUserFromAccessToken(accessToken) {
     return Promise.all([
         getUsername(accessToken),
         getID(accessToken),
-        getLatestPost(accessToken),
     ])
-    .then(([username, id, promotedPost]) => {
-        return User.findOneAndUpdate({ instagramUserID: id }, { username: username, accessToken: accessToken, promotedPost: promotedPost, qrcodes: [], nrOfScans: 0 }, { upsert: true })
+    .then(([username, id]) => {
+        return User.findOneAndUpdate({ instagramUserID: id }, { username: username, accessToken: accessToken, qrcodes: [], nrOfScans: 0 }, { upsert: true })
     })
 }
 
@@ -226,7 +216,6 @@ module.exports = {
     incrementNrOfScans,
     getUser,
     deleteUser,
-    getLatestPost,
     getUsername,
     getID,
     getOembed,
