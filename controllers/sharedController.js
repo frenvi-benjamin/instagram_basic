@@ -4,9 +4,14 @@ const fetch = require("node-fetch")
 const helper = require("../modules/helper")
 
 function checkForUserSession(req, res, next) {
-    if (
-        req.session.username
-    ) { return next() }
+    if (req.session.username) {
+        res.locals.user = {
+            username: req.session.username,
+            accessToken: req.session.accessToken,
+            instagramUserID: req.session.instagramUserID,
+        }
+        return next()
+    }
     else {
         res.render("login", { instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + req.originalUrl })
     }

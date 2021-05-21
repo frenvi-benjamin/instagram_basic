@@ -8,4 +8,9 @@
                 src="/img/eatlery-logo.png" alt="EATlery Logo">
         </a>
     </div>
+    <div class="row">
+        <% try { if (user) { %>
+            <button role="text" class="mx-auto my-2 btn btn-secondary" disabled><%= user.username %></button>
+        <% }} catch {} %>
+    </div>
 </div>
