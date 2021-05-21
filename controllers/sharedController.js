@@ -1,9 +1,11 @@
+require("dotenv").config()
+
 function checkForUserSession(req, res, next) {
     if (
         req.session.username
     ) { return next() }
     else {
-        res.redirect("/")
+        res.render("login", { instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + req.baseUrl })
     }
 }
 
