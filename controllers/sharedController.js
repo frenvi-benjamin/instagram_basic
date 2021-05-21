@@ -5,7 +5,7 @@ function checkForUserSession(req, res, next) {
         req.session.username
     ) { return next() }
     else {
-        res.render("login", { instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + "/auth" })
+        res.render("login", { instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + req.originalUrl })
     }
 }
 
