@@ -16,7 +16,7 @@ function checkForActiveQrcode (req, res, next) {
 }
 
 function renderIndex (req, res) {
-    res.render("index", { instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + "/auth" })
+    res.render("index")
 }
 
 module.exports = { renderIndex, checkForActiveQrcode }

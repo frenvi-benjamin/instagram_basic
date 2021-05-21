@@ -73,14 +73,15 @@ mongoose.connect(process.env.MONGODB_CONNECTION_URL, { useNewUrlParser: true, us
 helper.refreshAccessTokens()
 setInterval(helper.refreshAccessTokens, 2147483647)
 
+const sharedController = require("./controllers/sharedController")
+
+app.use(sharedController.auth)
+
 // index
 app.use("/", require("./routes/indexRoute"))
 
 // admin
 app.use("/admin", require("./routes/adminRoute"))
-
-// auth
-app.use("/auth", require("./routes/authRoute"))
 
 // collab
 app.use("/collab", require("./routes/collabRoute"))
