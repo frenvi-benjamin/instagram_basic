@@ -22,6 +22,7 @@ function checkAdminAuth(req, res, next) {
 }
 
 function auth(req, res, next) {
+    console.log(req.query)
     if (req.query.error == "access_denied") return res.render("request-permissions")
     if (!req.query.code) return next()
 
