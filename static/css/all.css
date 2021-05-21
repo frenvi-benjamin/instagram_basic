@@ -33,3 +33,7 @@
     background-color: white;
     border-color: #FFC107;
 }
+
+.full-width {
+    width: 100%;
+}
