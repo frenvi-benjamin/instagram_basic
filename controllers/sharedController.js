@@ -1,5 +1,6 @@
 require("dotenv").config()
 const FormData = require("form-data")
+const fetch = require("node-fetch")
 
 function checkForUserSession(req, res, next) {
     if (
