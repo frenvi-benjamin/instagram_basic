@@ -26,7 +26,8 @@ function auth(req, res, next) {
     if (req.query.error == "access_denied") {
         return res.render("request-permissions", {
             instagramAppID: process.env.INSTAGRAM_APP_ID,
-            oauthRedirectURI: process.env.HOST + req.originalUrl })
+            oauthRedirectURI: process.env.HOST + req.originalUrl
+        })
     }
     if (!req.query.code) return next()
 
@@ -52,7 +53,10 @@ function auth(req, res, next) {
         .then(response => response.json())
         .then(body => {
             if (body.error) {
-                return res.render("request-permissions")
+                return res.render("request-permissions", {
+                    instagramAppID: process.env.INSTAGRAM_APP_ID,
+                    oauthRedirectURI: process.env.HOST + req.originalUrl
+                })
             }
             else {
                 const url = `https://graph.instagram.com/access_token?` +
