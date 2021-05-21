@@ -23,7 +23,11 @@ function checkAdminAuth(req, res, next) {
 
 function auth(req, res, next) {
     console.log(req.query)
-    if (req.query.error == "access_denied") return res.render("request-permissions")
+    if (req.query.error == "access_denied") {
+        return res.render("request-permissions", {
+            instagramAppID: process.env.INSTAGRAM_APP_ID,
+            oauthRedirectURI: process.env.HOST + req.originalUrl })
+    }
     if (!req.query.code) return next()
 
     var formdata = new FormData()
