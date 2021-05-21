@@ -9,7 +9,6 @@ const userSchema = new Schema({
     },
     accessToken: String,
     username: String,
-    shortcode: String,
     qrcodes: [{
         type: Schema.Types.ObjectId,
         ref: "QrCode"
