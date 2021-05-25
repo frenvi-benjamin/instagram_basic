@@ -31,6 +31,21 @@
     width: 200px;
 }
 
+.row {
+    justify-content: space-around;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#final-img {
+    max-height: 49vh;
+    max-width: 100%;
+}
+
 #fixed {
     position: fixed;
     bottom: 20px;

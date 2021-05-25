@@ -34,7 +34,7 @@
         </div>
         <div class="row">
             <% media.forEach(post => { %>
-                <div class="col my-1 img-container">
+                <div class="m-1 img-container">
                     <img class="preview-img" src="<%= post.media_url %>" id="<%= post.id %>" onclick="selectPost('<%= post.id %>')">
                 </div>
             <% }) %>
@@ -68,10 +68,10 @@
                 <div class="modal-header">
                     <h4 class="modal-title">Wahl bestätigen</h4>
                 </div>
-                <div class="modal-body img-container">
+                <div class="modal-body">
                     Sie haben diesen Post für die Promotion gewählt. Stimmt das so?
                     <br><br>
-                    <img id="final-img" class="full-width" src="<%= media[0].media_url %>">
+                    <img id="final-img" src="<%= media[0].media_url %>">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-custom-warning full-width" data-dismiss="modal">Meine Wahl ändern</button>
