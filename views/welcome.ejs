@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <%- include("./partials/head", { title: "Willkommen" }) %> 
+</head>
+<body>
+    <%- include("./partials/header") %>
+    <div class="container pt-3">
+        <div class="row">
+            <div class="col">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Willkommen zum exklusiven EATlery Partner-Programm</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            Wir bieten Ihnen und Ihrem Unternehmen die Chance gemeinsam mit uns Ihre Kundenbasis zu erweitern.
+                            Mit minimalem Aufwand ihrerseits helfen wir Ihnen, Ihre Social-Media-Känale bei Ihren Kunden zu bewerben.
+                        </p>
+                        <p>
+                            Und so funktioniert es:
+                        </p>
+                        <h5>1. Anmelden bei Instagram</h5>
+                        <p>
+                            Um Ihren Instagram-Kanal promoten zu können, brauchen wir von Ihnen die Berechtigung Ihre
+                            Instagram-Medien einzusehen. Keine Sorge wir sehen nur, was auch Ihre Follower sehen!
+                        </p>
+                        <h5>2. Instagram-Post wählen</h5>
+                        <p>
+                            Nun haben Sie die Wahl. Welchen Ihrer Instagram-Posts wollen Sie auf unserer gemeinsamen Kampagne promoten?
+                            Einfach einen Post anklicken und weiter geht's.
+                        </p>
+                        <img class="mx-5" src="/img/choose_post.svg">
+                        <br>
+                        <br>
+                        <h5>3. QR-Codes registrieren</h5>
+                        <p>
+                            Mit dem QR-Scanner unserer Webseite scannen Sie einmal jeden QR-Code, den Sie geliefert bekommen haben.
+                            Er ist nun auf Ihren Instagram-Account registriert und führt ab sofort auf unsere gemeinsame Kampagnen-Webseite.
+                        </p>
+                        <img class="mx-4" src="/img/small_qrscan_explanation.svg">
+                        <br>
+                        <br>
+                        <h5>Und fertig!</h5>
+                        <p>
+                            Schon können Sie die QR-Code-Aufkleber wie gewünscht verteilen.
+                        </p>
+                        <p>Interesse? Dann starten Sie jetzt mit dem ersten Schritt und melden Sie sich per Instagram an.</p>
+                        <%- include("./partials/instagram-button")  %> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
