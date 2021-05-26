@@ -3,10 +3,11 @@ QrScanner.WORKER_PATH = "/qr-scanner/qr-scanner-worker.min.js"
 
 
 const video = document.getElementById("qr-video")
-
-const qrStatus = document.getElementsByClassName("qr-status")
+const qrCounter = document.getElementById("qr-counter")
+const scanResponse = document.getElementById("scan-response")
 
 const alreadyScannedQrcodes = []
+var successfulScans = 0
 function alreadyScanned(qrID) {
 	return alreadyScannedQrcodes.indexOf(qrID) != -1
 }
@@ -16,17 +17,8 @@ function onQrScan(result) {
 	const pos = result.search("qr=") + 3
 	const qrID = result.slice(pos)
 
-	// check if already scanned this session
-	if (alreadyScanned(qrID)) {
-		for (let i = 0; i < qrStatus.length; i++) {
-			const status = qrStatus[i];
-			status.innerHTML = "QR-Code gescannt!"
-			status.style.backgroundColor = "#A2D208"
-			status.style.color = "white"
-		}
-	}
 	// if not scanned, connect qrcode to user
-	else {
+	if (!alreadyScanned(qrID)) {
 		fetch("/admin/connection/create", {
 			method: "POST",
 			headers: {
@@ -36,13 +28,63 @@ function onQrScan(result) {
 				"qrID": qrID
 			}),
 		})
+		.then(response => {
+			if (response.status == 200) scanSuccessful()
+			else if (response.status == 451) scanUnsuccessful()
+		})
 		alreadyScannedQrcodes.push(qrID)
 	}
+}
 
-	if (!alreadyScanned(qrID)) {
-		alreadyScannedQrcodes.push(qrID)
+function scanSuccessful() {
+	successfulScans++
+	qrCounter.innerHTML = successfulScans
+	showResponse(true, "QR-Code gescannt", 2000)
+}
+
+function scanUnsuccessful() {
+	showResponse(false, "QR-Code bereits registriert", 2500)
+}
+
+function showResponse(good, message, time) {
+	scanResponse.innerHTML = message
+	if (good) {
+		scanResponse.style.color = "#A2D208"
+		scanResponse.style.borderColor = "#A2D208"
+	}
+	else {
+		scanResponse.style.color = "#DC3545"
+		scanResponse.style.borderColor = "#DC3545"
 	}
 
+	fadeIn(scanResponse)
+	setTimeout(() => fadeOut(scanResponse), time)
+	
+
+}
+
+function fadeIn(elem) {
+	var opacity = 0
+	const id = setInterval(() => {
+		if (opacity >= 1) clearInterval(id)
+		else {
+			opacity += .1
+			elem.style.opacity = opacity
+			console.log("var", opacity)
+			console.log("true", elem.style.opacity)
+		}
+	}, 15);
+}
+
+function fadeOut(elem) {
+	var opacity = 1
+	const id = setInterval(() => {
+		if (opacity <= 0) clearInterval(id)
+		else {
+			opacity -= .1
+			elem.style.opacity = opacity
+		}
+	}, 15);
 }
 
 // ####### Web Cam Scanning #######
@@ -50,14 +92,7 @@ function onQrScan(result) {
 const scanner = new QrScanner(
 	video,
 	(result) => onQrScan(result),
-	(error) => {
-		for (let i = 0; i < qrStatus.length; i++) {
-			const status = qrStatus[i];
-			status.innerHTML = "Kein QR-Code gefunden"
-			status.style.backgroundColor = "white"
-			status.style.color = "black"
-		}
-	}
+	() => {}
 )
 
 scanner.start()

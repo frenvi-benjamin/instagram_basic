@@ -14,24 +14,15 @@
 	<%- include("./partials/header") %>
 
 		<div class="container-fluid">
-
-			<div class="row">
-				<div class="col">
-					<div class="mx-auto p-0 max-width-500px">
-						<p class="h3 text-center p-2 my-2 card qr-status"></p>
-					</div>
-				</div>
-			</div>
-
 			<div class="row" id="scanner-row">
-				<div class="col-3 pr-0 horizontal">
-					<p class="h3 text-center p-2 my-2 card qr-status"></p>
-				</div>
 				<div class="col">
 					<div class="mx-auto max-width-500px" id="scanner">
 						<i id="info" class="far fa-question-circle rounded p-1 m-2" role="button" onclick="modal.show()"></i>
+						<h5 id="qr-counter" class="rounded py-1 m-2">0</h5>
+						<div id="scan-response" class="card mx-auto p-2"></div>
 					</div>
 				</div>
+				<!-- only visible when phone is flipped horizontal -->
 				<div class="col-3 pl-0 horizontal">
 					<a id="ready-button" href="/collab/<%= username %>">
 						<p id="ready-card" class="h5 text-center p-2 my-2 card">

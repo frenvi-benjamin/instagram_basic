@@ -17,6 +17,29 @@
     box-sizing: unset;
 }
 
+#qr-counter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: #A2D208;
+    color: white;
+    box-sizing: unset;
+    padding-left: 10px!important;
+    padding-right: 10px!important;
+}
+
+#scan-response {
+    opacity: 0;
+    position: absolute;
+    text-align: center;
+    bottom: .5rem;
+    left: .5rem;
+    right: .5rem;
+    z-index: 1;
+    box-sizing: unset;
+}
+
 #scanner {
     display: block;
     width: 100%;
