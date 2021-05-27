@@ -34,6 +34,30 @@
     border-color: #FFC107;
 }
 
+.btn-insta {
+    background: linear-gradient(to right bottom, #fbad50, #fa9e4c, #f88e4a, #f57e4b, #f16e4c, #f15f5a, #ee5169, #e64678, #d74596, #bb4fb3, #905cc9, #4c68d7);
+}
+
+.btn-insta:active {
+    background: #fbad50!important;
+}
+
+.btn-insta:focus {
+    background: #fbad50!important;
+}
+
+.btn-insta>svg {
+    border: none!important;
+}
+
+.btn-insta>span {
+    color: white;
+}
+
+.btn-insta>span:hover {
+    color: rgba(250, 250, 250, 0.7);
+}
+
 .full-width {
     width: 100%;
 }
