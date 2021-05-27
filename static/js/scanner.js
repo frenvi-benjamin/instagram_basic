@@ -70,8 +70,6 @@ function fadeIn(elem) {
 		else {
 			opacity += .1
 			elem.style.opacity = opacity
-			console.log("var", opacity)
-			console.log("true", elem.style.opacity)
 		}
 	}, 15);
 }
