@@ -80,6 +80,9 @@ app.use(sharedController.auth)
 // index
 app.use("/", require("./routes/indexRoute"))
 
+// example
+app.use("/example", require("./routes/exampleRoute"))
+
 // admin
 app.use("/admin", require("./routes/adminRoute"))
 
