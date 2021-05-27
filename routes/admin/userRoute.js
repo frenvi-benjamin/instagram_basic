@@ -6,11 +6,8 @@ const sharedController = require("../../controllers/sharedController")
 
 router.use("/set", require("./user/setRoute"))
 
-// check for admin user
-router.use(sharedController.checkAdminAuth)
+router.post("/get", sharedController.checkAdminAuth, controller.get)
 
-router.post("/get", controller.get)
-
-router.post("/delete", controller.del)
+router.post("/delete", sharedController.checkAdminAuth, controller.del)
 
 module.exports = router

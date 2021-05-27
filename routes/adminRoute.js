@@ -17,15 +17,12 @@ router.use("/connection", require("./admin/connectionRoute"))
 // their promoted posts
 router.use("/user", require("./admin/userRoute"))
 
-// check for admin user
-router.use(sharedController.checkAdminAuth)
-
 //  root
-router.get("/", (req, res) => {
+router.get("/", sharedController.checkAdminAuth, (req, res) => {
     res.render("admin")
 })
 
 // qrcodes
-router.use("/qrcode", require("./admin/qrcodeRoute"))
+router.use("/qrcode", sharedController.checkAdminAuth, require("./admin/qrcodeRoute"))
 
 module.exports = router
