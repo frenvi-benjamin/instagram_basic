@@ -9,7 +9,7 @@ function checkForActiveQrcode (req, res, next) {
     .then(
         user => {
             helper.incrementNrOfScans(user.username)
-            res.redirect(`/collab/${user.username}`)
+            res.redirect(`/campaign/${user.username}`)
         },
         () => {return next()}
     )

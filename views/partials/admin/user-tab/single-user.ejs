@@ -33,13 +33,13 @@
 
     <div class="input-group mb-1">
         <div class="input-group-prepend fixed-width">
-            <div class="input-group-text fixed-width">Collaboration Website</div>
+            <div class="input-group-text fixed-width">Campaign Website</div>
         </div>
         <div class="form-control text-right">
-            <%= process.env.HOST + "/collab/" + user.username %>
+            <%= process.env.HOST + "/campaign/" + user.username %>
         </div>
         <div class="input-group-append">
-            <a class="btn btn-custom" target="_blank" href="<%= "/collab/" + user.username %>">
+            <a class="btn btn-custom" target="_blank" href="<%= "/campaign/" + user.username %>">
                 <i class="fas fa-chevron-right"></i>
             </a>
         </div>

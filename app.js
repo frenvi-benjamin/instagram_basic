@@ -86,8 +86,8 @@ app.use("/example", require("./routes/exampleRoute"))
 // admin
 app.use("/admin", require("./routes/adminRoute"))
 
-// collab
-app.use("/collab", require("./routes/collabRoute"))
+// campaign
+app.use("/campaign", require("./routes/campaignRoute"))
 
 //scanner
 app.use("/scanner", require("./routes/scannerRoute"))

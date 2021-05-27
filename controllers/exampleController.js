@@ -6,7 +6,7 @@ function renderExample(req, res) {
         helper.getOembed("eatleryforfuture")
     ])
     .then(([partnerInstagram, eatleryInstagram]) => {
-        res.render("collab", { partnerInstagram: partnerInstagram, eatleryInstagram, eatleryInstagram, username: "eisdiele_um_die_ecke" })
+        res.render("campaign", { partnerInstagram: partnerInstagram, eatleryInstagram, eatleryInstagram, username: "eisdiele_um_die_ecke" })
     })
     .catch((err) => {
         console.log(err)

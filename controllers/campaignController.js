@@ -14,7 +14,7 @@ function render (req, res) {
         helper.getOembed("eatleryforfuture")
     ])
     .then(([partnerInstagram, eatleryInstagram]) => {
-        res.render("collab", { partnerInstagram: partnerInstagram, eatleryInstagram, eatleryInstagram, username: req.params.username })
+        res.render("campaign", { partnerInstagram: partnerInstagram, eatleryInstagram, eatleryInstagram, username: req.params.username })
     })
     .catch((err) => {
         console.log(err)
@@ -22,8 +22,8 @@ function render (req, res) {
     })
 }
 
-function renderCollabPage (req, res) {
+function renderCampaignPage (req, res) {
     checkUserExistance(req, res, render)
 }
 
-module.exports = { renderCollabPage }
+module.exports = { renderCampaignPage }
