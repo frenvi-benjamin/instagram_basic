@@ -1,0 +1,17 @@
+.inline-img {
+    max-width: 60%;
+    max-height: 30vh;
+}
+
+.img-div {
+    text-align: center;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+}

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <%- include("./partials/head", { title: "Willkommen" }) %> 
+    <%- include("./partials/head", { title: "Willkommen" }) %>
+    <link rel="stylesheet" href="/css/welcome.css">
 </head>
 <body>
     <%- include("./partials/header") %>
@@ -15,32 +16,39 @@
                     <div class="card-body">
                         <p>
                             Wir bieten Ihnen und Ihrem Unternehmen die Chance gemeinsam mit uns Ihre Kundenbasis zu erweitern.
-                            Mit minimalem Aufwand ihrerseits helfen wir Ihnen, Ihre Social-Media-Känale bei Ihren Kunden zu bewerben.
+                            In nur 3 einfachen Schritten helfen wir Ihnen, Ihre Social-Media-Känale bei Ihren Kunden zu bewerben.
                         </p>
-                        <p>
-                            Und so funktioniert es:
-                        </p>
-                        <h5>1. Anmelden bei Instagram</h5>
+                        <ol>
+                            <a href="#step1">
+                                <b><li>Bei Instagram anmelden</li></b>
+                            </a><a href="#step2">
+                                <b><li>Instagram-Post wählen</li></b>
+                            </a><a href="#step3">
+                                <b><li>QR-Codes registrieren</li></b>
+                            </a>
+                        </ol>
+                        <p>Und schon kann's losgehen!</p>
+                        <h5 id="step1">1. Bei Instagram anmelden</h5>
                         <p>
                             Um Ihren Instagram-Kanal promoten zu können, brauchen wir von Ihnen die Berechtigung Ihre
                             Instagram-Medien einzusehen. Keine Sorge wir sehen nur, was auch Ihre Follower sehen!
                         </p>
-                        <h5>2. Instagram-Post wählen</h5>
+                        <h5 id="step2">2. Instagram-Post wählen</h5>
                         <p>
                             Nun haben Sie die Wahl. Welchen Ihrer Instagram-Posts wollen Sie auf unserer gemeinsamen Kampagne promoten?
                             Einfach einen Post anklicken und weiter geht's.
                         </p>
-                        <img class="mx-5" src="/img/choose_post.svg">
-                        <br>
-                        <br>
-                        <h5>3. QR-Codes registrieren</h5>
+                        <div class="img-div my-4">
+                            <img class="mx-auto inline-img" src="/img/choose_post.svg">
+                        </div>
+                        <h5 id="step3">3. QR-Codes registrieren</h5>
                         <p>
                             Mit dem QR-Scanner unserer Webseite scannen Sie einmal jeden QR-Code, den Sie geliefert bekommen haben.
                             Er ist nun auf Ihren Instagram-Account registriert und führt ab sofort auf unsere gemeinsame Kampagnen-Webseite.
                         </p>
-                        <img class="mx-4" src="/img/small_qrscan_explanation.svg">
-                        <br>
-                        <br>
+                        <div class="img-div my-4">
+                            <img class="mx-auto inline-img" src="/img/small_qrscan_explanation.svg">
+                        </div>
                         <h5>Und fertig!</h5>
                         <p>
                             Schon können Sie die QR-Code-Aufkleber wie gewünscht verteilen.
