@@ -36,6 +36,8 @@
 
 .btn-insta {
     background: linear-gradient(to right bottom, #fbad50, #fa9e4c, #f88e4a, #f57e4b, #f16e4c, #f15f5a, #ee5169, #e64678, #d74596, #bb4fb3, #905cc9, #4c68d7);
+    padding: 2px 0px 2px 5px;
+    border: none;
 }
 
 .btn-insta:active {
@@ -48,6 +50,7 @@
 
 .btn-insta>svg {
     border: none!important;
+    position: unset!important;
 }
 
 .btn-insta>span {
