@@ -13,7 +13,7 @@ function checkForUserSession(req, res, next) {
         return next()
     }
     else {
-        res.render("welcome", { instagramAppID: process.env.INSTAGRAM_APP_ID, oauthRedirectURI: process.env.HOST + "/choose" })
+        res.render("welcome")
     }
 }
 
@@ -29,7 +29,6 @@ function checkAdminAuth(req, res, next) {
 function auth(req, res, next) {
     if (req.query.error == "access_denied") {
         return res.render("request-permissions", {
-            instagramAppID: process.env.INSTAGRAM_APP_ID,
             oauthRedirectURI: process.env.HOST + req.originalUrl
         })
     }
@@ -57,10 +56,7 @@ function auth(req, res, next) {
         .then(response => response.json())
         .then(body => {
             if (body.error) {
-                return res.render("request-permissions", {
-                    instagramAppID: process.env.INSTAGRAM_APP_ID,
-                    oauthRedirectURI: process.env.HOST + req.originalUrl
-                })
+                return res.render("request-permissions", { oauthRedirectURI: process.env.HOST + req.originalUrl })
             }
             else {
                 const url = `https://graph.instagram.com/access_token?` +

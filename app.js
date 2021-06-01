@@ -46,7 +46,6 @@ app.use(
 
 // set view engine to ejs
 app.set("view engine", "ejs")
-const ejs = require("ejs")
 
 // set all paths
 app.use("/img", express.static(path.join(__dirname, "/static/img")))
@@ -70,8 +69,10 @@ mongoose.connect(process.env.MONGODB_CONNECTION_URL, { useNewUrlParser: true, us
 .catch((err) => console.log(err))
 
 // refresh tokens every 24.855 days (maximum)
-helper.refreshAccessTokens()
-setInterval(helper.refreshAccessTokens, 2147483647)
+// helper.refreshAccessTokens()
+// setInterval(helper.refreshAccessTokens, 2147483647)
+
+app.locals.env = process.env
 
 const sharedController = require("./controllers/sharedController")
 
@@ -94,5 +95,11 @@ app.use("/scanner", require("./routes/scannerRoute"))
 
 //choose
 app.use("/choose", require("./routes/chooseRoute"))
+
+//logout
+app.use("/logout", (req, res) => {
+    req.session.destroy()
+    res.render("logout")
+})
 
 app.use(require("./routes/404Route"))

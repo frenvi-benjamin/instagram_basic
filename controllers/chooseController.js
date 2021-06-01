@@ -8,10 +8,7 @@ function render(req, res) {
             res.render("choose", { media: body.data })
         }
         else {
-            res.render("request-permissions", {
-                instagramAppID: process.env.INSTAGRAM_APP_ID,
-                oauthRedirectURI: process.env.HOST + req.originalUrl
-            })
+            res.render("request-permissions", { oauthRedirectURI: process.env.HOST + req.originalUrl })
         }
     })
 }

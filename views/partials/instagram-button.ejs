@@ -1,4 +1,4 @@
-<a class="btn btn-block btn-social btn-insta" target="_self" role="button" href="https://api.instagram.com/oauth/authorize?client_id=<%= instagramAppID %>&redirect_uri=<%= oauthRedirectURI %>&scope=user_profile,user_media&response_type=code">
+<a class="btn btn-block btn-social btn-insta" target="_self" role="button" href="https://api.instagram.com/oauth/authorize?client_id=<%= env.INSTAGRAM_APP_ID %>&redirect_uri=<% try { %> <%= oauthRedirectURI %> <% } catch { %> </a> <%= env.HOST + "/choose" %> <% } %>&scope=user_profile,user_media&response_type=code">
     <svg class="mx-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 135 135" width="36" height="36" xmlns:xlink="http://www.w3.org/1999/xlink">
         <defs>
             <linearGradient id="b">
