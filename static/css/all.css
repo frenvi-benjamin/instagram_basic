@@ -61,6 +61,10 @@
     color: rgba(250, 250, 250, 0.7);
 }
 
+.navbar-item>.dropdown-item:active {
+    background-color: #A2D208;
+}
+
 .full-width {
     width: 100%;
 }
