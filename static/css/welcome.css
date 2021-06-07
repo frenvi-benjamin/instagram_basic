@@ -1,4 +1,9 @@
-.inline-img {
+.img-div>svg {
+    max-width: 60%;
+    max-height: 30vh;
+}
+
+.img-div>img {
     max-width: 60%;
     max-height: 30vh;
 }
@@ -14,4 +19,14 @@ a {
 a:hover {
     color: rgba(0, 0, 0, 0.5);
     text-decoration: none;
+}
+
+#scan-bars>rect {
+    animation: scan 2s ease-in-out infinite;
+}
+
+@keyframes scan {
+    100% {
+        transform: translateY(80%);
+    }
 }
