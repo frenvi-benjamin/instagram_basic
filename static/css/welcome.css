@@ -1,11 +1,10 @@
 .img-div>svg {
-    max-width: 60%;
-    max-height: 30vh;
+    max-height: 20vh;
 }
 
 .img-div>img {
     max-width: 60%;
-    max-height: 30vh;
+    max-height: 20vh;
 }
 
 .img-div {
@@ -24,15 +23,15 @@ a:hover {
 /* small_qrscan_explanation animation */
 
 #scan-bars>rect {
-    animation: scan-bars 5s ease-in-out infinite;
+    animation: scan-bars 7s ease-in-out infinite;
 }
 
 #qrcode {
-    animation: qrcode 5s ease-in-out infinite;
+    animation: qrcode 7s ease-in-out infinite;
 }
 
 #border {
-    animation: border 5s ease-in infinite;
+    animation: border 7s ease-in infinite;
 }
 
 @keyframes border {
@@ -40,25 +39,33 @@ a:hover {
         opacity: 0;
     }
 
-    20% {
+/* #################### move in #################### */
+
+    10% {
         opacity: 0;
         transform: scale(120%) translate(-20px, -40px);
     }
 
-    30% {
+    15% {
         opacity: 1;
         transform: scale(100%) translate(0px, 0px);
     }
 
-    50% {
+/* ################################################# */
+
+/* #################### move out #################### */
+
+    35% {
         opacity: 1;
         transform: scale(100%) translate(0px, 0px);
     }
 
-    60% {
+    40% {
         opacity: 0;
         transform: scale(120%) translate(-20px, -40px);
     }
+
+/* ################################################## */
 
     100% {
         opacity: 0;
@@ -71,13 +78,17 @@ a:hover {
         transform: translateY(0%);
     }
 
-    20% {
+/* #################### move down #################### */
+
+    15% {
         transform: translateY(0%);
     }
 
-    50% {
+    35% {
         transform: translateY(100%);
     }
+
+/* ################################################### */
 
     100% {
         transform: translateY(100%);
@@ -85,23 +96,57 @@ a:hover {
 }
 
 @keyframes qrcode {
+/* #################### move in #################### */
+
     0% {
         transform: translateX(-200%) translateY(-50%) scale(200%);
     }
 
-    20% {
+    15% {
+        transform: translateX(0%) translateY(0%) scale(100%);
+    }
+
+/* ################################################# */
+
+/* #################### move out #################### */
+
+    35% {
         transform: translateX(0%) translateY(0%) scale(100%);
     }
 
     50% {
-        transform: translateX(0%) translateY(0%) scale(100%);
+        transform: translateX(100%) translateY(-50%) scale(200%);
     }
 
-    70% {
-        transform: translateX(100%) translateY(-50%) scale(200%);
+/* ################################################## */
+
+/* #################### move out of frame and back in #################### */
+
+
+    60% {
+        transform: translateX(1100%) translateY(-50%) scale(200%);
+        opacity: 1;
+    }
+
+    61% {
+        opacity: 0;
+    }
+
+    64% {
+        transform: translateX(-1200%) translateY(-50%) scale(200%);
+        opacity: 0;
+    }
+
+    65% {
+        opacity: 1;
     }
 
     100% {
-        transform: translateX(100%) translateY(-50%) scale(200%);
+        transform: translateX(-200%) translateY(-50%) scale(200%);
     }
+
+
+
+/* ########################################################### */
+
 }
