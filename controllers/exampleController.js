@@ -1,17 +1,7 @@
 const helper = require("../modules/helper")
 
 function renderExample(req, res) {
-    Promise.all([
-        helper.getOembed("eisdiele_um_die_ecke"),
-        helper.getOembed("eatleryforfuture")
-    ])
-    .then(([partnerInstagram, eatleryInstagram]) => {
-        res.render("campaign", { partnerInstagram: partnerInstagram, eatleryInstagram, eatleryInstagram, username: "eisdiele_um_die_ecke" })
-    })
-    .catch((err) => {
-        console.log(err)
-        res.render("no-permissions")
-    })
+    res.render("example")
 }
 
 module.exports = { renderExample }
