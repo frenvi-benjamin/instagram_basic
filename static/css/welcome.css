@@ -24,14 +24,26 @@ a:hover {
 
 #scan-bars>rect {
     animation: scan-bars 7s ease-in-out infinite;
+    -o-animation: scan-bars 7s ease-in-out infinite;
+    -ms-animation: scan-bars 7s ease-in-out infinite;
+    -moz-animation: scan-bars 7s ease-in-out infinite;
+    -webkit-animation: scan-bars 7s ease-in-out infinite;
 }
 
 #qrcode {
     animation: qrcode 7s ease-in-out infinite;
+    -o-animation: qrcode 7s ease-in-out infinite;
+    -ms-animation: qrcode 7s ease-in-out infinite;
+    -moz-animation: qrcode 7s ease-in-out infinite;
+    -webkit-animation: qrcode 7s ease-in-out infinite;
 }
 
 #border {
     animation: border 7s ease-in infinite;
+    -o-animation: border 7s ease-in infinite;
+    -ms-animation: border 7s ease-in infinite;
+    -moz-animation: border 7s ease-in infinite;
+    -webkit-animation: border 7s ease-in infinite;
 }
 
 @keyframes border {
@@ -44,11 +56,19 @@ a:hover {
     10% {
         opacity: 0;
         transform: scale(120%) translate(-20px, -40px);
+        /* -o-transform: scale(120%) translate(-20px, -40px);
+        -ms-transform: scale(120%) translate(-20px, -40px);
+        -moz-transform: scale(120%) translate(-20px, -40px);
+        -webkit-transform: scale(120%) translate(-20px, -40px); */
     }
 
     15% {
         opacity: 1;
         transform: scale(100%) translate(0px, 0px);
+        /* -o-transform: scale(100%) translate(0px, 0px);
+        -ms-transform: scale(100%) translate(0px, 0px);
+        -moz-transform: scale(100%) translate(0px, 0px);
+        -webkit-transform: scale(100%) translate(0px, 0px); */
     }
 
 /* ################################################# */
@@ -58,40 +78,68 @@ a:hover {
     35% {
         opacity: 1;
         transform: scale(100%) translate(0px, 0px);
+        /* -o-transform: scale(100%) translate(0px, 0px);
+        -ms-transform: scale(100%) translate(0px, 0px);
+        -moz-transform: scale(100%) translate(0px, 0px);
+        -webkit-transform: scale(100%) translate(0px, 0px); */
     }
 
     40% {
         opacity: 0;
         transform: scale(120%) translate(-20px, -40px);
+        /* -o-transform: scale(120%) translate(-20px, -40px);
+        -ms-transform: scale(120%) translate(-20px, -40px);
+        -moz-transform: scale(120%) translate(-20px, -40px);
+        -webkit-transform: scale(120%) translate(-20px, -40px); */
     }
 
 /* ################################################## */
 
     100% {
         opacity: 0;
-        transform: scale(120%) translate(-20px, -40px);
+        /* transform: scale(120%) translate(-20px, -40px);
+        -o-transform: scale(120%) translate(-20px, -40px);
+        -ms-transform: scale(120%) translate(-20px, -40px);
+        -moz-transform: scale(120%) translate(-20px, -40px);
+        -webkit-transform: scale(120%) translate(-20px, -40px); */
     }
 }
 
 @keyframes scan-bars {
     0% {
         transform: translateY(0%);
+        /* -o-transform: translateY(0%);
+        -ms-transform: translateY(0%);
+        -moz-transform: translateY(0%);
+        -webkit-transform: translateY(0%); */
     }
 
 /* #################### move down #################### */
 
     15% {
         transform: translateY(0%);
+        /* -o-transform: translateY(0%);
+        -ms-transform: translateY(0%);
+        -moz-transform: translateY(0%);
+        -webkit-transform: translateY(0%); */
     }
 
     35% {
         transform: translateY(100%);
+        /* -o-transform: translateY(100%);
+        -ms-transform: translateY(100%);
+        -moz-transform: translateY(100%);
+        -webkit-transform: translateY(100%); */
     }
 
 /* ################################################### */
 
     100% {
         transform: translateY(100%);
+        /* -o-transform: translateY(100%);
+        -ms-transform: translateY(100%);
+        -moz-transform: translateY(100%);
+        -webkit-transform: translateY(100%); */
     }
 }
 
@@ -100,10 +148,18 @@ a:hover {
 
     0% {
         transform: translateX(-200%) translateY(-50%) scale(200%);
+        /* -o-transform: translateX(-200%) translateY(-50%) scale(200%);
+        -ms-transform: translateX(-200%) translateY(-50%) scale(200%);
+        -moz-transform: translateX(-200%) translateY(-50%) scale(200%);
+        -webkit-transform: translateX(-200%) translateY(-50%) scale(200%); */
     }
 
     15% {
         transform: translateX(0%) translateY(0%) scale(100%);
+        /* -o-transform: translateX(0%) translateY(0%) scale(100%);
+        -ms-transform: translateX(0%) translateY(0%) scale(100%);
+        -moz-transform: translateX(0%) translateY(0%) scale(100%);
+        -webkit-transform: translateX(0%) translateY(0%) scale(100%); */
     }
 
 /* ################################################# */
@@ -112,10 +168,18 @@ a:hover {
 
     35% {
         transform: translateX(0%) translateY(0%) scale(100%);
+        /* -o-transform: translateX(0%) translateY(0%) scale(100%);
+        -ms-transform: translateX(0%) translateY(0%) scale(100%);
+        -moz-transform: translateX(0%) translateY(0%) scale(100%);
+        -webkit-transform: translateX(0%) translateY(0%) scale(100%); */
     }
 
     50% {
         transform: translateX(100%) translateY(-50%) scale(200%);
+        /* -o-transform: translateX(100%) translateY(-50%) scale(200%);
+        -ms-transform: translateX(100%) translateY(-50%) scale(200%);
+        -moz-transform: translateX(100%) translateY(-50%) scale(200%);
+        -webkit-transform: translateX(100%) translateY(-50%) scale(200%); */
     }
 
 /* ################################################## */
@@ -125,6 +189,10 @@ a:hover {
 
     60% {
         transform: translateX(1100%) translateY(-50%) scale(200%);
+        /* -o-transform: translateX(1100%) translateY(-50%) scale(200%);
+        -ms-transform: translateX(1100%) translateY(-50%) scale(200%);
+        -moz-transform: translateX(1100%) translateY(-50%) scale(200%);
+        -webkit-transform: translateX(1100%) translateY(-50%) scale(200%); */
         opacity: 1;
     }
 
@@ -134,6 +202,10 @@ a:hover {
 
     64% {
         transform: translateX(-1200%) translateY(-50%) scale(200%);
+        /* -o-transform: translateX(-1200%) translateY(-50%) scale(200%);
+        -ms-transform: translateX(-1200%) translateY(-50%) scale(200%);
+        -moz-transform: translateX(-1200%) translateY(-50%) scale(200%);
+        -webkit-transform: translateX(-1200%) translateY(-50%) scale(200%); */
         opacity: 0;
     }
 
@@ -143,6 +215,10 @@ a:hover {
 
     100% {
         transform: translateX(-200%) translateY(-50%) scale(200%);
+        /* -o-transform: translateX(-200%) translateY(-50%) scale(200%);
+        -ms-transform: translateX(-200%) translateY(-50%) scale(200%);
+        -moz-transform: translateX(-200%) translateY(-50%) scale(200%);
+        -webkit-transform: translateX(-200%) translateY(-50%) scale(200%); */
     }
 
 
