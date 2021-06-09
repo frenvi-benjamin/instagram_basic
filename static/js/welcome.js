@@ -12,10 +12,10 @@ tl.to("#border", { duration: 0.5, opacity: 0, scale: 1.2, ease: "power2.inOut"})
 
 tl.to("#qrcode", { duration: 1, x: 300, scale: 2, ease: "power2.inOut"}, "-=0.25")
 
-tl.to("#qrcode", { duration: 1, x: 1000, scale: 2, ease: "power2.inOut"})
+tl.to("#qrcode", { duration: 1, x: 2000, scale: 2, ease: "power4.in"})
 
-tl.to("#qrcode", { duration: 0, opacity: 0, x: -1000 })
+tl.to("#qrcode", { duration: 0, opacity: 0, x: -2000 })
 
 tl.to("#qrcode", { duration: 0, opacity: 1})
 
-tl.to("#qrcode", { duration: 1, x: -300, scale: 2, ease: "power2.inOut"})
+tl.to("#qrcode", { duration: 1, x: -300, scale: 2, ease: "power4.out"})
