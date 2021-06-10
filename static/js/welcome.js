@@ -15,29 +15,36 @@ function concat() {
 }
 
 function animateStep3() {
-    const qrcode = '*[data-name="reg-qrcode"]'
+    const qrcodeGroup = '*[data-name="reg-qrcode-group"]'
+    const qrcodeLabel = '*[data-name="reg-qrcode-label"]'
     const border = '*[data-name="reg-border"]'
     const scanBars = '*[data-name="reg-scan-bars"]'
 
-    gsap.set(concat(qrcode, border), { transformOrigin: "50% 50%" })
+    gsap.set(concat(qrcodeGroup, border), { transformOrigin: "50% 50%" })
 
     tl = gsap.timeline({ repeat: -1})
 
-    tl.from(qrcode, { duration: 1, x: -300, scale: 2, ease: "power2.inOut"})
+    tl.from(qrcodeGroup, { duration: 1, x: -300, scale: 2, ease: "power2.inOut"})
 
     tl.from(border, { duration: 0.5, opacity: 0, scale: 1.2, ease: "power2.inOut"}, "-=0.25")
 
-    tl.to(scanBars, { duration: 1, y: 475 })
+    tl.to(scanBars, { duration: 1, y: 475, ease: "power2.inOut" })
 
     tl.to(border, { duration: 0.5, opacity: 0, scale: 1.2, ease: "power2.inOut"})
 
-    tl.to(qrcode, { duration: 1, x: 300, scale: 2, ease: "power2.inOut"}, "-=0.25")
+    tl.to(qrcodeGroup, { duration: 1, x: 300, scale: 2, ease: "power2.inOut"}, "-=0.25")
 
-    tl.to(qrcode, { duration: 1, x: 2000, scale: 2, ease: "power4.in"})
+    tl.to(qrcodeLabel, { duration: 0.5, opacity: 1 })
 
-    tl.to(qrcode, { duration: 0, opacity: 0, x: -2000 })
+    tl.to({}, { duration: 0.5 })
 
-    tl.to(qrcode, { duration: 0, opacity: 1})
+    tl.to(qrcodeGroup, { duration: 1, x: 2000, scale: 2, ease: "power4.in"})
+
+    tl.to(qrcodeLabel, { duration: 0, opacity: 0 })
+
+    tl.to(qrcodeGroup, { duration: 0, x: -2000 })
+
+    tl.to(qrcodeGroup, { duration: 1, x: -300, scale: 2, ease: "power4.out"})
 
     tl.to(qrcode, { duration: 1, x: -300, scale: 2, ease: "power4.out"})
 }
@@ -77,7 +84,7 @@ function animateStep4() {
 
     tl.to(x, { duration: 0.5, opacity: 1, ease: "power2.inOut" }, "-=0.5")
 
-    tl.to({}, { duration: 2 })
+    tl.to({}, { duration: 1.75 })
 
     tl.to(concat(logo, x, du), { duration: 0.5, opacity: 0 })
 
