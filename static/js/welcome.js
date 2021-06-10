@@ -32,9 +32,9 @@ function animateStep3() {
 
     tl.to(border, { duration: 0.5, opacity: 0, scale: 1.2, ease: "power2.inOut"})
 
-    tl.to(qrcodeGroup, { duration: 1, x: 300, scale: 2, ease: "power2.inOut"}, "-=0.25")
+    tl.to(qrcodeLabel, { duration: 0.25, opacity: 1 }, "-=0.75")
 
-    tl.to(qrcodeLabel, { duration: 0.5, opacity: 1 })
+    tl.to(qrcodeGroup, { duration: 1, x: 300, scale: 2, ease: "power2.inOut"}, "-=0.25")
 
     tl.to({}, { duration: 0.5 })
 
@@ -50,7 +50,6 @@ function animateStep3() {
 function animateStep4() {
     const qrcodeSmall = '*[data-name="usr-qrcode-sm"]'
     const qrcodeLarge = '*[data-name="usr-qrcode-lg"]'
-    const phone = '*[data-name="usr-phone"]'
     const border = '*[data-name="usr-border"]'
     const scanBars = '*[data-name="usr-scan-bars"]'
     const campaignView = '*[data-name="usr-campaign-view"]'
@@ -59,7 +58,7 @@ function animateStep4() {
     const x = '*[data-name="usr-x"]'
     const du = '*[data-name="usr-du"]'
 
-    gsap.set(concat(qrcodeSmall, qrcodeLarge, phone, border, scanBars, campaignView, scanView, logo, x, du), { transformOrigin: "50% 50%"})
+    gsap.set(concat(qrcodeSmall, qrcodeLarge, border, scanBars, campaignView, scanView, logo, x, du), { transformOrigin: "50% 50%"})
 
     tl = gsap.timeline({ repeat: -1 })
 
