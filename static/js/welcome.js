@@ -45,8 +45,6 @@ function animateStep3() {
     tl.to(qrcodeGroup, { duration: 0, x: -2000 })
 
     tl.to(qrcodeGroup, { duration: 1, x: -300, scale: 2, ease: "power4.out"})
-
-    tl.to(qrcode, { duration: 1, x: -300, scale: 2, ease: "power4.out"})
 }
 
 function animateStep4() {
