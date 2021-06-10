@@ -16,35 +16,37 @@ function concat() {
 
 function animateStep3() {
     const qrcodeGroup = '*[data-name="reg-qrcode-group"]'
-    const qrcodeLabel = '*[data-name="reg-qrcode-label"]'
+    const tick = '*[data-name="reg-tick"]'
     const border = '*[data-name="reg-border"]'
     const scanBars = '*[data-name="reg-scan-bars"]'
+    const insta = '*[data-name="reg-insta"]'
 
-    gsap.set(concat(qrcodeGroup, border), { transformOrigin: "50% 50%" })
+    gsap.set(concat(qrcodeGroup, border, tick, insta), { transformOrigin: "50% 50%" })
 
-    tl = gsap.timeline({ repeat: -1})
+    tl = gsap.timeline({ repeat: -1, repeatDelay: 0.5})
 
-    tl.from(qrcodeGroup, { duration: 1, x: -300, scale: 2, ease: "power2.inOut"})
+    tl.to(insta, { duration: 0.5, opacity: 1 })
+
+    tl.fromTo(qrcodeGroup, { x: -2000, scale: 2 }, { x: -300, scale: 2, ease: "power4.out" })
+
+    tl.fromTo(qrcodeGroup, { x: -300, scale: 2 }, { x: 0, scale: 1, duration: 1, ease: "power2.inOut" })
 
     tl.from(border, { duration: 0.5, opacity: 0, scale: 1.2, ease: "power2.inOut"}, "-=0.25")
 
     tl.to(scanBars, { duration: 1, y: 475, ease: "power2.inOut" })
 
-    tl.to(border, { duration: 0.5, opacity: 0, scale: 1.2, ease: "power2.inOut"})
+    tl.from(insta, { duration: 1, y: 150, ease: "power2.inOut" })
 
-    tl.to(qrcodeLabel, { duration: 0.25, opacity: 1 }, "-=0.75")
+    tl.to(insta, { duration: 0.5, opacity: 0 }, "-=0.3")
 
-    tl.to(qrcodeGroup, { duration: 1, x: 300, scale: 2, ease: "power2.inOut"}, "-=0.25")
+    tl.from(tick, { duration: 0.5, opacity: 0, scale: 2, ease: "power4.out"})
 
-    tl.to({}, { duration: 0.5 })
+    tl.to(border, { duration: 0.5, opacity: 0, scale: 1.2, ease: "power2.inOut"}, "+=0.25")
 
-    tl.to(qrcodeGroup, { duration: 1, x: 2000, scale: 2, ease: "power4.in"})
+    tl.to(qrcodeGroup, { duration: 0.5, opacity: 0 }, "-=0.5")
 
-    tl.to(qrcodeLabel, { duration: 0, opacity: 0 })
-
-    tl.to(qrcodeGroup, { duration: 0, x: -2000 })
-
-    tl.to(qrcodeGroup, { duration: 1, x: -300, scale: 2, ease: "power4.out"})
+    tl.to(tick, { duration: 0, opacity: 0 })
+    console.log(tl.duration())
 }
 
 function animateStep4() {
@@ -86,4 +88,5 @@ function animateStep4() {
     tl.to(concat(logo, x, du), { duration: 0.5, opacity: 0 })
 
     tl.to(qrcodeLarge, { duration: 1, x: 2000, ease: "back.in(0.8)" }, "-=1.5")
+    console.log(tl.duration())
 }
