@@ -96,7 +96,11 @@ app.use("/scanner", require("./routes/scannerRoute"))
 //choose
 app.use("/choose", require("./routes/chooseRoute"))
 
+//preview
+app.use("/preview", require("./routes/previewRoute"))
+
 const ejs = require("ejs")
+
 //logout
 app.use("/logout", (req, res) => {
     req.session.destroy()

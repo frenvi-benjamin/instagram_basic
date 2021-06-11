@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head", { title: "Vorschau" }) %>
+</head>
+
+<body>
+    <%- include("./partials/header") %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        Auf die unten dargestellte Webseite landen Kunden, die von dir registrierte QR-Codes
+                        einscannen.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="shadow-sm pt-3 mb-1 bg-white rounded"></div>
+
+    <iframe id="iframe" class="mb-3" src="/campaign/<%= username %> " onload='javascript:(function(o){o.style.height=(o.contentWindow.document.body.scrollHeight + 100)+"px";}(this));' style="height:200px;width:100%;border:none;overflow:hidden;"></iframe>
+
+    <script>
+        addEventListener("resize", () => {
+            const iframe = document.getElementById("iframe")
+            iframe.style.height=(iframe.contentWindow.document.body.scrollHeight + 100)+"px"
+        })
+    </script>
+</body>
+
+</html>
