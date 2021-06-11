@@ -1,27 +1,19 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <%- include("./partials/head", { title: "Logout"}) %>
-</head>
-<body>
-    <%- include("./partials/header") %>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">
-                        Erfolgreich ausgeloggt
-                    </div>
-                    <div class="card-body">
-                        Sie würden erfolgreich ausgeloggt.
-                        Falls das keine Absicht war oder Sie sich mit einem anderen Account anmelden möchten, können Sie das hier tun.
-                        <br>
-                        <br>
-                        <%- include("./partials/instagram-button") %>
-                    </div>
+<%- include("./partials/header") %>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    Erfolgreich ausgeloggt
+                </div>
+                <div class="card-body">
+                    Sie wurden erfolgreich ausgeloggt.
+                    Falls das keine Absicht war oder Sie sich mit einem anderen Account anmelden möchten, können Sie das hier tun.
+                    <br>
+                    <br>
+                    <%- include("./partials/instagram-button") %>
                 </div>
             </div>
         </div>
     </div>
-</body>
-</html>
+</div>

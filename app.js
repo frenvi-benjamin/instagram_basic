@@ -96,10 +96,12 @@ app.use("/scanner", require("./routes/scannerRoute"))
 //choose
 app.use("/choose", require("./routes/chooseRoute"))
 
+const ejs = require("ejs")
 //logout
 app.use("/logout", (req, res) => {
     req.session.destroy()
-    res.render("logout")
+    ejs.renderFile(path.join(__dirname, "/views/logout.ejs"), { env: process.env})
+    .then(rendered => res.send(rendered))
 })
 
 app.use(require("./routes/404Route"))
