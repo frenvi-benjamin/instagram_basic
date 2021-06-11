@@ -6,6 +6,24 @@ const video = document.getElementById("qr-video")
 const qrCounter = document.getElementById("qr-counter")
 const scanResponseDiv = document.getElementById("scan-response-div")
 
+// aquire wake lock on page load and every time the window gets back focus
+// this makes screens stay permanently on during scanning
+
+function aquireWakeLock() {
+	if ("wakeLock" in navigator && document.visibilityState == "visible") {
+		navigator.wakeLock.request("screen")
+		.then(wakeLock => {
+			console.log("wakeLock aquired")
+		
+			wakeLock.addEventListener("release", () => {
+				console.log("wakeLock released")
+			})
+		})
+	}
+}
+addEventListener("DOMContentLoaded", aquireWakeLock)
+addEventListener("visibilitychange", aquireWakeLock)
+
 const alreadyScannedQrcodes = []
 var successfulScans = 0
 function alreadyScanned(qrID) {
