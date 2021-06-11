@@ -4,7 +4,7 @@ QrScanner.WORKER_PATH = "/qr-scanner/qr-scanner-worker.min.js"
 
 const video = document.getElementById("qr-video")
 const qrCounter = document.getElementById("qr-counter")
-const scanResponse = document.getElementById("scan-response")
+const scanResponseDiv = document.getElementById("scan-response-div")
 
 const alreadyScannedQrcodes = []
 var successfulScans = 0
@@ -29,60 +29,45 @@ function onQrScan(result) {
 			}),
 		})
 		.then(response => {
-			if (response.status == 200) scanSuccessful()
-			else if (response.status == 451) scanUnsuccessful()
+			if (response.status == 200) {
+				successfulScans++
+				qrCounter.innerHTML = successfulScans
+				showResponse(true)
+			}
+			else if (response.status == 451) {
+				showResponse(false)
+			}
 		})
 		alreadyScannedQrcodes.push(qrID)
 	}
 }
 
-function scanSuccessful() {
-	successfulScans++
-	qrCounter.innerHTML = successfulScans
-	showResponse(true, "QR-Code gescannt", 2000)
-}
+function showResponse(good) {
 
-function scanUnsuccessful() {
-	showResponse(false, "QR-Code bereits registriert", 2500)
-}
+	const scanResponse = document.createElement("div")
+	scanResponse.classList.add("card", "mx-auto", "p-2", "mt-1")
 
-function showResponse(good, message, time) {
-	scanResponse.innerHTML = message
+	scanResponseDiv.appendChild(scanResponse)
+
 	if (good) {
-		scanResponse.style.color = "#A2D208"
-		scanResponse.style.borderColor = "#A2D208"
+		scanResponse.classList.add("good")
+		scanResponse.innerHTML = "QR-Code gescannt"
 	}
 	else {
-		scanResponse.style.color = "#DC3545"
-		scanResponse.style.borderColor = "#DC3545"
+		scanResponse.classList.add("bad")
+		scanResponse.innerHTML = "QR-Code bereits registriert"
 	}
 
-	fadeIn(scanResponse)
-	setTimeout(() => fadeOut(scanResponse), time)
-	
+	const tl = gsap.timeline()
 
-}
+	tl.eventCallback("onComplete", () => {
+		scanResponse.remove()
+	})
 
-function fadeIn(elem) {
-	var opacity = 0
-	const id = setInterval(() => {
-		if (opacity >= 1) clearInterval(id)
-		else {
-			opacity += .1
-			elem.style.opacity = opacity
-		}
-	}, 15);
-}
+	tl.to(scanResponse, { duration: 0.5, opacity: 1 })
+	tl.to(scanResponse, { duration: 2 })
+	tl.to(scanResponse, { duration: 0.5, opacity: 0 })
 
-function fadeOut(elem) {
-	var opacity = 1
-	const id = setInterval(() => {
-		if (opacity <= 0) clearInterval(id)
-		else {
-			opacity -= .1
-			elem.style.opacity = opacity
-		}
-	}, 15);
 }
 
 // ####### Web Cam Scanning #######

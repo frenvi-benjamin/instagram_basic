@@ -29,8 +29,7 @@
     padding-right: 10px!important;
 }
 
-#scan-response {
-    opacity: 0;
+#scan-response-div {
     position: absolute;
     text-align: center;
     bottom: .5rem;
@@ -38,6 +37,16 @@
     right: .5rem;
     z-index: 1;
     box-sizing: unset;
+}
+
+.good {
+    color: white;
+    background-color: #A2D208;
+}
+
+.bad {
+    color: white;
+    background-color: #DC3545;
 }
 
 #scanner {
@@ -69,9 +78,19 @@ canvas {
     }
 
     #scanner {
-        max-width: 96vh;
+        width: 96vh;
         margin-top: 2vh;
         margin-bottom: 2vh;
+        margin-left: 0px!important;
+    }
+
+    #scanner-col {
+        padding-left: 2vh!important;
+        padding-right: 2vh!important;
+    }
+
+    .col.horizontal {
+        padding-right: 2vh!important;
     }
 
     .horizontal {

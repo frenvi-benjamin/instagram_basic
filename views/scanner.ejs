@@ -3,27 +3,36 @@
 
 <head>
 	<%- include("./partials/head", {title: "QR-Scanner" }) %>
+	<link rel="stylesheet" href="/css/scanner.css">
 </head>
 
 <body>
-	<link rel="stylesheet" href="/css/scanner.css">
-	<script src="/js/scanner.js" type="module"></script>
-
 	<video hidden id="qr-video" class="centered video" autoplay="true" playsinline="true"></video>
 
 	<%- include("./partials/header") %>
 
-		<div class="container-fluid">
-			<div class="row" id="scanner-row">
-				<div class="col">
-					<div class="mx-auto max-width-500px" id="scanner">
-						<i id="info" class="far fa-question-circle rounded p-1 m-2" role="button" onclick="modal.show()"></i>
-						<h5 id="qr-counter" class="rounded py-1 m-2">0</h5>
-						<div id="scan-response" class="card mx-auto p-2"></div>
-					</div>
+	<div class="container-fluid">
+		<div class="row" id="scanner-row">
+			<div class="col" id="scanner-col">
+				<div class="mx-auto max-width-500px" id="scanner">
+					<i id="info" class="far fa-question-circle rounded p-1 m-2" role="button" onclick="modal.show()"></i>
+					<h5 id="qr-counter" class="rounded py-1 m-2">0</h5>
+					<div id="scan-response-div"></div>
 				</div>
-				<!-- only visible when phone is flipped horizontal -->
-				<div class="col-3 pl-0 horizontal">
+			</div>
+			<!-- only visible when phone is flipped horizontal -->
+			<div class="col pl-0 horizontal">
+				<a id="ready-button" href="/campaign/<%= username %>">
+					<p id="ready-card" class="h5 text-center p-2 my-2 card">
+						Alle QR-Codes gescannt? Hier geht's zu Ihrer Webseite
+					</p>
+				</a>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<div class="mx-auto p-0 max-width-500px">
 					<a id="ready-button" href="/campaign/<%= username %>">
 						<p id="ready-card" class="h5 text-center p-2 my-2 card">
 							Alle QR-Codes gescannt? Hier geht's zu Ihrer Webseite
@@ -31,47 +40,39 @@
 					</a>
 				</div>
 			</div>
-
-			<div class="row">
-				<div class="col">
-					<div class="mx-auto p-0 max-width-500px">
-						<a id="ready-button" href="/campaign/<%= username %>">
-							<p id="ready-card" class="h5 text-center p-2 my-2 card">
-								Alle QR-Codes gescannt? Hier geht's zu Ihrer Webseite
-							</p>
-						</a>
-					</div>
-				</div>
-			</div>
-
 		</div>
 
+	</div>
 
-		<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">QR-Codes Scannen</h4>
-					</div>
-					<div class="modal-body">
-						<p>
-							Bitte scannen Sie alle gelieferten QR-Codes. Alle von Ihnen gescannten Codes werden nach dem
-							Scan auf unsere gemeinsame Kampagnen-Webseite führen!
-						</p>
-					</div>
-					<div class="modal-footer">
-						<button id="ok-button" type="button" class="btn btn-custom" data-dismiss="modal">Okay</button>
-					</div>
+
+	<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">QR-Codes Scannen</h4>
+				</div>
+				<div class="modal-body">
+					<p>
+						Bitte scannen Sie alle gelieferten QR-Codes. Alle von Ihnen gescannten Codes werden nach dem
+						Scan auf unsere gemeinsame Kampagnen-Webseite führen!
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button id="ok-button" type="button" class="btn btn-custom" data-dismiss="modal">Okay</button>
 				</div>
 			</div>
 		</div>
-		<script>
-			var modal = new bootstrap.Modal(document.getElementById("modal"))
+	</div>
+	<script>
+		var modal = new bootstrap.Modal(document.getElementById("modal"))
 
-			if (!<%= hasVisitedScanner %>) {
-				modal.show()
-			}
-		</script>
+		if (!<%= hasVisitedScanner %>) {
+			modal.show()
+		}
+	</script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+	<script src="/js/scanner.js" type="module"></script>
 
 </body>
 
