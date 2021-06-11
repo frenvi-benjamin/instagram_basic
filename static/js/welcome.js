@@ -46,7 +46,6 @@ function animateStep3() {
     tl.to(qrcodeGroup, { duration: 0.5, opacity: 0 }, "-=0.5")
 
     tl.to(tick, { duration: 0, opacity: 0 })
-    console.log(tl.duration())
 }
 
 function animateStep4() {
@@ -88,5 +87,4 @@ function animateStep4() {
     tl.to(concat(logo, x, du), { duration: 0.5, opacity: 0 })
 
     tl.to(qrcodeLarge, { duration: 1, x: 2000, ease: "back.in(0.8)" }, "-=1.5")
-    console.log(tl.duration())
 }
