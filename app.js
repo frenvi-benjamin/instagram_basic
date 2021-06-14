@@ -110,12 +110,12 @@ app.use("/logout", (req, res) => {
 
 // deauthorization (instagram)
 app.use("/deauthorize", (req, res) => {
-    console.log(req)
+    console.log(req.body)
 })
 
 // data deletion (instagram)
 app.use("/delete-data", (req, res) => {
-    console.log(req)
+    console.log(req.body)
 })
 
 app.use(require("./routes/404Route"))
