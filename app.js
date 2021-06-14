@@ -110,12 +110,6 @@ app.use("/logout", (req, res) => {
 
 // deauthorization (instagram)
 app.use("/deauthorize", (req, res) => {
-    console.log(req.url)
-    const sr = req.body.signed_request.split(".")
-    let encodedSignature, payload
-    [encodedSignature, payload] = sr
-    console.log("encodedSignature", encodedSignature)
-    console.log("payload", payload)
 })
 
 // data deletion (instagram)
