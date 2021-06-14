@@ -108,8 +108,11 @@ app.use("/logout", (req, res) => {
     .then(rendered => res.send(rendered))
 })
 
+const base64url = require("base64url")
+
 // deauthorization (instagram)
 app.use("/deauthorize", (req, res) => {
+    res.sendStatus(200)
 })
 
 // data deletion (instagram)
@@ -118,8 +121,9 @@ app.use("/delete-data", (req, res) => {
     const sr = req.body.signed_request.split(".")
     let encodedSignature, payload
     [encodedSignature, payload] = sr
-    console.log("encodedSignature", encodedSignature)
-    console.log("payload", payload)
+    console.log("encodedSignature", base64url.decode(encodedSignature))
+    console.log("payload", base64url.decode(payload))
+    res.sendStatus(200)
 })
 
 app.use(require("./routes/404Route"))
