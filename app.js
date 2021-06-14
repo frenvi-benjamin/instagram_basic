@@ -109,6 +109,7 @@ app.use("/logout", (req, res) => {
 })
 
 const base64url = require("base64url")
+const User = require("./models/userModel")
 
 // deauthorization (instagram)
 app.use("/deauthorize", (req, res) => {
@@ -118,11 +119,9 @@ app.use("/deauthorize", (req, res) => {
 // data deletion (instagram)
 app.use("/delete-data", (req, res) => {
     console.log(req.url)
-    const sr = req.body.signed_request.split(".")
-    let encodedSignature, payload
-    [encodedSignature, payload] = sr
-    console.log("encodedSignature", base64url.decode(encodedSignature))
-    console.log("payload", base64url.decode(payload))
+    const request = req.body.signed_request
+    const decodedPayload = base64url.decode(request[1])
+    User.findOneAndDelete({ instagramUserID: decodedPayload.user_id })
     res.sendStatus(200)
 })
 
