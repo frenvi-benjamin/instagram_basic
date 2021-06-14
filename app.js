@@ -121,16 +121,16 @@ app.use("/delete-data", (req, res) => {
     const request = req.body.signed_request
     const encodedPayload = request[1]
     const decodedPayload = base64url.decode(encodedPayload)
-    const parsedPayload = JSON.parse(decodedPayload)
-    const instagramUserID = parsedPayload.user_id
+    // const parsedPayload = JSON.parse(decodedPayload)
+    // const instagramUserID = parsedPayload.user_id
 
     console.log("request", request, typeof request)
     console.log("encodedPayload", encodedPayload, typeof encodedPayload)
     console.log("decodedPayload", decodedPayload, typeof decodedPayload)
-    console.log("parsedPayload", parsedPayload, typeof parsedPayload)
-    console.log("instagramUserID", instagramUserID, typeof instagramUserID)
+    // console.log("parsedPayload", parsedPayload, typeof parsedPayload)
+    // console.log("instagramUserID", instagramUserID, typeof instagramUserID)
 
-    User.findOneAndDelete({ instagramUserID: instagramUserID }).exec()
+    // User.findOneAndDelete({ instagramUserID: instagramUserID }).exec()
     res.sendStatus(200)
 })
 
