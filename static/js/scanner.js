@@ -12,13 +12,6 @@ const scanResponseDiv = document.getElementById("scan-response-div")
 function aquireWakeLock() {
 	if ("wakeLock" in navigator && document.visibilityState == "visible") {
 		navigator.wakeLock.request("screen")
-		.then(wakeLock => {
-			console.log("wakeLock aquired")
-		
-			wakeLock.addEventListener("release", () => {
-				console.log("wakeLock released")
-			})
-		})
 	}
 }
 addEventListener("DOMContentLoaded", aquireWakeLock)
