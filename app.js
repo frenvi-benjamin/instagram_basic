@@ -110,12 +110,22 @@ app.use("/logout", (req, res) => {
 
 // deauthorization (instagram)
 app.use("/deauthorize", (req, res) => {
-    console.log(req.body)
+    console.log(req.path)
+    const sr = req.body.signed_request.split(".")
+    let encodedSignature, payload
+    [encodedSignature, payload] = sr
+    console.log("encodedSignature", encodedSignature)
+    console.log("payload", payload)
 })
 
 // data deletion (instagram)
 app.use("/delete-data", (req, res) => {
-    console.log(req.body)
+    console.log(req.path)
+    const sr = req.body.signed_request.split(".")
+    let encodedSignature, payload
+    [encodedSignature, payload] = sr
+    console.log("encodedSignature", encodedSignature)
+    console.log("payload", payload)
 })
 
 app.use(require("./routes/404Route"))
