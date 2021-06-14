@@ -118,7 +118,7 @@ app.use("/deauthorize", (req, res) => {
 
 // data deletion (instagram)
 app.use("/delete-data", (req, res) => {
-    const request = req.body.signed_request
+    const request = req.body.signed_request.split(".")
     const encodedPayload = request[1]
     const decodedPayload = base64url.decode(encodedPayload)
     // const parsedPayload = JSON.parse(decodedPayload)
