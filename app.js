@@ -110,7 +110,7 @@ app.use("/logout", (req, res) => {
 
 // deauthorization (instagram)
 app.use("/deauthorize", (req, res) => {
-    console.log(req.path)
+    console.log(req.url)
     const sr = req.body.signed_request.split(".")
     let encodedSignature, payload
     [encodedSignature, payload] = sr
@@ -120,7 +120,7 @@ app.use("/deauthorize", (req, res) => {
 
 // data deletion (instagram)
 app.use("/delete-data", (req, res) => {
-    console.log(req.path)
+    console.log(req.url)
     const sr = req.body.signed_request.split(".")
     let encodedSignature, payload
     [encodedSignature, payload] = sr
