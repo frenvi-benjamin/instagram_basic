@@ -24,7 +24,7 @@ function alreadyScanned(qrID) {
 }
 
 function onQrScan(result) {
-	document.getElementById("debug").innerHTML = result
+	document.getElementById("debug").innerHTML += result + "<br>"
 	// find qr code ID
 	const pos = result.search("qr=") + 3
 	const qrID = result.slice(pos)
