@@ -3,7 +3,7 @@ QrScanner.WORKER_PATH = "/qr-scanner/qr-scanner-worker.min.js"
 
 
 const video = document.getElementById("qr-video")
-const qrCounter = document.getElementById("qr-counter-div")
+const qrCounter = document.getElementById("qr-counter")
 const scanResponseDiv = document.getElementById("scan-response-div")
 
 // aquire wake lock on page load and every time the window gets back focus
