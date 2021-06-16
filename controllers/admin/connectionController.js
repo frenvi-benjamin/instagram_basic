@@ -35,8 +35,10 @@ function clear(req, res) {
 }
 
 function assureUnusedQrcode(req, res, next) {
+    console.log("qrcode ID: ", req.body.qrID)
     QrCode.findById(req.body.qrID)
     .then(qrcode => {
+        console.log("connectedUser: ", qrcode.connectedUser)
         if (qrcode.connectedUser) {
             return res.sendStatus(451)
         }

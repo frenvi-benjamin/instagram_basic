@@ -17,7 +17,7 @@
     box-sizing: unset;
 }
 
-#qr-counter-div {
+#qr-counter {
     position: absolute;
     top: 0;
     left: 0;
