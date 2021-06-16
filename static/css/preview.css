@@ -1,0 +1,11 @@
+iframe {
+    width: 96vw;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    
+    overflow: hidden;
+}
+
+.border {
+    border: 2px solid #A2D208!important;
+}

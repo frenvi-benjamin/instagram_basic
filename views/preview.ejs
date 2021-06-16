@@ -3,6 +3,7 @@
 
 <head>
     <%- include("./partials/head", { title: "Vorschau" }) %>
+    <link rel="stylesheet" href="/css/preview.css">
 </head>
 
 <body>
@@ -18,22 +19,7 @@
                     <div class="card-body">
                         <p>
                             Glückwunsch, du bist fertig mit der Registrierung. Nun kannst du alle QR-Codes verteilen, wo du möchtest.
-                            Scannt ein Kunde den QR-Code landet er auf der unten vorgestellten Webseite.
-                        </p>
-                        <p>
-                            Falls du den Instagram-Post, der von der Kampagne promoted wird, ändern möchtest, kannst du dich 
-                            jederzeit erneut einloggen und diesen ändern. Weitere QR-Codes kannst du ebenfalls einscannen.
-                        </p>
-                        <p>
-                            Falls dich etwas an der Kampagne stört, kannst du dich jederzeit  
-                            <a href="mailto:info@frenvi-sales.de" target="_blank">bei uns melden</a> und wir werden versuchen eine
-                            Lösung zu finden, die für beide Seiten vorteilhaft ist.
-                        </p>
-                        <p class="mb-0">
-                            Wenn du keine Interesse hast, weiterhin an unserer Kampagne teilzunehmen, kannst du ganz einfach 
-                            <a href="https://www.instagram.com/accounts/manage_access/" target="_blank">die Instagram-Berechtigungen zurückziehen</a>. 
-                            Wir werden daraufhin von Instagram benachrichtigt und sind verpflichtet deine Daten bei uns zu löschen. 
-                            Eine Anleitung dazu findest du <a href="https://www.facebook.com/help/instagram/1144624522593085" target="_blank">hier</a>.
+                            Scannt ein Kunde den QR-Code landet er auf der unten im <span class="border p-1">grünen Rahmen</span> vorgestellten Webseite.
                         </p>
                     </div>
                 </div>
@@ -41,16 +27,9 @@
         </div>
     </div>
 
-    <div class="shadow-sm pt-3 mb-1 bg-white rounded"></div>
+    <iframe id="iframe" class="my-3 border shadow" src="/campaign/<%= username %>"></iframe>
 
-    <iframe id="iframe" class="mb-3" src="/campaign/<%= username %> " onload='javascript:(function(o){o.style.height=(o.contentWindow.document.body.scrollHeight + 100)+"px";}(this));' style="height:200px;width:100%;border:none;overflow:hidden;"></iframe>
-
-    <script>
-        addEventListener("resize", () => {
-            const iframe = document.getElementById("iframe")
-            iframe.style.height=(iframe.contentWindow.document.body.scrollHeight + 100)+"px"
-        })
-    </script>
+    <script src="/js/preview.js"></script>
 </body>
 
 </html>
