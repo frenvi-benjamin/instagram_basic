@@ -3,7 +3,7 @@ QrScanner.WORKER_PATH = "/qr-scanner/qr-scanner-worker.min.js"
 
 
 const video = document.getElementById("qr-video")
-const qrCounter = document.getElementById("qr-counter")
+const qrCounter = document.getElementById("qr-counter-div")
 const scanResponseDiv = document.getElementById("scan-response-div")
 
 // aquire wake lock on page load and every time the window gets back focus
@@ -42,7 +42,7 @@ function onQrScan(result) {
 		.then(response => {
 			if (response.status == 200) {
 				successfulScans++
-				qrCounter.innerHTML = successfulScans
+				updateQrCounter()
 				showResponse(true)
 			}
 			else if (response.status == 451) {
@@ -79,6 +79,16 @@ function showResponse(good) {
 	tl.to(scanResponse, { duration: 2 })
 	tl.to(scanResponse, { duration: 0.5, opacity: 0 })
 
+}
+
+gsap.set(qrCounter, { transformOrigin: "50% 50%" })
+
+function updateQrCounter() {
+	const tl = gsap.timeline()
+
+	tl.to(qrCounter, { duration: 0.25, scale: 1.5 })
+	tl.set(qrCounter, { duration: 0, innerHTML: successfulScans }, "-=0.1")
+	tl.to(qrCounter, { duration: 0.25, scale: 1 })
 }
 
 // ####### Web Cam Scanning #######
