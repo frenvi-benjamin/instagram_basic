@@ -35,3 +35,7 @@
 .form-control[readonly] {
     background-color: white;
 }
+
+.qr-col {
+    text-align: center;
+}

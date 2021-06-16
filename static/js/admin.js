@@ -48,7 +48,7 @@ function createQrcodes(nQrcodes) {
 
 
             const col = document.createElement("div")
-            col.classList.add("col")
+            col.classList.add("col", "qr-col")
             col.innerHTML = file.content
             row.append(col)
         })
@@ -119,7 +119,7 @@ function getQrcodes(type) {
         row.innerHTML = ""
         files.forEach(file => {
             const col = document.createElement("div")
-            col.classList.add("col")
+            col.classList.add("col", "qr-col")
             col.innerHTML = file.content
             row.append(col)
         })
