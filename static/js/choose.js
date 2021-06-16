@@ -1,13 +1,59 @@
+// global event listeners
+
 addEventListener("scroll", () => {
     if (pageYOffset > 400) {
-        $("#fixed").show()
+        $("#fixed-confirm-button").show()
     }
     else {
-        $("#fixed").hide()
+        $("#fixed-confirm-button").hide()
     }
 })
 
-function selectPost(id) {
+// event listeners
+
+const radioStaticPost = document.getElementById("radio-static-post")
+const radioDynamicPost = document.getElementById("radio-dynamic-post")
+const previewImages = document.getElementsByClassName("preview-img")
+const confirmButtons = document.getElementsByClassName("confirm-button")
+const finalConfirmation = document.getElementById("final-confirmation")
+const switchButton = document.getElementById("switch-to-dynamic-button")
+
+radioStaticPost.addEventListener("click", () => {
+    document.getElementById("static-post-text").hidden = false
+    document.getElementById("dynamic-post-text").hidden = true
+
+    document.getElementById("images").hidden = false
+})
+
+radioDynamicPost.addEventListener("click", () => {
+    removeAllSelections()
+
+    document.getElementById("static-post-text").hidden = true
+    document.getElementById("dynamic-post-text").hidden = false
+
+    document.getElementById("images").hidden = true
+})
+
+for (let i = 0; i < previewImages.length; i++) {
+    const image = previewImages[i];
+    image.addEventListener("click", selectPost)
+}
+
+for (let i = 0; i < confirmButtons.length; i++) {
+    const button = confirmButtons[i];
+    button.addEventListener("click", confirmChoice)
+}
+
+finalConfirmation.addEventListener("click", sendConfirmation)
+
+switchButton.addEventListener("click", () => {
+    document.getElementById("radio-dynamic-post").click()
+    confirmChoice()
+})
+
+// functions
+
+function selectPost(event) {
     const imgs = document.getElementsByTagName("img")
 
     for (let i = 0; i < imgs.length; i++) {
@@ -15,9 +61,9 @@ function selectPost(id) {
         img.classList.remove("selected")
     }
 
-    const selected = document.getElementById(id)
+    const selected = event.target
     selected.classList.add("selected")
-    document.getElementById("static").click()
+    document.getElementById("radio-static-post").click()
 }
 
 function removeAllSelections() {
@@ -30,7 +76,7 @@ function removeAllSelections() {
 
 function confirmChoice() {
     const selectedPost = document.getElementsByClassName("selected")[0]
-    const static = document.getElementById("static")
+    const static = document.getElementById("radio-static-post")
 
     if (static.checked && !selectedPost) {
         return $("#noPostSelectedModal").modal({

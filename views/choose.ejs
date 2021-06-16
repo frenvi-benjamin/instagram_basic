@@ -3,7 +3,6 @@
 <head>
     <%- include("./partials/head", { title: "Post wählen" }) %>
     <link rel="stylesheet" href="/css/choose.css">
-    <script src="/js/choose.js"></script>
 </head>
 <body>
     <%- include("./partials/header") %>
@@ -15,33 +14,33 @@
                         Sie können nun einen Ihrer Instagram-Posts wählen, der den Kunden nach dem Scannen des QR-Codes angezeigt werden soll.
                         Alternativ haben Sie die Wahl, immer den aktuellsten Instagram-Post zu promoten.
                         <br><br>
-                        <label for="static">
-                            <input type="radio" name="radio" id="static">
-                            Ich möchte den von mir ausgewählten Post promoten
-                        </label>
-                        <br>
-                        <label for="dynamic">
-                            <input type="radio" name="radio" id="dynamic" checked onclick="removeAllSelections()">
+                        <label for="radio-dynamic-post">
+                            <input type="radio" name="radio" id="radio-dynamic-post" checked>
                             Ich möchte immer den aktuellsten Post promoten
                         </label>
+                        <br>
+                        <label for="radio-static-post">
+                            <input type="radio" name="radio" id="radio-static-post">
+                            Ich möchte einen bestimmten Post promoten
+                        </label>
                         <br><br>
-                        <button class="btn btn-custom" onclick="confirmChoice()">
+                        <button class="btn btn-custom confirm-button">
                             Auswahl bestätigen
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div id="images" class="row" hidden>
             <% media.forEach(post => { %>
                 <div class="m-1 img-container">
-                    <img class="preview-img" src="<%= post.media_url %>" id="<%= post.id %>" onclick="selectPost('<%= post.id %>')">
+                    <img class="preview-img" src="<%= post.media_url %>" id="<%= post.id %>">
                 </div>
             <% }) %>
         </div>
     </div>
 
-    <button id="fixed" class="btn btn-custom" onclick="confirmChoice()">
+    <button id="fixed-confirm-button" class="btn btn-custom confirm-button">
         Auswahl bestätigen
     </button>
 
@@ -56,7 +55,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-custom full-width" data-dismiss="modal">Ich möchte einen Post wählen</button>
-              <button type="button" class="btn btn-custom full-width" data-dismiss="modal" onclick="document.getElementById('dynamic').click(); confirmChoice()">Ich möchte immer den neusten Post</button>
+              <button id="switch-to-dynamic-button" type="button" class="btn btn-custom full-width confirm-button" data-dismiss="modal">Ich möchte immer den neusten Post</button>
             </div>
           </div>
         </div>
@@ -69,17 +68,19 @@
                     <h4 class="modal-title">Wahl bestätigen</h4>
                 </div>
                 <div class="modal-body">
-                    Sie haben diesen Post für die Promotion gewählt. Stimmt das so?
+                    <span hidden id="static-post-text">Du hast diesen Post für die Promotion gewählt. Stimmt das so?</span>
+                    <span id="dynamic-post-text">Du willst immer den aktuellsten Post promoten. Im Moment ist das diese hier.</span>
                     <br><br>
                     <img id="final-img" src="<%= media[0].media_url %>">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-custom-warning full-width" data-dismiss="modal">Meine Wahl ändern</button>
-                    <button type="submit" class="btn btn-custom full-width" data-dismiss="modal" onclick="sendConfirmation()">Meine Wahl bestätigen</button>
+                    <button id="final-confirmation" class="btn btn-custom full-width" data-dismiss="modal" onclick="sendConfirmation()">Meine Wahl bestätigen</button>
                 </div>
             </div>
         </div>
     </div>
-
+    
+    <script src="/js/choose.js"></script>
 </body>
 </html>

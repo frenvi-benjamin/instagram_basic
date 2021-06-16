@@ -46,7 +46,7 @@
     max-width: 100%;
 }
 
-#fixed {
+#fixed-confirm-button {
     position: fixed;
     bottom: 20px;
     right: 20px;
