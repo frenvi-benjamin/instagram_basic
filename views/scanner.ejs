@@ -11,7 +11,8 @@
 
 	<%- include("./partials/header") %>
 
-	<div class="container-fluid">
+	<div class="container">
+        <%- include("./partials/progress-bar", { step: 3 }) %>
 		<div class="row" id="scanner-row">
 			<div class="col" id="scanner-col">
 				<div class="mx-auto max-width-500px" id="scanner">

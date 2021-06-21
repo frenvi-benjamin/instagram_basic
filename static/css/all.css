@@ -76,3 +76,7 @@ body {
 .full-width {
     width: 100%;
 }
+
+.progress-bar {
+    background-color: #A2D208;
+}
