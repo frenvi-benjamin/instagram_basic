@@ -85,3 +85,7 @@ body {
 .progress-bar {
     background-color: #A2D208;
 }
+
+#winner>.modal-dialog>.modal-content>.modal-body {
+    text-align: center;
+}

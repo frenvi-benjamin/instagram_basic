@@ -33,6 +33,16 @@
             </div>
         </div>
     </div>
+
+    <% if (Math.random() <= 0.5) { %>
+        <%- include("./partials/winner", { type: rewardType }) %>
+        <script>
+            $("#winner").modal({
+                backdrop: "static",
+                keyboard: false,
+            })
+        </script>
+    <% } %>
 </body>
 
 </html>
