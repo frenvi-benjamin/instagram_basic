@@ -96,6 +96,9 @@ app.use("/scanner", require("./routes/scannerRoute"))
 //choose
 app.use("/choose", require("./routes/chooseRoute"))
 
+//reward
+app.use("/reward", require("./routes/rewardRoute"))
+
 //preview
 app.use("/preview", require("./routes/previewRoute"))
 

@@ -115,5 +115,5 @@ function sendConfirmation() {
         })
     })
 
-    window.location = "/scanner"
+    window.location = "/reward"
 }

@@ -1,0 +1,39 @@
+<%
+    let text = ""
+
+    switch (type) {
+        case 1:
+        case "1":
+            text = "eine Kugel Eis deiner Wahl im Becher!"
+            break;
+    
+        case 2:
+        case "2":
+            text = "eine kostenlose Portion Sahne auf dein Eis!"
+            break;
+    
+        case 3:
+        case "3":
+            text = "eine Kugel Eis extra!"
+            break;
+    
+        case 4:
+        case "4":
+            text = "eine Überraschung!"
+            break;
+    
+        
+    }
+%>
+<div id="winner" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Du hast gewonnen!</h5>
+            </div>
+            <div class="modal-body">
+                Zeige diese Nachricht und erhalte <b><%= text %></b>
+            </div>
+        </div>
+    </div>
+</div>
