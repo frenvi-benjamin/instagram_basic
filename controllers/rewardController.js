@@ -1,5 +1,6 @@
 const ejs = require("ejs")
 const path = require("path")
+const User = require("../models/userModel")
 
 function render(req, res) {
     res.render("reward")
@@ -12,4 +13,9 @@ function renderModal(req, res) {
     })
 }
 
-module.exports = { render, renderModal }
+function setRewardType(req, res) {
+    User.findOneAndUpdate({ username: req.session.username }, { rewardType: req.body.type }).exec()
+    res.sendStatus(200)
+}
+
+module.exports = { render, renderModal, setRewardType }

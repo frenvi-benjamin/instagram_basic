@@ -15,6 +15,7 @@ const userSchema = new Schema({
     }],
     nrOfScans: Number,
     promotedPost: String,
+    rewardType: String,
 }, { timestamps: true })
 
 const User = mongoose.model("User", userSchema)

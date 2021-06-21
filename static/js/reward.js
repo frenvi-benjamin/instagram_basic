@@ -21,5 +21,15 @@ for (let i = 0; i < choices.length; i++) {
             document.getElementById("spinner").hidden = true
             document.getElementById("preview").innerHTML = modal
         })
+
+        fetch("/reward/set", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "type": type
+            }),
+        })
     })
 }
