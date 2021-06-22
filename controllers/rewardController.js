@@ -18,4 +18,9 @@ function setRewardType(req, res) {
     res.sendStatus(200)
 }
 
-module.exports = { render, renderModal, setRewardType }
+function getRewardType(req, res) {
+    User.findOne({ username: req.session.username })
+    .then(user => res.send(user))
+}
+
+module.exports = { render, renderModal, setRewardType, getRewardType }

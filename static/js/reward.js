@@ -1,5 +1,3 @@
-const choices = document.getElementsByName("reward")
-
 for (let i = 0; i < choices.length; i++) {
     const choice = choices[i]
     choice.addEventListener("click", () => {
@@ -20,16 +18,6 @@ for (let i = 0; i < choices.length; i++) {
         .then(modal => {
             document.getElementById("spinner").hidden = true
             document.getElementById("preview").innerHTML = modal
-        })
-
-        fetch("/reward/set", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                "type": type
-            }),
         })
     })
 }

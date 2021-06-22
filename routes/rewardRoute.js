@@ -10,4 +10,6 @@ router.post("/modal", sharedController.checkForUserSession, controller.renderMod
 
 router.post("/set", sharedController.checkForUserSession, controller.setRewardType)
 
+router.get("/get", sharedController.checkForUserSession, controller.getRewardType)
+
 module.exports = router
