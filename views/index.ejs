@@ -3,19 +3,49 @@
 
 <head>
     <%- include("./partials/head", {title: "Home"}) %>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 
 <body>
     <%- include("./partials/header") %>
 
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <a role="button" class="btn btn-custom full-width my-1" href="/choose">Den zu promotenden Instagram-Post ändern</a>
-                <a role="button" class="btn btn-custom full-width my-1" href="/scanner">Neue QR-Codes Scannen</a>
-                <a role="button" class="btn btn-custom full-width my-1" href="/preview">Meine Promotion ansehen</a>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Einstellungen</h5>
+            </div>
+            <div class="card-body">
+                <div id="choose-div">
+                    <h6>Post auswählen</h6>
+                    <label for="radio-dynamic-post">
+                        <input type="radio" name="radio" id="radio-dynamic-post">
+                        Ich möchte immer den aktuellsten Post promoten
+                    </label>
+                    <br>
+                    <label for="radio-static-post">
+                        <input type="radio" name="radio" id="radio-static-post">
+                        Ich möchte einen bestimmten Post promoten
+                    </label>
+                    <br>
+                    <a hidden id="link-to-choose" class="btn btn-custom mb-4" href="/choose">Zur Auswahl</a>
+                    <button hidden id="confirm-dynamic-post" class="btn btn-custom mb-4">Bestätigen</button>
+                    <br>
+                    <span hidden id="done" style="color: #A2D208;">Erfolgreich geändert</span>
+                </div>
+
+                <div>
+                    <h6>Preis auswählen</h6>
+                    <%- include("./partials/reward-radios") %>
+                </div>
+
+
+                <div>
+                    <h6 class="mt-3">QR-Codes scannen</h6>
+                    <a href="/scanner" class="btn btn-custom">Zum Scanner</a>
+                </div>
             </div>
         </div>
     </div>
+    <script src="/js/index.js"></script>
 </body>
 </html>
