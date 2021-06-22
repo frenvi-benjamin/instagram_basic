@@ -82,7 +82,7 @@ body {
     width: 100%;
 }
 
-.progress-bar {
+.progress-bar.green {
     background-color: #A2D208;
 }
 

@@ -39,3 +39,19 @@
 .qr-col {
     text-align: center;
 }
+
+.progress-bar.type-0 {
+    background-color: #ef476f;
+}
+
+.progress-bar.type-1 {
+    background-color: #ffd166;
+}
+
+.progress-bar.type-2 {
+    background-color: #06d6a0;
+}
+
+.progress-bar.type-3 {
+    background-color: #118ab2;
+}
