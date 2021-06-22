@@ -1,5 +1,6 @@
 animateStep3()
 animateStep4()
+animateStep5()
 
 function concat() {
     let output = ""
@@ -15,6 +16,40 @@ function concat() {
 }
 
 function animateStep3() {
+    const pointer = '*[data-name="rwd-pointer"]'
+    const coffee = '*[data-name="rwd-coffee"]'
+    const bowl = '*[data-name="rwd-bowl"]'
+    const cone = '*[data-name="rwd-cone"]'
+
+    gsap.set(concat(pointer, coffee, bowl, cone), { transformOrigin: "50% 50%" })
+
+    tl = gsap.timeline({ repeat: -1, yoyo: false, repeatDelay: 0.5 })
+
+    tl.to(pointer, { duration: 1, x: 137, ease: "power4.inOut" })
+    tl.to(cone, { duration: 0.5, opacity: 0.5, ease: "power3.inOut" }, "-=0.75")
+    tl.to(coffee, { duration: 0.5, opacity: 1, ease: "power3.inOut" }, "-=0.5")
+
+    tl.to({}, { duration: 0.5 })
+
+    tl.to(pointer, { duration: 1, x: 0, ease: "power4.inOut" })
+    tl.to(coffee, { duration: 0.5, opacity: 0.5, ease: "power3.inOut" }, "-=0.75")
+    tl.to(cone, { duration: 0.5, opacity: 1, ease: "power3.inOut" }, "-=0.5")
+
+    tl.to({}, { duration: 0.5 })
+
+    tl.to(pointer, { duration: 1, x: -137, ease: "power4.inOut" })
+    tl.to(cone, { duration: 0.5, opacity: 0.5, ease: "power3.inOut" }, "-=0.75")
+    tl.to(bowl, { duration: 0.5, opacity: 1, ease: "power3.inOut" }, "-=0.5")
+    
+    tl.to({}, { duration: 0.5 })
+
+    tl.to(pointer, { duration: 1, x: 0, ease: "power4.inOut" })
+    tl.to(bowl, { duration: 0.5, opacity: 0.5, ease: "power3.inOut" }, "-=0.75")
+    tl.to(cone, { duration: 0.5, opacity: 1, ease: "power3.inOut" }, "-=0.5")
+
+}
+
+function animateStep4() {
     const qrcodeGroup = '*[data-name="reg-qrcode-group"]'
     const tick = '*[data-name="reg-tick"]'
     const border = '*[data-name="reg-border"]'
@@ -48,7 +83,7 @@ function animateStep3() {
     tl.to(tick, { duration: 0, opacity: 0 })
 }
 
-function animateStep4() {
+function animateStep5() {
     const qrcodeSmall = '*[data-name="usr-qrcode-sm"]'
     const qrcodeLarge = '*[data-name="usr-qrcode-lg"]'
     const border = '*[data-name="usr-border"]'
