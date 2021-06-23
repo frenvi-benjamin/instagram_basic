@@ -66,11 +66,11 @@ function animateStep4() {
 
     tl.fromTo(qrcodeGroup, { x: -300, scale: 2 }, { x: 0, scale: 1, duration: 1, ease: "power2.inOut" })
 
-    tl.from(border, { duration: 0.5, opacity: 0, scale: 1.2, ease: "power2.inOut"}, "-=0.25")
+    tl.from(border, { duration: 0.5, opacity: 0, scale: 1.2, ease: "power2.inOut"}, "-=0.5")
 
     tl.to(scanBars, { duration: 1, y: 475, ease: "power2.inOut" })
 
-    tl.from(insta, { duration: 1, y: 150, ease: "power2.inOut" })
+    tl.from(insta, { duration: 1, y: 150, ease: "power2.inOut" }, "-=0.6")
 
     tl.to(insta, { duration: 0.5, opacity: 0 }, "-=0.3")
 

@@ -12,11 +12,11 @@
     text-align: center;
 }
 
-a {
+ol>a {
     color: black;
 }
 
-a:hover {
+ol>a:hover {
     color: rgba(0, 0, 0, 0.5);
     text-decoration: none;
 }
