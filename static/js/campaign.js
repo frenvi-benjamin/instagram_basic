@@ -1,9 +1,8 @@
 try {
     const winner = document.getElementById("winner")
-    const then = Date.now()
 
     const id = setInterval(() => {
-        if (Date.now() - then > 10000) {
+        if (Date.now() - time > 1800000) {
             try {
                 $("#winner").modal("hide")
                 document.body.removeChild(winner)
@@ -12,5 +11,5 @@ try {
                 clearInterval(id)
             }
         }
-    }, 1000)
+    }, 60000)
 } catch {}

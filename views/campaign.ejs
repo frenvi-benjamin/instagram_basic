@@ -33,6 +33,7 @@
             </div>
         </div>
     </div>
+    <script> const time = <%= lottery.time %> </script>
     <% try { if (lottery.winner) { %>
         <%- include("./partials/winner", { type: rewardType }) %>
         <script>
