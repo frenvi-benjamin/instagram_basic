@@ -10,6 +10,7 @@ function checkForActiveQrcode (req, res, next) {
         user => {
             helper.incrementNrOfScans(user.username)
             // lottery
+            if (req.session.lottery == undefined) req.session.lottery = {}
             if (req.session.lottery == undefined || (Date.now() - req.session.lottery.time) > 2000) { // last lottery entered has to be a week old
                 console.log("lottery entered")
                 if (Math.random() <= 0.9) {
