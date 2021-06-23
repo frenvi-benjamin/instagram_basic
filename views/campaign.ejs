@@ -33,8 +33,7 @@
             </div>
         </div>
     </div>
-
-    <% if (Math.random() <= 0.5) { %>
+    <% try { if (lottery.winner) { %>
         <%- include("./partials/winner", { type: rewardType }) %>
         <script>
             $("#winner").modal({
@@ -42,7 +41,8 @@
                 keyboard: false,
             })
         </script>
-    <% } %>
+    <% }} catch {} %>
+    <script src="/js/campaign.js"></script>
 </body>
 
 </html>

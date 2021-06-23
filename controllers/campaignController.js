@@ -16,7 +16,8 @@ function render (req, res) {
         User.findOne({ username: req.params.username })
     ])
     .then(([partnerInstagram, eatleryInstagram, user]) => {
-        res.render("campaign", { partnerInstagram: partnerInstagram, eatleryInstagram, eatleryInstagram, username: req.params.username, rewardType: user.rewardType })
+        res.render("campaign", { partnerInstagram: partnerInstagram, eatleryInstagram, eatleryInstagram, username: req.params.username, lottery: req.session.lottery, rewardType: user.rewardType })
+        req.session.lottery.winner = false
     })
     .catch((err) => {
         console.log(err)
