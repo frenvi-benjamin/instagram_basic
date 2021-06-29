@@ -1,5 +1,7 @@
 const winner = document.getElementById("winner")
 const fireworks = document.getElementsByClassName("stage-container")[0]
+let fireworkIntervalID
+
 
 if (winner && fireworks) {
 
@@ -29,13 +31,19 @@ function showWinnerModalAndFireworks() {
         keyboard: false,
     })
 
-    startFireworks()
+    fireworkIntervalID = startFireworks()
 
     console.log("show winner modal and start fireworks")
 }
 
 function removeWinnerAndFireworks() {
     $("#winner").modal("hide")
+    try {
+        clearInterval(fireworkIntervalID)
+    }
+    catch (error) {
+        console.log(error)
+    }
     document.body.removeChild(winner)
     document.body.removeChild(fireworks)
     console.log("removed modal and fireworks")

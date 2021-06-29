@@ -859,17 +859,7 @@ let isFirstSeq = true;
 const finaleCount = 32;
 let currentFinaleCount = 0;
 function startSequence() {
-	new Shell(randomShell(shellSizeSelector())).launch(
-		getRandomShellPositionH(),
-		getRandomShellPositionV()
-	)
-
-	setInterval(() => {
-		new Shell(randomShell(shellSizeSelector())).launch(
-			getRandomShellPositionH(),
-			getRandomShellPositionV()
-		)
-	}, 4000)
+	
 	
 
 	// if (isFirstSeq) {
@@ -2068,5 +2058,15 @@ const soundManager = {
 };
 
 function startFireworks() {
-	init()
+	new Shell(randomShell(shellSizeSelector())).launch(
+		getRandomShellPositionH(),
+		getRandomShellPositionV()
+	)
+
+	return setInterval(() => {
+		new Shell(randomShell(shellSizeSelector())).launch(
+			getRandomShellPositionH(),
+			getRandomShellPositionV()
+		)
+	}, 4000)
 }
