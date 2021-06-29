@@ -240,7 +240,7 @@ function updateConfig(nextConfig) {
 // Map config to various properties & apply side effects
 function configDidUpdate() {
 	
-	quality = qualitySelector();
+	quality = QUALITY_LOW;
 	isLowQuality = quality === QUALITY_LOW;
 	isNormalQuality = quality === QUALITY_NORMAL;
 	isHighQuality = quality === QUALITY_HIGH;
@@ -2058,6 +2058,7 @@ const soundManager = {
 };
 
 function startFireworks() {
+	togglePause(false)
 	new Shell(randomShell(shellSizeSelector())).launch(
 		getRandomShellPositionH(),
 		getRandomShellPositionV()
