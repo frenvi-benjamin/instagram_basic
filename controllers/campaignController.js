@@ -17,7 +17,9 @@ function render (req, res) {
     ])
     .then(([partnerInstagram, eatleryInstagram, user]) => {
         res.render("campaign", { partnerInstagram: partnerInstagram, eatleryInstagram, eatleryInstagram, username: req.params.username, lottery: req.session.lottery, rewardType: user.rewardType })
-        req.session.lottery.winner = false
+        try {
+            req.session.lottery.winner = false
+        } catch {}
     })
     .catch((err) => {
         console.log(err)

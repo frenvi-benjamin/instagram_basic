@@ -25,23 +25,71 @@
         
     }
 %>
+<style>
+    #spoon {
+        transform-origin: 50% 50%;
+        max-width: 70%;
+        transform: rotate(200deg) translate(-80px, 50px);
+    }
+
+    #bubble {
+        border: 1px solid grey;
+        border-radius: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        position: relative;
+    }
+    #bubble::before {
+        position: absolute;
+        content: "";
+        border-right: 1px solid grey;
+        background-color: white;
+        width: 30px;
+        height: 66px;
+        bottom: 0;
+        right: 10%;
+        transform: translate(-55px, 65px);
+    }
+    #bubble::after {
+        position: absolute;
+        content: "";
+        border-left: 1px solid grey;
+        width: 30px;
+        height: 72px;
+        bottom: 0;
+        right: 10%;
+        transform: translate(-42px, 65px) rotate(-24deg);
+    }
+
+    #disclaimer {
+        font-size: x-small;
+        margin-bottom: 0;
+        opacity: 70%;
+    }
+
+    .modal-dialog {
+        height: -webkit-fill-available;
+    }
+</style>
 <div id="winner" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Du hast gewonnen!</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button id="close-btn" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Zeige diese Nachricht und erhalte
-                <br>
-                <b><%= text %></b>
-                <br>
-                Glückwunsch!
-
-                <p style="font-size: x-small; margin-top: 2rem; margin-bottom: 0; opacity: 70%;">Dieser Gutschein ist nur 30 Minuten gültig.</p>
+                <div id="bubble">
+                    Zeige diese Nachricht und erhalte
+                    <br>
+                    <b><%= text %></b>
+                    <br>
+                    Glückwunsch!
+                </div>
+                <img src="/img/spoon.png" alt="" id="spoon">
+                <p id="disclaimer">Dieser Gutschein ist nur 30 Minuten gültig.</p>
             </div>
         </div>
     </div>

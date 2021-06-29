@@ -10,14 +10,19 @@ function checkForActiveQrcode (req, res, next) {
         user => {
             helper.incrementNrOfScans(user.username)
             // lottery
+            // set lottery session details if not set
             if (req.session.lottery == undefined) req.session.lottery = {}
-            if ((Date.now() - req.session.lottery.time) > 604800000 || req.session.lottery.time == undefined) { // last lottery entered has to be a week old
-                if (Math.random() <= 0.9) {
+            // only enter user in lottery if he was last entered more than a week ago or never before entered
+            if ((Date.now() - req.session.lottery.time) > 1000*60*60*24*7 || req.session.lottery.time == undefined) { // last lottery entered has to be a week old
+                // choose a winner by chance
+                if (Math.random() <= 1) {
                     req.session.lottery.winner = true
                 }
+                // set time entered into the lottery regardless of win or not
                 req.session.lottery.time = Date.now()
             }
             else {
+                // if not eligible to enter set winner to false
                 req.session.lottery.winner = false
             }
             res.redirect(`/campaign/${user.username}`)
