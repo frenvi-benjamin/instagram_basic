@@ -7,7 +7,27 @@ if (winner && fireworks) {
 
     addTimeToDisclaimer()
 
-    const intervalID = removeModalAfter30Mins()
+    const intervalID = setInterval(() => {
+        // remove modal and fireworks if 30 mins have passed since the user entered the lottery
+        if (!wonWithin30Mins()) {
+            console.log("30 mins are over")
+            try {
+                removeWinnerAndFireworks()
+                clearInterval(id)
+            } catch {
+                clearInterval(id)
+            }
+        }
+
+        // update the time displayed in the disclaimer
+        const locale = new Date(time).toLocaleString("de-DE", { timeZone: "CET" })
+        const minutesLeft = Math.round(30 - ((Date.now() - time)/1000/60))
+        const disclaimer = document.getElementById("disclaimer")
+        disclaimer.innerHTML = `Dieser Gutschein ist noch ${minutesLeft} Minuten gültig.<br>(ausgestellt ${locale})`
+        if (minutesLeft <= 5) {
+            disclaimer.style.color = "#DC3545"
+        }
+    }, 1000);
 
     document.getElementById("close-btn").addEventListener("click", () => {
         console.log("user closed modal")
@@ -51,21 +71,6 @@ function removeWinnerAndFireworks() {
 
 function wonWithin30Mins() {
     return Date.now() - time < (1000*60*30)
-}
-
-function removeModalAfter30Mins() {
-    const id = setInterval(() => {
-        if (!wonWithin30Mins()) {
-            console.log("30 mins are over")
-            try {
-                removeWinnerAndFireworks()
-                clearInterval(id)
-            } catch {
-                clearInterval(id)
-            }
-        }
-    }, 200)
-    return id
 }
 
 function addTimeToDisclaimer() {
