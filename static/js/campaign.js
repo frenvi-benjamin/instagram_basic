@@ -26,6 +26,7 @@ if (winner && fireworks) {
         disclaimer.innerHTML = `Dieser Gutschein ist noch ${minutesLeft} Minuten gültig.<br>(ausgestellt ${locale})`
         if (minutesLeft <= 5) {
             disclaimer.style.color = "#DC3545"
+            disclaimer.style.fontWeight = "bolder"
         }
     }, 1000);
 
