@@ -1,13 +1,21 @@
 // global event listeners
 
 addEventListener("scroll", () => {
-    if (pageYOffset > 400) {
-        $("#fixed-confirm-button").show()
+    var scrollPosition = window.pageYOffset;
+    var windowSize     = window.innerHeight;
+    var bodyHeight     = document.body.offsetHeight;
+
+    let distanceFromBottom = Math.max(bodyHeight - (scrollPosition + windowSize), 0);
+
+    if (distanceFromBottom > 100) {
+        $("#to-bottom").show()
     }
     else {
-        $("#fixed-confirm-button").hide()
+        $("#to-bottom").hide()
     }
 })
+
+
 
 // event listeners
 
@@ -19,8 +27,8 @@ const finalConfirmation = document.getElementById("final-confirmation")
 const switchButton = document.getElementById("switch-to-dynamic-button")
 
 radioStaticPost.addEventListener("click", () => {
-    document.getElementById("static-post-text").hidden = false
-    document.getElementById("dynamic-post-text").hidden = true
+    // document.getElementById("static-post-text").hidden = false
+    // document.getElementById("dynamic-post-text").hidden = true
 
     document.getElementById("images").hidden = false
 })
@@ -28,8 +36,8 @@ radioStaticPost.addEventListener("click", () => {
 radioDynamicPost.addEventListener("click", () => {
     removeAllSelections()
 
-    document.getElementById("static-post-text").hidden = true
-    document.getElementById("dynamic-post-text").hidden = false
+    // document.getElementById("static-post-text").hidden = true
+    // document.getElementById("dynamic-post-text").hidden = false
 
     document.getElementById("images").hidden = true
 })
@@ -44,12 +52,12 @@ for (let i = 0; i < confirmButtons.length; i++) {
     button.addEventListener("click", confirmChoice)
 }
 
-finalConfirmation.addEventListener("click", sendConfirmation)
+// finalConfirmation.addEventListener("click", sendConfirmation)
 
-switchButton.addEventListener("click", () => {
-    document.getElementById("radio-dynamic-post").click()
-    confirmChoice()
-})
+// switchButton.addEventListener("click", () => {
+//     document.getElementById("radio-dynamic-post").click()
+//     confirmChoice()
+// })
 
 // functions
 

@@ -46,9 +46,11 @@
     max-width: 100%;
 }
 
-#fixed-confirm-button {
+#to-bottom {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 2.11rem;
+    right: 15px;
     display: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }

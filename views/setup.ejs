@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head", { title: "Setup" }) %>
+    <link rel="stylesheet" href="/css/setup.css">
+</head>
+<body>
+    <%- include("./partials/header") %> 
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="progress mb-3">
+                    <div class="progress-bar green"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Post auswählen</h5>
+                    </div>
+                    <div class="card-body">
+                        <%- include("./partials/setup/choose") %>
+                    </div>
+                    <div id="setup-footer" class="modal-footer">
+                        <button disabled class="btn btn-custom mr-auto">Zurück</button>
+                        <button class="btn btn-custom ml-auto">Weiter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
