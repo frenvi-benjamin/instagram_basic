@@ -17,10 +17,14 @@ body {
     border-color: #A2D208;
 }
 
-.btn-custom:hover {
+.btn-custom:hover:not(:disabled) {
     color: #A2D208;
     background-color: white;
     border-color: #A2D208;
+}
+
+.btn-custom:hover {
+    color: white;
 }
 
 .btn-custom-danger {
@@ -29,10 +33,14 @@ body {
     border-color: #DC3545;
 }
 
-.btn-custom-danger:hover {
+.btn-custom-danger:hover:not(:disabled) {
     color: #DC3545;
     background-color: white;
     border-color: #DC3545;
+}
+
+.btn-custom-danger:hover {
+    color: white;
 }
 
 .btn-custom-warning {
@@ -41,10 +49,14 @@ body {
     border-color: #FFC107;
 }
 
-.btn-custom-warning:hover {
+.btn-custom-warning:hover:not(:disabled) {
     color:#FFC107;
     background-color: white;
     border-color: #FFC107;
+}
+
+.btn-custom-warning:hover {
+    color: white;
 }
 
 .btn-insta {
