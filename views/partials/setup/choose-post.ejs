@@ -23,7 +23,7 @@
     <div id="images" class="row" <% if (promotedPost == undefined) { %>hidden<% } %>>
         <% media.forEach(post => { %>
             <div class="m-1 img-container">
-                <img class="preview-img <% if (post.permalink == promotedPost) { %>selected<% } %>" src="<%= post.media_url %>" id="<%= post.id %>">
+                <img class="preview-img <% if (post.permalink == promotedPost) { %>selected<% } %>" src="<%= post.media_url %>" id="<%= post.id %>" data-permalink="<%= post.permalink %>">
             </div>
         <% }) %>
     </div>

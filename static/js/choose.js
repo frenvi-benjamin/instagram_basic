@@ -34,6 +34,8 @@ backToTopButton.addEventListener("click", () => {
 
 
 radioStaticPost.addEventListener("click", () => {
+    setPromotedPost(document.getElementsByClassName("selected")[0])
+
     document.getElementById("images").hidden = false
 })
 
@@ -59,8 +61,6 @@ function selectPost(event) {
     const selected = event.target
     selected.classList.add("selected")
 
-    setPromotedPost(selected)
-
     document.getElementById("radio-static-post").click()
 }
 
@@ -85,13 +85,15 @@ function setPromotedPost(post) {
     if (post) {
         preview.src = post.src
         previewText.hidden = true
+        promotedPost = post.getAttribute("data-permalink")
     }
     else {
         const firstImage = document.getElementsByClassName("preview-img")[0]
         preview.src = firstImage.src
-        promotedPost = firstImage
+        promotedPost = undefined
         
         previewText.hidden = false
         previewText.innerHTML = "Du hast dich dafür entschieden immer den neusten Post auf deinem Instagram zu promoten.<br>Das ist aktuell dieser:"
     }
+    console.log(promotedPost)
 }
