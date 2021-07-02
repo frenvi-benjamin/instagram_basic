@@ -99,7 +99,10 @@ const scanner = new QrScanner(
 	() => {}
 )
 
-scanner.start()
+document.getElementById("start-scan").addEventListener("click", () => {
+	scanner.start()
+	document.getElementById("blindfold").hidden = true
+})
 
 const scannerDiv = document.getElementById("scanner")
 const canvas = scanner.$canvas
@@ -109,7 +112,7 @@ scannerDiv.appendChild(canvas)
 
 
 var observer = new MutationObserver((mutationsList) => {
-	mutationsList.forEach(mutation => {
+	mutationsList.forEach(() => {
 		canvas.style.transform = video.style.transform
 	});
 })
