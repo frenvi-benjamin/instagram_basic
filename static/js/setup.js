@@ -8,7 +8,7 @@ history.scrollRestoration = "manual"
 for (let i = 0; i < nextButtons.length; i++) {
     const button = nextButtons[i];
     button.addEventListener("click", () => {
-        changePage(1)
+        jumpToPage(currentPage + 1)
         document.body.scrollTop = 0
         document.documentElement.scrollTop = 0
     })
@@ -17,7 +17,7 @@ for (let i = 0; i < nextButtons.length; i++) {
 for (let i = 0; i < prevButtons.length; i++) {
     const button = prevButtons[i];
     button.addEventListener("click", () => {
-        changePage(-1)
+        jumpToPage(currentPage - 1)
         document.body.scrollTop = 0
         document.documentElement.scrollTop = 0
     })
@@ -33,27 +33,6 @@ var currentPage = FIRST_PAGE
 pages[currentPage].hidden = false
 
 updateButtons()
-
-function changePage(nr) {
-    const previousPage = currentPage
-    currentPage += nr
-
-    // transition content
-
-    const contentTimeline = gsap.timeline()
-    contentTimeline.to(pages[previousPage], { duration: 0.25, opacity: 0 })
-    contentTimeline.to(pages[previousPage], { duration: 0, hidden: true })
-
-    contentTimeline.to(pages[currentPage], { duration: 0, hidden: false })
-    contentTimeline.to(pages[currentPage], { duration: 0.25, opacity: 1 })
-
-    // move progress bar
-
-    progressBar.style.width = ((currentPage/LAST_PAGE) * 100) + "%"
-
-    updateButtons()
-
-}
 
 function updateButtons() {
     // enable/disable nextButtons
@@ -85,4 +64,28 @@ function updateButtons() {
             button.disabled = false
         }
     }
+}
+
+function jumpToPageById(id) {
+    jumpToPage([...pages].indexOf(document.getElementById(id)))
+}
+
+function jumpToPage(nr) {
+    const previousPage = currentPage
+    currentPage = nr
+
+    // transition content
+
+    const contentTimeline = gsap.timeline()
+    contentTimeline.to(pages[previousPage], { duration: 0.25, opacity: 0 })
+    contentTimeline.to(pages[previousPage], { duration: 0, hidden: true })
+
+    contentTimeline.to(pages[currentPage], { duration: 0, hidden: false })
+    contentTimeline.to(pages[currentPage], { duration: 0.25, opacity: 1 })
+
+    // move progress bar
+
+    progressBar.style.width = ((currentPage/LAST_PAGE) * 100) + "%"
+
+    updateButtons()
 }

@@ -1,20 +1,25 @@
-<div class="setup-content-page" hidden>
-    <link rel="stylesheet" href="/css/choose.css">
+<div class="setup-content-page" id="choose-post-page" hidden>
     <h5 class="card-title">Post auswählen</h5>
 
     Du kannst nun einen deiner Instagram-Posts wählen, der auf der Kampagnen-Seite promoted wird.
     <br>
     Alternativ hast du die Wahl, immer den aktuellsten Instagram-Post zu promoten.
     <br><br>
+
     <label for="radio-dynamic-post">
         <input type="radio" name="radio" id="radio-dynamic-post" <% if (promotedPost == undefined) { %>checked<% } %>>
         Ich möchte immer den aktuellsten Post promoten
     </label>
+
     <br>
+
     <label for="radio-static-post">
         <input type="radio" name="radio" id="radio-static-post" <% if (promotedPost != undefined) { %>checked<% } %>>
         Ich möchte einen bestimmten Post promoten
     </label>
+
+
+
     <div id="images" class="row" <% if (promotedPost == undefined) { %>hidden<% } %>>
         <% media.forEach(post => { %>
             <div class="m-1 img-container">
@@ -23,9 +28,7 @@
         <% }) %>
     </div>
 
-    <a id="back-to-top" class="btn btn-custom" href="#header">
+    <button id="back-to-top" class="btn btn-custom">
         <i class="fas fa-chevron-up"></i>
-    </a>
-
-    <script src="/js/choose.js"></script>
+    </button>
 </div>

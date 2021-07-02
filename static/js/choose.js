@@ -7,8 +7,6 @@ addEventListener("scroll", () => {
 
     let distanceFromBottom = Math.max(bodyHeight - (scrollPosition + windowSize), 0)
 
-    let backToTopButton = document.getElementById("back-to-top")
-
     if (distanceFromBottom > 100 && pageYOffset > 300) {
         gsap.to(backToTopButton, { duration: 0.2, opacity: 1, pointerEvents: "all" })
     }
@@ -21,6 +19,7 @@ addEventListener("scroll", () => {
 
 // event listeners
 
+const backToTopButton = document.getElementById("back-to-top")
 const radioStaticPost = document.getElementById("radio-static-post")
 const radioDynamicPost = document.getElementById("radio-dynamic-post")
 const previewImages = document.getElementsByClassName("preview-img")
@@ -28,51 +27,40 @@ const confirmButtons = document.getElementsByClassName("confirm-button")
 const finalConfirmation = document.getElementById("final-confirmation")
 const switchButton = document.getElementById("switch-to-dynamic-button")
 
-radioStaticPost.addEventListener("click", () => {
-    // document.getElementById("static-post-text").hidden = false
-    // document.getElementById("dynamic-post-text").hidden = true
+backToTopButton.addEventListener("click", () => {
+    document.body.scrollTop = 0
+    document.documentElement.scrollTop = 0
+})
 
+
+radioStaticPost.addEventListener("click", () => {
     document.getElementById("images").hidden = false
 })
 
-radioDynamicPost.addEventListener("click", () => {
-    removeAllSelections()
 
-    // document.getElementById("static-post-text").hidden = true
-    // document.getElementById("dynamic-post-text").hidden = false
+radioDynamicPost.addEventListener("click", () => {
+    setPromotedPost(undefined)
 
     document.getElementById("images").hidden = true
 })
+
 
 for (let i = 0; i < previewImages.length; i++) {
     const image = previewImages[i];
     image.addEventListener("click", selectPost)
 }
 
-for (let i = 0; i < confirmButtons.length; i++) {
-    const button = confirmButtons[i];
-    button.addEventListener("click", confirmChoice)
-}
-
-// finalConfirmation.addEventListener("click", sendConfirmation)
-
-// switchButton.addEventListener("click", () => {
-//     document.getElementById("radio-dynamic-post").click()
-//     confirmChoice()
-// })
 
 // functions
 
 function selectPost(event) {
-    const imgs = document.getElementsByTagName("img")
-
-    for (let i = 0; i < imgs.length; i++) {
-        const img = imgs[i];
-        img.classList.remove("selected")
-    }
+    removeAllSelections()
 
     const selected = event.target
     selected.classList.add("selected")
+
+    setPromotedPost(selected)
+
     document.getElementById("radio-static-post").click()
 }
 
@@ -84,46 +72,26 @@ function removeAllSelections() {
     }
 }
 
-function confirmChoice() {
-    const selectedPost = document.getElementsByClassName("selected")[0]
-    const static = document.getElementById("radio-static-post")
+try {
+    setPromotedPost(document.getElementsByClassName("selected")[0])
+} catch {}
 
-    if (static.checked && !selectedPost) {
-        return $("#noPostSelectedModal").modal({
-            backdrop: "static",
-            keyboard: false,
-        })
-    }
-    
-    const finalImg = document.getElementById("final-img")
+var promotedPost
 
-    if (static.checked) {
-        finalImg.src = selectedPost.src
-        finalImg.setAttribute("data-id", selectedPost.id)
+function setPromotedPost(post) {
+    promotedPost = post
+    const preview = document.getElementById("promoted-post-preview")
+    const previewText = document.getElementById("promoted-post-preview-text")
+    if (post) {
+        preview.src = post.src
+        previewText.hidden = true
     }
     else {
-        finalImg.src = document.getElementsByClassName("preview-img")[0].src
-        finalImg.setAttribute("data-id", undefined)
+        const firstImage = document.getElementsByClassName("preview-img")[0]
+        preview.src = firstImage.src
+        promotedPost = firstImage
+        
+        previewText.hidden = false
+        previewText.innerHTML = "Du hast dich dafür entschieden immer den neusten Post auf deinem Instagram zu promoten.<br>Das ist aktuell dieser:"
     }
-    
-    $("#confirmationModal").modal({
-        backdrop: "static",
-        keyboard: false,
-    })
-}
-
-function sendConfirmation() {
-    const id = document.getElementById("final-img").getAttribute("data-id")
-
-    fetch("/admin/user/set/promotedPost", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            mediaID: id
-        })
-    })
-
-    window.location = "/reward"
 }
