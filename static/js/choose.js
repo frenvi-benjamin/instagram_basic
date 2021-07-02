@@ -1,17 +1,19 @@
 // global event listeners
 
 addEventListener("scroll", () => {
-    var scrollPosition = window.pageYOffset;
-    var windowSize     = window.innerHeight;
-    var bodyHeight     = document.body.offsetHeight;
+    let scrollPosition = window.pageYOffset
+    let windowSize     = window.innerHeight
+    let bodyHeight     = document.body.offsetHeight
 
-    let distanceFromBottom = Math.max(bodyHeight - (scrollPosition + windowSize), 0);
+    let distanceFromBottom = Math.max(bodyHeight - (scrollPosition + windowSize), 0)
 
-    if (distanceFromBottom > 100) {
-        $("#to-bottom").show()
+    let backToTopButton = document.getElementById("back-to-top")
+
+    if (distanceFromBottom > 100 && pageYOffset > 300) {
+        gsap.to(backToTopButton, { duration: 0.2, opacity: 1, pointerEvents: "all" })
     }
     else {
-        $("#to-bottom").hide()
+        gsap.to(backToTopButton, { duration: 0.2, opacity: 0, pointerEvents: "none" })
     }
 })
 

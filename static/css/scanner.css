@@ -52,7 +52,7 @@
 #scanner {
     display: block;
     width: 100%;
-    max-width: 100%;
+    max-width: 90vh;
     position: relative;
 }
 
@@ -69,7 +69,7 @@ canvas {
     display: none;
 }
 
-@media screen and (max-height: 450px) {
+/* @media screen and (max-height: 450px) {
     #header {
         display: none;
     }
@@ -97,4 +97,4 @@ canvas {
     .horizontal {
         display: block;
     }
-}
+} */

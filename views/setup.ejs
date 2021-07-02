@@ -10,27 +10,31 @@
         <div class="row">
             <div class="col">
                 <div class="progress mb-3">
-                    <div class="progress-bar green"></div>
+                    <div class="progress-bar green" style="width: 0%;"></div>
                 </div>
             </div>
         </div>
         <div class="row mb-3">
             <div class="col">
                 <div class="card">
-                    <div class="card-header">
-                        <h5>Post auswählen</h5>
+                    <div id="setup-header" class="modal-footer">
+                        <%- include("./partials/setup/header-footer") %> 
                     </div>
                     <div class="card-body">
+                        <h5 id="title" class="card-title"></h5>
                         <%- include("./partials/setup/choose") %>
+                        <%- include("./partials/setup/reward") %>
+                        <%- include("./partials/setup/scanner") %>
+                        <%- include("./partials/setup/preview") %>
                     </div>
                     <div id="setup-footer" class="modal-footer">
-                        <button disabled class="btn btn-custom mr-auto">Zurück</button>
-                        <button class="btn btn-custom ml-auto">Weiter</button>
+                        <%- include("./partials/setup/header-footer") %> 
                     </div>
                 </div>
             </div>
         </div>
-        
     </div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+    <script src="/js/setup.js"></script>
 </body>
 </html>

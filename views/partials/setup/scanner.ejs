@@ -1,0 +1,49 @@
+<div id="scanner-page" hidden>
+	<link rel="stylesheet" href="/css/scanner.css">
+
+    <video hidden id="qr-video" class="centered video" autoplay="true" playsinline="true"></video>
+
+	<div class="container">
+		<div class="row" id="scanner-row">
+			<div class="col px-0" id="scanner-col">
+				<div class="mx-auto max-width-500px" id="scanner">
+					<i id="info" class="far fa-question-circle rounded p-1 m-2" role="button" onclick="modal.show()"></i>
+					<div id="qr-counter" class="h5 rounded pb-1 pt-2 m-2">0</div>
+					<div id="scan-response-div"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">QR-Codes Scannen</h4>
+				</div>
+				<div class="modal-body">
+					Nun kannst du beliebig viele QR-Codess scannen.
+					<br>
+					<br>
+					<b>Achtung!</b>
+					<br>
+					Bitte nur QR-Codes, die hier registriert wurden auch später Kunden zum Scannen aushängen.
+				</div>
+				<div class="modal-footer">
+					<button id="ok-button" type="button" class="btn btn-custom" data-dismiss="modal">Verstanden</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		var modal = new bootstrap.Modal(document.getElementById("modal"))
+
+		if (!<%= hasVisitedScanner %>) {
+			modal.show()
+		}
+	</script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+	<script src="/js/scanner.js" type="module"></script>
+</div>

@@ -1,9 +1,6 @@
 iframe {
-    width: 96vw;
-    margin-left: 2vw;
-    margin-right: 2vw;
-    
-    overflow: hidden;
+    width: 100%;
+    overflow: auto;
 }
 
 .border {

@@ -46,11 +46,9 @@
     max-width: 100%;
 }
 
-#to-bottom {
+#back-to-top {
     position: fixed;
-    bottom: 2.11rem;
-    right: 15px;
-    display: none;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    bottom: 1rem;
+    right: 1rem;
+    opacity: 0;
 }

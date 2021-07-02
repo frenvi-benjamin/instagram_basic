@@ -1,0 +1,18 @@
+<div id="reward-page" hidden>
+    <link rel="stylesheet" href="/css/reward.css">
+
+    Welchen Preis sollen deine Kunden gewinnen können?
+    <br>
+    <br>
+    <%- include("../reward-radios") %>
+
+
+    <div id="spinner" class="spinner mx-auto" hidden>
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+    <div id="preview">
+        <%- include("../winner", { type: rewardType }) %>
+    </div>
+    <script src="/js/reward.js"></script>
+</div>
