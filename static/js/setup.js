@@ -30,6 +30,8 @@ var currentPage = FIRST_PAGE
 
 pages[currentPage].hidden = false
 
+updateButtons()
+
 function changePage(nr) {
     const previousPage = currentPage
     currentPage += nr
@@ -47,6 +49,11 @@ function changePage(nr) {
 
     progressBar.style.width = ((currentPage/LAST_PAGE) * 100) + "%"
 
+    updateButtons()
+
+}
+
+function updateButtons() {
     // enable/disable nextButtons
 
     if (currentPage == LAST_PAGE) {
