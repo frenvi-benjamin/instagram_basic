@@ -9,7 +9,8 @@ for (let i = 0; i < nextButtons.length; i++) {
     const button = nextButtons[i];
     button.addEventListener("click", () => {
         changePage(1)
-        window.location = "#header"
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
     })
 }
 
@@ -17,7 +18,8 @@ for (let i = 0; i < prevButtons.length; i++) {
     const button = prevButtons[i];
     button.addEventListener("click", () => {
         changePage(-1)
-        window.location = "#header"
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
     })
 }
 
