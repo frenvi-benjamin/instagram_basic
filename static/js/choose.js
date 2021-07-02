@@ -95,5 +95,4 @@ function setPromotedPost(post) {
         previewText.hidden = false
         previewText.innerHTML = "Du hast dich dafür entschieden immer den neusten Post auf deinem Instagram zu promoten.<br>Das ist aktuell dieser:"
     }
-    console.log(promotedPost)
 }
