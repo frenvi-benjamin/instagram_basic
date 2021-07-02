@@ -2,6 +2,9 @@ const nextButtons = document.getElementsByClassName("next")
 const prevButtons = document.getElementsByClassName("prev")
 const progressBar = document.getElementsByClassName("progress-bar")[0]
 
+// prevent automatic scrolling after refresh
+history.scrollRestoration = "manual"
+
 for (let i = 0; i < nextButtons.length; i++) {
     const button = nextButtons[i];
     button.addEventListener("click", () => {
