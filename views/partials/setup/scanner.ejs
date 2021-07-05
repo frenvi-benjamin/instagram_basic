@@ -1,5 +1,4 @@
 <div class="setup-content-page" hidden>
-	<link rel="stylesheet" href="/css/scanner.css">
     <h5 class="card-title">QR-Codes scannen</h5>
 
     <video hidden id="qr-video" class="centered video" autoplay="true" playsinline="true"></video>
@@ -9,7 +8,7 @@
 			<div class="col px-0" id="scanner-col">
 				<div class="mx-auto max-width-500px" id="scanner">
 					<div id="blindfold" class="border rounded">
-						Nun kannst du beliebig viele QR-Codess scannen.
+						Nun kannst du beliebig viele QR-Codes scannen.
 						<br>
 						<br>
 						<b>Achtung!</b>
@@ -19,13 +18,28 @@
 						<br>
 						<button id="start-scan" class="btn btn-custom">Scan starten</button>
 					</div>
-					<i id="info" class="far fa-question-circle rounded p-1 m-2" role="button" onclick="modal.show()"></i>
+					<i id="info" class="far fa-question-circle rounded p-1 m-2" role="button" onclick="new bootstrap.Modal(document.getElementById('modal')).show()"></i>
 					<div id="qr-counter" class="h5 rounded pb-1 pt-2 m-2">0</div>
 					<div id="scan-response-div"></div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
-	<script src="/js/scanner.js" type="module"></script>
+
+	<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">QR-Codes Scannen</h4>
+				</div>
+				<div class="modal-body">
+					<p>Um QR-Codes zu scannen musst du deine Kamera einfach zentral auf den QR-Code richten, bis die Nachricht "QR-Code gescannt" auftaucht.</p>
+					<p class="mb-0">Du kannst nachschauen, ob du bereits alle QR-Codes gescannt hast, indem du die Zahl in der oberen linken Ecke mit der Anzahl der gelieferten QR-Codes abgleichst.</p>
+				</div>
+				<div class="modal-footer">
+					<button id="ok-button" type="button" class="btn btn-custom" data-dismiss="modal">Verstanden</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

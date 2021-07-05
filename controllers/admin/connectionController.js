@@ -37,7 +37,7 @@ function clear(req, res) {
 function assureUnusedQrcode(req, res, next) {
     QrCode.findById(req.body.qrID)
     .then(qrcode => {
-        if (qrcode.connectedUser) {
+        if (qrcode.connectedUser && qrcode.connectedUser != req.session.instagramUserID) {
             return res.sendStatus(451)
         }
         else {
