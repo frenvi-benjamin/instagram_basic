@@ -4,25 +4,29 @@
         else if (first.nrOfScans < second.nrOfScans) return 1
         else return 0
     })
+    const TYPE_CUP_OF_ICE_CREAM = 1
+    const TYPE_EXTRA_CREAM = 2
+    const TYPE_EXTRA_SCOOP = 3
+    const TYPE_SURPRISE = 4
 
     let types = [0, 0, 0, 0]
     let total = 0
 
     users.forEach(user => {
         switch (user.rewardType) {
-            case "1":
+            case TYPE_CUP_OF_ICE_CREAM:
                 types[0]++
                 total++
                 break;
-            case "2":
+            case TYPE_EXTRA_CREAM:
                 types[1]++
                 total++
                 break;
-            case "3":
+            case TYPE_EXTRA_SCOOP:
                 types[2]++
                 total++
                 break;
-            case "4":
+            case TYPE_SURPRISE:
                 types[3]++
                 total++
                 break;
