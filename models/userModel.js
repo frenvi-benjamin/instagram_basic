@@ -13,9 +13,19 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "QrCode"
     }],
-    nrOfScans: Number,
+    nrOfScans: {
+        default: 0,
+        type: Number
+    },
     promotedPost: String,
-    rewardType: Number,
+    rewardType: {
+        default: 4,
+        type: Number
+    },
+    public: {
+        default: false,
+        type: Boolean
+    },
 }, { timestamps: true })
 
 const User = mongoose.model("User", userSchema)
