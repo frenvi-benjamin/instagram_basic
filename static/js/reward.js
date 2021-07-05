@@ -34,7 +34,10 @@ for (let i = 0; i < choices.length; i++) {
         document.getElementById("winner").hidden = true
         document.getElementById("spinner").hidden = false
 
-        const type = choice.attributes.getNamedItem("data-type").value
+        const type = parseInt(choice.attributes.getNamedItem("data-type").value)
+
+        setRewardType(type)
+
         fetch("/reward/modal", {
             method: "POST",
             headers: {
