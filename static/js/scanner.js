@@ -118,3 +118,14 @@ var observer = new MutationObserver((mutationsList) => {
 })
 
 observer.observe(video, { attributes : true, attributeFilter : ["style"] })
+
+const nextPrevButtons = document.querySelectorAll(".next,.prev")
+
+for (let i = 0; i < nextPrevButtons.length; i++) {
+	const button = nextPrevButtons[i];
+	button.addEventListener("click", () => {
+		console.log("click")
+		scanner.stop()
+		document.getElementById("blindfold").hidden = false
+	})
+}
