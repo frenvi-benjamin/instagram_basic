@@ -28,11 +28,14 @@ function showPreview() {
 function publishCampaign() {
     fetch("/me/set", {
         method: "POST",
-        body: {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
             "public": true,
             "promotedPost": promotedPost,
             "rewardType": rewardType,
-        },
+        }),
     })
     .then(new bootstrap.Modal(document.getElementById("publish-modal")).show())
 }
