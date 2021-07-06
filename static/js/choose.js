@@ -72,17 +72,17 @@ function removeAllSelections() {
     }
 }
 
+const username = document.getElementById("campaign-preview").getAttribute("data-username")
 var promotedPost
-const iframe = document.querySelector("#campaign-preview > iframe")
-const BASE_PREVIEW_URL = iframe.src
 function setPromotedPost(post) {
     promotedPost = post
     const preview = document.getElementById("promoted-post-preview")
     const previewText = document.getElementById("promoted-post-preview-text")
+
     if (promotedPost) {
-        iframe.src = `${BASE_PREVIEW_URL}&promotedPost=${promotedPost.getAttribute("data-permalink")}`
+        iframe.src = `/campaign/preview?username=${username}&promotedPost=${promotedPost.getAttribute("data-permalink")}`
     } else {
-        iframe.src = `${BASE_PREVIEW_URL}&promotedPost=undefined`
+        iframe.src = `/campaign/preview?username=${username}&promotedPost=undefined`
     }
     if (post) {
         preview.src = post.src

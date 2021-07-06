@@ -13,13 +13,18 @@ closePreviewButton.addEventListener("click", hidePreview)
 showPreviewButton.addEventListener("click", showPreview)
 publishButton.addEventListener("click", publishCampaign)
 
+const iframe = document.createElement("iframe")
+iframe.frameBorder = 0
+
 function hidePreview() {
     const tl = gsap.timeline()
     tl.to(preview, { duration: 0.25, opacity: 0 })
     tl.to(preview, { duration: 0, hidden: true })
+    document.querySelector("#campaign-preview > iframe").remove()
 }
 
 function showPreview() {
+    document.getElementById("campaign-preview").prepend(iframe)
     const tl = gsap.timeline()
     tl.to(preview, { duration: 0, hidden: false })
     tl.to(preview, { duration: 0.25, opacity: 1 })

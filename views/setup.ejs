@@ -37,8 +37,7 @@
         </div>
     </div>
 
-    <div id="campaign-preview" hidden>
-        <iframe frameborder="0" src="/campaign/preview?username=<%= username %>"></iframe>
+    <div id="campaign-preview" data-username="<%= username %>" hidden>
         <button id="close-preview-button" class="btn border rounded shadow-sm">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -46,10 +45,10 @@
 
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+    <script src="/js/confirm-and-publish.js"></script>
     <script src="/js/setup.js"></script>
     <script src="/js/choose.js"></script>
     <script src="/js/reward.js"></script>
     <script src="/js/scanner.js" type="module"></script>
-    <script src="/js/confirm-and-publish.js"></script>
 </body>
 </html>
