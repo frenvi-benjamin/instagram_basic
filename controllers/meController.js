@@ -1,16 +1,8 @@
 const User = require("../models/userModel")
 
 function get(req, res) {
-    let query
-
-    if (req.body.fields) {
-        query = User.findOne({ instagramUserID: req.session.instagramUserID }, req.body.fields)
-    }
-    else {
-        query = User.findOne({ instagramUserID: req.session.instagramUserID })
-    }
-
-    query.exec((err, user) => {
+    User.findOne({ instagramUserID: req.session.instagramUserID })
+    .exec((err, user) => {
         if (err) res.send(err)
         else res.send(user)
     })
