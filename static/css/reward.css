@@ -9,7 +9,7 @@
   padding: 10px;
 }
 
-#preview>.modal {
+#preview>.modal>.modal-dialog {
   box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
 
