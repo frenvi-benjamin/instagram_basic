@@ -26,6 +26,13 @@ function showPreview() {
 }
 
 function publishCampaign() {
-    // TODO set public to true
-    new bootstrap.Modal(document.getElementById("publish-modal")).show()
+    fetch("/me/set", {
+        method: "POST",
+        body: {
+            "public": true,
+            "promotedPost": promotedPost,
+            "rewardType": rewardType,
+        },
+    })
+    .then(new bootstrap.Modal(document.getElementById("publish-modal")).show())
 }

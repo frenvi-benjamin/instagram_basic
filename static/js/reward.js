@@ -3,7 +3,7 @@ const TYPE_EXTRA_CREAM = 2
 const TYPE_EXTRA_SCOOP = 3
 const TYPE_SURPRISE = 4
 
-fetch("/reward/get")
+fetch("/me")
 .then(response => response.json())
 .then(user => {
     switch (user.rewardType) {
