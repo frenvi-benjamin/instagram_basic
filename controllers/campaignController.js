@@ -5,7 +5,7 @@ function checkUserExistance(req, res, next) {
     helper.getUser(req.params.username)
     .then(
         () => {return next()},
-        () => {return res.render("404")}
+        () => {return res.redirect("/404", )}
     )
 }
 
@@ -27,7 +27,7 @@ function render (req, res) {
     })
     .catch((err) => {
         console.log(err)
-        res.render("no-permissions")
+        res.render("error", { title: "Error", message: "Die gesuchte Seite kann nicht aufgerufen werden, da der zugehörige Partner die Erlaubnis zum Teilen seiner Instagram-Inhalte zurückgezogen hat."})
     })
 }
 
