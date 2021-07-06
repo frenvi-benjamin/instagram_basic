@@ -72,16 +72,18 @@ function removeAllSelections() {
     }
 }
 
-try {
-    setPromotedPost(document.getElementsByClassName("selected")[0])
-} catch {}
-
 var promotedPost
-
+const iframe = document.querySelector("#campaign-preview > iframe")
+const BASE_PREVIEW_URL = iframe.src
 function setPromotedPost(post) {
     promotedPost = post
     const preview = document.getElementById("promoted-post-preview")
     const previewText = document.getElementById("promoted-post-preview-text")
+    if (promotedPost) {
+        iframe.src = `${BASE_PREVIEW_URL}&promotedPost=${promotedPost.getAttribute("data-permalink")}`
+    } else {
+        iframe.src = `${BASE_PREVIEW_URL}&promotedPost=undefined`
+    }
     if (post) {
         preview.src = post.src
         previewText.hidden = true
@@ -95,4 +97,12 @@ function setPromotedPost(post) {
         previewText.hidden = false
         previewText.innerHTML = "Du hast dich dafür entschieden immer den neusten Post auf deinem Instagram zu promoten.<br>Das ist aktuell dieser:"
     }
+}
+
+try {
+    setPromotedPost(document.getElementsByClassName("selected")[0])
+} catch {
+    const firstImage = document.getElementsByClassName("preview-img")[0]
+    firstImage.classList.add("selected")
+    setPromotedPost(document.getElementsByClassName("selected")[0])
 }
