@@ -32,7 +32,7 @@ function auth(req, res, next) {
             oauthRedirectURI: process.env.HOST + req.originalUrl
         })
     }
-    if (!req.query.code) return next()
+    if (!req.query.code || req.session.username) return next()
 
     var formdata = new FormData()
     formdata.append("code", req.query.code)
