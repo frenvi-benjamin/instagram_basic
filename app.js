@@ -81,6 +81,9 @@ app.use(sharedController.auth)
 // index
 app.use("/", require("./routes/indexRoute"))
 
+// me
+app.use("/me", sharedController.checkForUserSession, require("./routes/meRoute"))
+
 // example
 app.use("/example", require("./routes/exampleRoute"))
 
