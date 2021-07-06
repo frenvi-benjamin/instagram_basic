@@ -4,7 +4,7 @@ const User = require("../models/userModel")
 function checkUserExistance(req, res, next) {
     helper.getUser(req.params.username)
     .then(
-        () => {return next(req, res)},
+        () => {return next()},
         () => {return res.render("404")}
     )
 }
@@ -31,10 +31,6 @@ function render (req, res) {
     })
 }
 
-function renderCampaignPage (req, res) {
-    checkUserExistance(req, res, render)
-}
-
 function renderPreview(req, res) {
     const username = req.query.username
     const promotedPost = req.query.promotedPost
@@ -49,4 +45,12 @@ function renderPreview(req, res) {
 
 }
 
-module.exports = { renderCampaignPage, renderPreview }
+function checkPublicity(req, res, next) {
+    User.findOne({ instagramUserID: req.session.instagramUserID})
+    .then(user => {
+        if (user.public) return next()
+        else return res.render("error", { title: "Kampagne nicht öffentlich", message: "Die gesuchte Seite kann nicht aufgerufen werden, da die Kampagne noch nicht veröffentlicht wurde." })
+    })
+}
+
+module.exports = { render, renderPreview, checkPublicity, checkUserExistance }
