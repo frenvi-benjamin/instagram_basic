@@ -35,4 +35,18 @@ function renderCampaignPage (req, res) {
     checkUserExistance(req, res, render)
 }
 
-module.exports = { renderCampaignPage }
+function renderPreview(req, res) {
+    const username = req.query.username
+    const promotedPost = req.query.promotedPost
+
+    Promise.all([
+        helper.buildOembed(username, promotedPost),
+        helper.getOembed("eatleryforfuture"),
+    ])
+    .then(([partnerInstagram, eatleryInstagram, user]) => {
+        res.render("campaign", { partnerInstagram: partnerInstagram, eatleryInstagram, eatleryInstagram, username: req.params.username, lottery: { winner: false }, rewardType: 1 })
+    })
+
+}
+
+module.exports = { renderCampaignPage, renderPreview }

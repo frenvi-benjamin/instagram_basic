@@ -3,6 +3,8 @@ const router = express.Router()
 
 const controller = require("../controllers/campaignController")
 
-router.get("/:username", controller.renderCampaignPage )
+router.get("/preview", controller.renderPreview)
+
+router.get("/:username", controller.renderCampaignPage)
 
 module.exports = router
