@@ -46,7 +46,7 @@ function renderPreview(req, res) {
 }
 
 function checkPublicity(req, res, next) {
-    User.findOne({ instagramUserID: req.session.instagramUserID})
+    User.findOne({ username: req.params.username})
     .then(user => {
         if (user.public) return next()
         else return res.render("error", { title: "Kampagne nicht öffentlich", message: "Die gesuchte Seite kann nicht aufgerufen werden, da die Kampagne noch nicht veröffentlicht wurde." })
