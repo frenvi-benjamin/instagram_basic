@@ -1,6 +1,6 @@
 const path = require("path")
 const ejs = require("ejs")
-const QRCode = require("qrcode-svg")
+const QRCode = require("../../modules/qrcode-svg/dist/qrcode.min.js")
 
 const helper = require("../../modules/helper")
 const QrCode = require("../../models/qrcodeModel")
@@ -24,8 +24,9 @@ function createQrcodeFiles(qrcodes) {
         let qrcodeImage = new QRCode({
             content: `${process.env.HOST}?qr=${qrID}`,
             color: "black",
-            background: "white",
-            join: true // joins all vector graphics paths
+            background: "none",
+            join: true, // joins all vector graphics paths
+            ecl: "H",
         })
         files.push({
             content: qrcodeImage.svg(),
@@ -39,6 +40,7 @@ function createQrcodeFiles(qrcodes) {
 }
 
 function download(req, res) {
+    console.log(req.body)
     let files = req.body.files || createQrcodeFiles(req.body.qrcodes)
 
     if (typeof files == "string") {
