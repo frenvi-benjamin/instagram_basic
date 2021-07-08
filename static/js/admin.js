@@ -41,7 +41,7 @@ function createQrcodes(nQrcodes) {
         fileStore.value = `[`
 
         files.forEach(file => {
-            fileStore.value += JSON.stringify(file)
+            fileStore.value += "\"" + file.name.slice(0,-4) + "\""
             if (files.indexOf(file) < files.length - 1) {
                 fileStore.value += ", "
             }
