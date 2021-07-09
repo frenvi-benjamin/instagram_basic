@@ -10,25 +10,27 @@ body {
     font-weight: bolder;
 }
 
+/* removed bootstrap button glow */
+.btn:focus,
+.btn:active{
+    box-shadow:none !important;
+    outline:0px !important;
+}
+
 .modal-footer {
     background-color: rgba(0,0,0,.03);
     border-top: 1px solid rgba(0,0,0,.125);
 }
 
 .btn-custom {
-    color: white;
-    background-color: #A2D208;
-    border-color: #A2D208;
+    border: none;
+    transition: none;
+    background-color: rgba(0, 0, 0, .03);
 }
 
 .btn-custom:hover:not(:disabled) {
-    color: #A2D208;
-    background-color: white;
-    border-color: #A2D208;
-}
-
-.btn-custom:hover {
-    color: white;
+    border: none;
+    background-color: rgba(0, 0, 0, .06);
 }
 
 .btn-custom-danger {
@@ -96,10 +98,6 @@ body {
 
 .full-width {
     width: 100%;
-}
-
-.progress-bar.green {
-    background-color: #A2D208;
 }
 
 #winner>.modal-dialog>.modal-content>.modal-body {

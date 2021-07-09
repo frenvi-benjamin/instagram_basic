@@ -11,7 +11,7 @@
 }
 
 .selected {
-    border: 3px solid #A2D208!important;
+    box-shadow: 0 0 20px 1px rgb(255, 237, 0);
 }
 
 .preview-img {
