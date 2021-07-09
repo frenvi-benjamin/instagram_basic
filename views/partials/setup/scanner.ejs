@@ -6,21 +6,21 @@
 	<div class="container">
 		<div class="row" id="scanner-row">
 			<div class="col px-0" id="scanner-col">
-				<div class="mx-auto max-width-500px" id="scanner">
-					<div id="blindfold" class="border rounded">
-						Nun kannst du beliebig viele QR-Codes scannen.
-						<br>
-						<br>
-						<b>Achtung!</b>
-						<br>
-						Bitte nur QR-Codes, die hier registriert wurden auch später Kunden zum Scannen aushängen.
-						<br>
-						<br>
-						<button id="start-scan" class="btn btn-custom">Scan starten</button>
-					</div>
+				<div class="mx-auto max-width-500px" id="scanner" hidden>
 					<i id="info" class="far fa-question-circle rounded p-1 m-2" role="button" onclick="new bootstrap.Modal(document.getElementById('modal')).show()"></i>
 					<div id="qr-counter" class="h5 rounded pb-1 pt-2 m-2">0</div>
 					<div id="scan-response-div"></div>
+				</div>
+				<div id="blindfold">
+					Nun kannst du beliebig viele QR-Codes scannen.
+					<br>
+					<br>
+					<b>Achtung!</b>
+					<br>
+					Bitte nur QR-Codes, die hier registriert wurden auch später Kunden zum Scannen aushängen.
+					<br>
+					<br>
+					<button id="start-scan" class="btn btn-custom">Scan starten</button>
 				</div>
 			</div>
 		</div>

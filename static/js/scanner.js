@@ -102,6 +102,7 @@ const scanner = new QrScanner(
 document.getElementById("start-scan").addEventListener("click", () => {
 	scanner.start()
 	document.getElementById("blindfold").hidden = true
+	scannerDiv.hidden = false
 })
 
 const scannerDiv = document.getElementById("scanner")
@@ -126,5 +127,6 @@ for (let i = 0; i < nextPrevButtons.length; i++) {
 	button.addEventListener("click", () => {
 		scanner.stop()
 		document.getElementById("blindfold").hidden = false
+		scannerDiv.hidden = true
 	})
 }
