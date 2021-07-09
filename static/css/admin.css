@@ -16,6 +16,7 @@
 
 .form-control {
     height: fit-content;
+    height: -moz-fit-content;
 }
 
 #download-button {
