@@ -2,7 +2,7 @@ const fetch = require("node-fetch")
 const User = require("../models/userModel")
 
 function render(req, res) {
-    fetch(`https://graph.instagram.com/me/media?fields=media_url,permalink&access_token=${req.session.accessToken}`)
+    fetch(`https://graph.instagram.com/me/media?fields=media_url,media_type,thumbnail_url,permalink&access_token=${req.session.accessToken}`)
     .then(response => response.json())
     .then(body => {
         if (body.data) {
