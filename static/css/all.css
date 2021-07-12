@@ -96,6 +96,7 @@ body {
 
 .navbar-item>.dropdown-item {
     border-radius: .25rem;
+    padding-top: 0.4rem;
 }
 
 .navbar-item>.dropdown-item:active {
