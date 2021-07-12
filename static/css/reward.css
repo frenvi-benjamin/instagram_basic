@@ -6,11 +6,10 @@
   left: auto;
   z-index: 1;
   display: block;
-  padding: 10px;
 }
 
 #preview>.modal>.modal-dialog {
-  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  margin: 0;
 }
 
 /* spinner animation */
