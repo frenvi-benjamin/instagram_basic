@@ -2,7 +2,7 @@
 <html lang="de">
 
 <head>
-    <%- include("./partials/head", { title: username}) %>
+    <%- include("./partials/head", { title: username }) %>
     <link rel="stylesheet" href="/css/campaign.css">
 </head>
 
@@ -10,18 +10,8 @@
     <div class="container-fluid mt-3">
         <div class="row">
             <div class="col">
-                <div class="card">
-                    <div class="h4 card-body">
-                        Nimm Teil an unserer Aktion und zeige der Welt mit was du dein Eis isst! Mach einen Post oder eine 
-                        Story mit unserem<button class="h4 tag" onclick="location.href='#hashtag';"">Hashtag</button>und tagge 
-                        uns<button class="h4 tag copyOnClick">@eatleryforfuture</button>und<button class="h4 tag copyOnClick">@<%= username %></button>!
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="mx-auto">
-                <button id="hashtag" class="h3 tag copyOnClick">#TastyNotWasty</button>
+                <p>Schon unseren Tasty Mini probiert? Den gibt's hier bei <a href="https://instagram.com/<%= username %>">@<%= username %></a>!</p>
+                <p>Mit jedem Tasty Mini sparen wir mit deiner Hilfe x,xx Gramm CO<sub>2</sub> und x,xx Liter Wasser. Und lecker schmeckt er auch noch!</p>
             </div>
         </div>
         <div class="row my-3">
