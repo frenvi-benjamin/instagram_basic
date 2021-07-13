@@ -1,4 +1,6 @@
 const helper = require("../modules/helper")
+const User = require("../models/userModel")
+const fetch = require("node-fetch")
 
 function checkForActiveQrcode (req, res, next) {
     if (!req.query.qr) return next()
@@ -33,8 +35,16 @@ function checkForActiveQrcode (req, res, next) {
     )
 }
 
-function renderIndex (req, res) {
-    res.render("index")
+function render (req, res) {
+    User.findOne({ instagramUserID: req.session.instagramUserID })
+    .then(user => {
+        fetch(`https://graph.instagram.com/me/media?fields=media_type,permalink,media_url,thumbnail_url&access_token=${req.session.accessToken}`)
+        .then(response => response.json())
+        .then(body => {
+        res.render("index", { user: user, media: body.data })
+
+        })
+    })
 }
 
-module.exports = { renderIndex, checkForActiveQrcode }
+module.exports = { render, checkForActiveQrcode }
