@@ -96,8 +96,8 @@ app.use("/campaign", require("./routes/campaignRoute"))
 //scanner
 app.use("/scanner", require("./routes/scannerRoute"))
 
-//choose
-app.use("/choose", require("./routes/chooseRoute"))
+//choose-post
+app.use("/choose-post", require("./routes/choosePostRoute"))
 
 //reward
 app.use("/reward", require("./routes/rewardRoute"))

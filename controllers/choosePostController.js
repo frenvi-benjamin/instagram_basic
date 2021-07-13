@@ -5,7 +5,7 @@ function render(req, res) {
     .then(response => response.json())
     .then(body => {
         if (body.data) {
-            res.render("choose", { media: body.data })
+            res.render("choose-post", { media: body.data })
         }
         else {
             res.render("request-permissions", { oauthRedirectURI: process.env.HOST + req.originalUrl })

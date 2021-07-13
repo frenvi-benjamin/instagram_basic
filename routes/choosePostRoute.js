@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 
-const controller = require("../controllers/chooseController")
+const controller = require("../controllers/choosePostController")
 const sharedController = require("../controllers/sharedController")
 
 
