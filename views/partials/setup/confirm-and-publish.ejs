@@ -1,51 +1,48 @@
-<div class="setup-content-page" hidden>
-    <h5 class="card-title">Daten überprüfen und veröffentlichen</h5>
+<h5 class="card-title">Daten überprüfen und veröffentlichen</h5>
 
-    Überprüfe nochmal alle deine Daten bevor du die Kampagne veröffentlichst.
+Überprüfe nochmal alle deine Daten bevor du die Kampagne veröffentlichst.
 
-    <div class="mt-4">
-        <h6>Der zu promotende Post</h6>
-        <span id="promoted-post-preview-text"></span>
-        <div id="promoted-post-card" class="card">
-            <img id="promoted-post-preview" class="card-img-top">
-            <div id="change-post" class="card-body btn-light">
-                Anderen Post auswählen
+<div class="mt-4">
+    <h6>Der zu promotende Post</h6>
+    <span id="promoted-post-preview-text"></span>
+    <div id="promoted-post-card" class="card">
+        <img id="promoted-post-preview" class="card-img-top">
+        <div id="change-post" class="card-body btn-light">
+            Anderen Post auswählen
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <h6>Das Goodie für deine Kunden</h6>
+    Deine Kunden erhalten <span id="goodie-preview-text"></span>
+</div>
+
+<div class="mt-4">
+    <h6>Kampagne veröffentlichen</h6>
+    <p>
+        Nun ist es fast geschafft!
+        <br>
+        Schau dir kurz die Vorschau unserer gemeinsamen Kampagnen-Seite an und veröffentliche sie anschließend.
+    </p>
+    <button id="show-preview-button" class="btn btn-custom mb-2">Vorschau</button>
+    <br>
+    <button id="publish-button" class="btn btn-custom">Veröffentlichen</button>
+</div>
+
+<div class="modal fade" id="publish-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="mb-0">Geschafft!</h6>
+            </div>
+            <div class="modal-body">
+                Super, deine Kampagne ist nun online!
+                <br>
+                Jetzt musst du nur noch die QR-Codes verteilen, damit deine Kunden sie einscannen können!
+                <br>
+                
             </div>
         </div>
     </div>
-
-    <div class="mt-4">
-        <h6>Das Goodie für deine Kunden</h6>
-        Deine Kunden erhalten <span id="goodie-preview-text"></span>
-    </div>
-
-    <div class="mt-4">
-        <h6>Kampagne veröffentlichen</h6>
-        <p>
-            Nun ist es fast geschafft!
-            <br>
-            Schau dir kurz die Vorschau unserer gemeinsamen Kampagnen-Seite an und veröffentliche sie anschließend.
-        </p>
-        <button id="show-preview-button" class="btn btn-custom mb-2">Vorschau</button>
-        <br>
-        <button id="publish-button" class="btn btn-custom">Veröffentlichen</button>
-    </div>
-    
-    <div class="modal fade" id="publish-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="mb-0">Geschafft!</h6>
-                </div>
-				<div class="modal-body">
-					Super, deine Kampagne ist nun online!
-                    <br>
-                    Jetzt musst du nur noch die QR-Codes verteilen, damit deine Kunden sie einscannen können!
-                    <br>
-                    
-				</div>
-			</div>
-		</div>
-	</div>
-    
 </div>

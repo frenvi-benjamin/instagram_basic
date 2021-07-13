@@ -24,10 +24,18 @@
                         <%- include("./partials/setup/header-footer") %> 
                     </div>
                     <div class="card-body">
-                        <%- include("./partials/setup/choose-post") %>
-                        <%- include("./partials/setup/choose-reward") %>
-                        <%- include("./partials/setup/scanner") %>
-                        <%- include("./partials/setup/confirm-and-publish") %>
+                        <div class="setup-content-page" id="choose-post-page" hidden>
+                            <%- include("./partials/setup/choose-post") %>
+                        </div>
+                        <div class="setup-content-page" hidden>
+                            <%- include("./partials/setup/choose-reward") %>
+                        </div>
+                        <div class="setup-content-page" hidden>
+                            <%- include("./partials/setup/scanner") %>
+                        </div>
+                        <div class="setup-content-page" hidden>
+                            <%- include("./partials/setup/confirm-and-publish") %>
+                        </div>
                     </div>
                     <div id="setup-footer" class="modal-footer">
                         <%- include("./partials/setup/header-footer") %>

@@ -1,17 +1,15 @@
-<div class="setup-content-page" hidden>
-    <h5 class="card-title">Goodie auswählen</h5>
+<h5 class="card-title">Goodie auswählen</h5>
 
-    Welchen Preis sollen deine Kunden gewinnen können?
-    <br>
-    <br>
-    <%- include("../reward-radios") %>
+Welchen Preis sollen deine Kunden gewinnen können?
+<br>
+<br>
+<%- include("../reward-radios") %>
 
 
-    <div id="spinner" class="spinner mx-auto" hidden>
-        <div class="double-bounce1"></div>
-        <div class="double-bounce2"></div>
-    </div>
-    <div id="preview">
-        <%- include("../winner", { type: rewardType }) %>
-    </div>
+<div id="spinner" class="spinner mx-auto" hidden>
+    <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
+</div>
+<div id="preview">
+    <%- include("../winner", { type: rewardType }) %>
 </div>
