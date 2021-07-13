@@ -12,7 +12,9 @@ body {
 
 /* removed bootstrap button glow */
 .btn:focus,
-.btn:active{
+.btn:active,
+a:focus,
+a:active{ 
     box-shadow:none !important;
     outline:0px !important;
 }

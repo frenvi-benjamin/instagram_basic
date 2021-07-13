@@ -1,0 +1,23 @@
+#current-post-card>a {
+    text-align: center;
+}
+
+#current-post-card>a:hover {
+    text-decoration: none;
+}
+
+#current-post-card {
+    max-width: 200px;
+}
+
+#current-post-card>.card-body {
+    padding: 0.75rem;
+}
+
+.custom-switch label input[type=checkbox]:checked+.lever {
+    background-color: #1ffd01;
+}
+
+.custom-switch label input[type=checkbox]:checked+.lever:after {
+    background-color: #1201fa ;
+}
