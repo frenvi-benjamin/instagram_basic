@@ -5,6 +5,11 @@ const progressBar = document.getElementsByClassName("progress-bar")[0]
 // prevent automatic scrolling after refresh
 history.scrollRestoration = "manual"
 
+// alert user of data loss when reloading or closing
+window.addEventListener("beforeunload", (e) => {
+    e.preventDefault()
+})
+
 for (let i = 0; i < nextButtons.length; i++) {
     const button = nextButtons[i];
     button.addEventListener("click", () => {
