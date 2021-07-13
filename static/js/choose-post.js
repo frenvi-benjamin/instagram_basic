@@ -71,6 +71,7 @@ function removeAllSelections() {
         sel.classList.remove("selected")
     }
 }
+let username
 try {
     const username = document.getElementById("campaign-preview").getAttribute("data-username")
 } catch {}
