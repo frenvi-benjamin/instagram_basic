@@ -136,7 +136,7 @@ function createUserFromAccessToken(accessToken) {
         getID(accessToken),
     ])
     .then(([username, id]) => {
-        return User.findOneAndUpdate({ instagramUserID: id }, { username: username, accessToken: accessToken, qrcodes: [], $setOnInsert: {nrOfScans: 0} }, { upsert: true })
+        return User.findOneAndUpdate({ instagramUserID: id }, { username: username, accessToken: accessToken, $setOnInsert: {nrOfScans: 0, qrcodes: []} }, { upsert: true })
     })
 }
 
