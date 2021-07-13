@@ -99,8 +99,8 @@ app.use("/scanner", require("./routes/scannerRoute"))
 //choose-post
 app.use("/choose-post", require("./routes/choosePostRoute"))
 
-//reward
-app.use("/reward", require("./routes/rewardRoute"))
+//choose-reward
+app.use("/choose-reward", require("./routes/chooseRewardRoute"))
 
 //preview
 app.use("/preview", require("./routes/previewRoute"))

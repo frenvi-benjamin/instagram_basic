@@ -38,7 +38,7 @@ for (let i = 0; i < choices.length; i++) {
 
         setRewardType(type)
 
-        fetch("/reward/modal", {
+        fetch("/choose-reward/modal", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -59,19 +59,38 @@ var rewardType
 
 function setRewardType(type) {
     rewardType = type
-    const preview =  document.getElementById("goodie-preview-text")
-    switch (type) {
-        case TYPE_CUP_OF_ICE_CREAM:
-            preview.innerHTML = "eine Kugel Eis im Becher mit unserem EATlery&copy; Löffel."
-            break;
-        case TYPE_EXTRA_CREAM:
-            preview.innerHTML = "eine extra Portion Sahne auf ihr Eis."
-            break;
-        case TYPE_EXTRA_SCOOP:
-            preview.innerHTML = "eine Kugel Eis extra."
-            break;
-        case TYPE_SURPRISE:
-            preview.innerHTML = "eine Überraschung. Du suchst selbst aus was deine Kunden erhalten."
-            break;
-    }
+    try {
+        const preview =  document.getElementById("goodie-preview-text")
+        switch (type) {
+            case TYPE_CUP_OF_ICE_CREAM:
+                preview.innerHTML = "eine Kugel Eis im Becher mit unserem EATlery&copy; Löffel."
+                break;
+            case TYPE_EXTRA_CREAM:
+                preview.innerHTML = "eine extra Portion Sahne auf ihr Eis."
+                break;
+            case TYPE_EXTRA_SCOOP:
+                preview.innerHTML = "eine Kugel Eis extra."
+                break;
+            case TYPE_SURPRISE:
+                preview.innerHTML = "eine Überraschung. Du suchst selbst aus was deine Kunden erhalten."
+                break;
+        }
+    } catch {}
+}
+
+try {
+    document.getElementById("update").addEventListener("click", updateRewardType)
+} catch {}
+
+function updateRewardType() {
+    fetch("/me/set", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            rewardType: rewardType
+        })
+    })
+    .then(() => { window.location = "/" })
 }

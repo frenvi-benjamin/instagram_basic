@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <%- include("./partials/head", { title: "Goodie wählen" }) %>
+    <link rel="stylesheet" href="/css/choose-reward.css">
+</head>
+<body>
+    <%- include("./partials/header") %> 
+
+    <div class="container pb-5">
+        <%- include("./partials/setup/choose-reward") %>
+        <div class="my-4"></div>
+    </div>
+
+    <div id="update" class="btn btn-custom floating">
+        Aktualisieren
+    </div>
+
+    <script src="/js/choose-reward.js"></script>
+</body>
+</html>

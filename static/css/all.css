@@ -117,3 +117,21 @@ a:active{
 #winner>.modal-dialog>.modal-content>.modal-body {
     text-align: center;
 }
+
+.floating:hover {
+    background-color: #fff67f!important;
+}
+
+.floating:active {
+    background-color: rgb(255, 237, 0)!important;
+    box-shadow: 0 0 5px 0px rgb(220, 220, 220)!important;
+}
+
+.floating:focus {
+    box-shadow: 0 0 5px 0px rgb(220, 220, 220)!important;
+}
+
+.floating {
+    background-color: #f7f7f7!important;
+    box-shadow: 0 0 5px 0px rgb(220, 220, 220);
+}

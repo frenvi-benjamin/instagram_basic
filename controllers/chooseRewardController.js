@@ -3,7 +3,10 @@ const path = require("path")
 const User = require("../models/userModel")
 
 function render(req, res) {
-    res.render("reward")
+    User.findOne({ instagramUserID: req.session.instagramUserID })
+    .then(user => {
+        res.render("choose-reward", { rewardType: user.rewardType })
+    })
 }
 
 function renderModal(req, res) {

@@ -10,7 +10,7 @@
     <%- include("./partials/header") %>
 
     <div class="container pb-3">
-        <div class="row mb-3">
+        <div class="row mb-4">
             <div class="col">
                 <h5>Aktueller Post</h5>
                 <div id="current-post-card" class="card">
@@ -23,14 +23,14 @@
                             <% } %>
                         <% } %>
                     <% }) %>
-                    <a class="card-body btn-light" href="/choose-post">
+                    <a class="card-body btn-custom btn" href="/choose-post">
                         Ändern
                     </a>
                 </div>
             </div>
         </div>
-
-        <div class="row mb-3">
+        <hr>
+        <div class="row mb-4">
             <div class="col">
                 <h5>Goodie bei Kunden-Gewinn</h5>
                 Deine Kunden erhalten 
@@ -48,23 +48,23 @@
                         eine Überraschung. Du kannst dir aussuchen, was sie erhalten werden.
                     <% break; %>
                 <% } %>
-                <div id="preview-button" class="btn btn-custom">Vorschau</div>
-                <a href="/choose-reward" class="btn btn-custom">Ändern</a>
+                <div id="preview-button" class="btn btn-custom mt-2">Vorschau</div>
+                <a href="/choose-reward" class="btn btn-custom mt-2">Ändern</a>
             </div>
 
             <%- include("./partials/winner", {type: user.rewardType}) %>
         </div>
-
-        <div class="row mb-3">
+        <hr>
+        <div class="row mb-4">
             <div class="col">
                 <h5>QR-Codes</h5>
-                <a class="btn btn-custom" href="/scanner">Neue QR-Codes scannen</a>
+                <a class="btn btn-custom mb-2" href="/scanner">Neue QR-Codes scannen</a>
                 <br>
                 Bereits gescannte QR-Codes: <%= user.qrcodes.length %>
             </div>
         </div>
-
-        <div class="row mb-3">
+        <hr>
+        <div class="row mb-4">
             <div class="col">
                 <h5>Veröffentlichen</h5>
                 <div class="custom-control custom-switch">
