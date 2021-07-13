@@ -71,31 +71,40 @@ function removeAllSelections() {
         sel.classList.remove("selected")
     }
 }
-
-const username = document.getElementById("campaign-preview").getAttribute("data-username")
+try {
+    const username = document.getElementById("campaign-preview").getAttribute("data-username")
+} catch {}
 var promotedPost
 function setPromotedPost(post) {
     promotedPost = post
     const preview = document.getElementById("promoted-post-preview")
     const previewText = document.getElementById("promoted-post-preview-text")
 
-    if (promotedPost) {
-        iframe.src = `/campaign/preview?username=${username}&promotedPost=${promotedPost.getAttribute("data-permalink")}`
-    } else {
-        iframe.src = `/campaign/preview?username=${username}&promotedPost=undefined`
-    }
+    try {
+        if (promotedPost) {
+            iframe.src = `/campaign/preview?username=${username}&promotedPost=${promotedPost.getAttribute("data-permalink")}`
+        } else {
+            iframe.src = `/campaign/preview?username=${username}&promotedPost=undefined`
+        }        
+    } catch {}
+
     if (post) {
-        preview.src = post.src
-        previewText.hidden = true
+        try {
+            preview.src = post.src
+            previewText.hidden = true
+        } catch {}
+
         promotedPost = post.getAttribute("data-permalink")
     }
     else {
         const firstImage = document.getElementsByClassName("preview-img")[0]
-        preview.src = firstImage.src
         promotedPost = undefined
+        try {
+            preview.src = firstImage.src
+            previewText.hidden = false
+            previewText.innerHTML = "Du hast dich dafür entschieden immer den neusten Post auf deinem Instagram zu promoten.<br>Das ist aktuell dieser:"    
+        } catch {}
         
-        previewText.hidden = false
-        previewText.innerHTML = "Du hast dich dafür entschieden immer den neusten Post auf deinem Instagram zu promoten.<br>Das ist aktuell dieser:"
     }
 }
 
@@ -106,3 +115,20 @@ try {
     firstImage.classList.add("selected")
     setPromotedPost(document.getElementsByClassName("selected")[0])
 }
+
+function updatePromotedPost() {
+    fetch("/me/set", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            promotedPost: promotedPost
+        })
+    })
+    .then(() => {window.location = "/"})
+}
+
+try {
+    document.getElementById("update").addEventListener("click", updatePromotedPost)
+} catch {}

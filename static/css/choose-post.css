@@ -45,4 +45,23 @@
     bottom: 1rem;
     right: 1rem;
     opacity: 0;
+    background-color: #f7f7f7;
+}
+
+#update {
+    position: fixed;
+    left: 1rem;
+    bottom: 1rem;
+    right: 4.5rem;
+    background-color: #f7f7f7;
+}
+
+#update:hover,
+#back-to-top:hover {
+    background-color: #fff67f;
+}
+
+#update:active,
+#back-to-top:active {
+    background-color: rgb(255, 237, 0);
 }
