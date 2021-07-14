@@ -1,5 +1,5 @@
 function render(req, res) {
-    res.render("preview", { username: req.session.username })
+    res.render("preview")
 }
 
 module.exports = { render }

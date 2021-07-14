@@ -1,36 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="de">
 <head>
-    <%- include("./partials/head", { title: "Vorschau" }) %>
+    <%- include("./partials/head", { title: "Beispiel"}) %>
     <link rel="stylesheet" href="/css/preview.css">
 </head>
-
 <body>
-    <%- include("./partials/header") %>
-
-    <div class="container">
-        <%- include("./partials/progress-bar", { step: 4 }) %> 
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="h5 mb-0">Registrierung abgeschlossen</div>
-                    </div>
-                    <div class="card-body">
-                        Glückwunsch, du bist fertig mit der Registrierung.
-                        <br>
-                        Nun kannst du alle QR-Codes verteilen, wo du möchtest.
-                        Scannt ein Kunde den QR-Code landet er auf der unten im <span class="border p-1">grünen Rahmen</span> vorgestellten Webseite.
-                    </div>
-                </div>
-            </div>
+    <iframe src="/campaign/eisdiele_um_die_ecke" frameborder="0"></iframe>
+    <div id="card" class="card">
+        <div class="card-body">
+            <p>
+                Überzeugt? Dann leg los!
+            </p>
+            <%- include("./partials/instagram-button") %> 
         </div>
     </div>
-
-    <iframe id="iframe" class="my-3 border shadow" src="/campaign/<%= username %>"></iframe>
-
-    <script src="/js/preview.js"></script>
 </body>
-
 </html>

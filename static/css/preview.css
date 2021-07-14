@@ -1,8 +1,17 @@
 iframe {
+    position: absolute;
     width: 100%;
-    overflow: auto;
+    height: 100%;
+    padding-bottom: 120px;
 }
 
-.border {
-    border: 2px solid #A2D208!important;
+#card {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    left: 5px;
+}
+
+@media screen and (max-width: 768px) {
+
 }
