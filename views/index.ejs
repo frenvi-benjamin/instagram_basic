@@ -12,6 +12,13 @@
     <div class="container pb-3">
         <div class="row mb-4">
             <div class="col">
+                <a class="btn btn-custom full-width" href="/campaign/<%= user.username %>" target="_blank">
+                    <i class="fas fa-bullhorn"></i><span class="ml-2">Meine Kampagne</span>
+                </a>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col">
                 <h5>Aktueller Post</h5>
                 <div id="current-post-card" class="card">
                     <% media.forEach(post => { %>
@@ -69,9 +76,9 @@
             <div class="col">
                 <h5>Veröffentlichen</h5>
                 <div class="custom-control custom-switch">
-                    <input <% if (true) { %>checked<% } %> type="checkbox" class="custom-control-input" id="public-switch">
-                    <label class="custom-control-label" for="public-switch"><% if (true) { %>Öffentlich<% } %></label>
-                  </div>
+                    <input type="checkbox" class="custom-control-input" id="public-switch">
+                    <label class="custom-control-label" for="public-switch"><% if (user.public) { %>Öffentlich<% } else { %>Nicht öffentlich<% } %></label>
+                </div>
             </div>
         </div>
     </div>

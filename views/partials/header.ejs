@@ -10,6 +10,11 @@
                 <li class="navbar-item">
                     <a class="dropdown-item" role="button" href="/"><i class="fas fa-home"></i><span class="ml-2">Home</span></a>
                 </li>
+                <% if (user.public) { %>
+                    <li class="navbar-item">
+                        <a class="dropdown-item" role="button" href="/campaign/<%= user.username %>" target="_blank"><i class="fas fa-bullhorn"></i><span class="ml-2">Meine Kampagne</span></a>
+                    </li>
+                <% } %>
                 <li class="navbar-item">
                     <a class="dropdown-item" role="button" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span class="ml-2">Ausloggen</span></a>
                 </li>
