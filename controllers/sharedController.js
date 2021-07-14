@@ -1,4 +1,5 @@
 require("dotenv").config()
+const User = require("../models/userModel")
 const FormData = require("form-data")
 const fetch = require("node-fetch")
 
