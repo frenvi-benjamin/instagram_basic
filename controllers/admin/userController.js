@@ -18,7 +18,7 @@ function get(req, res) {
         )
     }
     else {
-        User.findOne({})
+        User.find({})
         .then(users => {
             ejs.renderFile(path.join(__dirname, "../../views/partials/admin/user-tab/all-users.ejs"), { users: users })
             .then(rendered => res.send(rendered))
@@ -27,10 +27,14 @@ function get(req, res) {
 }
 
 function del(req, res) {
-    User.deleteOne({ username: req.body.username }, { returnOriginal: true })
-    .then(user => QrCode.deleteMany({ _id: { $in: user.qrcodes }}))
-    .then(() => res.redirect("/admin#user"))
-    
+    User.findOne({ username: req.body.username })
+    .then(user => {
+        Promise.all([
+            QrCode.deleteMany({ _id: { $in: user.qrcodes }}),
+            User.deleteOne({ instagramUserID: user.instagramUserID })
+        ])
+        .then(() => res.redirect("/admin#user"))
+    })
 }
 
 module.exports = { get, del }
