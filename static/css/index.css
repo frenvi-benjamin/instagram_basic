@@ -14,10 +14,30 @@
     padding: 0.75rem;
 }
 
-.custom-switch label input[type=checkbox]:checked+.lever {
-    background-color: #1ffd01;
+.custom-switch>label {
+    padding-top: 1.5px;
 }
 
-.custom-switch label input[type=checkbox]:checked+.lever:after {
-    background-color: #1201fa ;
+.custom-control-input:focus~.custom-control-label::before {
+  border-color: #adb5bd !important;
+  box-shadow: none !important;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+  border-color: rgb(255, 237, 0) !important;
+  background-color: rgb(255, 237, 0) !important;
+}
+
+.custom-control-input:active~.custom-control-label::before {
+  background-color: rgb(255, 237, 0) !important;
+  border-color: #adb5bd !important;
+}
+
+.custom-control-input:focus:not(:checked)~.custom-control-label::before {
+  border-color: #adb5bd !important;
+}
+
+.custom-control-input-green:not(:disabled):active~.custom-control-label::before {
+  background-color: rgb(255, 237, 0) !important;
+  border-color: rgb(255, 237, 0) !important;
 }
