@@ -8,7 +8,7 @@ const path = require("path")
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-// mongoose imports
+// mongoose import and settings
 const mongoose = require("mongoose")
 mongoose.set("returnOriginal", false)
 mongoose.set("debug", true)
@@ -22,6 +22,12 @@ const User = require("./models/userModel")
 
 // ensure eatlery account is there
 User.findOne({ instagramUserID: "17841428462715235" })
+.then(user => {
+    if (!user) throw Error("Application needs the eatlery account in DB to run properly")
+})
+
+// ensure example account is there
+User.findOne({ instagramUserID: "17841447654588327" })
 .then(user => {
     if (!user) throw Error("Application needs the eatlery account in DB to run properly")
 })
