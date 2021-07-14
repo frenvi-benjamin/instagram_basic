@@ -2,12 +2,16 @@ const path = require("path")
 const ejs = require("ejs")
 const QRCode = require("../../modules/qrcode-svg/dist/qrcode.min.js")
 
-const helper = require("../../modules/helper")
 const QrCode = require("../../models/qrcodeModel")
+const User = require("../../models/userModel")
 
 function create(req, res) {
     const n = req.body.nQrcodes
-    helper.createQrcodes(n)
+    let a = []
+    for (let i = 0; i < n; i++) {
+        a.push({})
+    }
+    QrCode.insertMany(a)
     .then(newQrcodes => res.send(createQrcodeFiles(newQrcodes)))
 }
 
@@ -55,7 +59,8 @@ function download(req, res) {
 
 function del(req, res) {
     if (req.body.username) {
-        helper.deleteQrcodes(req.body.username)
+        User.findOneAndUpdate({ username: req.body.username }, { qrcodes: [] }, { returnOriginal: true })
+        .then(user => QrCode.deleteMany({ _id: { $in: user.qrcodes }}))
         .then(
             () => {
                 ejs.renderFile(path.join(__dirname, "../../views/partials/admin/response.ejs"), { message: "QR-Codes gelöscht", good: true })
@@ -68,7 +73,10 @@ function del(req, res) {
         )
     }
     else {
-        helper.deleteQrcodes()
+        Promise.all([
+            User.updateMany({}, { qrcodes: [] }),
+            QrCode.deleteMany({})
+        ])
         .then(
             () => {
                 ejs.renderFile(path.join(__dirname, "../../views/partials/admin/response.ejs"), { message: "QR-Codes gelöscht", good: true })

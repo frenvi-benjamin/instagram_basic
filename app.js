@@ -17,12 +17,13 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
-// helper module
-const helper = require("./modules/helper")
+// DB models
+const User = require("./models/userModel")
 
-helper.getUser("eatleryforfuture")
+// ensure eatlery account is there
+User.findOne({ instagramUserID: "17841428462715235" })
 .then(user => {
-    if (!user) throw Error("Application needs the eatleryforfuture account in DB to run properly")
+    if (!user) throw Error("Application needs the eatlery account in DB to run properly")
 })
 
 // session
@@ -68,6 +69,8 @@ mongoose.connect(process.env.MONGODB_CONNECTION_URL, { useNewUrlParser: true, us
 .then(() => startServer)
 .catch((err) => console.log(err))
 
+// helper module
+const helper = require("./modules/helper")
 // refresh tokens every 24.855 days (maximum)
 helper.refreshAccessTokens()
 setInterval(helper.refreshAccessTokens, 2147483647)
@@ -118,7 +121,6 @@ app.use("/logout", (req, res) => {
 })
 
 const base64url = require("base64url")
-const User = require("./models/userModel")
 
 // deauthorization (instagram)
 app.use("/deauthorize", (req, res) => {

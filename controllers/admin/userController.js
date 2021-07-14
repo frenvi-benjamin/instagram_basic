@@ -1,11 +1,11 @@
 const path = require("path")
 const ejs = require("ejs")
 
-const helper = require("../../modules/helper")
-
+const User = require("../../models/userModel")
+const QrCode = require("../../models/qrcodeModel")
 function get(req, res) {
     if (req.body.username) {
-        helper.getUser(req.body.username)
+        User.findOne({ username: req.body.username })
         .then(
             user => {
                 ejs.renderFile(path.join(__dirname, "../../views/partials/admin/user-tab/single-user.ejs"), { user: user })
@@ -18,7 +18,7 @@ function get(req, res) {
         )
     }
     else {
-        helper.getUser()
+        User.findOne({})
         .then(users => {
             ejs.renderFile(path.join(__dirname, "../../views/partials/admin/user-tab/all-users.ejs"), { users: users })
             .then(rendered => res.send(rendered))
@@ -27,8 +27,10 @@ function get(req, res) {
 }
 
 function del(req, res) {
-    helper.deleteUser(req.body.username, true)
-    res.redirect("/admin#user")
+    User.deleteOne({ username: req.body.username }, { returnOriginal: true })
+    .then(user => QrCode.deleteMany({ _id: { $in: user.qrcodes }}))
+    .then(() => res.redirect("/admin#user"))
+    
 }
 
 module.exports = { get, del }

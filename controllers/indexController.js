@@ -1,4 +1,3 @@
-const helper = require("../modules/helper")
 const User = require("../models/userModel")
 const fetch = require("node-fetch")
 
@@ -7,10 +6,10 @@ function checkForActiveQrcode (req, res, next) {
 
     const qrID = req.query.qr
 
-    helper.getConnectedUser(qrID)
+    User.findOne({ qrcodes: qrID })
     .then(
         user => {
-            helper.incrementNrOfScans(user.username)
+            User.findOneAndUpdate({ instagramUserID: user.instagramUserID }, { $inc: { nrOfScans: 1 } }, { upsert: true }).exec()
             // lottery
             // set lottery session details if not set
             if (req.session.lottery == undefined) req.session.lottery = {}

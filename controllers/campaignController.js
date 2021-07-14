@@ -2,11 +2,11 @@ const helper = require("../modules/helper")
 const User = require("../models/userModel")
 
 function checkUserExistance(req, res, next) {
-    helper.getUser(req.params.username)
-    .then(
-        () => {return next()},
-        () => {return res.redirect("/404", )}
-    )
+    User.findOne({ username: req.params.username })
+    .then(user => {
+            if (user) return next()
+            else return res.redirect("/404", )
+    })
 }
 
 function render (req, res) {
