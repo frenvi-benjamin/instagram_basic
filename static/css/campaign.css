@@ -45,3 +45,8 @@ iframe {
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
 }
+
+blockquote {
+    margin-left: auto!important;
+    margin-right: auto!important;
+}
