@@ -124,7 +124,7 @@ app.use("/logout", (req, res) => {
 })
 
 const base64url = require("base64url")
-
+const Session = require("./models/sessionModel")
 // deauthorization (instagram)
 app.use("/deauthorize", (req, res) => {
     res.sendStatus(200)
@@ -136,8 +136,12 @@ app.use("/delete-data", (req, res) => {
     const decodedPayload = base64url.decode(encodedPayload)
     const parsedPayload = JSON.parse(decodedPayload)
 
-    User.findOneAndDelete({ instagramUserID: parsedPayload.user_id }).exec()
-    res.sendStatus(200)
+    Promise.all([
+        User.findOneAndDelete({ instagramUserID: parsedPayload.user_id }),
+        Session.deleteOne({ session: { $regex: parsedPayload.user_id, $options: "i" } })
+    ])
+    .then(() => res.sendStatus(200))
+    
 })
 
 app.use(require("./routes/404Route"))
