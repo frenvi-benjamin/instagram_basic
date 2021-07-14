@@ -138,7 +138,7 @@ app.use("/delete-data", (req, res) => {
 
     Promise.all([
         User.findOneAndDelete({ instagramUserID: parsedPayload.user_id }),
-        Session.deleteOne({ session: { $regex: parsedPayload.user_id, $options: "i" } })
+        Session.deleteMany({ session: { $regex: parsedPayload.user_id, $options: "i" } })
     ])
     .then(() => res.sendStatus(200))
     
