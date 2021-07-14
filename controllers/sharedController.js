@@ -1,7 +1,6 @@
 require("dotenv").config()
 const FormData = require("form-data")
 const fetch = require("node-fetch")
-const helper = require("../modules/helper")
 
 function checkForUserSession(req, res, next) {
     if (req.session.username) {
@@ -69,13 +68,25 @@ function auth(req, res, next) {
                 .then(body => {
                     const longLivedAccessToken = body.access_token
 
-                    helper.createUserFromAccessToken(longLivedAccessToken)
-                    .then(user => {
-                        req.session.accessToken = user.accessToken
-                        req.session.username = user.username
-                        req.session.instagramUserID = user.instagramUserID
-
-                        next()
+                    fetch(`https://graph.instagram.com/me/?fields=username,id&access_token=${longLivedAccessToken}`)
+                    .then(response => response.json())
+                    .then(response => {
+                        User.findOneAndUpdate(
+                            { instagramUserID: response.id },
+                            {
+                                username: response.username,
+                                accessToken: longLivedAccessToken,
+                                $setOnInsert: {nrOfScans: 0, qrcodes: []}
+                            },
+                            { upsert: true }
+                        )
+                        .then(user => {
+                            req.session.accessToken = user.accessToken
+                            req.session.username = user.username
+                            req.session.instagramUserID = user.instagramUserID
+    
+                            next()
+                        })
                     })
                 })
             }
