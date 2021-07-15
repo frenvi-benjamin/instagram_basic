@@ -7,31 +7,50 @@
 </head>
 
 <body>
-    <div class="container-fluid mt-3">
-        <div class="row">
+    <div class="container-fluid">
+
+        <div class="row" id="top-row">
             <div class="col">
-                <div class="card">
-                    <div class="h4 card-body">
-                        Nimm Teil an unserer Aktion und zeige der Welt mit was du dein Eis isst! Mach einen Post oder eine 
-                        Story mit unserem<button class="h4 tag" onclick="location.href='#hashtag';"">Hashtag</button>und tagge 
-                        uns<button class="h4 tag copyOnClick">@eatleryforfuture</button>und<button class="h4 tag copyOnClick">@<%= username %></button>!
-                    </div>
-                </div>
+                
+                <h3 class="ml-4 mb-3"><span class="title-bars">HEY!</span></h3>
+                
+                <span id="welcome-paragraph" class="m-3 mt-4 white-bars">
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+                    eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
+                    duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                </span>
+
             </div>
         </div>
+
         <div class="row">
-            <div class="mx-auto">
-                <button id="hashtag" class="h3 tag copyOnClick">#TastyNotWasty</button>
+            <div class="col-md" id="zero-waste">
+
+                <div id="spoon-animation" class="ml-3">
+                    <img src="/img/spoon-eating-animation.gif" alt="">
+                </div>
+                <h3 class="mb-3"><span class="title-bars">ZERO WASTE</span></h3>
+                <span class="white-bars">
+                    Mit einem Löffel aus einer leckeren Getreidemischung bleibt am Ende des Essens
+                    nichts außer dem Wunsch nach noch einem Löffel.
+                </span>
+
+                <h3 class="mb-3 mt-5 partner"><span class="title-bars">UNSERE PARTNER</span></h3>
+                <span class="white-bars partner" id="">
+                    Mithilfe Partner wie <a href="https://instagram.com/eisdiele_um_die_ecke">@eisdiele_um_die_ecke</a>
+                    schaffen wir es mit jedem Löffel 1,43 Gramm CO<sub>2</sub> einzusparen.
+                    <br>
+                    Und nicht zu vergessen: an unseren Löffeln erstickt keine Schildkröte.
+                </span>
+
             </div>
-        </div>
-        <div class="row my-3">
-            <div class="col-sm">
-                <%- eatleryInstagram %>
-            </div>
-            <div class="col-sm">
+
+            <div class="col-md mt-5">
                 <%- partnerInstagram %>
             </div>
         </div>
+
+
     </div>
     <% try { if (lottery.winner) { %>
         <script> const time = <%= lottery.time %></script>
