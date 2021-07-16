@@ -1,21 +1,15 @@
-.tag {
-    color: #A2D208;
-    background: none;
-    border: none;
-    padding-left: 0.3em;
-    padding-right: 0.3em;
-    margin-bottom: 0;
-}
-
-.tag:hover {
-    opacity: .6;
-}
-
+/* center instagram embed */
 iframe {
     margin-left: auto!important;
     margin-right: auto!important;
 }
 
+blockquote {
+    margin-left: auto!important;
+    margin-right: auto!important;
+}
+
+/* fireworks */
 .stage-container {
     pointer-events: none;
     overflow: hidden;
@@ -46,10 +40,67 @@ iframe {
     transform: translateZ(0);
 }
 
-blockquote {
-    margin-left: auto!important;
-    margin-right: auto!important;
+#insta {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 32px;
+    height: 32px;
+    z-index: 1;
 }
+
+#insta>svg {
+    width: 100%;
+    height: 100%;
+}
+
+#insta:hover {
+    text-decoration: none;
+}
+
+#insta::before {
+    content: "Checkt unser Instagram";
+
+    position: absolute;
+    left: -525%;
+    top: 12%;
+
+    font-size: small;
+
+    color: black;
+    background-color: #e5d500;
+
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 3px;
+    padding-bottom: 2px;
+
+    border-radius: 5px;
+}
+
+#insta::after {
+    content: "";
+
+    position: absolute;
+    top: 29%;
+    left: -42%;
+
+    border-left: 8px solid #e5d500;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+}
+
+@media screen and (max-width: 342px) {
+    #insta::before {
+        display: none;
+    }
+
+    #insta::after {
+        display: none;
+    }
+}
+
+
 
 #top-row {
     margin-bottom: 115px;
