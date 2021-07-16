@@ -96,6 +96,7 @@ blockquote {
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, .15);
     background-color: #fff;
     box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
     padding: 6px;
     line-height: 2;
 }
@@ -149,8 +150,20 @@ blockquote {
     margin-left: 5rem;
 }
 
+#zero-waste-icon {
+    max-width: 35px;
+    margin-left: 1rem;
+    margin-bottom: .7rem;
+    border-radius: 100%;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, .15);
+}
+
 @media screen and (max-width: 768px)  {
-    .partner {
+    h3.partner {
         margin-left: 1.5rem!important;
+    }
+
+    span.partner {
+        margin-left: 1rem!important;
     }
 }
