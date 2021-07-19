@@ -101,10 +101,8 @@ blockquote {
     }
 }
 
-
-
 #top-row {
-    margin-bottom: 115px;
+    margin-bottom: 85px;
 }
 
 #top-row>.col>h3 {
@@ -189,7 +187,7 @@ blockquote {
     border-bottom: 145px solid transparent;
 
     position: absolute;
-    left: -16px;
+    left: -20px;
     top: -60px;
 }
 
