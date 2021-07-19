@@ -210,6 +210,41 @@ blockquote {
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, .15);
 }
 
+#partner-instagram {
+    background-color: rgb(255, 237, 0);
+}
+
+#partner-instagram::before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-bottom: 130px solid rgb(255, 237, 0);
+    border-left: 70vw solid transparent;
+    border-right: 30vw solid transparent;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -129px;
+    z-index: -1;
+}
+
+#partner-instagram::after {
+    content: "";
+    width: 0;
+    height: 0;
+
+    border-top: 100px solid rgb(255, 237, 0);
+    border-left: 25vw solid transparent;
+    border-right: 75vw solid transparent;
+    
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -100px;
+    z-index: -1;
+}
+
+/* only on small screen */
 @media screen and (max-width: 768px)  {
     h3.partner {
         margin-left: 1.5rem!important;
@@ -217,5 +252,50 @@ blockquote {
 
     span.partner {
         margin-left: 1rem!important;
+    }
+}
+
+/* only on large screen */
+@media screen and (min-width: 768px)  {
+    #welcome-paragraph::after {
+        content: "";
+        width: 0;
+        height: 0;
+        border-top: 100px solid rgb(255, 237, 0);
+        border-left: 69.15vw solid transparent;
+        border-right: 30vw solid rgb(255,237,0);
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -112px;
+        z-index: -1;
+    }
+
+    #partner-instagram::before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-bottom: 130px solid rgb(255, 237, 0);
+        border-left: 34.5vw solid transparent;
+        border-right: 15vw solid rgb(255, 237, 0);
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -129px;
+        z-index: -1;
+    }
+
+    #partner-instagram::after {
+        content: "";
+        width: 0;
+        height: 0;
+        border-top: 100px solid rgb(255, 237, 0);
+        border-left: 12.5vw solid transparent;
+        border-right: 37vw solid transparent;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -100px;
+        z-index: -1;
     }
 }
