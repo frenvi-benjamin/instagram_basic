@@ -22,7 +22,7 @@
     top: 0;
     left: 0;
     z-index: 1;
-    background-color: rgb(255, 237, 0);
+    background-color: var(--frenvi-yellow);
     color: black;
     box-sizing: unset;
     padding-left: 12px!important;
@@ -41,7 +41,7 @@
 
 .good {
     color: black;
-    background-color: rgb(255, 237, 0);
+    background-color: var(--frenvi-yellow);
 }
 
 .bad {

@@ -1,3 +1,7 @@
+:root {
+    --frenvi-yellow: rgb(255, 237, 0)
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -34,7 +38,7 @@ a:active{
 }
 
 .btn-custom:active {
-    background-color: rgb(255, 237, 0)
+    background-color: var(--frenvi-yellow)
 }
 
 .btn-custom-danger {
@@ -102,7 +106,7 @@ a:active{
 }
 
 .navbar-item>.dropdown-item:active {
-    background-color: rgb(255, 237, 0);
+    background-color: var(--frenvi-yellow);
     color: black;
 }
 
@@ -123,7 +127,7 @@ a:active{
 }
 
 .floating:active {
-    background-color: rgb(255, 237, 0)!important;
+    background-color: var(--frenvi-yellow)!important;
     box-shadow: 0 0 5px 0px rgb(220, 220, 220)!important;
 }
 

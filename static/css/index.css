@@ -24,12 +24,12 @@
 }
 
 .custom-control-input:checked~.custom-control-label::before {
-  border-color: rgb(255, 237, 0) !important;
-  background-color: rgb(255, 237, 0) !important;
+  border-color: var(--frenvi-yellow) !important;
+  background-color: var(--frenvi-yellow) !important;
 }
 
 .custom-control-input:active~.custom-control-label::before {
-  background-color: rgb(255, 237, 0) !important;
+  background-color: var(--frenvi-yellow) !important;
   border-color: #adb5bd !important;
 }
 
@@ -38,6 +38,6 @@
 }
 
 .custom-control-input-green:not(:disabled):active~.custom-control-label::before {
-  background-color: rgb(255, 237, 0) !important;
-  border-color: rgb(255, 237, 0) !important;
+  background-color: var(--frenvi-yellow) !important;
+  border-color: var(--frenvi-yellow) !important;
 }

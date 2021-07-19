@@ -11,7 +11,7 @@
 }
 
 .selected {
-    box-shadow: 0px 0px 3px 3px rgb(255, 237, 0);
+    box-shadow: 0px 0px 3px 3px var(--frenvi-yellow);
 }
 
 .preview-img {
