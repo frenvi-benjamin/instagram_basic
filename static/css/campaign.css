@@ -62,7 +62,7 @@ blockquote {
     content: "Checkt unser Instagram";
 
     position: absolute;
-    left: -525%;
+    left: -168px;
     top: 12%;
 
     font-size: small;
@@ -83,7 +83,7 @@ blockquote {
 
     position: absolute;
     top: 29%;
-    left: -42%;
+    left: -14px;
 
     border-left: 8px solid #e5d500;
     border-top: 7px solid transparent;
