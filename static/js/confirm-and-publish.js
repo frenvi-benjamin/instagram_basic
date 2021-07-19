@@ -21,6 +21,7 @@ function hidePreview() {
     tl.to(preview, { duration: 0.25, opacity: 0 })
     tl.to(preview, { duration: 0, hidden: true })
     document.querySelector("#campaign-preview > iframe").remove()
+    document.body.style.overflow = "visible"
 }
 
 function showPreview() {
@@ -28,6 +29,7 @@ function showPreview() {
     const tl = gsap.timeline()
     tl.to(preview, { duration: 0, hidden: false })
     tl.to(preview, { duration: 0.25, opacity: 1 })
+    document.body.style.overflow = "hidden"
 }
 
 function publishCampaign() {
