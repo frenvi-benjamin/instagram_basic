@@ -37,7 +37,7 @@ a:active{
     background-color: rgba(255, 237, 0, .5);
 }
 
-.btn-custom:active {
+.btn-custom:active:not(:disabled) {
     background-color: var(--frenvi-yellow)
 }
 
