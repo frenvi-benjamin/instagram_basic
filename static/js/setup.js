@@ -6,9 +6,10 @@ const progressBar = document.getElementsByClassName("progress-bar")[0]
 history.scrollRestoration = "manual"
 
 // alert user of data loss when reloading or closing
-window.addEventListener("beforeunload", (e) => {
+const alertOnLeave = (e) => {
     e.preventDefault()
-})
+}
+window.addEventListener("beforeunload", alertOnLeave)
 
 for (let i = 0; i < nextButtons.length; i++) {
     const button = nextButtons[i];

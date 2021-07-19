@@ -44,5 +44,19 @@ function publishCampaign() {
             "rewardType": rewardType,
         }),
     })
-    .then(new bootstrap.Modal(document.getElementById("publish-modal")).show())
+    .then($('#publish-modal').modal({
+        backdrop: "static",
+        keyboard: false
+    }))
+
+    removeEventListener("beforeunload", alertOnLeave)
+
+    const countdown = document.getElementById("forward-countdown")
+    let nr = 9
+    setInterval(() => {
+        if (nr == 0) {
+            window.location = "/campaign/" + document.getElementById("campaign-preview").getAttribute("data-username")
+        }
+        countdown.innerHTML = nr--
+    }, 1000);
 }
