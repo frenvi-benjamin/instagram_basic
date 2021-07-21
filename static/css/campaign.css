@@ -1,3 +1,7 @@
+body {
+    overflow-x: hidden;
+}
+
 /* center instagram embed */
 iframe {
     margin-left: auto!important;
