@@ -18,4 +18,12 @@ function render(req, res) {
     })
 }
 
-module.exports = { render }
+function redirectIfAlreadySetup(req, res, next) {
+    User.findOne({ instagramUserID: req.session.instagramUserID })
+    .then(user => {
+        if (user.public) res.redirect("/")
+        else next()
+    })
+}
+
+module.exports = { render, redirectIfAlreadySetup }
