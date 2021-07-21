@@ -38,3 +38,15 @@ function setPublic(value) {
         })
     })
 }
+
+const deleteAccountButton = document.getElementById("delete-account")
+const modal = document.getElementById("delete-account-modal")
+deleteAccountButton.addEventListener("click", () => {
+    new bootstrap.Modal(modal).show()
+})
+
+const confirmDeleteAccount = document.getElementById("confirm-delete-account")
+confirmDeleteAccount.addEventListener("click", () => {
+    fetch("/me/delete")
+    .then(() => logout())
+})

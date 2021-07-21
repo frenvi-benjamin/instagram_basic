@@ -1,5 +1,6 @@
 const User = require("../models/userModel")
 const QrCode = require("../models/qrcodeModel")
+const Session = require("../models/sessionModel")
 
 function get(req, res) {
     User.findOne({ instagramUserID: req.session.instagramUserID })
@@ -25,4 +26,14 @@ function connect(req, res) {
     .then(response => res.send(response))
 }
 
-module.exports = { get, set, connect }
+function del (req, res) {
+    Promise.all([
+        QrCode.updateMany({ connectedUser: req.session.instagramUserID }, { connectedUser: undefined }),
+        User.deleteOne({ instagramUserID: req.session.instagramUserID }),
+        Session.deleteMany({ session: { $regex: req.session.instagramUserID, $options: "i" } })
+    ])
+    .then(() => res.sendStatus(200))
+
+}
+
+module.exports = { get, set, connect, del }

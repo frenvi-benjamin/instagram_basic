@@ -81,6 +81,32 @@
                 </div>
             </div>
         </div>
+        <hr>
+        <div class="row mb-3">
+            <div class="col">
+                <h5>Account löschen</h5>
+                <button id="delete-account" class="btn btn-custom-danger">
+                    Daten löschen
+                </button>
+            </div>
+        </div>
+        <div id="delete-account-modal" class="modal fade">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        Sicher, dass du deinen Account unwiderruflich löschen willst?
+                        <div class="row">
+                            <div class="col">
+                                <button id="confirm-delete-account" class="btn btn-custom-danger mt-2 full-width">Ja, löschen</button>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-custom mt-2 full-width" data-dismiss="modal">Nein, nicht löschen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="/js/index.js"></script>
