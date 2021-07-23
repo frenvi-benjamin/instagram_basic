@@ -13,7 +13,6 @@
     "@fortawesome/fontawesome-free": "^5.15.3",
     "base64url": "^3.0.1",
     "bootstrap": "^4.6.0",
-    "bootstrap-social": "^5.1.1",
     "connect-mongo": "^4.4.1",
     "dotenv": "^8.6.0",
     "ejs": "^3.1.6",

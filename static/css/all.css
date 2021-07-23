@@ -7,7 +7,7 @@ html {
 }
 
 body {
-    font-family: rubik,sans-serif;
+    font-family: rubik, sans-serif;
 }
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
@@ -15,17 +15,15 @@ body {
 }
 
 /* removed bootstrap button glow */
-.btn:focus,
-.btn:active,
-a:focus,
-a:active{ 
-    box-shadow:none !important;
-    outline:0px !important;
+
+.btn:focus, .btn:active, a:focus, a:active {
+    box-shadow: none !important;
+    outline: 0px !important;
 }
 
 .modal-footer {
-    background-color: rgba(0,0,0,.03);
-    border-top: 1px solid rgba(0,0,0,.125);
+    background-color: rgba(0, 0, 0, .03);
+    border-top: 1px solid rgba(0, 0, 0, .125);
 }
 
 .btn-custom {
@@ -43,7 +41,7 @@ a:active{
 
 .btn-custom-danger {
     color: white;
-    background-color: rgb(220,53,69);
+    background-color: rgb(220, 53, 69);
 }
 
 .btn-custom-danger:hover:not(:disabled) {
@@ -56,13 +54,13 @@ a:active{
 }
 
 .btn-custom-warning {
-    color:white;
+    color: white;
     background-color: #FFC107;
     border-color: #FFC107;
 }
 
 .btn-custom-warning:hover:not(:disabled) {
-    color:#FFC107;
+    color: #FFC107;
     background-color: white;
     border-color: #FFC107;
 }
@@ -75,6 +73,7 @@ a:active{
     background: linear-gradient(to right bottom, #fbad50, #fa9e4c, #f88e4a, #f57e4b, #f16e4c, #f15f5a, #ee5169, #e64678, #d74596, #bb4fb3, #905cc9, #4c68d7);
     padding: 2px 0px 2px 5px;
     border: none;
+    text-align: left;
 }
 
 .btn-insta:active {
@@ -88,6 +87,15 @@ a:active{
 .btn-insta>svg {
     border: none!important;
     position: unset!important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 32px;
+    line-height: 34px;
+    font-size: 1.6em;
+    text-align: center;
+    border-right: 1px solid rgba(0, 0, 0, 0.2)
 }
 
 .btn-insta>span {
