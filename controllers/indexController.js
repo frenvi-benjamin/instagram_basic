@@ -9,6 +9,7 @@ function checkForActiveQrcode (req, res, next) {
     User.findOne({ qrcodes: qrID })
     .then(
         user => {
+            if (!user) return next()
             User.findOneAndUpdate({ instagramUserID: user.instagramUserID }, { $inc: { nrOfScans: 1 } }, { upsert: true }).exec()
             // lottery
             // set lottery session details if not set
@@ -29,8 +30,7 @@ function checkForActiveQrcode (req, res, next) {
                 req.session.lottery.winner = false
             }
             res.redirect(`/campaign/${user.username}`)
-        },
-        () => {return next()}
+        }
     )
 }
 
