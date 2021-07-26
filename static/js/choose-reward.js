@@ -63,7 +63,7 @@ function setRewardType(type) {
         const preview =  document.getElementById("goodie-preview-text")
         switch (type) {
             case TYPE_CUP_OF_ICE_CREAM:
-                preview.innerHTML = "eine Kugel Eis im Becher mit unserem EATlery&copy; Löffel."
+                preview.innerHTML = "eine Kugel Eis im Becher mit unserem EATlery&reg; Löffel."
                 break;
             case TYPE_EXTRA_CREAM:
                 preview.innerHTML = "eine extra Portion Sahne auf ihr Eis."
