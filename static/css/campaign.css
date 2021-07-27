@@ -146,7 +146,7 @@ blockquote {
     z-index: -2;
 }
 
-.white-bars {
+.white-bars>span {
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, .15);
     background-color: #fff;
     box-decoration-break: clone;
@@ -252,7 +252,7 @@ blockquote {
         margin-left: 1.5rem!important;
     }
 
-    span.partner {
+    .white-bars.partner {
         margin-left: 1rem!important;
     }
 }
