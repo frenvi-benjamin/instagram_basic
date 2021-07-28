@@ -246,6 +246,11 @@ blockquote {
     z-index: -1;
 }
 
+#eatlery-instagram>iframe,
+#eatlery-instagram>blockquote {
+    margin-bottom: 1rem!important;
+}
+
 /* only on small screen */
 @media screen and (max-width: 768px)  {
     h3.partner {

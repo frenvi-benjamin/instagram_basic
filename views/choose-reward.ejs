@@ -3,13 +3,13 @@
 <head>
     <%- include("./partials/head", { title: "Goodie wählen" }) %>
     <link rel="stylesheet" href="/css/choose-reward.css">
+    <link rel="stylesheet" href="/css/footer-padding.css">
 </head>
 <body>
     <%- include("./partials/header") %> 
 
-    <div class="container pb-5">
+    <div class="container mb-3">
         <%- include("./partials/setup/choose-reward") %>
-        <div class="my-4"></div>
     </div>
 
     <div id="update" class="btn btn-custom floating">
@@ -17,5 +17,6 @@
     </div>
 
     <script src="/js/choose-reward.js"></script>
+    <%- include("./partials/footer") %>
 </body>
 </html>

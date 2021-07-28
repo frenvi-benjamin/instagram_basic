@@ -53,4 +53,5 @@
     left: 1rem;
     bottom: 1rem;
     right: 4.5rem;
+    z-index: 1;
 }
