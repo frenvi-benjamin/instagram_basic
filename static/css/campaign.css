@@ -73,7 +73,7 @@ blockquote {
     font-size: small;
 
     color: black;
-    background-color: #e5d500;
+    background-color: rgba(0, 0, 0, .03);
 
     padding-left: 7px;
     padding-right: 7px;
@@ -90,7 +90,7 @@ blockquote {
     top: 29%;
     transform: translate(-44px);
 
-    border-left: 8px solid #e5d500;
+    border-left: 8px solid rgba(0, 0, 0, .03);
     border-top: 7px solid transparent;
     border-bottom: 7px solid transparent;
 }
