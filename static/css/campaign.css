@@ -251,6 +251,10 @@ blockquote {
     margin-bottom: 1rem!important;
 }
 
+#footer {
+    background-color: rgb(255,237,0);
+}
+
 /* only on small screen */
 @media screen and (max-width: 768px)  {
     h3.partner {
