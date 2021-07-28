@@ -252,7 +252,7 @@ blockquote {
 }
 
 #footer {
-    background-color: rgb(255,237,0);
+    background-color: var(--frenvi-yellow);
 }
 
 /* only on small screen */
@@ -274,7 +274,7 @@ blockquote {
         height: 0;
         border-top: 100px solid var(--frenvi-yellow);
         border-left: 69.15vw solid transparent;
-        border-right: 30vw solid rgb(255,237,0);
+        border-right: 30vw solid var(--frenvi-yellow);
         position: absolute;
         left: 0;
         right: 0;
