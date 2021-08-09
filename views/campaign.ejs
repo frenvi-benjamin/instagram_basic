@@ -20,14 +20,14 @@
                 <h3 class="ml-4 mb-3"><span class="title-bars">HEY!</span></h3>
                 
                 <div class="white-bars">
-                    <span class="m-3 mt-4">
+                    <span class=" mt-4">
                         Du hast also Interesse an einer nachhaltigen Zukunft? <b>Wir auch!</b>
                     </span>
                 </div>
                 <br>
                 <br>
                 <div class="white-bars">
-                    <span id="welcome-paragraph" class="m-3">
+                    <span id="welcome-paragraph" class="">
                         Mit unserem essbaren <b>EATlery&reg;</b>-Besteck wirken wir der Wegwerfgesellschaft
                         von heute tatkräftig entgegen.
                         <br>
@@ -75,7 +75,7 @@
                 <h3 class="mb-3 ml-5"><span class="title-bars">ÜBER UNS</span></h3>
 
                 <div class="white-bars">
-                    <span class="m-3">
+                    <span class="">
                         Wir sind <a href="https://frenvi.de" target="_blank">FRENVI</a>, ein kleines deutsch-indisches Start-Up mit Sitz in Mannheim.
                         <br>
                         Mit unserer Marke EATlery&reg; arbeiten wir an essbarem Besteck (EAT + cutlery), um eine leckere Alternative zu Plastik zu bieten.
@@ -91,6 +91,7 @@
 
 
     </div>
+
     <% try { if (lottery.winner) { %>
         <script> const time = <%= lottery.time %></script>
 
@@ -117,6 +118,8 @@
         <script src="/js/campaign.js"></script>
 
     <% }} catch {} %>
+
+    <script src="/js/iOSCampaign.js"></script>
 
     <%- include("./partials/footer") %>
 </body>

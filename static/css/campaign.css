@@ -146,6 +146,11 @@ blockquote {
     z-index: -2;
 }
 
+.white-bars {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
 .white-bars>span {
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, .15);
     background-color: #fff;
