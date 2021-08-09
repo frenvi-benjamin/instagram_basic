@@ -251,10 +251,6 @@ blockquote {
     margin-bottom: 1rem!important;
 }
 
-#footer {
-    background-color: var(--frenvi-yellow);
-}
-
 /* only on small screen */
 @media screen and (max-width: 768px)  {
     h3.partner {

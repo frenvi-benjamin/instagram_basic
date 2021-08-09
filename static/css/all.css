@@ -158,5 +158,5 @@ body {
 
 #footer {
     margin-top: auto;
-    background-color: rgba(255, 237, 0, .75);
+    background-color: var(--frenvi-yellow);
 }

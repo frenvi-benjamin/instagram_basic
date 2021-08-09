@@ -112,7 +112,16 @@ app.use("/choose-reward", require("./routes/chooseRewardRoute"))
 app.use("/preview", require("./routes/previewRoute"))
 
 // setup
-app.get("/setup", require("./routes/setupRoute"))
+app.use("/setup", require("./routes/setupRoute"))
+
+//kontakt
+app.get("/kontakt", (req, res) => res.render("kontakt"))
+
+//datenschutz
+app.get("/datenschutz", (req, res) => res.render("datenschutz"))
+
+//impressum
+app.get("/impressum", (req, res) => res.render("impressum"))
 
 const ejs = require("ejs")
 
