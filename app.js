@@ -87,6 +87,18 @@ const sharedController = require("./controllers/sharedController")
 
 app.use(sharedController.auth)
 
+app.use((req, res, next) => {
+    console.log("during check", req.session.cookiesAccepted)
+
+    if (req.session.cookiesAccepted) {
+        res.locals.cookiesAccepted = true
+    }
+    else {
+        res.locals.cookiesAccepted = false
+    }
+    next()
+})
+
 // index
 app.use("/", require("./routes/indexRoute"))
 
@@ -122,6 +134,13 @@ app.get("/datenschutz", (req, res) => res.render("datenschutz"))
 
 //impressum
 app.get("/impressum", (req, res) => res.render("impressum"))
+
+app.get("/accept-cookies", (req, res) => {
+    console.log("before accepting" , req.session.cookiesAccepted)
+    req.session.cookiesAccepted = true
+    console.log("after accepting" , req.session.cookiesAccepted)
+    res.sendStatus(200)
+})
 
 const ejs = require("ejs")
 

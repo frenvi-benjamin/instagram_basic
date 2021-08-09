@@ -160,3 +160,24 @@ body {
     margin-top: auto;
     background-color: var(--frenvi-yellow);
 }
+
+#cookies {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    transition: opacity .5s;
+}
+
+#cookies>.card-body {
+    padding: .75rem;
+}
+
+#cookies>.card-body>div {
+    display: flex;
+    justify-content: space-between;
+}
+
+#cookies>.card-body>a {
+    font-size: small;
+}

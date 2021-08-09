@@ -1,0 +1,13 @@
+<% if (!cookiesAccepted) { %>
+    <div id="cookies" class="card shadow">
+        <div class="card-body">
+            <div>
+                <span class="my-auto">Wir benutzen Cookies.</span>
+                <div id="accept-cookies" class="btn btn-custom">Ok</div>
+            </div>
+            <a href="/datenschutz" target="_blank">Mehr Informationen</a>
+        </div>
+    </div>
+    
+    <script src="/js/cookies.js"></script> 
+<% } %>
