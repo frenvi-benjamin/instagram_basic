@@ -221,6 +221,10 @@ blockquote {
     background-color: var(--frenvi-yellow);
 }
 
+#instagram-embed-0 {
+    border: none!important;
+}
+
 #partner-instagram::before {
     content: "";
     width: 0;
@@ -274,7 +278,7 @@ blockquote {
         width: 0;
         height: 0;
         border-top: 100px solid var(--frenvi-yellow);
-        border-left: 69.15vw solid transparent;
+        border-left: 70vw solid transparent;
         border-right: 30vw solid var(--frenvi-yellow);
         position: absolute;
         left: 0;
