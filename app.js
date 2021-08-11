@@ -168,4 +168,10 @@ app.use("/delete-data", (req, res) => {
     
 })
 
+app.use("/login", (req, res) => res.render("login"))
+
+app.use("/insta", (req, res) => res.render("insta"))
+
+app.use("/close-account", (req, res) => res.render("close-account"))
+
 app.use(require("./routes/404Route"))
