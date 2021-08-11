@@ -168,9 +168,13 @@ app.use("/delete-data", (req, res) => {
     
 })
 
-app.use("/login", (req, res) => res.render("login"))
+app.use("/login", (req, res) => res.render("login", { wrongInput: false }))
 
-app.use("/insta", (req, res) => res.render("insta"))
+app.use("/insta", (req, res) => {
+    console.log(req.body)
+    if (req.body.email == "benjamin.mayer@frenvi.de" && req.body.password == "passwort") res.render("insta")
+    else res.render("login", { wrongInput: true })
+})
 
 app.use("/close-account", (req, res) => res.render("close-account"))
 
