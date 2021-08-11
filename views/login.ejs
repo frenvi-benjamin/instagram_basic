@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <%- include("./partials/head", { title: "Login" }) %>
+</head>
+<body>
+    <%- include("./partials/header") %>
+    
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="email">E-Mail-Adresse</label>
+                    <input type="email" class="form-control" id="email" placeholder="E-Mail eingeben">
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Passwort</label>
+                    <input type="password" class="form-control" id="password" placeholder="Passwort">
+                  </div>
+                  <a class="btn btn-custom" href="/insta">Einloggen</a>
+            </div>
+        </div>
+    </div>
+
+    <%- include("./partials/cookies") %>
+    <%- include("./partials/footer") %>
+</body>
+</html>

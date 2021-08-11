@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <%- include("./partials/head", { title: "Login" }) %>
+</head>
+<body>
+    <%- include("./partials/header") %>
+    
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <p>
+                    Erfolgreich eingeloggt!
+                    <br>
+                    Um deinen Account mit Instagram zu verbinden musst du uns nun Berechtigungen zu deinem Instagram-Account geben.
+                </p>
+                <%- include("./partials/instagram-button") %>
+            </div>
+        </div>
+    </div>
+
+    <%- include("./partials/cookies") %>
+    <%- include("./partials/footer") %>
+</body>
+</html>
