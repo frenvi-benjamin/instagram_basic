@@ -16,6 +16,7 @@ function render(req, res) {
                 (err, html) => {
                     console.log(html)
                     console.log("finished render")
+                    res.send(html)
                 })
                 
             })
