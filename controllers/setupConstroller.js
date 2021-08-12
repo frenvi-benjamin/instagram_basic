@@ -10,8 +10,9 @@ function render(req, res) {
         if (body.data) {
             User.findOne({ username: req.session.username })
             .then(user => {
-                console.log("found user")
+                console.log("found user, starting render")
                 res.render("setup", { media: body.data, rewardType: user.rewardType, promotedPost: user.promotedPost, instagramUserID: req.session.instagramUserID, accessToken: req.session.accessToken, username: req.session.username })
+                console.log("finished render")
             })
             
         }
