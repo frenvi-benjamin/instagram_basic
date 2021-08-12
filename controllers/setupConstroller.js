@@ -11,7 +11,12 @@ function render(req, res) {
             User.findOne({ username: req.session.username })
             .then(user => {
                 console.log("found user, starting render")
-                res.render("setup", { media: body.data, rewardType: user.rewardType, promotedPost: user.promotedPost, instagramUserID: req.session.instagramUserID, accessToken: req.session.accessToken, username: req.session.username }, (err, html) => console.log("finished render"))
+                res.render("setup",
+                { media: body.data, rewardType: user.rewardType, promotedPost: user.promotedPost, instagramUserID: req.session.instagramUserID, accessToken: req.session.accessToken, username: req.session.username },
+                (err, html) => {
+                    console.log(html)
+                    console.log("finished render")
+                })
                 
             })
             
