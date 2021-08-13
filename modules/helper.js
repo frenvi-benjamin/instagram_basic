@@ -9,7 +9,7 @@ const fetch = require("node-fetch")
 
 // api urls
 const mediaURL = "https://graph.instagram.com/me/media"
-const oembedURL = "https://graph.facebook.com/v10.0/instagram_oembed"
+const oembedURL = "https://graph.facebook.com/v11.0/instagram_oembed"
 
 // INSTAGRAM
 
@@ -28,19 +28,18 @@ function getOembed(username) {
     .then(user => {
         if (user.promotedPost) {
             // WORKAROUND
-            return buildOembed(user.username, user.promotedPost)
-            // return fetch(oembedURL + `?url=${user.promotedPost}&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`)
-            // .then(response => response.json())
-            // .then(body => body.html)
+            // return buildOembed(user.username, user.promotedPost)
+            return fetch(oembedURL + `?url=${user.promotedPost}&hidecaption=true&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`)
+            .then(response => response.json())
+            .then(body => body.html)
         }
         else {
-            return undefined
-            // return fetch(mediaURL + `?fields=permalink&access_token=${user.accessToken}`)
-            // .then(response => response.json())
-            // .then(body => fetch(oembedURL +`?url=${body.data[0].permalink}&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`))
-            // .then(response => response.json())
-            // .then(body => {console.log(body); return body})
-            // .then(body => body.html)
+            // return undefined
+            return fetch(mediaURL + `?fields=permalink&access_token=${user.accessToken}`)
+            .then(response => response.json())
+            .then(body => fetch(oembedURL +`?url=${body.data[0].permalink}&hidecaption=true&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`))
+            .then(response => response.json())
+            .then(body => body.html)
         }
     })
     
