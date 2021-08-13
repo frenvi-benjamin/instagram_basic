@@ -1,7 +1,7 @@
 const winner = document.getElementById("winner")
 const fireworks = document.getElementsByClassName("stage-container")[0]
 let fireworkIntervalID
-
+const THIRTY_MINUTES = 1000 * 60 * 30
 
 if (winner && fireworks) {
 
@@ -20,10 +20,10 @@ if (winner && fireworks) {
         }
 
         // update the time displayed in the disclaimer
-        const locale = new Date(time).toLocaleString("de-DE", { timeZone: "CET" })
+        const locale = new Date(time + THIRTY_MINUTES).toLocaleString("de-DE", { timeZone: "CET" })
         const minutesLeft = Math.round(30 - ((Date.now() - time)/1000/60))
         const disclaimer = document.getElementById("disclaimer")
-        disclaimer.innerHTML = `Dieser Gutschein ist noch ${minutesLeft} Minuten gültig.<br>(ausgestellt ${locale})`
+        disclaimer.innerHTML = `Dieser Gutschein ist noch ${minutesLeft} Minuten gültig.<br>(gültig bis ${locale})`
         if (minutesLeft <= 5) {
             disclaimer.style.color = "#DC3545"
             disclaimer.style.fontWeight = "bolder"
@@ -71,10 +71,10 @@ function removeWinnerAndFireworks() {
 }
 
 function wonWithin30Mins() {
-    return Date.now() - time < (1000*60*30)
+    return Date.now() - time < THIRTY_MINUTES
 }
 
 function addTimeToDisclaimer() {
-    const locale = new Date(time).toLocaleString("de-DE", { timeZone: "CET" })
-    document.getElementById("disclaimer").innerHTML += `<br>(ausgestellt ${locale})`
+    const locale = new Date(time + THIRTY_MINUTES).toLocaleString("de-DE", { timeZone: "CET" })
+    document.getElementById("disclaimer").innerHTML += `<br>(gültig bis ${locale})`
 }
