@@ -21,15 +21,29 @@
             <div class="col">
                 <h5>Aktueller Post</h5>
                 <div id="current-post-card" class="card">
-                    <% media.forEach(post => { %>
-                        <% if(post.permalink == user.promotedPost) { %>
-                            <% if (post.media_type == "VIDEO") { %>
-                                <img class="card-img-top" src="<%= post.thumbnail_url %>">
-                            <% } else { %>
-                                <img class="card-img-top" src="<%= post.media_url %>">
-                            <% } %>
-                        <% } %>
-                    <% }) %>
+                    <% console.log(user.promotePost) %>
+
+                    <%
+                        let currentPost
+
+                        if (!user.promotedPost) {
+                            currentPost = media[0]
+                        }
+                        else {
+                            media.forEach(post => {
+                                if(post.permalink == user.promotedPost) {
+                                    currentPost = post
+                                }
+                            })
+                        }
+                    %>
+
+                    <% if (currentPost.media_type == "VIDEO") { %>
+                        <img class="card-img-top" src="<%= currentPost.thumbnail_url %>">
+                    <% } else { %>
+                        <img class="card-img-top" src="<%= currentPost.media_url %>">
+                    <% } %>
+
                     <a class="card-body btn-custom btn" href="/choose-post">
                         Ändern
                     </a>

@@ -99,7 +99,7 @@ function setPromotedPost(post) {
     }
     else {
         const firstImage = document.getElementsByClassName("preview-img")[0]
-        promotedPost = undefined
+        promotedPost = null
         try {
             preview.src = firstImage.src
             previewText.hidden = false
