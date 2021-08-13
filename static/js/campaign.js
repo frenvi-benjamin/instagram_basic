@@ -1,32 +1,34 @@
 const winner = document.getElementById("winner")
 const fireworks = document.getElementsByClassName("stage-container")[0]
 let fireworkIntervalID
-const THIRTY_MINUTES = 1000 * 60 * 30
+const VALID_COUPON_TIME = 1000 * 20
+const VALID_COUPON_TIME_MINUTES = VALID_COUPON_TIME / 60 / 1000
+let validityIntervalID
 
 if (winner && fireworks) {
 
-    addTimeToDisclaimer()
-
-    const intervalID = setInterval(() => {
-        // remove modal and fireworks if 30 mins have passed since the user entered the lottery
-        if (!wonWithin30Mins()) {
-            console.log("30 mins are over")
+    validityIntervalID = setInterval(() => {
+        // remove modal and fireworks if VALID_COUPON_TIME_MINUTES mins have passed since the user entered the lottery
+        if (!wonWithinValidTime()) {
+            console.log(`${VALID_COUPON_TIME_MINUTES} mins are over`)
             try {
                 removeWinnerAndFireworks()
-                clearInterval(id)
+                clearInterval(validityIntervalID)
             } catch {
-                clearInterval(id)
+                clearInterval(validityIntervalID)
             }
         }
 
         // update the time displayed in the disclaimer
-        const locale = new Date(time + THIRTY_MINUTES).toLocaleString("de-DE", { timeZone: "CET" })
-        const minutesLeft = Math.round(30 - ((Date.now() - time)/1000/60))
+        const locale = new Date(time + VALID_COUPON_TIME).toLocaleString("de-DE", { timeZone: "CET" })
+        const minutesLeft = Math.ceil(VALID_COUPON_TIME_MINUTES - ((Date.now() - time)/1000/60))
         const disclaimer = document.getElementById("disclaimer")
-        disclaimer.innerHTML = `Dieser Gutschein ist noch ${minutesLeft} Minuten gültig.<br>(gültig bis ${locale})`
-        if (minutesLeft <= 5) {
-            disclaimer.style.color = "#DC3545"
-            disclaimer.style.fontWeight = "bolder"
+        if (disclaimer) {
+            disclaimer.innerHTML = `Dieser Gutschein ist noch ${minutesLeft} Minuten gültig.<br>(gültig bis ${locale})`
+            if (minutesLeft <= 5) {
+                disclaimer.style.color = "#DC3545"
+                disclaimer.style.fontWeight = "bolder"
+            }
         }
     }, 1000);
 
@@ -36,11 +38,11 @@ if (winner && fireworks) {
         clearInterval(intervalID)
     })
 
-    if (wonWithin30Mins()) {
+    if (wonWithinValidTime()) {
         showWinnerModalAndFireworks()
     }
     else {
-        console.log("modal not displayed because win time is longer than 30 mins ago")
+        console.log(`modal not displayed because win time is longer than ${VALID_COUPON_TIME_MINUTES} mins ago`)
         removeWinnerAndFireworks()
     }
 
@@ -84,11 +86,11 @@ function removeWinnerAndFireworks() {
     console.log("removed modal and fireworks")
 }
 
-function wonWithin30Mins() {
-    return Date.now() - time < THIRTY_MINUTES
+function wonWithinValidTime() {
+    return Date.now() - time < VALID_COUPON_TIME
 }
 
 function addTimeToDisclaimer() {
-    const locale = new Date(time + THIRTY_MINUTES).toLocaleString("de-DE", { timeZone: "CET" })
+    const locale = new Date(time + VALID_COUPON_TIME).toLocaleString("de-DE", { timeZone: "CET" })
     document.getElementById("disclaimer").innerHTML += `<br>(gültig bis ${locale})`
 }
