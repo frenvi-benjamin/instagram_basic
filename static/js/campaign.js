@@ -46,6 +46,15 @@ if (winner && fireworks) {
 
 }
 
+addEventListener("visibilitychange", () => {
+    if (document.visibilityState == "visible") {
+        fireworkIntervalID = startFireworks()
+    } else {
+        stopFireworks()
+    }
+  })
+
+
 function showWinnerModalAndFireworks() {
     $("#winner").modal({
         backdrop: "static",
@@ -57,14 +66,19 @@ function showWinnerModalAndFireworks() {
     console.log("show winner modal and start fireworks")
 }
 
-function removeWinnerAndFireworks() {
-    $("#winner").modal("hide")
+function stopFireworks() {
     try {
         clearInterval(fireworkIntervalID)
+        fireworkIntervalID = null
     }
     catch (error) {
         console.log(error)
     }
+}
+
+function removeWinnerAndFireworks() {
+    $("#winner").modal("hide")
+    stopFireworks()
     document.body.removeChild(winner)
     document.body.removeChild(fireworks)
     console.log("removed modal and fireworks")
