@@ -37,11 +37,32 @@
 
 <div class="col">
     <div class="progress mb-2">
-        <div class="progress-bar type-0" style="width: <%= types[0]/total*100 %>%;"></div>
-        <div class="progress-bar type-1" style="width: <%= types[1]/total*100 %>%;"></div>
-        <div class="progress-bar type-2" style="width: <%= types[2]/total*100 %>%;"></div>
-        <div class="progress-bar type-3" style="width: <%= types[3]/total*100 %>%;"></div>
+        <div title="Becher Eis + Löffel" class="progress-bar type-0" style="width: <%= types[0]/total*100 %>%;"><span style="padding-top: 2px;"><%= Math.round(types[0]/total*100) %>%</span></div>
+        <div title="Portion Sahne" class="progress-bar type-1" style="width: <%= types[1]/total*100 %>%;"><span style="padding-top: 2px;"><%= Math.round(types[1]/total*100) %>%</span></div>
+        <div title="Extra Kugel Eis" class="progress-bar type-2" style="width: <%= types[2]/total*100 %>%;"><span style="padding-top: 2px;"><%= Math.round(types[2]/total*100) %>%</span></div>
+        <div title="Unbekannt (default)" class="progress-bar type-3" style="width: <%= types[3]/total*100 %>%;"><span style="padding-top: 2px;"><%= Math.round(types[3]/total*100) %>%</span></div>
     </div>
+
+    <div style="display: flex; justify-content: space-around;" class="mb-2">
+        <div style="display: flex;">
+            <div class="rounded progress-bar type-0 mr-1" style="width: 1rem; height: 1rem; margin-top: 2px;"></div>
+            <span style="font-size: small; margin-top: 2px;">Becher Eis + Löffel: <%= +(types[0]/total*100).toFixed(2) %>%</span>
+        </div>
+        <div style="display: flex;">
+            <div class="rounded progress-bar type-1 mr-1" style="width: 1rem; height: 1rem; margin-top: 2px;"></div>
+            <span style="font-size: small; margin-top: 2px;">Portion Sahne: <%= +(types[1]/total*100).toFixed(2) %>%</span>
+        </div>
+        <div style="display: flex;">
+            <div class="rounded progress-bar type-2 mr-1" style="width: 1rem; height: 1rem; margin-top: 2px;"></div>
+            <span style="font-size: small; margin-top: 2px;">Extra Kugel Eis: <%= +(types[2]/total*100).toFixed(2) %>%</span>
+        </div>
+        <div style="display: flex;">
+            <div class="rounded progress-bar type-3 mr-1" style="width: 1rem; height: 1rem; margin-top: 2px;"></div>
+            <span style="font-size: small; margin-top: 2px;">Unbekannt (default): <%= +(types[3]/total*100).toFixed(2) %>%</span>
+        </div>
+    </div>
+    
+
     <% users.forEach(user => { %> 
         <div class="input-group mb-1">
             <div class="input-group-prepend fixed-width">
