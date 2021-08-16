@@ -2,36 +2,36 @@
 <!-- Generator: Adobe Illustrator 25.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 507.27 301.62" style="enable-background:new 0 0 507.27 301.62;" xml:space="preserve">
-<rect x="2.5" y="2.91" style="fill:#FFFFFF;stroke:#99C31D;stroke-width:5;stroke-miterlimit:10;" width="143.87" height="129.51"/>
+<rect x="2.5" y="2.91" style="fill:#FFFFFF;stroke:#FFED00;stroke-width:5;stroke-miterlimit:10;" width="143.87" height="129.51"/>
 <polygon style="fill:#CDCCCC;" points="88.68,46.12 70.74,74.61 53.07,60.65 17.47,110.21 131.4,110.21 "/>
 <circle style="fill:#CDCCCC;" cx="31.71" cy="39" r="14.24"/>
 <g style="opacity:0.5;">
 	<rect x="181.7" y="169.61" style="fill:#FFFFFF;" width="143.87" height="129.51"/>
-	<path style="fill:#99C31D;" d="M328.07,301.62h-148.9V167.11h148.9V301.62z M184.2,296.62h138.87V172.11h-138.9L184.2,296.62z"/>
+	<path style="fill:#CDCCCC;" d="M328.07,301.62h-148.9V167.11h148.9V301.62z M184.2,296.62h138.87V172.11h-138.9L184.2,296.62z"/>
 </g>
 <polygon style="fill:#CDCCCC;" points="267.88,212.82 249.94,241.3 232.28,227.35 196.67,276.91 310.61,276.91 "/>
 <circle style="fill:#CDCCCC;" cx="210.91" cy="205.7" r="14.24"/>
 <g style="opacity:0.5;">
 	<rect x="360.9" y="169.61" style="fill:#FFFFFF;" width="143.87" height="129.51"/>
-	<path style="fill:#99C31D;" d="M507.27,301.62H358.4V167.11h148.87V301.62z M363.4,296.62h138.87V172.11H363.4L363.4,296.62z"/>
+	<path style="fill:#CDCCCC;" d="M507.27,301.62H358.4V167.11h148.87V301.62z M363.4,296.62h138.87V172.11H363.4L363.4,296.62z"/>
 </g>
 <polygon style="fill:#CDCCCC;" points="447.08,212.82 429.14,241.3 411.48,227.35 375.87,276.91 489.81,276.91 "/>
 <circle style="fill:#CDCCCC;" cx="390.11" cy="205.7" r="14.24"/>
 <g style="opacity:0.5;">
 	<rect x="2.5" y="169.61" style="fill:#FFFFFF;" width="143.87" height="129.51"/>
-	<path style="fill:#99C31D;" d="M148.87,301.62H0V167.11h148.87V301.62z M5,296.62h138.87V172.11H5V296.62z"/>
+	<path style="fill:#CDCCCC;" d="M148.87,301.62H0V167.11h148.87V301.62z M5,296.62h138.87V172.11H5V296.62z"/>
 </g>
 <polygon style="fill:#CDCCCC;" points="88.68,212.82 70.74,241.3 53.07,227.35 17.47,276.91 131.4,276.91 "/>
 <circle style="fill:#CDCCCC;" cx="31.71" cy="205.7" r="14.24"/>
 <g style="opacity:0.5;">
 	<rect x="181.7" y="2.5" style="fill:#FFFFFF;" width="143.87" height="129.51"/>
-	<path style="fill:#99C31D;" d="M328.07,134.51h-148.9V0h148.9V134.51z M184.2,129.51h138.87V5h-138.9L184.2,129.51z"/>
+	<path style="fill:#CDCCCC;" d="M328.07,134.51h-148.9V0h148.9V134.51z M184.2,129.51h138.87V5h-138.9L184.2,129.51z"/>
 </g>
 <polygon style="fill:#CDCCCC;" points="267.88,45.71 249.94,74.19 232.28,60.24 196.67,109.8 310.61,109.8 "/>
 <circle style="fill:#CDCCCC;" cx="210.91" cy="38.59" r="14.24"/>
 <g style="opacity:0.5;">
 	<rect x="360.9" y="2.5" style="fill:#FFFFFF;" width="143.87" height="129.51"/>
-	<path style="fill:#99C31D;" d="M507.27,134.51H358.4V0h148.87V134.51z M363.4,129.51h138.87V5H363.4L363.4,129.51z"/>
+	<path style="fill:#CDCCCC;" d="M507.27,134.51H358.4V0h148.87V134.51z M363.4,129.51h138.87V5H363.4L363.4,129.51z"/>
 </g>
 <polygon style="fill:#CDCCCC;" points="447.08,45.71 429.14,74.19 411.48,60.24 375.87,109.8 489.81,109.8 "/>
 <circle style="fill:#CDCCCC;" cx="390.11" cy="38.59" r="14.24"/>
@@ -40,7 +40,7 @@
 		c6.255,0,12.153,2.044,17.064,5.911c3.638-2.812,7.578-5.488,12.261-8.404l3.933-2.449l4.397,10.103l-2.205,1.925
 		c-3.549,3.1-6.764,6.32-9.892,9.998l0.418,1.158c1.084,3.006,1.634,6.158,1.634,9.368
 		C158.087,132.73,145.702,145.116,130.477,145.116z"/>
-	<path style="fill:#A2C621;" d="M113.743,112.437l4.239-3.916c4.813,2.283,9.392,5.029,13.673,8.2
+	<path style="fill:#FFED00;" d="M113.743,112.437l4.239-3.916c4.813,2.283,9.392,5.029,13.673,8.2
 		c10.48-11.882,17.4-17.912,30.262-25.923l1.38,3.171c-10.603,9.257-18.38,19.57-29.561,39.641
 		C127.561,126.106,120.881,119.032,113.743,112.437z M149.432,113.867c0.226,1.18,0.355,2.394,0.355,3.639
 		c0,10.648-8.663,19.31-19.31,19.31c-10.648,0-19.31-8.663-19.31-19.31c0-10.648,8.663-19.31,19.31-19.31
