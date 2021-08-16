@@ -1,9 +1,11 @@
 .dropdown-item.active {
-    background-color: #A2D208;
+    background-color: #FFED00;
+    color: black;
 }
 
 .dropdown-item:active {
-    background-color: #A2D208;
+    background-color: #FFED00;
+    color: black;
 }
 
 .input-group-prepend.fixed-width {

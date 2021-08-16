@@ -4,10 +4,10 @@
             <div class="input-group-text fixed-width">Username</div>
         </div>
         <div class="form-control text-right username">
-            <%= user.username %>
+            <span style="opacity: .5;">https://instagram.com/</span><%= user.username %>
         </div>
         <div class="input-group-append">
-            <a class="btn btn-custom" target="_blank" href="<%= " https://www.instagram.com/" +user.username %>">
+            <a class="btn btn-custom border" target="_blank" href="<%= " https://instagram.com/" +user.username %>">
                 <i class="fas fa-chevron-right"></i>
             </a>
         </div>
@@ -25,7 +25,7 @@
             <% } %>
             </div>
         <div class="input-group-append">
-            <a class="btn btn-custom" target="_blank" href="<% if (user.promotedPost) { %><%= user.promotedPost %><% } else { %>https://www.instagram.com/<%= user.username %><% } %>">
+            <a class="btn btn-custom border" target="_blank" href="<% if (user.promotedPost) { %><%= user.promotedPost %><% } else { %>https://www.instagram.com/<%= user.username %><% } %>">
                 <i class="fas fa-chevron-right"></i>
             </a>
         </div>
@@ -39,7 +39,7 @@
             <%= process.env.HOST + "/campaign/" + user.username %>
         </div>
         <div class="input-group-append">
-            <a class="btn btn-custom" target="_blank" href="<%= "/campaign/" + user.username %>">
+            <a class="btn btn-custom border" target="_blank" href="<%= "/campaign/" + user.username %>">
                 <i class="fas fa-chevron-right"></i>
             </a>
         </div>
@@ -63,7 +63,7 @@
                 <%= user.qrcodes.length %>
                 </div>
                 <div class="input-group-append">
-                    <button class="btn btn-custom" onclick="document.getElementById('qrcode-single').hidden = true; document.getElementById('qrcode-all').hidden = false">
+                    <button class="btn btn-custom border" onclick="document.getElementById('qrcode-single').hidden = true; document.getElementById('qrcode-all').hidden = false">
                         Alle anzeigen
                     </button>
                 </div>
@@ -83,13 +83,13 @@
                     <%= qrID %>
                 </div>
                 <div class="input-group-append">
-                    <button class="btn btn-custom" onclick="toggleQrcode('<%= qrID %>')">
+                    <button class="btn btn-custom border" onclick="toggleQrcode('<%= qrID %>')">
                         <i class="fas fa-qrcode"></i>
                     </button>
                 </div>
                 <form class="input-group-append" action="/admin/qrcode/download" method="POST">
                     <input hidden type="text" name="qrcodes" value="[&quot;<%= qrID %>&quot;]">
-                    <button class="btn btn-custom" type="submit">
+                    <button class="btn btn-custom border" type="submit">
                         <i class="fas fa-file-download"></i>
                     </button>
                 </form>
