@@ -27,15 +27,22 @@ function render (req, res) {
     })
 }
 
-function renderPreview(req, res) {
+async function renderPreview(req, res) {
     const username = req.query.username
-    const promotedPost = req.query.promotedPost
+    let promotedPost = req.query.promotedPost
+
+    if (!promotedPost) {
+        await helper.getNewestPost(username)
+        .then(post =>{
+            promotedPost = post.permalink
+        })
+    }
 
     Promise.all([
-        helper.buildOembed(username, promotedPost),
+        helper.buildOembed(promotedPost),
         helper.getOembed("eatleryforfuture"),
     ])
-    .then(([partnerInstagram, eatleryInstagram, user]) => {
+    .then(([partnerInstagram, eatleryInstagram]) => {
         res.render("campaign", { partnerInstagram: partnerInstagram, eatleryInstagram, eatleryInstagram, username: req.params.username, lottery: { winner: false }, rewardType: 1 })
     })
 

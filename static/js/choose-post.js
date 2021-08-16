@@ -73,7 +73,7 @@ function removeAllSelections() {
 }
 let username
 try {
-    const username = document.getElementById("campaign-preview").getAttribute("data-username")
+    username = document.getElementById("campaign-preview").getAttribute("data-username")
 } catch {}
 var promotedPost
 function setPromotedPost(post) {
@@ -85,7 +85,7 @@ function setPromotedPost(post) {
         if (promotedPost) {
             iframe.src = `/campaign/preview?username=${username}&promotedPost=${promotedPost.getAttribute("data-permalink")}`
         } else {
-            iframe.src = `/campaign/preview?username=${username}&promotedPost=undefined`
+            iframe.src = `/campaign/preview?username=${username}`
         }        
     } catch {}
 
