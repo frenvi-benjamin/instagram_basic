@@ -11,7 +11,6 @@ minify(src)
   var comment = "/*! " + pkg.name + " v" + pkg.version + " | " + pkg.homepage + " | MIT license */\n";
   var js = comment + data;
   fs.writeFileSync(dst, js);
-  console.log("Done!");
 })
 .catch(function(error) {
   if (error) return console.error(error);

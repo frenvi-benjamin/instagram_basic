@@ -44,7 +44,6 @@ function createQrcodeFiles(qrcodes) {
 }
 
 function download(req, res) {
-    console.log(req.body)
     let files = req.body.files || createQrcodeFiles(req.body.qrcodes)
 
     if (typeof files == "string") {
