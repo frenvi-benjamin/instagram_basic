@@ -43,7 +43,7 @@ function getOembed(username) {
         else {
             return fetch(mediaURL + `?fields=permalink&access_token=${user.accessToken}`)
             .then(response => response.json())
-            .then(body => buildOembed(body[0].permalink))
+            .then(body => buildOembed(body.data[0].permalink))
         }
     })
     
