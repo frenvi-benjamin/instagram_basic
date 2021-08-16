@@ -27,6 +27,8 @@ function checkAdminAuth(req, res, next) {
 }
 
 function auth(req, res, next) {
+    res.locals.cookiesAccepted = req.session.cookiesAccepted
+
     if (req.query.error == "access_denied") {
         return res.render("request-permissions", {
             oauthRedirectURI: process.env.HOST + req.originalUrl
