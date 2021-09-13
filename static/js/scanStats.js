@@ -184,7 +184,9 @@ fetch("/me")
         const datePicker = document.getElementById("starting-day")
 
         // set initial value of datePicker
-        datePicker.value = new Date( new Date().getTime() - (WEEK - DAY) ).toISOString().slice(0, 10)
+        const aWeekAgo = new Date( new Date().getTime() - (WEEK - DAY) ).toISOString().slice(0, 10)
+        datePicker.value = aWeekAgo
+        datePicker.max = aWeekAgo
         updateChart()
 
 
