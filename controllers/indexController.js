@@ -10,7 +10,15 @@ function checkForActiveQrcode (req, res, next) {
     .then(
         user => {
             if (!user) return next()
-            User.findOneAndUpdate({ instagramUserID: user.instagramUserID }, { $inc: { nrOfScans: 1 } }, { upsert: true }).exec()
+            // register the scan for the user
+            User.findOneAndUpdate(
+                { instagramUserID: user.instagramUserID },
+                {
+                    $inc: { nrOfScans: 1 },
+                    $push: { scans: new Date() }
+                },
+                { upsert: true }
+            ).exec()
             // lottery
             // set lottery session details if not set
             if (req.session.lottery == undefined) req.session.lottery = {}

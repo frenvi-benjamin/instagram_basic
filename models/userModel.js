@@ -17,6 +17,7 @@ const userSchema = new Schema({
         default: 0,
         type: Number
     },
+    scans: [Date],
     promotedPost: String,
     rewardType: {
         default: 4,

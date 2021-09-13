@@ -96,6 +96,36 @@
         <hr>
         <div class="row mb-3">
             <div class="col">
+                <h5>Beliebtheit der Wochentage</h5>
+                Hier kannst du sehen an welchen Tagen deine Kunden am häufigsten QR-Codes scannen.
+                <br>
+                <br>
+                <div class="card">
+                    <div class="card-body">
+                        <canvas id="dayPop"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row mb-3">
+            <div class="col">
+                <h5>Anzahl der Scans an bestimmten Tagen</h5>
+                Wähle eine Woche aus, um zu sehen wie viele Kunden in dieser Woche QR-Codes gescannt haben.
+                <br>
+                <br>
+                <div class="card">
+                    <div class="card-body">
+                        <label for="starting-day">Zeige die Woche ab dem</label>
+                        <input type="date" id="starting-day">
+                        <canvas id="days"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row mb-3">
+            <div class="col">
                 <h5>Account löschen</h5>
                 <button id="delete-account" class="btn btn-custom-danger">
                     Daten löschen
@@ -123,6 +153,8 @@
 
     <%- include("./partials/footer") %>
     <%- include("./partials/cookies") %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js" integrity="sha512-asxKqQghC1oBShyhiBwA+YgotaSYKxGP1rcSYTDrB0U6DxwlJjU59B67U8+5/++uFjcuVM8Hh5cokLjZlhm3Vg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/js/scanStats.js"></script>
     <script src="/js/index.js"></script>
 </body>
 </html>
