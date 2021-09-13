@@ -13,12 +13,6 @@ router.get("/", sharedController.checkAdminAuth, (req, res) => {
     res.render("admin")
 })
 
-// stats
-router.get("/:username", sharedController.checkAdminAuth, sharedController.checkForUserSession, (req, res) => {
-    User.findOne({ username: req.params.username }, "scans")
-    .then(user => res.render("stats", { scans: user.scans }))
-})
-
 // connections
 router.use("/connection",sharedController.checkAdminAuth,  require("./admin/connectionRoute"))
 
