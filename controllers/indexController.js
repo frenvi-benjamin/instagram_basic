@@ -23,10 +23,10 @@ function checkForActiveQrcode (req, res, next) {
             // set lottery session details if not set
             if (req.session.lottery == undefined) req.session.lottery = {}
             // only enter user in lottery if he was last entered more than a week ago or never before entered
-            if ((Date.now() - req.session.lottery.time) > 5000/*1000*60*60*24*7*/ || req.session.lottery.time == undefined) { // last lottery entered has to be a week old
+            if ((Date.now() - req.session.lottery.time) > 1000*60*60*24*7 || req.session.lottery.time == undefined) { // last lottery entered has to be a week old
                 // choose a winner by chance
                 console.log("lottery entered")
-                if (Math.random() <= 1) {
+                if (Math.random() <= .1) {
                     console.log("lottery won")
                     req.session.lottery.winner = true
                 }
