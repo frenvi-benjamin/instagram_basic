@@ -6,9 +6,4 @@ const sharedController = require("../../controllers/sharedController")
 
 router.post("/clear", sharedController.checkAdminAuth, controller.clear)
 
-// user session check middleware
-// all routes below require an active session. if no session is active the user will be redirected to the login page
-// make sure qrcode is not already connected to a user 
-router.post("/create", sharedController.checkForUserSession, controller.assureUnusedQrcode, controller.create)
-
 module.exports = router

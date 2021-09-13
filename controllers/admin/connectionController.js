@@ -37,24 +37,4 @@ function clear(req, res) {
     }
 }
 
-function assureUnusedQrcode(req, res, next) {
-    QrCode.findById(req.body.qrID)
-    .then(qrcode => {
-        if (qrcode.connectedUser && qrcode.connectedUser != req.session.instagramUserID) {
-            return res.sendStatus(451)
-        }
-        else {
-            return next()
-        }
-    })
-}
-
-function create(req, res) {
-    Promise.all([
-        User.findOneAndUpdate({ instagramUserID: req.session.instagramUserID }, { $addToSet: { qrcodes: req.body.qrID } }),
-        QrCode.findByIdAndUpdate( req.body.qrID, { connectedUser: req.session.instagramUserID })
-    ])
-    .then(res.sendStatus(200))
-}
-
-module.exports = { clear, create, assureUnusedQrcode }
+module.exports = { clear }
