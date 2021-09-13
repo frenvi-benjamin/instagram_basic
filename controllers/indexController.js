@@ -14,7 +14,6 @@ function checkForActiveQrcode (req, res, next) {
             User.findOneAndUpdate(
                 { instagramUserID: user.instagramUserID },
                 {
-                    $inc: { nrOfScans: 1 },
                     $push: { scans: new Date() }
                 },
                 { upsert: true }

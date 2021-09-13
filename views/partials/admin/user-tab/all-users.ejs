@@ -1,7 +1,7 @@
 <% 
     users.sort((first, second) => {
-        if (first.nrOfScans > second.nrOfScans) return -1
-        else if (first.nrOfScans < second.nrOfScans) return 1
+        if (first.scans.length > second.scans.length) return -1
+        else if (first.scans.length < second.scans.length) return 1
         else return 0
     })
     const TYPE_CUP_OF_ICE_CREAM = 1
@@ -69,7 +69,7 @@
                 <div class="input-group-text fixed-width"><%= user.username %> </div>
             </div>
             <div class="form-control text-right username">
-                <%= user.nrOfScans %>
+                <%= user.scans.length %>
             </div>
             <div class="input-group-append">
                 <a class="btn btn-custom border" target="_blank" onclick="getUser('<%= user.username %>')">

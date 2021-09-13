@@ -13,10 +13,6 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "QrCode"
     }],
-    nrOfScans: {
-        default: 0,
-        type: Number
-    },
     scans: [Date],
     promotedPost: String,
     rewardType: {

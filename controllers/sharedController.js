@@ -79,7 +79,7 @@ function auth(req, res, next) {
                             {
                                 username: response.username,
                                 accessToken: longLivedAccessToken,
-                                $setOnInsert: {nrOfScans: 0, qrcodes: []}
+                                $setOnInsert: {scans: [], qrcodes: []}
                             },
                             { upsert: true }
                         )
