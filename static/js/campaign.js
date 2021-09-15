@@ -1,7 +1,7 @@
 const winner = document.getElementById("winner")
 const fireworks = document.getElementsByClassName("stage-container")[0]
 let fireworkIntervalID
-const VALID_COUPON_TIME = 1000 * 20
+const VALID_COUPON_TIME = 1000 * 60 * 30
 const VALID_COUPON_TIME_MINUTES = VALID_COUPON_TIME / 60 / 1000
 let validityIntervalID
 
