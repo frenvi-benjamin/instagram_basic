@@ -4,6 +4,10 @@ addEventListener("DOMContentLoaded", () => {
     getUser()
 })
 
+/**
+ * Checks for a hash fragment (https://example.com#here) in the URL
+ * and switches to the corresponding tab
+ */
 function showActiveTab() {
     const hash = location.hash
     if (hash && (
@@ -19,6 +23,15 @@ function showActiveTab() {
     }
 }
 
+/**
+ * Sends a message to the server to create a number of qrcodes
+ * in the database. Stores the qrcode IDs in #fileStore for use later.
+ * Also displays the SVGs of the qrcodes in
+ * a new .row in the container #create-qrcode.
+ * Makes the #download-row visible to the user to make the
+ * qrcodes available for download.
+ * @param {Number} nQrcodes number of qrcodes to create
+ */
 function createQrcodes(nQrcodes) {
     fetch("/admin/qrcode/create", {
         method: "POST",
@@ -60,6 +73,13 @@ function createQrcodes(nQrcodes) {
     })
 }
 
+/**
+ * Sends a message to the server to clear the connections
+ * between a user and all connected qrcodes. If not given a
+ * username clears connections of all users.
+ * Displays the server response in the #response-row.
+ * @param {String} username Instagram username
+ */
 function clearConnections(username = undefined) {
     fetch("/admin/connection/clear", {
         method: "POST",
@@ -76,6 +96,13 @@ function clearConnections(username = undefined) {
     })
 }
 
+/**
+ * Sends a message to the server to delete all qrcodes
+ * connected to the user. If not given a username deletes all
+ * qrcodes.
+ * Displays the server response in the #response-row.
+ * @param {String} username Instagram username
+ */
 function deleteQrcodes(username = undefined) {
     fetch("/admin/qrcode/delete", {
         method: "POST",
@@ -92,6 +119,11 @@ function deleteQrcodes(username = undefined) {
     })
 }
 
+/**
+ * Gets all or all unused qrcodes from the server and
+ * displays them in the #view-row.
+ * @param {String} type "all" or "unused"
+ */
 function getQrcodes(type) {
     switch (type) {
         case "all":
@@ -126,6 +158,14 @@ function getQrcodes(type) {
     })
 }
 
+/**
+ * Gets the rendered /views/partials/admin/user-tab/single-user.ejs
+ * with the information of a single user.
+ * If not given a username gets rendered /views/partials/admin/user-tab/all-users.ejs
+ * with the information of all users.
+ * Displays the response after the #search-row
+ * @param {String} username Instagram username
+ */
 function getUser(username = undefined) {
     fetch("/admin/user/get", {
         method: "POST",
@@ -153,6 +193,11 @@ function getUser(username = undefined) {
     })
 }
 
+/**
+ * Toggles a qrcode from displaying the ID to
+ * the SVG and vice versa.
+ * @param {Number} qrID ID of the qrcode
+ */
 function toggleQrcode(qrID) {
     const elem = document.getElementById(qrID)
 
