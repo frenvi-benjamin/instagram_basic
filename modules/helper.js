@@ -36,7 +36,7 @@ function getNewestPost(username) {
 
 /**
  * Gets the permalink of a user's Instagram media (post)
- * @param {Integer} mediaID ID of the Instagram media (post)
+ * @param {Number} mediaID ID of the Instagram media (post)
  * @param {String} accessToken Instagram access token of the media's user
  * @returns {String} permalink of the media
  */
