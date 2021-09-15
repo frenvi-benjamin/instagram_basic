@@ -1,7 +1,23 @@
+/*
+
+Controller for the chooseReward route ( /routes/chooseRewardRoute.js )
+
+Responsible for
+
+- rendering the chooseReward view ( /views/choose-reward.ejs ).
+- rendering the modal with a given reward type
+
+*/
+
 const ejs = require("ejs")
 const path = require("path")
 const User = require("../models/userModel")
 
+/**
+ * Gets the current users reward type and renders the choose-reward view.
+ * @param {*} req The express request object.
+ * @param {*} res The express response object.
+ */
 function render(req, res) {
     User.findOne({ instagramUserID: req.session.instagramUserID })
     .then(user => {
@@ -9,6 +25,12 @@ function render(req, res) {
     })
 }
 
+/**
+ * Is given a reward type via POST body, renders the /views/partials/winner.ejs
+ * modal and sends the rendered modal back.
+ * @param {*} req The express request object.
+ * @param {*} res The express response object.
+ */
 function renderModal(req, res) {
     ejs.renderFile(path.join(__dirname, "../views/partials/winner.ejs"), { type: req.body.type })
     .then(rendered => {
@@ -16,14 +38,4 @@ function renderModal(req, res) {
     })
 }
 
-function setRewardType(req, res) {
-    User.findOneAndUpdate({ username: req.session.username }, { rewardType: req.body.type }).exec()
-    res.sendStatus(200)
-}
-
-function getRewardType(req, res) {
-    User.findOne({ username: req.session.username })
-    .then(user => res.send(user))
-}
-
-module.exports = { render, renderModal, setRewardType, getRewardType }
+module.exports = { render, renderModal }

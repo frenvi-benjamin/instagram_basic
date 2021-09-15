@@ -1,8 +1,29 @@
+/*
+
+Controller shared between multiple routers
+
+Responsible for
+
+- checking if user is logged in
+- checking if user has admin privileges
+- processing a user that has been redirected from the Instagram oAuth
+
+*/
+
 require("dotenv").config()
 const User = require("../models/userModel")
 const FormData = require("form-data")
 const fetch = require("node-fetch")
 
+/**
+ * Checks if there is a user currently logged in and adds
+ * username, access token and instagram user ID to the locals
+ * so that it can be accessed in any ejs views.
+ * Renders /views/welcome.ejs view if no user is logged in.
+ * @param {*} req The express request object.
+ * @param {*} res The express response object.
+ * @param {*} next The express next object.
+ */
 function checkForUserSession(req, res, next) {
     if (req.session.username) {
         res.locals.user = {
@@ -17,6 +38,14 @@ function checkForUserSession(req, res, next) {
     }
 }
 
+/**
+ * Checks if the current session user has logged in
+ * as an admin. If not render the /views/admin-login.ejs view
+ * to prompt the login.
+ * @param {*} req The express request object.
+ * @param {*} res The express response object.
+ * @param {*} next The express next object.
+ */
 function checkAdminAuth(req, res, next) {
     if (req.session.admin === true) {
         return next()
@@ -26,6 +55,16 @@ function checkAdminAuth(req, res, next) {
     }
 }
 
+/**
+ * Processes the redirect from the Instagram oAuth.
+ * Takes the given code and turns it into a short lived
+ * and then a long lived access token. Also renders
+ * the /views/request-permissions.ejs view if the user has
+ * given none or not all required permissions.
+ * @param {*} req The express request object.
+ * @param {*} res The express response object.
+ * @param {*} next The express next object.
+ */
 function auth(req, res, next) {
     res.locals.cookiesAccepted = req.session.cookiesAccepted
 

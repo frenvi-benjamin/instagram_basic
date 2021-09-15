@@ -119,7 +119,7 @@ app.use("/choose-post", require("./routes/choosePostRoute"))
 app.use("/choose-reward", require("./routes/chooseRewardRoute"))
 
 //preview
-app.use("/preview", require("./routes/previewRoute"))
+app.use("/preview", (req, res) => res.render("preview"))
 
 // setup
 app.use("/setup", require("./routes/setupRoute"))

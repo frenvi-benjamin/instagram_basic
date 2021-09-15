@@ -8,8 +8,4 @@ router.get("/", sharedController.checkForUserSession, controller.render)
 
 router.post("/modal", sharedController.checkForUserSession, controller.renderModal)
 
-router.post("/set", sharedController.checkForUserSession, controller.setRewardType)
-
-router.get("/get", sharedController.checkForUserSession, controller.getRewardType)
-
 module.exports = router
