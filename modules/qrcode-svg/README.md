@@ -1,3 +1,7 @@
+# Library has been altered
+
+Library has been altered to leave the middle of the qrcodes free on the highest error correction level in order to add a logo in the middle.
+
 ## Introduction
 
 This library has been written to generate a SVG image of QR Code in Node.js, goals:
