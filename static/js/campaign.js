@@ -5,6 +5,7 @@ const VALID_COUPON_TIME = 1000 * 60 * 30
 const VALID_COUPON_TIME_MINUTES = VALID_COUPON_TIME / 60 / 1000
 let validityIntervalID
 
+// check winner modal and fireworks were rendered by server in /views/campaign.ejs
 if (winner && fireworks) {
 
     validityIntervalID = setInterval(() => {
@@ -32,10 +33,10 @@ if (winner && fireworks) {
         }
     }, 1000);
 
+    // remove modal and fireworks user closes modal
     document.getElementById("close-btn").addEventListener("click", () => {
         console.log("user closed modal")
         removeWinnerAndFireworks()
-        clearInterval(intervalID)
     })
 
     if (wonWithinValidTime()) {
@@ -48,14 +49,15 @@ if (winner && fireworks) {
 
 }
 
+// stop fireworks if user switches tabs or similar
+// otherwise they all explode when switching back and cause lag
 addEventListener("visibilitychange", () => {
     if (document.visibilityState == "visible") {
         fireworkIntervalID = startFireworks()
     } else {
         stopFireworks()
     }
-  })
-
+})
 
 function showWinnerModalAndFireworks() {
     $("#winner").modal({
@@ -81,6 +83,7 @@ function stopFireworks() {
 function removeWinnerAndFireworks() {
     $("#winner").modal("hide")
     stopFireworks()
+    clearInterval(validityIntervalID)
     document.body.removeChild(winner)
     document.body.removeChild(fireworks)
     console.log("removed modal and fireworks")
